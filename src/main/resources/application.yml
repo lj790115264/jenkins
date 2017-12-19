@@ -1,0 +1,23 @@
+server:
+  port: 11233
+
+ajax:
+  debug: true
+
+spring:
+  datasource:
+      driver-class-name: com.mysql.jdbc.Driver
+      username: ${mysql.username:root}
+      password: ${mysql.password:FanDong}
+      url: jdbc:mysql://${mysql.host:127.0.0.1}:${mysql.port:3306}/pkzyy?characterEncoding=utf8
+#      password: ${mysql.password:chinacaring}
+#      url: jdbc:mysql://${mysql.host:101.132.74.234}:${mysql.port:3306}/pkzyy?characterEncoding=utf8
+  jpa:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+        show_sql: false
+
+logging:
+  level: info
