@@ -1,0 +1,21 @@
+<Request>
+<scheduleId>1403</scheduleId>
+<realName>姬祥</realName>
+<ICNO>410323199407104513</ICNO>
+<IDType>01</IDType>
+<Sex>男</Sex>
+<bookingFlag>1</bookingFlag>
+<medicalType>01</medicalType>
+<isReg>0</isReg>
+<departmentName>骨外科</departmentName>
+<deptCode>306</deptCode>
+<doctorName>张冲</doctorName>
+<emplCode>8001</emplCode>
+<preRegTime></preRegTime>
+<bookRegTime>2017-12-06 14:00:00</bookRegTime>
+<patientNo>2463229</patientNo>
+<bookingNo>R0760083</bookingNo>
+<clinicFee>10</clinicFee>
+<payMode>weChat</payMode>
+<transNo>201712051314002017</transNo>
+</Request>

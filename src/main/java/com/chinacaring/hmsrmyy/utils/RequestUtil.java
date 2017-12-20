@@ -15,30 +15,43 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Map;
 
-/**
- * @author xjh1994
- * @date 2017/7/27
- * @intro
- */
+
 public class RequestUtil {
 
     private static Logger logger = LoggerFactory.getLogger(RequestUtil.class);
 
+    private static String SOAPENV = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:tem=\"http://tempuri.org/\">\n" +
+            "   <soapenv:Header/>\n" +
+            "   <soapenv:Body>\n" +
+            "      <tem:%s>\n" +
+            "         <!--Optional:-->\n" +
+            "         <tem:strInput>%s</tem:strInput>\n" +
+            "      </tem:%s>\n" +
+            "   </soapenv:Body>\n" +
+            "</soapenv:Envelope>";
 
     public static String soap(String params) {
         return soap(Constant.URL_WEBSERVICE, params, StringUtil.UTF8);
     }
 
 
+    public static String soap(String interfaceName, String strInput){
+        String soapRequest = String.format(SOAPENV, interfaceName, strInput, interfaceName);
+        logger.info("入参\n\n\n" + soapRequest + "\n\n\n");
+        String soapResponse = soap(soapRequest);
+        logger.info("出参\n\n\n" + soapResponse + "\n\n\n");
+        return getResult(soapResponse, interfaceName);
+    }
+
     /**
      * 获取返回结果
      * @param result
      * @return
      */
-    public static String getResult(String result) {
+    public static String getResult(String result, String interfaceName) {
         Map resultMap = null;
         resultMap = DomMapUtil.Dom2Map(result);
-        return String.valueOf(((Map) ((Map) resultMap.get("Body")).get("DoTransResponse")).get("DoTransResult"));
+        return String.valueOf(((Map) ((Map) resultMap.get("Body")).get(interfaceName + "Response")).get(interfaceName + "Result"));
     }
 
     // http的soap方法

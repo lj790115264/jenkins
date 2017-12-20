@@ -1,0 +1,44 @@
+<Response>
+  <returnCode>1</returnCode>
+  <returnDesc/>
+  <Items>
+    <Item>
+      <schemaID>1417</schemaID>
+      <seeDate>20171205</seeDate>
+      <week>周二</week>
+      <noonCode>下午</noonCode>
+      <beginTime>12:00</beginTime>
+      <endTime>17:59</endTime>
+      <supDeptCode>306</supDeptCode>
+      <supDeptName>门诊外科</supDeptName>
+      <deptCode>306</deptCode>
+      <deptName>骨外科</deptName>
+      <emplCode>2372</emplCode>
+      <docName>施凯兵</docName>
+      <telLimit>100</telLimit>
+      <telReged>0</telReged>
+      <regLevelCode/>
+      <regLevelName>专家</regLevelName>
+      <regCost>10</regCost>
+    </Item>
+    <Item>
+      <schemaID>1405</schemaID>
+      <seeDate>20171205</seeDate>
+      <week>周二</week>
+      <noonCode>全日</noonCode>
+      <beginTime>07:00</beginTime>
+      <endTime>06:59</endTime>
+      <supDeptCode>306</supDeptCode>
+      <supDeptName>门诊外科</supDeptName>
+      <deptCode>306</deptCode>
+      <deptName>骨外科</deptName>
+      <emplCode>2185</emplCode>
+      <docName>周荣</docName>
+      <telLimit>300</telLimit>
+      <telReged>0</telReged>
+      <regLevelCode/>
+      <regLevelName>专家</regLevelName>
+      <regCost>15</regCost>
+    </Item>
+</Items>
+</Response>

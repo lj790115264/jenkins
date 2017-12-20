@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Response" type="Response"/>
+  <xs:complexType name="Items">
+    <xs:sequence>
+      <xs:element type="Item" name="Item" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Item">
+    <xs:sequence>
+      <xs:element name="schemaID">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="1417"/>
+            <xs:enumeration value="1405"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="xs:string" name="seeDate"/>
+      <xs:element type="xs:string" name="week"/>
+      <xs:element name="noonCode">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="下午"/>
+            <xs:enumeration value="全日"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="beginTime">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="12:00"/>
+            <xs:enumeration value="07:00"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="endTime">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="17:59"/>
+            <xs:enumeration value="06:59"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="xs:string" name="supDeptCode"/>
+      <xs:element type="xs:string" name="supDeptName"/>
+      <xs:element type="xs:string" name="deptCode"/>
+      <xs:element type="xs:string" name="deptName"/>
+      <xs:element name="emplCode">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="2372"/>
+            <xs:enumeration value="2185"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="docName">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="施凯兵"/>
+            <xs:enumeration value="周荣"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="telLimit">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="100"/>
+            <xs:enumeration value="300"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="xs:string" name="telReged"/>
+      <xs:element type="xs:string" name="regLevelCode"/>
+      <xs:element type="xs:string" name="regLevelName"/>
+      <xs:element name="regCost">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="10"/>
+            <xs:enumeration value="15"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Response">
+    <xs:sequence>
+      <xs:element type="xs:string" name="returnCode"/>
+      <xs:element type="xs:string" name="returnDesc"/>
+      <xs:element type="Items" name="Items"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

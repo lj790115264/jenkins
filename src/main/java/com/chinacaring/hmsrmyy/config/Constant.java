@@ -2,7 +2,7 @@ package com.chinacaring.hmsrmyy.config;
 
 public class Constant {
 
-    public static final String URL_WEBSERVICE = "http://172.17.10.233:18088/AppServiceCommon.asmx";
+    public static final String URL_WEBSERVICE = "http://192.168.21.77:9090/Webservice.asmx";
 
     public static final String ALL = "ALL";
 
@@ -41,4 +41,6 @@ public class Constant {
     public static final String ORDERS_INHOS_PRE_CHARGE = "inhos_pre_charge";
     public static final String ORDERS_VISIT_CARD_CHARGE = "visit_card_charge";
 
+    //科室挂号标记
+    public static final String REG_FLAG_SHI_GUA_HAO_KE_SHI = "1";
 }

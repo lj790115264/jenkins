@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Request" type="Request"/>
+  <xs:complexType name="Request">
+    <xs:sequence>
+      <xs:element type="xs:string" name="bookingNO"/>
+      <xs:element type="xs:string" name="patientNO"/>
+      <xs:element type="xs:string" name="bookingTime"/>
+      <xs:element type="xs:string" name="bookingType"/>
+      <xs:element type="xs:string" name="operCode"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

@@ -1,0 +1,22 @@
+<Response>
+  <returnCode>1</returnCode>
+  <returnDesc/>
+  <Items>
+    <Data>
+      <deptCode>429</deptCode>
+      <deptName>感染科门诊</deptName>
+      <deptDes/>
+      <deptType>1</deptType>
+      <branch/>
+      <regFlag>1</regFlag>
+    </Data>
+    <Data>
+      <deptCode>429</deptCode>
+      <deptName>感染科门诊</deptName>
+      <deptDes/>
+      <deptType>1</deptType>
+      <branch/>
+      <regFlag>1</regFlag>
+     </Data>
+  </Items>
+</Response>

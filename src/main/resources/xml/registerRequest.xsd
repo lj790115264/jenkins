@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Request" type="Request"/>
+  <xs:complexType name="Request">
+    <xs:sequence>
+      <xs:element type="xs:string" name="scheduleId"/>
+      <xs:element type="xs:string" name="realName"/>
+      <xs:element type="xs:string" name="ICNO"/>
+      <xs:element type="xs:string" name="IDType"/>
+      <xs:element type="xs:string" name="Sex"/>
+      <xs:element type="xs:string" name="bookingFlag"/>
+      <xs:element type="xs:string" name="medicalType"/>
+      <xs:element type="xs:string" name="isReg"/>
+      <xs:element type="xs:string" name="departmentName"/>
+      <xs:element type="xs:string" name="deptCode"/>
+      <xs:element type="xs:string" name="doctorName"/>
+      <xs:element type="xs:string" name="emplCode"/>
+      <xs:element type="xs:string" name="preRegTime"/>
+      <xs:element type="xs:string" name="bookRegTime"/>
+      <xs:element type="xs:string" name="patientNo"/>
+      <xs:element type="xs:string" name="bookingNo"/>
+      <xs:element type="xs:string" name="clinicFee"/>
+      <xs:element type="xs:string" name="payMode"/>
+      <xs:element type="xs:string" name="transNo"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Response" type="Response"/>
+  <xs:complexType name="Response">
+    <xs:sequence>
+      <xs:element type="xs:string" name="returnCode"/>
+      <xs:element type="xs:string" name="returnDesc"/>
+      <xs:element type="xs:string" name="Name"/>
+      <xs:element type="xs:string" name="Age"/>
+      <xs:element type="xs:string" name="dateBirth"/>
+      <xs:element type="xs:string" name="familyName"/>
+      <xs:element type="xs:string" name="homeAddress"/>
+      <xs:element type="xs:string" name="phoneNO"/>
+      <xs:element type="xs:string" name="ICNO"/>
+      <xs:element type="xs:string" name="patientNo"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

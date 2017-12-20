@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Response" type="Response"/>
+  <xs:complexType name="Items">
+    <xs:sequence>
+      <xs:element type="Data" name="Data" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Data">
+    <xs:sequence>
+      <xs:element type="xs:string" name="deptCode"/>
+      <xs:element type="xs:string" name="deptName"/>
+      <xs:element type="xs:string" name="deptDes"/>
+      <xs:element type="xs:string" name="deptType"/>
+      <xs:element type="xs:string" name="branch"/>
+      <xs:element type="xs:string" name="regFlag"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DeptInfoResponseHis">
+    <xs:sequence>
+      <xs:element type="xs:string" name="returnCode"/>
+      <xs:element type="xs:string" name="returnDesc"/>
+      <xs:element type="Items" name="Items"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

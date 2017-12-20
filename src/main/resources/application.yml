@@ -1,5 +1,5 @@
 server:
-  port: 11233
+  port: 11246
 
 ajax:
   debug: true

@@ -1,0 +1,12 @@
+<Response>
+  <returnCode>1</returnCode>
+  <returnDesc/>
+  <Name>姬祥</Name>
+  <Age>男</Age>
+  <dateBirth>1994-07-10</dateBirth>
+  <familyName>汉族</familyName>
+  <homeAddress>河南省新安县正村乡白墙村</homeAddress>
+  <phoneNO>15720600717</phoneNO>
+  <ICNO>410323199407104513</ICNO>
+  <patientNo/>
+</Response>
