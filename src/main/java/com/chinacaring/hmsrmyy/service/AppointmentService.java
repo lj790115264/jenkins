@@ -7,4 +7,5 @@ public interface AppointmentService {
 
     Object getSchedule(ScheduleRequestHis scheduleRequestHis) throws CommonException;
 
+
 }
