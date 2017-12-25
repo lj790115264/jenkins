@@ -2,6 +2,8 @@ package com.chinacaring.hmsrmyy.config;
 
 public enum InterfaceName {
 
+    insertRegisterInfo("挂号"),
+    insertBooking("预约"),
     getSchemaInfo("排版信息"),
     deptInfo("科室信息"),
     createProfile("建立门诊档案"),

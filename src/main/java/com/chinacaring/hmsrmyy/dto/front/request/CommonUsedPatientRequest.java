@@ -13,7 +13,18 @@ public class CommonUsedPatientRequest {
 
     private String address;
 
+    //民族
+    private String Ethnic;
+
     public CommonUsedPatientRequest() {
+    }
+
+    public String getEthnic() {
+        return Ethnic;
+    }
+
+    public void setEthnic(String ethnic) {
+        Ethnic = ethnic;
     }
 
     public String getAddress() {

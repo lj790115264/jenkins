@@ -15,4 +15,44 @@
 
     </configuration>
 
+    <mapping>
+        <class-a>com.chinacaring.hmsrmyy.dao.entity.Appointment</class-a>
+        <class-b>com.chinacaring.hmsrmyy.dto.his.request.register.RegisterRequestHis</class-b>
+        <field>
+            <a>patientName</a>
+            <b>realName</b>
+        </field>
+        <field>
+            <a>idCard</a>
+            <b>icno</b>
+        </field>
+        <field>
+            <a>medicareType</a>
+            <b>medicalType</b>
+        </field>
+        <field>
+            <a>deptName</a>
+            <b>departmentName</b>
+        </field>
+        <field>
+            <a>doctorCode</a>
+            <b>emplCode</b>
+        </field>
+        <field>
+            <a>patientCode</a>
+            <b>patientNo</b>
+        </field>
+        <field>
+            <a>appointmentId</a>
+            <b>bookingNo</b>
+        </field>
+        <field>
+            <a>payChannel</a>
+            <b>payMode</b>
+        </field>
+        <field>
+            <a>orderNo</a>
+            <b>transNo</b>
+        </field>
+    </mapping>
 </mappings>

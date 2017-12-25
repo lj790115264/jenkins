@@ -3,7 +3,7 @@ package com.chinacaring.hmsrmyy.dao.entity;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.util.Date;
 
 @Entity
 @Data
@@ -17,10 +17,10 @@ public class Orders {
     private String orderNo;
 
     //下单时间
-    private Timestamp createTime;
+    private Date createTime;
 
     //订单更新时间
-    private Timestamp updateTime;
+    private Date updateTime;
 
     //用户id
     private Integer userId;

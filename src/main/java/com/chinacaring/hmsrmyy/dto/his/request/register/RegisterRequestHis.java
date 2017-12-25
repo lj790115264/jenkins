@@ -74,12 +74,18 @@ public class RegisterRequestHis {
     protected String icno;
     @XmlElement(name = "IDType", required = true)
     protected String idType;
+
+    //手动set
     @XmlElement(name = "Sex", required = true)
     protected String sex;
+
+    //手动set
     @XmlElement(required = true)
     protected String bookingFlag;
     @XmlElement(required = true)
     protected String medicalType;
+
+    //手动set
     @XmlElement(required = true)
     protected String isReg;
     @XmlElement(required = true)
@@ -90,14 +96,20 @@ public class RegisterRequestHis {
     protected String doctorName;
     @XmlElement(required = true)
     protected String emplCode;
+
+    //手动set
     @XmlElement(required = true)
     protected String preRegTime;
+
+    //手动set
     @XmlElement(required = true)
     protected String bookRegTime;
     @XmlElement(required = true)
     protected String patientNo;
     @XmlElement(required = true)
     protected String bookingNo;
+
+    //手动set
     @XmlElement(required = true)
     protected String clinicFee;
     @XmlElement(required = true)

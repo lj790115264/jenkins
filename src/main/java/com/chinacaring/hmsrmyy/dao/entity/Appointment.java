@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.Date;
 
 @Data
 @Entity
@@ -49,7 +50,7 @@ public class Appointment {
     private Integer regState;
 
     //预约时间
-    private Timestamp appointmentTime;
+    private Date appointmentTime;
 
     //午别 1 ：表示上午 2 ：表示下午
     private String noonCode;
@@ -71,7 +72,7 @@ public class Appointment {
     private BigDecimal cost;
 
     //创建时间
-    private Timestamp createTime;
+    private Date createTime;
 
     //身份证号码
     private String idCard;

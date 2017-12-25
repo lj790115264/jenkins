@@ -8,6 +8,9 @@ import com.chinacaring.hmsrmyy.dao.repository.CommonUsedPatientRepository;
 import com.chinacaring.hmsrmyy.dto.front.request.CommonUsedPatientRequest;
 import com.chinacaring.hmsrmyy.dto.front.response.BindCommonUsedPatientResponse;
 import com.chinacaring.hmsrmyy.dto.front.response.CommonUsedPatientResponse;
+import com.chinacaring.hmsrmyy.dto.his.request.createProfile.CreateProfileRequestHis;
+import com.chinacaring.hmsrmyy.dto.his.response.createProfile.CreateProfileResponseHis;
+import com.chinacaring.hmsrmyy.dto.his.response.getExistProfile.GetExistProfileResponseHis;
 import com.chinacaring.hmsrmyy.service.BaseInfoService;
 import com.chinacaring.hmsrmyy.service.CommonUsedPatientService;
 import com.chinacaring.user.dao.entity.User;
@@ -41,7 +44,9 @@ public class CommonUsedPatientServiceImpl implements CommonUsedPatientService {
     public BindCommonUsedPatientResponse bindCommonUsedPatient(CommonUsedPatientRequest commonUsedPatientRequest, User user) throws CommonException, ParseException {
 
         String phone = commonUsedPatientRequest.getPhone();
-        String idCard = commonUsedPatientRequest.getIdCard();
+        //身份证大写
+        String idCard = commonUsedPatientRequest.getIdCard().toUpperCase();
+        commonUsedPatientRequest.setIdCard(idCard);
 
         if (!PhoneUtils.isPhoneLegal(phone)){
             throw new CommonException("电话号码格式有误");
@@ -67,9 +72,6 @@ public class CommonUsedPatientServiceImpl implements CommonUsedPatientService {
 
         }
 
-        //身份证号 有字母的 统一为 大写
-        commonUsedPatientRequest.setIdCard(idCard.toUpperCase());
-
         CommonUsedPatient commonUsedPatient = BeanMapperUtil.map(commonUsedPatientRequest, CommonUsedPatient.class);
         commonUsedPatient.setUserId(user.getId());
         //设置 state为 1  正在使用
@@ -81,12 +83,32 @@ public class CommonUsedPatientServiceImpl implements CommonUsedPatientService {
         //获取patient_code
         String patientCode = "";
         String message = "";
+        //名族
+        String ethnic = commonUsedPatientRequest.getEthnic();
         String name = commonUsedPatientRequest.getName();
 
         try {
+            GetExistProfileResponseHis existProfile = baseInfoService.getExistProfile(idCard);
+            patientCode = existProfile.getPatientNo();
+        }catch (CommonException e){
+            message = e.getDetailMessage();
+            //根据身份证判断 性别
+            Integer sex = Integer.valueOf(idCard.substring(idCard.length() - 2, idCard.length() - 1)) % 2;
+            String age = (sex == 1) ? "男" : "女";
+            String birthday = idCard.substring(idCard.length() - 12, idCard.length() - 4 );
 
-        }catch (Exception e){
+            CreateProfileRequestHis createProfileRequestHis = new CreateProfileRequestHis();
+            createProfileRequestHis.setPhoneNO(phone);
+            createProfileRequestHis.setName(name);
+            createProfileRequestHis.setHomeAddress("中国");
+            createProfileRequestHis.setIcno(idCard);
+            createProfileRequestHis.setAge(age);
+            createProfileRequestHis.setDateBirth(birthday);
+            createProfileRequestHis.setFamilyName(ethnic);
 
+            //报 异常 则无法获取此人的 patientNo 则 直接 抛出异常
+            CreateProfileResponseHis profileResponseHis = baseInfoService.createProfile(createProfileRequestHis);
+            patientCode = profileResponseHis.getPatientNo();
         }
 
         commonUsedPatient.setPatientCode(patientCode);
