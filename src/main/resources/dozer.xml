@@ -102,4 +102,49 @@
             <b>docName</b>
         </field>
     </mapping>
+    <mapping>
+        <class-a>com.chinacaring.hmsrmyy.dto.front.request.UnpaidOutpatientRequest</class-a>
+        <class-b>com.chinacaring.hmsrmyy.dto.his.request.unpaidOutpatient.UnpaidOutpatientRequestHis</class-b>
+        <field>
+            <a>patientCode</a>
+            <b>patientNO</b>
+        </field>
+    </mapping>
+    <mapping>
+        <class-a>com.chinacaring.hmsrmyy.dto.front.response.UnpaidClinicRecordResponse</class-a>
+        <class-b>com.chinacaring.hmsrmyy.dto.his.response.unpaidOutpatient.ItemType</class-b>
+        <field>
+            <a>patientCode</a>
+            <b>patientNo</b>
+        </field>
+        <field>
+            <a>registerId</a>
+            <b>regNo</b>
+        </field>
+        <field>
+            <a>patientName</a>
+            <b>name</b>
+        </field>
+        <field>
+            <a>doctorCode</a>
+            <b>docCode</b>
+        </field>
+        <field>
+            <a>doctorName</a>
+            <b>docName</b>
+        </field>
+    </mapping>
+    <mapping>
+        <class-a>com.chinacaring.hmsrmyy.dto.front.response.PrescriptionResponse</class-a>
+        <class-b>com.chinacaring.hmsrmyy.dto.his.response.prescription.ItemType</class-b>
+        <field>
+            <a>doctorName</a>
+            <b>docName</b>
+        </field>
+        <field>
+            <a>doctorCode</a>
+            <b>emplCode</b>
+        </field>
+    </mapping>
+
 </mappings>

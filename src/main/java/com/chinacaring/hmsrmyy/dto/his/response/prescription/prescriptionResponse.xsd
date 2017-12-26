@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Response" type="ResponseType"/>
+  <xs:complexType name="ItemsType">
+    <xs:sequence>
+      <xs:element type="ItemType" name="Item" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ItemType">
+    <xs:sequence>
+      <xs:element name="recipeKey">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="109440966"/>
+            <xs:enumeration value="109440967"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="recipeNO">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="R2595163"/>
+            <xs:enumeration value="R2595165"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="xs:string" name="seqNO"/>
+      <xs:element type="xs:string" name="feeCode"/>
+      <xs:element type="xs:string" name="drugFlag"/>
+      <xs:element name="itemCode">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="506050401"/>
+            <xs:enumeration value="501040602"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="itemName">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="葡萄糖酸钙锌口服溶液"/>
+            <xs:enumeration value="注射用阿莫西林钠克拉维酸钾"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="number">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="12"/>
+            <xs:enumeration value="2"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="unitPrice">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="1.7917"/>
+            <xs:enumeration value="32.0000"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="totCost">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="21.50"/>
+            <xs:enumeration value="64"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="xs:string" name="docName"/>
+      <xs:element type="xs:string" name="emplCode"/>
+      <xs:element type="xs:string" name="deptCode"/>
+      <xs:element type="xs:string" name="deptName"/>
+      <xs:element name="execDeptCode">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="20406"/>
+            <xs:enumeration value="20405"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="execDeptName">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="门诊西药房"/>
+            <xs:enumeration value="急诊药房"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="xs:string" name="moTime"/>
+      <xs:element type="xs:string" name="itemClass"/>
+      <xs:element type="xs:string" name="payFlag"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PrescriptionResponseHis">
+    <xs:sequence>
+      <xs:element type="xs:string" name="returnCode"/>
+      <xs:element type="xs:string" name="returnDesc"/>
+      <xs:element type="ItemsType" name="Items"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

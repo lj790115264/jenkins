@@ -21,6 +21,7 @@ import com.chinacaring.util.IdCardUtil;
 import com.chinacaring.util.PhoneUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.text.ParseException;
 import java.util.List;
@@ -90,6 +91,10 @@ public class CommonUsedPatientServiceImpl implements CommonUsedPatientService {
         try {
             GetExistProfileResponseHis existProfile = baseInfoService.getExistProfile(idCard);
             patientCode = existProfile.getPatientNo();
+            //如果查询成功但是为空 则 还需要 重新建档
+            if (StringUtils.isEmpty(patientCode)){
+                throw new CommonException("查到档案，但是patientCode为 空");
+            }
         }catch (CommonException e){
             message = e.getDetailMessage();
             //根据身份证判断 性别

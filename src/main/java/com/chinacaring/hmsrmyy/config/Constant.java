@@ -1,5 +1,7 @@
 package com.chinacaring.hmsrmyy.config;
 
+import org.omg.CORBA.PUBLIC_MEMBER;
+
 public class Constant {
 
     public static final String URL_WEBSERVICE = "http://192.168.21.77:9090/Webservice.asmx";
@@ -29,6 +31,16 @@ public class Constant {
     public static final Integer REG_STATE_GUA_HAO_SHI_BAI = 4;
     public static final Integer REG_STATE_QU_XIAO_SHI_BAI = 5;
 
+    //门诊确认状态
+    // 1 -- 未确认
+    // 2 -- 确认成功
+    // 3 -- 确认失败
+    // 4 -- 部分确认成功
+    public static final Integer OUTPATIENT_CONFIRM_NOT_YET = 1;
+    public static final Integer OUTPATIENT_CONFIRM_SUCCESS = 2;
+    public static final Integer OUTPATIENT_CONFIRM_FAIL = 3;
+    public static final Integer OUTPATIENT_CONFIRM_PARTLY_SUCCESS = 4;
+
     //操作员工号
     public static final String OPER_CODE = "CARING";
 
@@ -56,7 +68,9 @@ public class Constant {
     public static final String APPOINTMENT_TYPE_CANCEL = "1";
 
     //ping++ 支付相关
-    public static final String CHARGE_SUBJECT_APPOINTMENT = "海门市人民医院门诊预约挂号";
+    public static final String CHARGE_SUBJECT_APPOINTMENT = "海门市人民医院预约挂号";
+    public static final String CHARGE_SUBJECT_OUTPATIENT = "海门市人民医院门诊缴费";
+
     //支付basic认证
     public static final String PAY_BASE64_STRING = "Basic cGF5OnBheWNhcmluZzIwMTc=";
     public static final String PAY_URL =  "http://121.196.219.153:8780/charge";
@@ -71,5 +85,7 @@ public class Constant {
     //退款来源
     //微信未结算 unsettled_funds
     public static final String REFUND_FUNDING_SOURCE_WX_UNSETTLED_FUNDS = "unsettled_funds";
+
+
 
 }

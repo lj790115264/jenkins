@@ -1,0 +1,30 @@
+<Response>
+    <returnCode>1</returnCode>
+    <returnDesc />
+    <Items>
+        <Item>
+            <regNO>R0760084</regNO>
+            <name>姬祥</name>
+            <regDate>2017/12/11 15:25:32</regDate>
+            <patientNO>2463229</patientNO>
+            <regLevelname>专家</regLevelname>
+            <regCost>15</regCost>
+            <deptCode>310205</deptCode>
+            <deptName>骨外科</deptName>
+            <docCode>148</docCode>
+            <docName>沈海荣（测）</docName>
+        </Item>
+        <Item>
+            <regNO>R0760084</regNO>
+            <name>姬祥</name>
+            <regDate>2017/12/11 15:25:32</regDate>
+            <patientNO>2463229</patientNO>
+            <regLevelname>专家</regLevelname>
+            <regCost>15</regCost>
+            <deptCode>310205</deptCode>
+            <deptName>骨外科</deptName>
+            <docCode>148</docCode>
+            <docName>沈海荣（测）</docName>
+        </Item>
+    </Items>
+</Response>

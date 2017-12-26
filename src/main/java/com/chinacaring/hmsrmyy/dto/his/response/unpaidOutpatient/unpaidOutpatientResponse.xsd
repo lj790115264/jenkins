@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Response" type="ResponseType"/>
+  <xs:complexType name="ItemsType">
+    <xs:sequence>
+      <xs:element type="ItemType" name="Item" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ItemType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="regNO"/>
+      <xs:element type="xs:string" name="name"/>
+      <xs:element type="xs:string" name="regDate"/>
+      <xs:element type="xs:string" name="patientNO"/>
+      <xs:element type="xs:string" name="regLevelname"/>
+      <xs:element type="xs:string" name="regCost"/>
+      <xs:element type="xs:string" name="deptCode"/>
+      <xs:element type="xs:string" name="deptName"/>
+      <xs:element type="xs:string" name="docCode"/>
+      <xs:element type="xs:string" name="docName"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="UnpaidOutpatientResponseHis">
+    <xs:sequence>
+      <xs:element type="xs:string" name="returnCode"/>
+      <xs:element type="xs:string" name="returnDesc"/>
+      <xs:element type="ItemsType" name="Items"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

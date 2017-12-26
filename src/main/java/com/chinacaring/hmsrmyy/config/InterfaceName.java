@@ -2,6 +2,9 @@ package com.chinacaring.hmsrmyy.config;
 
 public enum InterfaceName {
 
+    saveFee("门诊结算确认"),
+    getPrescriptionInfo("获取处方信息"),
+    getUnpaidClinicInfo("未缴费门诊"),
     GetOrderInfo("门诊用药记录"),
     getClinicRecordsInfo("查询门诊记录"),
     getClinicState("查询挂号状态"),
