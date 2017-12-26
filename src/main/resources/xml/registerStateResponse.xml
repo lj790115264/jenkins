@@ -1,0 +1,5 @@
+<Response>
+    <returnCode>7000</returnCode>
+    <returnDesc>未找到挂号信息!</returnDesc>
+    <state>1</state>
+</Response>

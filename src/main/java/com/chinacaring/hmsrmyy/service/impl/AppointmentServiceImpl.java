@@ -8,8 +8,11 @@ import com.chinacaring.hmsrmyy.dao.entity.Orders;
 import com.chinacaring.hmsrmyy.dao.repository.AppointmentRepository;
 import com.chinacaring.hmsrmyy.dao.repository.OrdersRepository;
 import com.chinacaring.hmsrmyy.dto.front.request.AppointmentInfoRequest;
+import com.chinacaring.hmsrmyy.dto.front.request.ScheduleRequest;
 import com.chinacaring.hmsrmyy.dto.his.request.register.RegisterRequestHis;
+import com.chinacaring.hmsrmyy.dto.his.request.registerState.RegisterStateRequestHis;
 import com.chinacaring.hmsrmyy.dto.his.response.register.RegisterResponseHis;
+import com.chinacaring.hmsrmyy.dto.his.response.registerState.RegisterStateResponseHis;
 import com.chinacaring.hmsrmyy.dto.pingpp.ChargeRequest;
 import com.chinacaring.hmsrmyy.dto.pingpp.PayMsg;
 import com.chinacaring.hmsrmyy.dto.front.response.OrderResponse;
@@ -61,8 +64,9 @@ public class AppointmentServiceImpl implements AppointmentService {
     private static DecimalFormat df = new DecimalFormat("#0.00");
 
     @Override
-    public ScheduleResponse getSchedule(ScheduleRequestHis scheduleRequestHis) throws CommonException {
+    public ScheduleResponse getSchedule(ScheduleRequest scheduleRequest) throws CommonException {
 
+        ScheduleRequestHis scheduleRequestHis = BeanMapperUtil.map(scheduleRequest, ScheduleRequestHis.class);
         //判断日期是否为 当天 的 下午
         Boolean isAfternoon = false;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -273,6 +277,18 @@ public class AppointmentServiceImpl implements AppointmentService {
         registerPayment.setPayChannel(appointment.getPayChannel());
         registerPayment.setPatientName(appointment.getPatientName());
         return registerPayment;
+    }
+
+    @Override
+    public Object getRegisterStatus(RegisterStateRequestHis registerStateRequestHis) throws CommonException {
+
+        String soap = RequestUtil.soap(InterfaceName.getClinicState.name(), JaxbXmlUtil.convertToXml(registerStateRequestHis));
+        RegisterStateResponseHis registerStateResponseHis = JaxbXmlUtil.convertToJavaBean(soap, RegisterStateResponseHis.class);
+
+        if (!Objects.equals(Constant.RETURN_CODE_SUCCESS, registerStateResponseHis.getReturnCode())){
+            throw new CommonException("查询挂号状态失败：" + registerStateResponseHis.getReturnDesc());
+        }
+        return registerStateResponseHis;
     }
 
 

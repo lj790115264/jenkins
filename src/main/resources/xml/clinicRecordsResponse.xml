@@ -1,0 +1,78 @@
+<Response>
+    <returnCode>1</returnCode>
+    <returnDesc />
+    <Items>
+        <Item>
+            <regDate>20170707020706</regDate>
+            <regNO>R0441559</regNO>
+            <deptCode>3110</deptCode>
+            <deptName>门诊眼科</deptName>
+            <patientName>姬祥</patientName>
+            <emplCode />
+            <docName />
+            <invoiceNO />
+            <operCode>4196</operCode>
+            <status>3</status>
+        </Item>
+        <Item>
+            <regDate>20170707020753</regDate>
+            <regNO>R0441559</regNO>
+            <deptCode>3110</deptCode>
+            <deptName>门诊眼科</deptName>
+            <patientName>姬祥</patientName>
+            <emplCode />
+            <docName />
+            <invoiceNO />
+            <operCode>4207</operCode>
+            <status>3</status>
+        </Item>
+        <Item>
+            <regDate>20171122021115</regDate>
+            <regNO>R0757498</regNO>
+            <deptCode>3128</deptCode>
+            <deptName>方便门诊</deptName>
+            <patientName>姬祥</patientName>
+            <emplCode>351</emplCode>
+            <docName>吴斌</docName>
+            <invoiceNO>R2585461&amp;R2585462</invoiceNO>
+            <operCode>5113</operCode>
+            <status>1</status>
+        </Item>
+        <Item>
+            <regDate>20171206101247</regDate>
+            <regNO>R0760082</regNO>
+            <deptCode>310205</deptCode>
+            <deptName>骨外科</deptName>
+            <patientName>姬祥</patientName>
+            <emplCode>573</emplCode>
+            <docName>陈晔</docName>
+            <invoiceNO />
+            <operCode>1061</operCode>
+            <status>1</status>
+        </Item>
+        <Item>
+            <regDate>20171206071250</regDate>
+            <regNO>R0760083</regNO>
+            <deptCode>310205</deptCode>
+            <deptName>骨外科</deptName>
+            <patientName>姬祥</patientName>
+            <emplCode>574</emplCode>
+            <docName>张冲</docName>
+            <invoiceNO />
+            <operCode>1061</operCode>
+            <status>1</status>
+        </Item>
+        <Item>
+            <regDate>20171211031232</regDate>
+            <regNO>R0760084</regNO>
+            <deptCode>310205</deptCode>
+            <deptName>骨外科</deptName>
+            <patientName>姬祥</patientName>
+            <emplCode>148</emplCode>
+            <docName>沈海荣（测）</docName>
+            <invoiceNO>R2595166&amp;R2595165&amp;R2595163</invoiceNO>
+            <operCode>1061</operCode>
+            <status>1</status>
+        </Item>
+    </Items>
+</Response>

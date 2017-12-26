@@ -16,7 +16,7 @@
       <xs:element type="xs:string" name="regFlag"/>
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="DeptInfoResponseHis">
+  <xs:complexType name="Response">
     <xs:sequence>
       <xs:element type="xs:string" name="returnCode"/>
       <xs:element type="xs:string" name="returnDesc"/>

@@ -1,0 +1,38 @@
+<Response>
+    <returnCode>1</returnCode>
+    <returnDesc />
+    <Items>
+        <Item>
+            <regNo>O0000138</regNo>
+            <patientNo>928878</patientNo>
+            <drugName>铝碳酸镁片</drugName>
+            <drugSpec>0.5g×36片</drugSpec>
+            <amount>108</amount>
+            <unitPrice>0.5472</unitPrice>
+            <totCost>59.10</totCost>
+            <dosage>1.50</dosage>
+            <adminstration>po</adminstration>
+            <frequency>3</frequency>
+            <frequencyName>tid</frequencyName>
+            <diagnosis>(K25.903)胃溃疡</diagnosis>
+            <emplCode>497</emplCode>
+            <docName>赵志江</docName>
+        </Item>
+        <Item>
+            <regNo>O0000138</regNo>
+            <patientNo>928878</patientNo>
+            <drugName>兰索拉唑肠溶胶囊</drugName>
+            <drugSpec>30mg*14粒</drugSpec>
+            <amount>28</amount>
+            <unitPrice>5.2000</unitPrice>
+            <totCost>145.60</totCost>
+            <dosage>30</dosage>
+            <adminstration>po</adminstration>
+            <frequency>2</frequency>
+            <frequencyName>bid</frequencyName>
+            <diagnosis>(K25.903)胃溃疡</diagnosis>
+            <emplCode>497</emplCode>
+            <docName>赵志江</docName>
+        </Item>
+    </Items>
+</Response>

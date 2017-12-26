@@ -55,4 +55,51 @@
             <b>transNo</b>
         </field>
     </mapping>
+
+    <mapping>
+        <class-a>com.chinacaring.hmsrmyy.dto.front.request.ClinicRecordRequest</class-a>
+        <class-b>com.chinacaring.hmsrmyy.dto.his.request.clinicRecords.ClinicRecordsRequestHis</class-b>
+        <field>
+            <a>patientCode</a>
+            <b>patientNO</b>
+        </field>
+    </mapping>
+
+    <mapping>
+        <class-a>com.chinacaring.hmsrmyy.dto.front.response.ClinicRecordResponse</class-a>
+        <class-b>com.chinacaring.hmsrmyy.dto.his.response.clinicRecords.ItemType</class-b>
+        <field>
+            <a>registerId</a>
+            <b>regNO</b>
+        </field>
+        <field>
+            <a>doctorCode</a>
+            <b>emplCode</b>
+        </field>
+        <field>
+            <a>doctorName</a>
+            <b>docName</b>
+        </field>
+    </mapping>
+
+    <mapping>
+        <class-a>com.chinacaring.hmsrmyy.dto.front.response.OutpatientMedicalRecordsResponse</class-a>
+        <class-b>com.chinacaring.hmsrmyy.dto.his.response.outPatientMedicalRecords.ItemType</class-b>
+        <field>
+            <a>registerId</a>
+            <b>regNo</b>
+        </field>
+        <field>
+            <a>patientCode</a>
+            <b>patientNo</b>
+        </field>
+        <field>
+            <a>doctorCode</a>
+            <b>emplCode</b>
+        </field>
+        <field>
+            <a>doctorName</a>
+            <b>docName</b>
+        </field>
+    </mapping>
 </mappings>

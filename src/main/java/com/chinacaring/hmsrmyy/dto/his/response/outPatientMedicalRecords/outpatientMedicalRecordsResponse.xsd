@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Response" type="ResponseType"/>
+  <xs:complexType name="ItemsType">
+    <xs:sequence>
+      <xs:element type="ItemType" name="Item" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ItemType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="regNo"/>
+      <xs:element type="xs:string" name="patientNo"/>
+      <xs:element name="drugName">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="铝碳酸镁片"/>
+            <xs:enumeration value="兰索拉唑肠溶胶囊"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="drugSpec">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="0.5g×36片"/>
+            <xs:enumeration value="30mg*14粒"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="amount">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="108"/>
+            <xs:enumeration value="28"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="unitPrice">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="0.5472"/>
+            <xs:enumeration value="5.2000"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="totCost">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="59.10"/>
+            <xs:enumeration value="145.60"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="dosage">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="1.50"/>
+            <xs:enumeration value="30"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="xs:string" name="adminstration"/>
+      <xs:element name="frequency">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="3"/>
+            <xs:enumeration value="2"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="frequencyName">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="tid"/>
+            <xs:enumeration value="bid"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="xs:string" name="diagnosis"/>
+      <xs:element type="xs:string" name="emplCode"/>
+      <xs:element type="xs:string" name="docName"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="OutpatientMedicalRecordsResponseHis">
+    <xs:sequence>
+      <xs:element type="xs:string" name="returnCode"/>
+      <xs:element type="xs:string" name="returnDesc"/>
+      <xs:element type="ItemsType" name="Items"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

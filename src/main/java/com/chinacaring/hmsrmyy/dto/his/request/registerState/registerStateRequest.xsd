@@ -3,7 +3,7 @@
   <xs:element name="Request" type="Request"/>
   <xs:complexType name="Request">
     <xs:sequence>
-      <xs:element type="xs:string" name="ICNO"/>
+      <xs:element type="xs:string" name="regNO"/>
     </xs:sequence>
   </xs:complexType>
 </xs:schema>

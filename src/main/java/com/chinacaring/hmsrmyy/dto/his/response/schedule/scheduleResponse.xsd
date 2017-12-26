@@ -83,7 +83,7 @@
       </xs:element>
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="ScheduleResponseHis">
+  <xs:complexType name="Response">
     <xs:sequence>
       <xs:element type="xs:string" name="returnCode"/>
       <xs:element type="xs:string" name="returnDesc"/>

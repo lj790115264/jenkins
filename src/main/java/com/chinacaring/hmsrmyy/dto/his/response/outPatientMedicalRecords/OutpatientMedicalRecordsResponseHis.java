@@ -1,22 +1,22 @@
 
-package com.chinacaring.hmsrmyy.dto.his.response.createProfile;
+package com.chinacaring.hmsrmyy.dto.his.response.outPatientMedicalRecords;
 
 import javax.xml.bind.annotation.*;
 
 
 /**
- * <p>Response complex type�� Java �ࡣ
+ * <p>ResponseType complex type�� Java �ࡣ
  * 
  * <p>����ģʽƬ��ָ�������ڴ����е�Ԥ�����ݡ�
  * 
  * <pre>
- * &lt;complexType name="Response">
+ * &lt;complexType name="ResponseType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="returnCode" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="returnDesc" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="patientNo" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="Items" type="{}ItemsType"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -26,20 +26,20 @@ import javax.xml.bind.annotation.*;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "CreateProfileResponseHis", propOrder = {
+@XmlType(name = "OutpatientMedicalRecordsResponseHis", propOrder = {
     "returnCode",
     "returnDesc",
-    "patientNo"
+    "items"
 })
 @XmlRootElement(name = "Response")
-public class CreateProfileResponseHis {
+public class OutpatientMedicalRecordsResponseHis {
 
     @XmlElement(required = true)
     protected String returnCode;
     @XmlElement(required = true)
     protected String returnDesc;
-    @XmlElement(required = true)
-    protected String patientNo;
+    @XmlElement(name = "Items", required = true)
+    protected ItemsType items;
 
     /**
      * ��ȡreturnCode���Ե�ֵ��
@@ -90,27 +90,27 @@ public class CreateProfileResponseHis {
     }
 
     /**
-     * ��ȡpatientNo���Ե�ֵ��
+     * ��ȡitems���Ե�ֵ��
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link ItemsType }
      *     
      */
-    public String getPatientNo() {
-        return patientNo;
+    public ItemsType getItems() {
+        return items;
     }
 
     /**
-     * ����patientNo���Ե�ֵ��
+     * ����items���Ե�ֵ��
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link ItemsType }
      *     
      */
-    public void setPatientNo(String value) {
-        this.patientNo = value;
+    public void setItems(ItemsType value) {
+        this.items = value;
     }
 
 }

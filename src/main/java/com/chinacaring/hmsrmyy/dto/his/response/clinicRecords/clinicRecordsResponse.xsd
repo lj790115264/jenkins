@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Response" type="ResponseType"/>
+  <xs:complexType name="ItemsType">
+    <xs:sequence>
+      <xs:element type="ItemType" name="Item" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ItemType">
+    <xs:sequence>
+      <xs:element name="regDate">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="20170707020706"/>
+            <xs:enumeration value="20170707020753"/>
+            <xs:enumeration value="20171122021115"/>
+            <xs:enumeration value="20171206101247"/>
+            <xs:enumeration value="20171206071250"/>
+            <xs:enumeration value="20171211031232"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="regNO">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="R0441559"/>
+            <xs:enumeration value="R0757498"/>
+            <xs:enumeration value="R0760082"/>
+            <xs:enumeration value="R0760083"/>
+            <xs:enumeration value="R0760084"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="deptCode">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="3110"/>
+            <xs:enumeration value="3128"/>
+            <xs:enumeration value="310205"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="deptName">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="门诊眼科"/>
+            <xs:enumeration value="方便门诊"/>
+            <xs:enumeration value="骨外科"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="xs:string" name="patientName"/>
+      <xs:element name="emplCode">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value=""/>
+            <xs:enumeration value="351"/>
+            <xs:enumeration value="573"/>
+            <xs:enumeration value="574"/>
+            <xs:enumeration value="148"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="docName">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value=""/>
+            <xs:enumeration value="吴斌"/>
+            <xs:enumeration value="陈晔"/>
+            <xs:enumeration value="张冲"/>
+            <xs:enumeration value="沈海荣（测）"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="invoiceNO">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value=""/>
+            <xs:enumeration value="R2585461&amp;R2585462"/>
+            <xs:enumeration value="R2595166&amp;R2595165&amp;R2595163"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="operCode">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="4196"/>
+            <xs:enumeration value="4207"/>
+            <xs:enumeration value="5113"/>
+            <xs:enumeration value="1061"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="status">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="3"/>
+            <xs:enumeration value="1"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ClinicRecordsResponseHis">
+    <xs:sequence>
+      <xs:element type="xs:string" name="returnCode"/>
+      <xs:element type="xs:string" name="returnDesc"/>
+      <xs:element type="ItemsType" name="Items"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

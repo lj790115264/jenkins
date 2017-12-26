@@ -2,6 +2,9 @@ package com.chinacaring.hmsrmyy.config;
 
 public enum InterfaceName {
 
+    GetOrderInfo("门诊用药记录"),
+    getClinicRecordsInfo("查询门诊记录"),
+    getClinicState("查询挂号状态"),
     insertRegisterInfo("挂号"),
     insertBooking("预约"),
     getSchemaInfo("排版信息"),
