@@ -10,6 +10,7 @@ import com.chinacaring.hmsrmyy.dao.repository.AppointmentRepository;
 import com.chinacaring.hmsrmyy.dao.repository.OrdersRepository;
 import com.chinacaring.hmsrmyy.dto.pingpp.PayResponse;
 import com.chinacaring.hmsrmyy.service.AppointmentService;
+import com.chinacaring.hmsrmyy.service.OutPatientService;
 import com.chinacaring.hmsrmyy.service.RefundService;
 import com.chinacaring.hmsrmyy.utils.WebhooksUtils;
 import com.chinacaring.util.JacksonUtil;
@@ -80,6 +81,9 @@ public class WebhookController {
 
     @Autowired
     private AppointmentService appointmentService;
+
+    @Autowired
+    private OutPatientService outPatientService;
     /**
      * 支付成功后进行挂号
      * @param event
@@ -106,7 +110,7 @@ public class WebhookController {
             case Constant.ORDERS_APPOINTMENT:
 
                 try {
-                    register(orderNo);
+                    appointmentService.doRegister(orderNo);
                     logger.info(orderNo + "挂号成功");
                 } catch (CommonException e) {
                     e.printStackTrace();
@@ -119,6 +123,16 @@ public class WebhookController {
 
             //门诊缴费
             case Constant.ORDERS_CLINIC:
+                try {
+                    outPatientService.doOutpatientConfirm(orderNo);
+                    logger.info(orderNo + "门诊确认成功");
+                } catch (CommonException e) {
+                    e.printStackTrace();
+                    //挂号失败。退款
+                    refundService.refund(orderNo, Constant.ORDERS_CLINIC, "退款原因" + e.getDetailMessage());
+                    response.setStatus(500);
+                    logger.info(orderNo + "门诊确认成功");
+                }
                 break;
 
             //住院预交金
@@ -135,9 +149,7 @@ public class WebhookController {
     }
 
 
-    private void register(String orderNo) throws CommonException {
-        appointmentService.doRegister(orderNo);
-    }
+
 
 
 

@@ -109,10 +109,8 @@ public class HmsrmyyApplicationTests {
 //		System.out.println(map.get("prescriptionNo"));
 //		BigDecimal bigDecimal = new BigDecimal("123");
 		List<String> strings = new ArrayList<>();
-		strings.add("a");
-		strings.add("b");
 		String join = StringUtils.join(strings, "|");
-		System.out.println(join);
+		System.out.println("\n" + join + "\n");
 
 	}
 

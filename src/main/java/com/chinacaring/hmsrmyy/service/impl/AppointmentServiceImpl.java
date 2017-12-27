@@ -244,13 +244,13 @@ public class AppointmentServiceImpl implements AppointmentService {
             appointment.setInvoiceNo(registerResponseHis.getInvoiceNo());
             appointment.setReceiptNo(registerResponseHis.getReceiptNo());
             appointment.setSeeNo(Integer.valueOf(registerResponseHis.getSeeNO()));
-            appointmentRepository.save(appointment);
+            appointmentRepository.saveAndFlush(appointment);
             return true;
         }else {
             //挂号失败
             appointment.setRegState(Constant.REG_STATE_GUA_HAO_SHI_BAI);
             appointment.setHisResult(xmlString);
-            appointmentRepository.save(appointment);
+            appointmentRepository.saveAndFlush(appointment);
             throw new CommonException(registerResponseHis.getReturnDesc());
         }
     }

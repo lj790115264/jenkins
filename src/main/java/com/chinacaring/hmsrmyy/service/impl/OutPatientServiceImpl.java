@@ -234,7 +234,7 @@ public class OutPatientServiceImpl implements OutPatientService{
         Outpatient outpatient = outpatients.get(0);
         //进入此方法时已经支付成功  设置状态为 已支付
         outpatient.setPayState(Constant.ORDERS_PAID);
-        outpatientRepository.save(outpatient);
+        outpatientRepository.saveAndFlush(outpatient);
 
         List<OutpatientConfirmResult> results = outpatientConfirm(outpatient);
         Boolean refundFlag = false;
@@ -255,10 +255,28 @@ public class OutPatientServiceImpl implements OutPatientService{
                 failConfirmedPrescription.add(outpatientConfirmResult.getPrescriptionNo());
             }
         }
-        return null;
+
+        outpatient.setInvoiceNo(org.apache.commons.lang.StringUtils.join(invoiceNo, "|"));
+        outpatient.setReceiptNo(org.apache.commons.lang.StringUtils.join(receiptNo, "|"));
+        outpatient.setRefundCost(refundCost);
+        String failpres = org.apache.commons.lang.StringUtils.join(failConfirmedPrescription, "|");
+        outpatient.setFailConfirmedPrescription(failpres);
+        outpatientRepository.saveAndFlush(outpatient);
+
+        if (refundFlag){
+            outpatient.setConfirmState(Constant.OUTPATIENT_CONFIRM_PARTLY_FAIL);
+            outpatientRepository.saveAndFlush(outpatient);
+            throw new CommonException("处方号：" + failpres + "确认失败");
+        }else {
+            outpatient.setConfirmState(Constant.OUTPATIENT_CONFIRM_SUCCESS);
+            outpatientRepository.saveAndFlush(outpatient);
+        }
+
+        return true;
     }
 
     private List<OutpatientConfirmResult> outpatientConfirm(Outpatient outpatient){
+
 
         List<Map> prescriptionList = gson.fromJson(outpatient.getPrescriptionNo(), ArrayList.class);
         OutpatientConfirmRequestHis outpatientConfirmRequestHis = new OutpatientConfirmRequestHis();

@@ -19,6 +19,7 @@ spring:
           auto: update
         show_sql: false
 
+
 logging:
   level: info
 

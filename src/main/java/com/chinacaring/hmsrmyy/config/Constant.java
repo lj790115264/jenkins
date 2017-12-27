@@ -17,7 +17,7 @@ public class Constant {
     public static final Integer STATE_COMMON_USED_PATIENT_DELETED = 2;
 
     //订单总表中的状态
-    //是否已支付   1--已支付，0--未支付  2 -- 已退款成功 3--退款失败
+    //是否已支付   1--已支付，0--未支付  2 -- 已退款成功 3--正在退款 4 -- 退款失败
     public static final Integer ORDERS_REFUND_FAILED = 4;
     public static final Integer ORDERS_REFUND_PENDING = 3;
     public static final Integer ORDERS_REFUNDED = 2;
@@ -39,7 +39,7 @@ public class Constant {
     public static final Integer OUTPATIENT_CONFIRM_NOT_YET = 1;
     public static final Integer OUTPATIENT_CONFIRM_SUCCESS = 2;
     public static final Integer OUTPATIENT_CONFIRM_FAIL = 3;
-    public static final Integer OUTPATIENT_CONFIRM_PARTLY_SUCCESS = 4;
+    public static final Integer OUTPATIENT_CONFIRM_PARTLY_FAIL = 4;
 
     //操作员工号
     public static final String OPER_CODE = "CARING";
