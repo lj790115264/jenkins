@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Response" type="ResponseType"/>
+  <xs:complexType name="ItemsType">
+    <xs:sequence>
+      <xs:element type="ItemType" name="Item" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ItemType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="reportNo"/>
+      <xs:element name="itemId">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="25020101"/>
+            <xs:enumeration value="25020102"/>
+            <xs:enumeration value="25020103"/>
+            <xs:enumeration value="25020104"/>
+            <xs:enumeration value="25020105"/>
+            <xs:enumeration value="25020106"/>
+            <xs:enumeration value="25020107"/>
+            <xs:enumeration value="250104006"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="itemName">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="ATⅢ"/>
+            <xs:enumeration value="PT凝血酶原时间"/>
+            <xs:enumeration value="INR国际化标准比率"/>
+            <xs:enumeration value="APTT活化部分凝血"/>
+            <xs:enumeration value="TT凝血酶时间"/>
+            <xs:enumeration value="FIB纤维蛋白原"/>
+            <xs:enumeration value="D-D二聚体"/>
+            <xs:enumeration value="FDP"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="result">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="67.30"/>
+            <xs:enumeration value="15.30"/>
+            <xs:enumeration value="1.35"/>
+            <xs:enumeration value="36.30"/>
+            <xs:enumeration value="15.70"/>
+            <xs:enumeration value="3.92"/>
+            <xs:enumeration value="480.00"/>
+            <xs:enumeration value="1.94"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="resultRef">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="75.00～125.00"/>
+            <xs:enumeration value="11.00～15.00"/>
+            <xs:enumeration value="0.80～1.50"/>
+            <xs:enumeration value="20.00～40.00"/>
+            <xs:enumeration value="14.00～21.00"/>
+            <xs:enumeration value="2.00～4.00"/>
+            <xs:enumeration value="1.00～1000.00"/>
+            <xs:enumeration value="0.00～5.00"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="xs:string" name="isDanger"/>
+      <xs:element name="unit">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="%"/>
+            <xs:enumeration value="s"/>
+            <xs:enumeration value="g/L"/>
+            <xs:enumeration value="ug/L"/>
+            <xs:enumeration value="ug/ml"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="resultFlag">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="↓"/>
+            <xs:enumeration value="↑"/>
+            <xs:enumeration value=""/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="itemIndex">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="1"/>
+            <xs:enumeration value="2"/>
+            <xs:enumeration value="3"/>
+            <xs:enumeration value="4"/>
+            <xs:enumeration value="5"/>
+            <xs:enumeration value="6"/>
+            <xs:enumeration value="7"/>
+            <xs:enumeration value="8"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExamineDetailResponseHis">
+    <xs:sequence>
+      <xs:element type="xs:string" name="returnCode"/>
+      <xs:element type="xs:string" name="returnDesc"/>
+      <xs:element type="ItemsType" name="Items"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

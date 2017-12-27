@@ -147,4 +147,29 @@
         </field>
     </mapping>
 
+    <mapping>
+        <class-a>com.chinacaring.hmsrmyy.dto.front.response.ExamineDetailResponseWithSortCode</class-a>
+        <class-b>com.chinacaring.hmsrmyy.dto.his.response.examineDetail.ItemType</class-b>
+        <field>
+            <a>report_code</a>
+            <b>reportNo</b>
+        </field>
+        <field>
+            <a>name</a>
+            <b>itemName</b>
+        </field>
+        <field>
+            <a>value</a>
+            <b>result</b>
+        </field>
+        <field>
+            <a>unit</a>
+            <b>unit</b>
+        </field>
+        <field>
+            <a>range</a>
+            <b>resultRef</b>
+        </field>
+    </mapping>
+
 </mappings>

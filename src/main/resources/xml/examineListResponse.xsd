@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Response" type="ResponseType"/>
+  <xs:complexType name="ItemsType">
+    <xs:sequence>
+      <xs:element type="ItemType" name="Item" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ItemType">
+    <xs:sequence>
+      <xs:element name="sampleType">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="血液"/>
+            <xs:enumeration value="血清"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="lisItemName">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="临检"/>
+            <xs:enumeration value="生化"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="lisItemCode">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="临检"/>
+            <xs:enumeration value="生化"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="sendTime">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="2017/11/23 14:48:00"/>
+            <xs:enumeration value="2017/11/23 13:24:00"/>
+            <xs:enumeration value="2017/11/23 14:26:00"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="xs:string" name="inceptTime"/>
+      <xs:element name="acceptTime">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="2017/11/23 14:48:38"/>
+            <xs:enumeration value="2017/11/23 13:24:48"/>
+            <xs:enumeration value="2017/11/23 14:26:35"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="xs:string" name="reportStatus"/>
+      <xs:element name="approveTime">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="2017/11/23 15:00:07"/>
+            <xs:enumeration value="2017/11/23 13:28:48"/>
+            <xs:enumeration value="2017/11/23 15:17:51"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="doctorCode">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="3035"/>
+            <xs:enumeration value="3207"/>
+            <xs:enumeration value="3233"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="doctorName">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="郭建晖"/>
+            <xs:enumeration value="刘一坤"/>
+            <xs:enumeration value="吴欢欢"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="xs:string" name="printSeq"/>
+      <xs:element name="machineId">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="028"/>
+            <xs:enumeration value="019"/>
+            <xs:enumeration value="025"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="sampleId">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="232"/>
+            <xs:enumeration value="80"/>
+            <xs:enumeration value="122"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="reportNo">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="4652781"/>
+            <xs:enumeration value="4652701"/>
+            <xs:enumeration value="4652614"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExamineListResponseHis">
+    <xs:sequence>
+      <xs:element type="xs:string" name="returnCode"/>
+      <xs:element type="xs:string" name="returnDesc"/>
+      <xs:element type="ItemsType" name="Items"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

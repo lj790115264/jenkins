@@ -2,6 +2,8 @@ package com.chinacaring.hmsrmyy.config;
 
 public enum InterfaceName {
 
+    getLisResultInfo("检验主表"),
+    getLisResultDetilInfo("检验明细"),
     hospitalizationExpensesRecharge("住院押金费充值确认"),
     saveFee("门诊结算确认"),
     getPrescriptionInfo("获取处方信息"),

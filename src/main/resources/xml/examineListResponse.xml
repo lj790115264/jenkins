@@ -1,0 +1,54 @@
+<Response>
+    <returnCode>1</returnCode>
+    <returnDesc />
+    <Items>
+        <Item>
+            <sampleType>血液</sampleType>
+            <lisItemName>临检</lisItemName>
+            <lisItemCode>临检</lisItemCode>
+            <sendTime>2017/11/23 14:48:00</sendTime>
+            <inceptTime>2017/11/23 12:59:00</inceptTime>
+            <acceptTime>2017/11/23 14:48:38</acceptTime>
+            <reportStatus>1</reportStatus>
+            <approveTime>2017/11/23 15:00:07</approveTime>
+            <doctorCode>3035</doctorCode>
+            <doctorName>郭建晖</doctorName>
+            <printSeq>1</printSeq>
+            <machineId>028</machineId>
+            <sampleId>232</sampleId>
+            <reportNo>4652781</reportNo>
+        </Item>
+        <Item>
+            <sampleType>血液</sampleType>
+            <lisItemName>临检</lisItemName>
+            <lisItemCode>临检</lisItemCode>
+            <sendTime>2017/11/23 13:24:00</sendTime>
+            <inceptTime>2017/11/23 12:59:00</inceptTime>
+            <acceptTime>2017/11/23 13:24:48</acceptTime>
+            <reportStatus>1</reportStatus>
+            <approveTime>2017/11/23 13:28:48</approveTime>
+            <doctorCode>3207</doctorCode>
+            <doctorName>刘一坤</doctorName>
+            <printSeq>1</printSeq>
+            <machineId>019</machineId>
+            <sampleId>80</sampleId>
+            <reportNo>4652701</reportNo>
+        </Item>
+        <Item>
+            <sampleType>血清</sampleType>
+            <lisItemName>生化</lisItemName>
+            <lisItemCode>生化</lisItemCode>
+            <sendTime>2017/11/23 14:26:00</sendTime>
+            <inceptTime>2017/11/23 12:59:00</inceptTime>
+            <acceptTime>2017/11/23 14:26:35</acceptTime>
+            <reportStatus>1</reportStatus>
+            <approveTime>2017/11/23 15:17:51</approveTime>
+            <doctorCode>3233</doctorCode>
+            <doctorName>吴欢欢</doctorName>
+            <printSeq>1</printSeq>
+            <machineId>025</machineId>
+            <sampleId>122</sampleId>
+            <reportNo>4652614</reportNo>
+        </Item>
+    </Items>
+</Response>

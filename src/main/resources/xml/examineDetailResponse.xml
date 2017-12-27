@@ -1,0 +1,94 @@
+<Response>
+    <returnCode>1</returnCode>
+    <returnDesc />
+    <Items>
+        <Item>
+            <reportNo>4652781</reportNo>
+            <itemId>25020101</itemId>
+            <itemName>ATⅢ</itemName>
+            <result>67.30</result>
+            <resultRef>75.00～125.00</resultRef>
+            <isDanger>0</isDanger>
+            <unit>%</unit>
+            <resultFlag>↓</resultFlag>
+            <itemIndex>1</itemIndex>
+        </Item>
+        <Item>
+            <reportNo>4652781</reportNo>
+            <itemId>25020102</itemId>
+            <itemName>PT凝血酶原时间</itemName>
+            <result>15.30</result>
+            <resultRef>11.00～15.00</resultRef>
+            <isDanger>0</isDanger>
+            <unit>s</unit>
+            <resultFlag>↑</resultFlag>
+            <itemIndex>2</itemIndex>
+        </Item>
+        <Item>
+            <reportNo>4652781</reportNo>
+            <itemId>25020103</itemId>
+            <itemName>INR国际化标准比率</itemName>
+            <result>1.35</result>
+            <resultRef>0.80～1.50</resultRef>
+            <isDanger>0</isDanger>
+            <unit>%</unit>
+            <resultFlag />
+            <itemIndex>3</itemIndex>
+        </Item>
+        <Item>
+            <reportNo>4652781</reportNo>
+            <itemId>25020104</itemId>
+            <itemName>APTT活化部分凝血</itemName>
+            <result>36.30</result>
+            <resultRef>20.00～40.00</resultRef>
+            <isDanger>0</isDanger>
+            <unit>s</unit>
+            <resultFlag />
+            <itemIndex>4</itemIndex>
+        </Item>
+        <Item>
+            <reportNo>4652781</reportNo>
+            <itemId>25020105</itemId>
+            <itemName>TT凝血酶时间</itemName>
+            <result>15.70</result>
+            <resultRef>14.00～21.00</resultRef>
+            <isDanger>0</isDanger>
+            <unit>s</unit>
+            <resultFlag />
+            <itemIndex>5</itemIndex>
+        </Item>
+        <Item>
+            <reportNo>4652781</reportNo>
+            <itemId>25020106</itemId>
+            <itemName>FIB纤维蛋白原</itemName>
+            <result>3.92</result>
+            <resultRef>2.00～4.00</resultRef>
+            <isDanger>0</isDanger>
+            <unit>g/L</unit>
+            <resultFlag />
+            <itemIndex>6</itemIndex>
+        </Item>
+        <Item>
+            <reportNo>4652781</reportNo>
+            <itemId>25020107</itemId>
+            <itemName>D-D二聚体</itemName>
+            <result>480.00</result>
+            <resultRef>1.00～1000.00</resultRef>
+            <isDanger>0</isDanger>
+            <unit>ug/L</unit>
+            <resultFlag />
+            <itemIndex>7</itemIndex>
+        </Item>
+        <Item>
+            <reportNo>4652781</reportNo>
+            <itemId>250104006</itemId>
+            <itemName>FDP</itemName>
+            <result>1.94</result>
+            <resultRef>0.00～5.00</resultRef>
+            <isDanger>0</isDanger>
+            <unit>ug/ml</unit>
+            <resultFlag />
+            <itemIndex>8</itemIndex>
+        </Item>
+    </Items>
+</Response>
