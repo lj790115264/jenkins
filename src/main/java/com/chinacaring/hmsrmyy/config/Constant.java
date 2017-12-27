@@ -41,6 +41,12 @@ public class Constant {
     public static final Integer OUTPATIENT_CONFIRM_FAIL = 3;
     public static final Integer OUTPATIENT_CONFIRM_PARTLY_FAIL = 4;
 
+    //住院押金充值
+    //1：未充值 2：充值成功 3：充值失败
+    public static final Integer INBALANCE_CONFIRM_WEI_CHONG_ZHI = 1;
+    public static final Integer INBALANCE_CONFIRM_SUCCESS = 2;
+    public static final Integer INBALANCE_CONFIRM_FAIL = 3;
+
     //操作员工号
     public static final String OPER_CODE = "CARING";
 
@@ -68,8 +74,10 @@ public class Constant {
     public static final String APPOINTMENT_TYPE_CANCEL = "1";
 
     //ping++ 支付相关
+    //支付标题
     public static final String CHARGE_SUBJECT_APPOINTMENT = "海门市人民医院预约挂号";
     public static final String CHARGE_SUBJECT_OUTPATIENT = "海门市人民医院门诊缴费";
+    public static final String CHARGE_SUBJECT_INBALANCE = "海门市人民医院住院押金充值";
 
     //支付basic认证
     public static final String PAY_BASE64_STRING = "Basic cGF5OnBheWNhcmluZzIwMTc=";

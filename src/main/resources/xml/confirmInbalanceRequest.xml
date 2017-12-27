@@ -1,0 +1,9 @@
+<Request>
+    <inpatientNo>201743837</inpatientNo>
+    <name>朱雨琴</name>
+    <operCode>chinacaring_app</operCode>
+    <payMode>wechat</payMode>
+    <amount>1</amount>
+    <time>2017-12-12 15:00:00</time>
+    <transNo>201712051314002020</transNo>
+</Request>

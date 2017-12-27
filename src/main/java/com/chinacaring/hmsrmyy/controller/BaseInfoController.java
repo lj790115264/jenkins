@@ -1,5 +1,6 @@
 package com.chinacaring.hmsrmyy.controller;
 
+import com.chinacaring.common.vo.Result;
 import com.chinacaring.hmsrmyy.service.BaseInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +14,7 @@ public class BaseInfoController {
 
     @GetMapping(value = "depts")
     public Object getDepts(){
-        return baseInfoService.getDepts();
+        return new Result<>(baseInfoService.getDepts());
     }
 
 }

@@ -2,11 +2,14 @@ package com.chinacaring.hmsrmyy.service.impl;
 
 import com.chinacaring.hmsrmyy.config.Constant;
 import com.chinacaring.hmsrmyy.dao.entity.Appointment;
+import com.chinacaring.hmsrmyy.dao.entity.Inbalance;
 import com.chinacaring.hmsrmyy.dao.entity.Outpatient;
 import com.chinacaring.hmsrmyy.dao.repository.AppointmentRepository;
+import com.chinacaring.hmsrmyy.dao.repository.InbalanceRepository;
 import com.chinacaring.hmsrmyy.dao.repository.OutpatientRepository;
 import com.chinacaring.hmsrmyy.dto.pingpp.RefundRequest;
 import com.chinacaring.hmsrmyy.dto.wechatpush.WechatPushResponse;
+import com.chinacaring.hmsrmyy.service.InbalanceService;
 import com.chinacaring.hmsrmyy.service.RefundService;
 import com.chinacaring.hmsrmyy.service.WechatPushService;
 import com.google.gson.Gson;
@@ -38,17 +41,25 @@ public class RefundServiceImpl implements RefundService {
 
     private final WechatPushService wechatPushService;
 
+    private final InbalanceService inbalanceService;
+
+    private final InbalanceRepository inbalanceRepository;
+
     @Autowired
     public RefundServiceImpl(AppointmentRepository appointmentRepository,
                              OutpatientRepository outpatientRepository,
                              RestTemplate restTemplate,
                              Gson gson,
-                             WechatPushService wechatPushService) {
+                             WechatPushService wechatPushService,
+                             InbalanceService inbalanceService,
+                             InbalanceRepository inbalanceRepository) {
         this.appointmentRepository = appointmentRepository;
         this.outpatientRepository = outpatientRepository;
         this.restTemplate = restTemplate;
         this.gson = gson;
         this.wechatPushService = wechatPushService;
+        this.inbalanceService = inbalanceService;
+        this.inbalanceRepository = inbalanceRepository;
     }
 
     @Override
@@ -60,7 +71,7 @@ public class RefundServiceImpl implements RefundService {
                 try{
                     refundAppointment(orderNo, refundDes);
                 }catch (Exception e){
-                    logger.info("orderType :" + orderType + "  orderNo :" + orderNo + "  退款出现异常！！");
+                    logger.info("\norderType :" + orderType + "  orderNo :" + orderNo + "  退款出现异常！！\n");
                     e.printStackTrace();
                 }
                 break;
@@ -69,13 +80,19 @@ public class RefundServiceImpl implements RefundService {
                 try{
                     refundOutpatient(orderNo, refundDes);
                 }catch (Exception e){
-                    logger.info("orderType :" + orderType + "  orderNo :" + orderNo + "  退款出现异常！！");
+                    logger.info("\norderType :" + orderType + "  orderNo :" + orderNo + "  退款出现异常！！\n");
                     e.printStackTrace();
                 }
                 break;
 
             //住院预交金
             case Constant.ORDERS_INHOS_PRE_CHARGE:
+                try{
+                    refundInbalance(orderNo, refundDes);
+                }catch (Exception e){
+                    logger.info("\norderType :" + orderType + "  orderNo :" + orderNo + "  退款出现异常！！\n");
+                    e.printStackTrace();
+                }
                 break;
 
             default:
@@ -86,7 +103,7 @@ public class RefundServiceImpl implements RefundService {
 
     private void refundAppointment(String orderNo, String refundDes){
 
-        logger.info("挂号退款 -- " + orderNo);
+        logger.info("\n挂号退款 -- " + orderNo + "\n");
 
         Appointment appointment = appointmentRepository.findOneByOrderNo(orderNo);
         String fundingSource;
@@ -143,15 +160,76 @@ public class RefundServiceImpl implements RefundService {
         }
 
         WechatPushResponse wechatPushResponse = wechatPushService.sendNews(alipayUrl, title, refundDes);
-        logger.info("退款推送 -- " + orderNo);
-        logger.info(wechatPushResponse.toString());
+        logger.info("\n退款推送 -- " + orderNo + "\n");
+        logger.info(wechatPushResponse.toString() + "\n");
 
     }
 
+    private void refundInbalance(String orderNo, String refundDes){
+
+        logger.info("\n住院预交金退款 -- " + orderNo + "\n");
+        List<Inbalance> inbalances = inbalanceRepository.findByOrderNo(orderNo);
+        Inbalance inbalance = inbalances.get(0);
+
+        String fundingSource;
+        if (inbalance.getPayChannel().startsWith("alipay")) {
+            fundingSource = "";
+        }else {
+            fundingSource = Constant.REFUND_FUNDING_SOURCE_WX_UNSETTLED_FUNDS;
+        }
+        String refundRes = refundByPaydata(inbalance.getPayData(), "挂号失败退款", fundingSource, inbalance.getCost().intValue());
+        //如果重复退款 退款接口会返回 null
+        if (Objects.equals(refundRes, null)){
+            inbalance.setRefundRes("重复退款");
+            inbalanceRepository.saveAndFlush(inbalance);
+            return;
+        }
+        Map refundResMap= gson.fromJson(refundRes, Map.class);
+        String refundStatus = refundResMap.get("status") + "";
+        String refundNo = refundResMap.get("id") + "";
+
+        inbalance.setRefundNo(refundNo);
+        inbalance.setRefundRes(refundRes);
+
+        //正在处理
+        if (Objects.equals(refundStatus, "pending")){
+            inbalance.setPayState(Constant.ORDERS_REFUND_PENDING);
+            inbalanceRepository.saveAndFlush(inbalance);
+            //退款成功
+        }else if (Objects.equals(refundStatus, "succeeded")){
+            inbalance.setPayState(Constant.ORDERS_REFUNDED);
+            inbalanceRepository.saveAndFlush(inbalance);
+            //其余退款失败
+        }else {
+            inbalance.setPayState(Constant.ORDERS_REFUND_FAILED);
+            inbalanceRepository.saveAndFlush(inbalance);
+        }
+
+        String alipayUrl;
+        String title;
+        //微信到此结束
+        //支付宝还需要景 url 推送给对应的退款人
+        if (inbalance.getPayChannel().startsWith("alipay")){
+            alipayUrl = refundResMap.get("failureMsg") + "";
+            alipayUrl = alipayUrl.replace("需要打开地址进行下一步退款操作: ", "");
+            //保存下 url
+            inbalance.setAlipayRefundUrl(alipayUrl);
+            inbalanceRepository.saveAndFlush(inbalance);
+
+            title = "支付宝退款通知";
+        }else {
+            alipayUrl = "";
+            title = "微信退款通知";
+        }
+
+        WechatPushResponse wechatPushResponse = wechatPushService.sendNews(alipayUrl, title, refundDes);
+        logger.info("\n退款推送 -- " + orderNo + "\n");
+        logger.info("\n" + wechatPushResponse.toString() + "\n");
+    }
 
     private void refundOutpatient(String orderNo, String refundDes){
 
-        logger.info("门诊结算退款 -- " + orderNo);
+        logger.info("\n门诊结算退款 -- " + orderNo + "\n");
         List<Outpatient> outpatients = outpatientRepository.findByOrderNo(orderNo);
         Outpatient outpatient = outpatients.get(0);
         String fundingSource;
@@ -208,8 +286,8 @@ public class RefundServiceImpl implements RefundService {
         }
 
         WechatPushResponse wechatPushResponse = wechatPushService.sendNews(alipayUrl, title, refundDes);
-        logger.info("退款推送 -- " + orderNo);
-        logger.info(wechatPushResponse.toString());
+        logger.info("\n退款推送 -- " + orderNo + "\n");
+        logger.info("\n" + wechatPushResponse.toString() + "\n");
     }
 
     private String refundByPaydata(String paydata, String description, String fundingSource, Integer refundAmount){

@@ -29,17 +29,21 @@ import java.util.List;
 @Service
 public class CommonUsedPatientServiceImpl implements CommonUsedPatientService {
 
-    @Autowired
-    private CommonUsedPatientRepository commonUsedPatientRepository;
+    private final CommonUsedPatientRepository commonUsedPatientRepository;
+
+    private final IUserInfoService iUserInfoService;
+
+    private final IdCardUtil idCardUtil;
+
+    private final BaseInfoService baseInfoService;
 
     @Autowired
-    private IUserInfoService iUserInfoService;
-
-    @Autowired
-    private IdCardUtil idCardUtil;
-
-    @Autowired
-    private BaseInfoService baseInfoService;
+    public CommonUsedPatientServiceImpl(CommonUsedPatientRepository commonUsedPatientRepository, IUserInfoService iUserInfoService, IdCardUtil idCardUtil, BaseInfoService baseInfoService) {
+        this.commonUsedPatientRepository = commonUsedPatientRepository;
+        this.iUserInfoService = iUserInfoService;
+        this.idCardUtil = idCardUtil;
+        this.baseInfoService = baseInfoService;
+    }
 
     @Override
     public BindCommonUsedPatientResponse bindCommonUsedPatient(CommonUsedPatientRequest commonUsedPatientRequest, User user) throws CommonException, ParseException {

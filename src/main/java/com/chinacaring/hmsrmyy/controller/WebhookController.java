@@ -10,6 +10,7 @@ import com.chinacaring.hmsrmyy.dao.repository.AppointmentRepository;
 import com.chinacaring.hmsrmyy.dao.repository.OrdersRepository;
 import com.chinacaring.hmsrmyy.dto.pingpp.PayResponse;
 import com.chinacaring.hmsrmyy.service.AppointmentService;
+import com.chinacaring.hmsrmyy.service.InbalanceService;
 import com.chinacaring.hmsrmyy.service.OutPatientService;
 import com.chinacaring.hmsrmyy.service.RefundService;
 import com.chinacaring.hmsrmyy.utils.WebhooksUtils;
@@ -84,6 +85,10 @@ public class WebhookController {
 
     @Autowired
     private OutPatientService outPatientService;
+
+    @Autowired
+    private InbalanceService inbalanceService;
+
     /**
      * 支付成功后进行挂号
      * @param event
@@ -137,7 +142,16 @@ public class WebhookController {
 
             //住院预交金
             case Constant.ORDERS_INHOS_PRE_CHARGE:
-
+                try {
+                    inbalanceService.doInbalanceConfirm(orderNo);
+                    logger.info(orderNo + "住院预交金确认成功");
+                } catch (CommonException e) {
+                    e.printStackTrace();
+                    //挂号失败。退款
+                    refundService.refund(orderNo, Constant.ORDERS_INHOS_PRE_CHARGE, "退款原因" + e.getDetailMessage());
+                    response.setStatus(500);
+                    logger.info(orderNo + "住院预交金确认成功");
+                }
                 break;
 
             default: break;
