@@ -28,9 +28,9 @@ public class ExamineController {
     private ExamineService examineService;
 
     @GetMapping(value = "examine")
-    public Object getExamine(@RequestParam("register_id") String patientCode) throws ParseException, CommonException {
+    public Object getExamine(@RequestParam("register_id") String regNo) throws ParseException, CommonException {
 
-        List<ExamineResponse> examineResponses = examineService.getExamine(patientCode);
+        List<ExamineResponse> examineResponses = examineService.getExamine(regNo);
         if (Objects.equals(0, examineResponses.size())){
             throw new CommonException("暂无相关记录");
         }
