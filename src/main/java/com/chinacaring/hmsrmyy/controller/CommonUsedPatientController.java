@@ -23,7 +23,7 @@ public class CommonUsedPatientController {
 
 
     @ApiOperation("绑定常用就诊人")
-    @PostMapping("common_userd_patient")
+    @PostMapping("/common_used_patient")
     public Object bindCommonUsedPatient(@RequestBody CommonUsedPatientRequest commonUsedPatientRequest, @CurrentUser User user) throws CommonException, ParseException {
 
         return new Result<>(commonUsedPatientService.bindCommonUsedPatient(commonUsedPatientRequest, user));
@@ -31,7 +31,7 @@ public class CommonUsedPatientController {
     }
 
     @ApiOperation("删除常用就诊人")
-    @PutMapping("common_userd_patient")
+    @PutMapping("/common_used_patient")
     public Object deleteCommonUsedPatient(@RequestBody CommonUsedPatientRequest commonUsedPatientRequest, @CurrentUser User user) throws CommonException {
 
         return new Result<>(commonUsedPatientService.deleteCommonUsedPatient(commonUsedPatientRequest, user));
@@ -39,7 +39,7 @@ public class CommonUsedPatientController {
     }
 
     @ApiOperation("查询常用就诊人")
-    @GetMapping("common_userd_patient")
+    @GetMapping("/common_used_patient")
     public Object getCommonUsedPatient(@CurrentUser User user) throws CommonException {
 
         return new Result<>(commonUsedPatientService.getCommonUsedPatient(user));
@@ -48,7 +48,7 @@ public class CommonUsedPatientController {
 
 
     @ApiOperation("修改常用就诊人的手机号")
-    @PatchMapping("common_userd_patient")
+    @PatchMapping("/common_used_patient")
     public Object modifyPhoneCommonUsedPatient(@RequestBody CommonUsedPatientRequest commonUsedPatientRequest, @CurrentUser User user) throws CommonException {
 
         return new Result<>(commonUsedPatientService.modifyPhone(commonUsedPatientRequest, user));

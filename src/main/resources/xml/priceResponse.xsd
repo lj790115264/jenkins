@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Response" type="ResponseType"/>
+  <xs:complexType name="datasType">
+    <xs:sequence>
+      <xs:element type="dataType" name="data" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="dataType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="BOARD_STYLE"/>
+      <xs:element name="ITEM_NAME">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="计算机图文报告-Y"/>
+            <xs:enumeration value="脏器声学造影"/>
+            <xs:enumeration value="常规经食管超声心动图"/>
+            <xs:enumeration value="术中经食管超声心动图"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="ITEM_CODE">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="220800008-Y"/>
+            <xs:enumeration value="220302010"/>
+            <xs:enumeration value="220600005"/>
+            <xs:enumeration value="220600006"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="ITEM_PRICE">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="15"/>
+            <xs:enumeration value="65"/>
+            <xs:enumeration value="200"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="xs:string" name="ITEM_CATEGORY"/>
+      <xs:element type="xs:string" name="ITEM_MEASURE_UNIT"/>
+      <xs:element type="xs:string" name="MANUFACTORY"/>
+      <xs:element type="xs:string" name="INSTRUCTIONS"/>
+      <xs:element name="FORMATS">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value=""/>
+            <xs:enumeration value="包括肿瘤声学造影"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="REMARK">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="新增眼部B超"/>
+            <xs:enumeration value=""/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="CREATE_TIME">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="2015/5/30 10:16:05"/>
+            <xs:enumeration value="2011/7/1 11:09:21"/>
+            <xs:enumeration value="2011/6/9 14:32:47"/>
+            <xs:enumeration value="2011/6/9 14:33:17"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PriceResponseHis">
+    <xs:sequence>
+      <xs:element name="returnCode" maxOccurs="unbounded" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="1"/>
+            <xs:enumeration value=""/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="datasType" name="datas"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

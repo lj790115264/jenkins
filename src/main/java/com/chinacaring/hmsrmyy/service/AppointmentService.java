@@ -3,6 +3,7 @@ package com.chinacaring.hmsrmyy.service;
 import com.chinacaring.common.exception.CommonException;
 import com.chinacaring.hmsrmyy.dto.front.request.AppointmentInfoRequest;
 import com.chinacaring.hmsrmyy.dto.front.request.ScheduleRequest;
+import com.chinacaring.hmsrmyy.dto.front.response.AppointmentRecord.AppointmentRecordsResponse;
 import com.chinacaring.hmsrmyy.dto.his.request.appointment.AppointmentRequestHis;
 import com.chinacaring.hmsrmyy.dto.his.request.registerState.RegisterStateRequestHis;
 import com.chinacaring.hmsrmyy.dto.his.request.schedule.ScheduleRequestHis;
@@ -27,4 +28,7 @@ public interface AppointmentService {
 
     //查看 挂号 在 医院的状态 已看诊 已退号 未看诊
     Object getRegisterStatus(RegisterStateRequestHis registerStateRequestHis) throws CommonException;
+
+    AppointmentRecordsResponse getAppointRecords(String patientCode, User user) throws CommonException;
+
 }

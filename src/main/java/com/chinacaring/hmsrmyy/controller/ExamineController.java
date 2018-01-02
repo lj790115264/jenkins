@@ -27,7 +27,7 @@ public class ExamineController {
     @Autowired
     private ExamineService examineService;
 
-    @GetMapping(value = "examine")
+    @GetMapping(value = "/examine")
     public Object getExamine(@RequestParam("register_id") String regNo) throws ParseException, CommonException {
 
         List<ExamineResponse> examineResponses = examineService.getExamine(regNo);
@@ -38,7 +38,7 @@ public class ExamineController {
 
     }
 
-    @GetMapping(value = "examine/{examine_code}")
+    @GetMapping(value = "/examine/{examine_code}")
     public Object getExamineDetail(@PathVariable("examine_code") String examine_code) throws CommonException {
 
         return new Result<>(examineService.getDetail(examine_code));

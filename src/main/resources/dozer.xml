@@ -171,5 +171,37 @@
             <b>resultRef</b>
         </field>
     </mapping>
+    <mapping>
+        <class-a>com.chinacaring.hmsrmyy.dto.his.response.price.DataType</class-a>
+        <class-b>com.chinacaring.hmsrmyy.dao.entity.Price</class-b>
+        <field>
+            <a>boardstyle</a>
+            <b>boardStyle</b>
+        </field>
+        <field>
+            <a>itemname</a>
+            <b>itemName</b>
+        </field>
+        <field>
+            <a>itemcode</a>
+            <b>itemCode</b>
+        </field>
+        <field>
+            <a>itemprice</a>
+            <b>itemPrice</b>
+        </field>
+        <field>
+            <a>itemcategory</a>
+            <b>itemCategory</b>
+        </field>
+        <field>
+            <a>itemmeasureunit</a>
+            <b>itemMeasureUnit</b>
+        </field>
+        <field>
+            <a>createtime</a>
+            <b>createTime</b>
+        </field>
+    </mapping>
 
 </mappings>

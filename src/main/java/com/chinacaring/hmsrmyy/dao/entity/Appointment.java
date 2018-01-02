@@ -121,6 +121,10 @@ public class Appointment {
 
     private String refundNo;
 
+    private Date refundTime;
+
     @Column(columnDefinition = "TEXT")
     private String alipayRefundUrl;
+
+    private String registerLevelName;
 }

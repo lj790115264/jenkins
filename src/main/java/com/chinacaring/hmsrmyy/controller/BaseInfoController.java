@@ -12,7 +12,7 @@ public class BaseInfoController {
     @Autowired
     private BaseInfoService baseInfoService;
 
-    @GetMapping(value = "depts")
+    @GetMapping(value = "/depts")
     public Object getDepts(){
         return new Result<>(baseInfoService.getDepts());
     }

@@ -9,6 +9,8 @@ import com.chinacaring.hmsrmyy.dao.repository.AppointmentRepository;
 import com.chinacaring.hmsrmyy.dao.repository.OrdersRepository;
 import com.chinacaring.hmsrmyy.dto.front.request.AppointmentInfoRequest;
 import com.chinacaring.hmsrmyy.dto.front.request.ScheduleRequest;
+import com.chinacaring.hmsrmyy.dto.front.response.AppointmentRecord.AppointmentRecord;
+import com.chinacaring.hmsrmyy.dto.front.response.AppointmentRecord.AppointmentRecordsResponse;
 import com.chinacaring.hmsrmyy.dto.his.request.register.RegisterRequestHis;
 import com.chinacaring.hmsrmyy.dto.his.request.registerState.RegisterStateRequestHis;
 import com.chinacaring.hmsrmyy.dto.his.response.register.RegisterResponseHis;
@@ -31,6 +33,7 @@ import com.chinacaring.util.JaxbXmlUtil;
 import com.chinacaring.util.TextUtil;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -39,13 +42,17 @@ import org.springframework.web.client.RestTemplate;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.logging.Logger;
 
 @Service
 public class AppointmentServiceImpl implements AppointmentService {
+
+    private Logger logger = Logger.getLogger(this.getClass().getName());
 
     @Autowired
     private OrdersRepository ordersRepository;
@@ -131,6 +138,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         //状态 未挂号
         appointment.setRegState(Constant.REG_STATE_WEI_GUA_HAO);
         //转换时间
+        appointment.setRegisterLevelName(appointmentInfoRequest.getRegisterLevelName());
         appointment.setAppointmentTime(sdf.parse(appointmentInfoRequest.getAppointmentTime()));
         appointment.setOpenid(appointmentInfoRequest.getOpenId());
         appointment.setCost(BigDecimal.valueOf(TextUtil.getDouble(appointmentInfoRequest.getCost())));
@@ -263,8 +271,11 @@ public class AppointmentServiceImpl implements AppointmentService {
         }
 
         RegisterPayment registerPayment = new RegisterPayment();
+        registerPayment.setRegisterLevelName(appointment.getRegisterLevelName());
         registerPayment.setId(appointment.getId());
+        registerPayment.setPayState(appointment.getPayState());
         registerPayment.setRegState(appointment.getRegState());
+        registerPayment.setRefundTime(appointment.getRefundTime());
         String doctorName = appointment.getDoctorName();
         registerPayment.setAppointmentTime(appointment.getAppointmentTime());
         registerPayment.setDeptName(appointment.getDeptName());
@@ -280,7 +291,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public Object getRegisterStatus(RegisterStateRequestHis registerStateRequestHis) throws CommonException {
+    public RegisterStateResponseHis getRegisterStatus(RegisterStateRequestHis registerStateRequestHis) throws CommonException {
 
         String soap = RequestUtil.soap(InterfaceName.getClinicState.name(), JaxbXmlUtil.convertToXml(registerStateRequestHis));
         RegisterStateResponseHis registerStateResponseHis = JaxbXmlUtil.convertToJavaBean(soap, RegisterStateResponseHis.class);
@@ -291,6 +302,59 @@ public class AppointmentServiceImpl implements AppointmentService {
         return registerStateResponseHis;
     }
 
+    @Override
+    public AppointmentRecordsResponse getAppointRecords(String patientCode, User user) throws CommonException {
+
+        Sort sort = new Sort(Sort.Direction.DESC, "id");
+        List<Appointment> appointments = appointmentRepository.findAllByPatientCodeAndUserIdAndPayStateAndRegisterIdNotNull(patientCode, user.getId(), Constant.ORDERS_PAID, sort);
+
+        List<AppointmentRecord> paied = new ArrayList<>();
+        List<AppointmentRecord> treated = new ArrayList<>();
+        List<AppointmentRecord> canceled = new ArrayList<>();
+
+        DecimalFormat df = new DecimalFormat("#0.00");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        for (Appointment appointment : appointments){
+
+            AppointmentRecord appointmentRecord = new AppointmentRecord();
+            appointmentRecord.setId(appointment.getId());
+            appointmentRecord.setState(String.valueOf(appointment.getRegState()));
+            appointmentRecord.setPatientName(appointment.getPatientName());
+            String doctorName = appointment.getDoctorName();
+            appointmentRecord.setDoctorName(doctorName);
+            appointmentRecord.setPayTime(sdf.format(appointment.getCreateTime()));
+            //分 -> 元
+            appointmentRecord.setCost(df.format(appointment.getCost().divide(new BigDecimal(100))));
+            Integer seeNo = (null == (appointment.getSeeNo())) ? 0 : appointment.getSeeNo();
+            appointmentRecord.setSeeNo(seeNo);
+            appointmentRecord.setDeptName(appointment.getDeptName());
+            appointmentRecord.setAppointmentTime(sdf.format(appointment.getAppointmentTime()));
+            String registerStatus;
+            try {
+                RegisterStateRequestHis registerStateRequestHis = new RegisterStateRequestHis();
+                registerStateRequestHis.setRegNO(appointment.getRegisterId());
+                RegisterStateResponseHis registerStateResponseHis = getRegisterStatus(registerStateRequestHis);
+                registerStatus = registerStateResponseHis.getState();
+            } catch (CommonException e) {
+                logger.info("获取挂号状态失败" + appointment.getRegisterId());
+                continue;
+            }
+            switch (registerStatus){
+                case Constant.REGISTER_STATUS_HIS_TUI_HAO:
+                    canceled.add(appointmentRecord);
+                    break;
+                case Constant.REGISTER_STATUS_HIS_WEI_KAN_ZHEN:
+                    paied.add(appointmentRecord);
+                    break;
+                case Constant.REGISTER_STATUS_HIS_YI_KAN_ZHEN:
+                    treated.add(appointmentRecord);
+                    break;
+            }
+
+        }
+
+        return new AppointmentRecordsResponse(paied, treated, canceled);
+    }
 
 }
 

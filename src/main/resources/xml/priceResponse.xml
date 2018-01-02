@@ -1,0 +1,58 @@
+<Response>
+    <returnCode>1</returnCode>
+    <returnCode />
+    <datas>
+        <data>
+            <BOARD_STYLE>1</BOARD_STYLE>
+            <ITEM_NAME>计算机图文报告-Y</ITEM_NAME>
+            <ITEM_CODE>220800008-Y</ITEM_CODE>
+            <ITEM_PRICE>15</ITEM_PRICE>
+            <ITEM_CATEGORY>B超</ITEM_CATEGORY>
+            <ITEM_MEASURE_UNIT>次</ITEM_MEASURE_UNIT>
+            <MANUFACTORY>无</MANUFACTORY>
+            <INSTRUCTIONS>无</INSTRUCTIONS>
+            <FORMATS />
+            <REMARK>新增眼部B超</REMARK>
+            <CREATE_TIME>2015/5/30 10:16:05</CREATE_TIME>
+        </data>
+        <data>
+            <BOARD_STYLE>1</BOARD_STYLE>
+            <ITEM_NAME>脏器声学造影</ITEM_NAME>
+            <ITEM_CODE>220302010</ITEM_CODE>
+            <ITEM_PRICE>65</ITEM_PRICE>
+            <ITEM_CATEGORY>B超</ITEM_CATEGORY>
+            <ITEM_MEASURE_UNIT>次</ITEM_MEASURE_UNIT>
+            <MANUFACTORY>无</MANUFACTORY>
+            <INSTRUCTIONS>无</INSTRUCTIONS>
+            <FORMATS>包括肿瘤声学造影</FORMATS>
+            <REMARK />
+            <CREATE_TIME>2011/7/1 11:09:21</CREATE_TIME>
+        </data>
+        <data>
+            <BOARD_STYLE>1</BOARD_STYLE>
+            <ITEM_NAME>常规经食管超声心动图</ITEM_NAME>
+            <ITEM_CODE>220600005</ITEM_CODE>
+            <ITEM_PRICE>200</ITEM_PRICE>
+            <ITEM_CATEGORY>B超</ITEM_CATEGORY>
+            <ITEM_MEASURE_UNIT>次</ITEM_MEASURE_UNIT>
+            <MANUFACTORY>无</MANUFACTORY>
+            <INSTRUCTIONS>无</INSTRUCTIONS>
+            <FORMATS />
+            <REMARK />
+            <CREATE_TIME>2011/6/9 14:32:47</CREATE_TIME>
+        </data>
+        <data>
+            <BOARD_STYLE>1</BOARD_STYLE>
+            <ITEM_NAME>术中经食管超声心动图</ITEM_NAME>
+            <ITEM_CODE>220600006</ITEM_CODE>
+            <ITEM_PRICE>200</ITEM_PRICE>
+            <ITEM_CATEGORY>B超</ITEM_CATEGORY>
+            <ITEM_MEASURE_UNIT>次</ITEM_MEASURE_UNIT>
+            <MANUFACTORY>无</MANUFACTORY>
+            <INSTRUCTIONS>无</INSTRUCTIONS>
+            <FORMATS />
+            <REMARK />
+            <CREATE_TIME>2011/6/9 14:33:17</CREATE_TIME>
+        </data>
+    </datas>
+</Response>

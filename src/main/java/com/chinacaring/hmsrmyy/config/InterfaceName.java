@@ -2,6 +2,7 @@ package com.chinacaring.hmsrmyy.config;
 
 public enum InterfaceName {
 
+    QueryPriceBoardInfo("价格公式"),
     getLisResultInfo("检验主表"),
     getLisResultDetilInfo("检验明细"),
     hospitalizationExpensesRecharge("住院押金费充值确认"),

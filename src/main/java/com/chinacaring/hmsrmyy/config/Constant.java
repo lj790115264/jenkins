@@ -94,6 +94,11 @@ public class Constant {
     //微信未结算 unsettled_funds
     public static final String REFUND_FUNDING_SOURCE_WX_UNSETTLED_FUNDS = "unsettled_funds";
 
+    //his返回的 挂号状态
+    public static final String REGISTER_STATUS_HIS_TUI_HAO = "0";
+    public static final String REGISTER_STATUS_HIS_WEI_KAN_ZHEN = "1";
+    public static final String REGISTER_STATUS_HIS_YI_KAN_ZHEN = "2";
+
 
 
 }

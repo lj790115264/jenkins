@@ -56,5 +56,7 @@ public class AppointmentInfoRequest {
     //operCode 为 chinacaring_shh，表示来自支付宝生活号操作；
 
     private String operCode;
+
+    private String registerLevelName;
     
 }
