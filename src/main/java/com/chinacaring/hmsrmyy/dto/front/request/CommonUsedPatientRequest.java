@@ -16,8 +16,10 @@ public class CommonUsedPatientRequest {
     //民族
     private String Ethnic;
 
+
     public CommonUsedPatientRequest() {
     }
+
 
     public String getEthnic() {
         return Ethnic;

@@ -71,20 +71,9 @@ public class AppointmentServiceImpl implements AppointmentService {
     private static DecimalFormat df = new DecimalFormat("#0.00");
 
     @Override
-    public ScheduleResponse getSchedule(ScheduleRequest scheduleRequest) throws CommonException {
+    public ScheduleResponse getSchedule(ScheduleRequest scheduleRequest) throws CommonException, ParseException {
 
         ScheduleRequestHis scheduleRequestHis = BeanMapperUtil.map(scheduleRequest, ScheduleRequestHis.class);
-        //判断日期是否为 当天 的 下午
-        Boolean isAfternoon = false;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        GregorianCalendar gregorianCalendar = new GregorianCalendar();
-        if (scheduleRequestHis.getBeginTime().equals(scheduleRequestHis.getEndTime())
-                && sdf.format(new Date()).equals(scheduleRequestHis.getBeginTime())
-                && new Integer(1).equals(gregorianCalendar.get(GregorianCalendar.AM_PM))){
-
-            isAfternoon = true;
-        }
-
         String soap = RequestUtil.soap(InterfaceName.getSchemaInfo.name(), JaxbXmlUtil.convertToXml(scheduleRequestHis));
         ScheduleResponseHis scheduleResponseHis = JaxbXmlUtil.convertToJavaBean(soap, ScheduleResponseHis.class);
 
@@ -95,14 +84,12 @@ public class AppointmentServiceImpl implements AppointmentService {
         List<Schedule> schedules = BeanMapperUtil.mapList(scheduleResponseHis.getItems().getItem(), Schedule.class);
         List<Schedule> normal = new ArrayList<>();
         List<Schedule> expert = new ArrayList<>();
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMdd");
         for (Schedule schedule : schedules){
 
-            //下午的时候  不看上午的排班
-            if (isAfternoon){
-                if (Constant.NOON_CODE_HIS_MORNING.equals(schedule.getNoonCode())){
-                    continue;
-                }
-            }
+            String seeDate = schedule.getSeeDate();
+            seeDate = sdf.format(sdf1.parse(seeDate));
+            schedule.setSeeDate(seeDate);
 
             if (Objects.equals(schedule.getRegLevelName(), "专家")){
                 expert.add(schedule);
@@ -159,15 +146,15 @@ public class AppointmentServiceImpl implements AppointmentService {
         appointment.setOperCode(appointmentInfoRequest.getOperCode());
         //未支付标识
         appointment.setPayState(Constant.ORDERS_NOT_PAY);
+        appointment.setScheduleId(appointmentInfoRequest.getScheduleId());
         Appointment appointmentWithID = appointmentRepository.save(appointment);
 
         ChargeRequest chargeRequest = new ChargeRequest();
-        PayMsg payMsg = new PayMsg(appointmentWithID.getId());
         chargeRequest.setAmount(TextUtil.getInt(appointmentInfoRequest.getCost()));
         chargeRequest.setChannel(appointmentInfoRequest.getPayChannel());
         //订单信息 做处理
         chargeRequest.setSubject(Constant.CHARGE_SUBJECT_APPOINTMENT);
-        chargeRequest.setBody(appointment.toString());
+        chargeRequest.setBody(Constant.CHARGE_SUBJECT_APPOINTMENT);
         chargeRequest.setOpen_id(appointmentInfoRequest.getOpenId());
         //获取支付信息
         HttpHeaders httpHeaders = new HttpHeaders();
@@ -313,7 +300,6 @@ public class AppointmentServiceImpl implements AppointmentService {
         List<AppointmentRecord> canceled = new ArrayList<>();
 
         DecimalFormat df = new DecimalFormat("#0.00");
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         for (Appointment appointment : appointments){
 
             AppointmentRecord appointmentRecord = new AppointmentRecord();
@@ -322,23 +308,23 @@ public class AppointmentServiceImpl implements AppointmentService {
             appointmentRecord.setPatientName(appointment.getPatientName());
             String doctorName = appointment.getDoctorName();
             appointmentRecord.setDoctorName(doctorName);
-            appointmentRecord.setPayTime(sdf.format(appointment.getCreateTime()));
+            appointmentRecord.setPayTime(appointment.getCreateTime());
             //分 -> 元
             appointmentRecord.setCost(df.format(appointment.getCost().divide(new BigDecimal(100))));
             Integer seeNo = (null == (appointment.getSeeNo())) ? 0 : appointment.getSeeNo();
             appointmentRecord.setSeeNo(seeNo);
             appointmentRecord.setDeptName(appointment.getDeptName());
-            appointmentRecord.setAppointmentTime(sdf.format(appointment.getAppointmentTime()));
-            String registerStatus;
-            try {
-                RegisterStateRequestHis registerStateRequestHis = new RegisterStateRequestHis();
-                registerStateRequestHis.setRegNO(appointment.getRegisterId());
-                RegisterStateResponseHis registerStateResponseHis = getRegisterStatus(registerStateRequestHis);
-                registerStatus = registerStateResponseHis.getState();
-            } catch (CommonException e) {
-                logger.info("获取挂号状态失败" + appointment.getRegisterId());
-                continue;
-            }
+            appointmentRecord.setAppointmentTime(appointment.getAppointmentTime());
+            String registerStatus = Constant.REGISTER_STATUS_HIS_TUI_HAO;
+//            try {
+//                RegisterStateRequestHis registerStateRequestHis = new RegisterStateRequestHis();
+//                registerStateRequestHis.setRegNO(appointment.getRegisterId());
+//                RegisterStateResponseHis registerStateResponseHis = getRegisterStatus(registerStateRequestHis);
+//                registerStatus = registerStateResponseHis.getState();
+//            } catch (CommonException e) {
+//                logger.info("获取挂号状态失败" + appointment.getRegisterId());
+//                continue;
+//            }
             switch (registerStatus){
                 case Constant.REGISTER_STATUS_HIS_TUI_HAO:
                     canceled.add(appointmentRecord);

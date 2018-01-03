@@ -26,7 +26,12 @@ public class AppointmentInfoRequest {
     //午别 1 ：表示上午 2 ：表示下午
     private String noonCode;
 
-    //支付方式 weChat：微信，aliPay：支付宝，icbcCard：工商银行网银
+    //支付方式 遵循ping++规则
+    //alipay 支付宝 APP 支付
+    //alipay_wap 支付宝手机网页支付
+    //wx 微信 APP 支付
+    //wx_pub 微信公众号支付
+    //wx_wap 微信 H5 支付
     private String payChannel;
 
     //类型，0：当天挂号，1：预约挂号
@@ -39,9 +44,13 @@ public class AppointmentInfoRequest {
     private String idCard;
 
     //身份标识卡类别
+    //默认01，表示身份证
     private String idType;
 
     //医保自费标记
+    //0：表示自费
+    //1：表示医保
+
     private String medicareType;
 
     //排班id

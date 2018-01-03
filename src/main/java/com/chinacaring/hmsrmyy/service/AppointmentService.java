@@ -15,7 +15,7 @@ import java.util.Objects;
 
 public interface AppointmentService {
 
-    Object getSchedule(ScheduleRequest scheduleRequest) throws CommonException;
+    Object getSchedule(ScheduleRequest scheduleRequest) throws CommonException, ParseException;
 
     Object createAppointmentOrder(AppointmentInfoRequest appointmentInfoRequest, User user) throws CommonException, ParseException;
 

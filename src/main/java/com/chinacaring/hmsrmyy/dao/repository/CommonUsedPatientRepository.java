@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface CommonUsedPatientRepository extends JpaRepository<CommonUsedPatient, Integer> {
 
-    CommonUsedPatient findByNameAndIdCardAndUserId(String name, String idCard, Integer userId);
+    CommonUsedPatient findByIdCardAndUserId(String idCard, Integer userId);
 
     List<CommonUsedPatient> findAllByUserIdAndState(Integer userId, Integer state);
 

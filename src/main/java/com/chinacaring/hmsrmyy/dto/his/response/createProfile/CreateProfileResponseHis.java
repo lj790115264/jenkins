@@ -29,7 +29,8 @@ import javax.xml.bind.annotation.*;
 @XmlType(name = "CreateProfileResponseHis", propOrder = {
     "returnCode",
     "returnDesc",
-    "patientNo"
+    "patientNo",
+        "mcardNo"
 })
 @XmlRootElement(name = "Response")
 public class CreateProfileResponseHis {
@@ -40,6 +41,17 @@ public class CreateProfileResponseHis {
     protected String returnDesc;
     @XmlElement(required = true)
     protected String patientNo;
+    @XmlElement(name = "MZH",required = true)
+    protected String mcardNo;
+
+
+    public String getMcardNo() {
+        return mcardNo;
+    }
+
+    public void setMcardNo(String mcardNo) {
+        this.mcardNo = mcardNo;
+    }
 
     /**
      * ��ȡreturnCode���Ե�ֵ��

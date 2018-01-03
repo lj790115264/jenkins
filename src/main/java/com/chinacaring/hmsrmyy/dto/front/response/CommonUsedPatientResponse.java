@@ -14,7 +14,17 @@ public class CommonUsedPatientResponse {
 
     private String relationship;
 
+    private String mcardNo;
+
     public CommonUsedPatientResponse() {
+    }
+
+    public String getMcardNo() {
+        return mcardNo;
+    }
+
+    public void setMcardNo(String mcardNo) {
+        this.mcardNo = mcardNo;
     }
 
     public String getRelationship() {

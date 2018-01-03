@@ -9,6 +9,7 @@ import com.chinacaring.hmsrmyy.dto.front.request.ScheduleRequest;
 import com.chinacaring.hmsrmyy.service.AppointmentService;
 import com.chinacaring.user.annotation.CurrentUser;
 import com.chinacaring.user.dao.entity.User;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,21 +21,30 @@ public class AppointmentController {
     @Autowired
     private AppointmentService appointmentService;
 
-    @GetMapping("/schedule")
+    @ApiOperation("查询对应科室的排班信息")
+    @GetMapping("/schedule/dept/{dept_code}")
     public Object getSchedule(@RequestParam("begin_time") String beginTime,
                               @RequestParam("end_time") String endTime,
-                              @RequestParam("dept_code") String deptCode) throws CommonException {
+                              @PathVariable("dept_code") String deptCode) throws CommonException, ParseException {
         return new Result<>(appointmentService.getSchedule(new ScheduleRequest(beginTime, endTime, deptCode)));
     }
 
-    @PostMapping("/appointment/order")
+    @ApiOperation("创建挂号订单")
+    @PostMapping("/register")
     public Object createAppointmentOrder(@RequestBody AppointmentInfoRequest appointmentInfoRequest, @CurrentUser User user) throws CommonException, ParseException {
         return new Result<>(appointmentService.createAppointmentOrder(appointmentInfoRequest, user));
     }
 
-    @GetMapping("/registerstatus/{id}")
+    @ApiOperation("查询挂号状态")
+    @GetMapping("/register_status/{id}")
     public Object getRegisterStatus(@PathVariable("id") Integer id) throws CommonException {
         return new Result<>(appointmentService.getRegisterStatus(id));
+    }
+
+    @ApiOperation("挂号记录")
+    @GetMapping("/register/{patient_code}")
+    public Object getAppointmentRecords(@PathVariable("patient_code") String patientCode ,@CurrentUser User user) throws CommonException {
+        return new Result<>(appointmentService.getAppointRecords(patientCode, user));
     }
 
 }

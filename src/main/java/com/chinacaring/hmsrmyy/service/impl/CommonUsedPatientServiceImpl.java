@@ -88,6 +88,7 @@ public class CommonUsedPatientServiceImpl implements CommonUsedPatientService {
         //获取patient_code
         String patientCode = "";
         String message = "";
+        String mcardNo = "";
         //名族
         String ethnic = commonUsedPatientRequest.getEthnic();
         String name = commonUsedPatientRequest.getName();
@@ -95,6 +96,7 @@ public class CommonUsedPatientServiceImpl implements CommonUsedPatientService {
         try {
             GetExistProfileResponseHis existProfile = baseInfoService.getExistProfile(idCard);
             patientCode = existProfile.getPatientNo();
+            mcardNo = existProfile.getMcardNo();
             //如果查询成功但是为空 则 还需要 重新建档
             if (StringUtils.isEmpty(patientCode)){
                 throw new CommonException("查到档案，但是patientCode为 空");
@@ -118,8 +120,10 @@ public class CommonUsedPatientServiceImpl implements CommonUsedPatientService {
             //报 异常 则无法获取此人的 patientNo 则 直接 抛出异常
             CreateProfileResponseHis profileResponseHis = baseInfoService.createProfile(createProfileRequestHis);
             patientCode = profileResponseHis.getPatientNo();
+//            mcardNo = profileResponseHis.getMcardNo();
         }
 
+        commonUsedPatient.setMcardNo(mcardNo);
         commonUsedPatient.setPatientCode(patientCode);
         commonUsedPatient.setMessage(message);
         commonUsedPatientRepository.save(commonUsedPatient);
@@ -134,9 +138,9 @@ public class CommonUsedPatientServiceImpl implements CommonUsedPatientService {
     }
 
     @Override
-    public boolean deleteCommonUsedPatient(CommonUsedPatientRequest commonUsedPatientRequest, User user) throws CommonException {
+    public boolean deleteCommonUsedPatient(String idCard, User user) throws CommonException {
 
-        CommonUsedPatient commonUsedPatient = commonUsedPatientRepository.findByNameAndIdCardAndUserId(commonUsedPatientRequest.getName(), commonUsedPatientRequest.getIdCard(), user.getId());
+        CommonUsedPatient commonUsedPatient = commonUsedPatientRepository.findByIdCardAndUserId(idCard, user.getId());
 
         if (null == commonUsedPatient){
             throw new CommonException("无此用户信息");

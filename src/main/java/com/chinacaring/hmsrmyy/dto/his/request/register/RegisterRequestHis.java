@@ -117,6 +117,23 @@ public class RegisterRequestHis {
     @XmlElement(required = true)
     protected String transNo;
 
+    public String getIcno() {
+        return icno;
+    }
+
+    public void setIcno(String icno) {
+        this.icno = icno;
+    }
+
+    public String getIdType() {
+        return idType;
+    }
+
+    public void setIdType(String idType) {
+        this.idType = idType;
+    }
+
+
     /**
      * ��ȡscheduleId���Ե�ֵ��
      * 

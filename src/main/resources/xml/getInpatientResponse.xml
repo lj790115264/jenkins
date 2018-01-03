@@ -1,0 +1,10 @@
+<Response>
+    <returnCode>1</returnCode>
+    <returnDesc />
+    <inpatientNo>2239442</inpatientNo>
+    <inpatientSeq>201743837</inpatientSeq>
+    <deptCode>202</deptCode>
+    <deptName>ICU</deptName>
+    <inhosTime>2017/11/23 20:50:49</inhosTime>
+    <inbalance>-4194.35</inbalance>
+</Response>

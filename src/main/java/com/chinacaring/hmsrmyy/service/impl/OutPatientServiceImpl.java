@@ -275,6 +275,11 @@ public class OutPatientServiceImpl implements OutPatientService{
         return true;
     }
 
+    @Override
+    public Object getOutpatientStatus(Integer id) throws CommonException {
+        return null;
+    }
+
     private List<OutpatientConfirmResult> outpatientConfirm(Outpatient outpatient){
 
 

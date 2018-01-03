@@ -5,6 +5,7 @@ import com.chinacaring.common.exception.CommonException;
 import com.chinacaring.common.vo.Result;
 import com.chinacaring.hmsrmyy.service.ExamineService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +28,7 @@ public class ExamineController {
     @Autowired
     private ExamineService examineService;
 
+    @ApiOperation("获取检验列表")
     @GetMapping(value = "/examine")
     public Object getExamine(@RequestParam("register_id") String regNo) throws ParseException, CommonException {
 
@@ -38,8 +40,9 @@ public class ExamineController {
 
     }
 
-    @GetMapping(value = "/examine/{examine_code}")
-    public Object getExamineDetail(@PathVariable("examine_code") String examine_code) throws CommonException {
+    @ApiOperation("获取检验详情")
+    @GetMapping(value = "/examine/{examine_id}")
+    public Object getExamineDetail(@PathVariable("examine_id") String examine_code) throws CommonException {
 
         return new Result<>(examineService.getDetail(examine_code));
     }

@@ -30,7 +30,17 @@ public class CommonUsedPatient {
 
     private String address;
 
+    private String mcardNo;
+
     public CommonUsedPatient() {
+    }
+
+    public String getMcardNo() {
+        return mcardNo;
+    }
+
+    public void setMcardNo(String mcardNo) {
+        this.mcardNo = mcardNo;
     }
 
     public String getAddress() {

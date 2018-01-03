@@ -8,13 +8,17 @@ import com.chinacaring.hmsrmyy.dao.entity.Orders;
 import com.chinacaring.hmsrmyy.dao.repository.InbalanceRepository;
 import com.chinacaring.hmsrmyy.dao.repository.OrdersRepository;
 import com.chinacaring.hmsrmyy.dto.front.request.InbalanceInfoRequest;
+import com.chinacaring.hmsrmyy.dto.front.response.InbalanceResponse;
 import com.chinacaring.hmsrmyy.dto.front.response.OrderResponse;
 import com.chinacaring.hmsrmyy.dto.his.request.confirmInbalance.ConfirmInbalanceRequestHis;
+import com.chinacaring.hmsrmyy.dto.his.request.getInpatient.GetInpatientRequestHis;
 import com.chinacaring.hmsrmyy.dto.his.response.confirmInbalance.ConfirmInbalanceResponseHis;
+import com.chinacaring.hmsrmyy.dto.his.response.getInpatient.GetInpatientResponseHis;
 import com.chinacaring.hmsrmyy.dto.pingpp.ChargeRequest;
 import com.chinacaring.hmsrmyy.service.InbalanceService;
 import com.chinacaring.hmsrmyy.utils.RequestUtil;
 import com.chinacaring.user.dao.entity.User;
+import com.chinacaring.util.BeanMapperUtil;
 import com.chinacaring.util.JaxbXmlUtil;
 import com.chinacaring.util.TextUtil;
 import com.google.gson.Gson;
@@ -155,6 +159,21 @@ public class InbalanceServiceImpl implements InbalanceService{
             return true;
         }
 
+    }
+
+    @Override
+    public Object getInbalance(String name, String idCard) throws CommonException {
+        GetInpatientRequestHis getInpatientRequestHis = new GetInpatientRequestHis();
+        getInpatientRequestHis.setIcno(idCard);
+        getInpatientRequestHis.setName(name);
+        String soap = RequestUtil.soap(InterfaceName.getInpatientNo.name(), JaxbXmlUtil.convertToXml(getInpatientRequestHis));
+        GetInpatientResponseHis getInpatientResponseHis = JaxbXmlUtil.convertToJavaBean(soap, GetInpatientResponseHis.class);
+        if (!Objects.equals(Constant.RETURN_CODE_SUCCESS, getInpatientResponseHis.getReturnCode())){
+            throw new CommonException("暂无相关数据");
+        }
+        String inhosTime = getInpatientResponseHis.getInhosTime();
+        getInpatientResponseHis.setInhosTime(inhosTime.replace("/", "-"));
+        return BeanMapperUtil.map(getInpatientResponseHis, InbalanceResponse.class);
     }
 
 }

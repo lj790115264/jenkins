@@ -14,7 +14,7 @@ public interface CommonUsedPatientService {
 
     BindCommonUsedPatientResponse bindCommonUsedPatient(CommonUsedPatientRequest commonUsedPatientRequest, User user) throws CommonException, ParseException;
 
-    boolean deleteCommonUsedPatient(CommonUsedPatientRequest commonUsedPatientRequest, User user) throws CommonException;
+    boolean deleteCommonUsedPatient(String idCard, User user) throws CommonException;
 
     List<CommonUsedPatientResponse> getCommonUsedPatient(User user) throws CommonException;
 

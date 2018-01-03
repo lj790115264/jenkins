@@ -1,0 +1,35 @@
+package com.chinacaring.hmsrmyy.controller;
+
+import com.chinacaring.common.exception.CommonException;
+import com.chinacaring.common.vo.Result;
+import com.chinacaring.hmsrmyy.dto.front.request.InbalanceInfoRequest;
+import com.chinacaring.hmsrmyy.service.InbalanceService;
+import com.chinacaring.user.annotation.CurrentUser;
+import com.chinacaring.user.dao.entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.text.ParseException;
+
+@RestController
+public class InbalanceController {
+
+    @Autowired
+    private InbalanceService inbalanceService;
+
+    @GetMapping("in_hospital/balance")
+    public Object getInbalance(@RequestParam("name") String name,
+                               @RequestParam("id_card") String idcard) throws CommonException {
+
+        return new Result<>(inbalanceService.getInbalance(name, idcard));
+    }
+
+    @PostMapping("in_hospital/deposit/recharge")
+    public Object createInbalanceOrder(@RequestBody InbalanceInfoRequest inbalanceInfoRequest, @CurrentUser User user) throws ParseException {
+        return new Result<>(inbalanceService.createInbalanceOrder(inbalanceInfoRequest, user));
+
+    }
+
+
+
+}

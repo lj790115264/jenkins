@@ -43,7 +43,8 @@ import javax.xml.bind.annotation.*;
     "homeAddress",
     "phoneNO",
     "icno",
-    "patientNo"
+    "patientNo",
+        "mcardNo"
 })
 @XmlRootElement(name = "Response")
 public class GetExistProfileResponseHis {
@@ -68,7 +69,18 @@ public class GetExistProfileResponseHis {
     protected String icno;
     @XmlElement(required = true)
     protected String patientNo;
+    @XmlElement(name = "MZH",required = true)
+    protected String mcardNo;
 
+
+
+    public String getMcardNo() {
+        return mcardNo;
+    }
+
+    public void setMcardNo(String mcardNo) {
+        this.mcardNo = mcardNo;
+    }
 
     public String getIcno() {
         return icno;
