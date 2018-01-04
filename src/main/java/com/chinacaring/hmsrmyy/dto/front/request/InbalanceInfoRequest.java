@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class InbalanceInfoRequest {
 
-    private String name;
+    private String patientName;
 
     private String idCard;
 

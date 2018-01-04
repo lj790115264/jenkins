@@ -30,6 +30,11 @@ public class InbalanceController {
 
     }
 
+    @GetMapping("in_hospital/balance/{id}")
+    public Object getInbalanceStatus(@PathVariable("id") Integer id) throws CommonException {
+        return new Result<>(inbalanceService.getInbalanceStatus(id));
+    }
+
 
 
 }

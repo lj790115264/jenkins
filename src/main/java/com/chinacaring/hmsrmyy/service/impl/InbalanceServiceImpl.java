@@ -10,6 +10,7 @@ import com.chinacaring.hmsrmyy.dao.repository.OrdersRepository;
 import com.chinacaring.hmsrmyy.dto.front.request.InbalanceInfoRequest;
 import com.chinacaring.hmsrmyy.dto.front.response.InbalanceResponse;
 import com.chinacaring.hmsrmyy.dto.front.response.OrderResponse;
+import com.chinacaring.hmsrmyy.dto.front.response.payments.InbalancePayment;
 import com.chinacaring.hmsrmyy.dto.his.request.confirmInbalance.ConfirmInbalanceRequestHis;
 import com.chinacaring.hmsrmyy.dto.his.request.getInpatient.GetInpatientRequestHis;
 import com.chinacaring.hmsrmyy.dto.his.response.confirmInbalance.ConfirmInbalanceResponseHis;
@@ -61,7 +62,7 @@ public class InbalanceServiceImpl implements InbalanceService{
     @Override
     public Object createInbalanceOrder(InbalanceInfoRequest inbalanceInfoRequest, User user) throws ParseException {
         Inbalance inbalance = new Inbalance();
-        inbalance.setName(inbalanceInfoRequest.getName());
+        inbalance.setPatientName(inbalanceInfoRequest.getPatientName());
         inbalance.setCost(new BigDecimal(inbalanceInfoRequest.getCost()));
         inbalance.setIdCard(inbalanceInfoRequest.getIdCard());
         inbalance.setInpatientCode(inbalanceInfoRequest.getInpatientCode());
@@ -134,7 +135,7 @@ public class InbalanceServiceImpl implements InbalanceService{
         // 分 --> 元
         confirmInbalanceRequestHis.setAmount(df.format(inbalance.getCost().divide(new BigDecimal(100))));
         confirmInbalanceRequestHis.setInpatientNo(inbalance.getInpatientCode());
-        confirmInbalanceRequestHis.setName(inbalance.getName());
+        confirmInbalanceRequestHis.setName(inbalance.getPatientName());
         confirmInbalanceRequestHis.setOperCode(inbalance.getOperCode());
         confirmInbalanceRequestHis.setPayMode(inbalance.getPayChannel());
         confirmInbalanceRequestHis.setTime(sdf.format(new Date()));
@@ -174,6 +175,28 @@ public class InbalanceServiceImpl implements InbalanceService{
         String inhosTime = getInpatientResponseHis.getInhosTime();
         getInpatientResponseHis.setInhosTime(inhosTime.replace("/", "-"));
         return BeanMapperUtil.map(getInpatientResponseHis, InbalanceResponse.class);
+    }
+
+    @Override
+    public Object getInbalanceStatus(Integer id) throws CommonException {
+        Inbalance inbalance = inbalanceRepository.findOne(id);
+        if (Objects.isNull(inbalance)){
+            throw new CommonException("暂无相关记录");
+        }
+
+        InbalancePayment inbalancePayment = new InbalancePayment();
+        inbalancePayment.setConfirmState(inbalance.getConfirmState());
+        inbalancePayment.setPayState(inbalance.getPayState());
+        inbalancePayment.setRefundTime(inbalance.getRefundTime());
+        inbalancePayment.setCost(df.format(inbalance.getCost().divide(new BigDecimal(100.0))));
+        inbalancePayment.setDeptName(inbalance.getDeptName());
+        inbalancePayment.setId(inbalance.getId());
+        inbalancePayment.setInbalance(df.format(inbalance.getInbalance().divide(new BigDecimal(100.0))));
+        inbalancePayment.setInhosTime(inbalance.getInhosTime());
+        inbalancePayment.setInpatientCode(inbalance.getInpatientCode());
+        inbalancePayment.setPatientName(inbalance.getPatientName());
+        inbalancePayment.setPayTime(inbalance.getCreateTime());
+        return inbalancePayment;
     }
 
 }

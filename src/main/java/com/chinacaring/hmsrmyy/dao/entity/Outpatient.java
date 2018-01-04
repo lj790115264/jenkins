@@ -66,6 +66,8 @@ public class Outpatient {
 
     private String refundNo;
 
+    private Date refundTime;
+
     @Column(columnDefinition = "TEXT")
     private String alipayRefundUrl;
 
@@ -73,5 +75,15 @@ public class Outpatient {
 
     private String failConfirmedPrescription;
 
+    private String deptName;
 
+    private String doctorName;
+
+    //号别
+    private String regLevelName;
+
+    //就诊时间
+    private String regDate;
+
+    private String patientName;
 }

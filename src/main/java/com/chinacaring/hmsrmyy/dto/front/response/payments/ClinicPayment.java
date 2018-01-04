@@ -6,36 +6,31 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class RegisterPayment {
+public class ClinicPayment {
 
     private Integer id;
 
-    private String deptName;
-
-    private String doctorName;
+    private String regDate;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date payTime;
 
-    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
-    private Date appointmentTime;
+    private String patientName;
 
-    private String payChannel;
+    private String deptName;
 
-    private String cost;
+    private String regLevelName;
 
-    private String receiptNo;
+    private String totalCost;
 
-    private Integer seeNo;
+    private String doctorName;
 
-    private Integer regState;
+    private Integer confirmState;
 
     private Integer payState;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date refundTime;
 
-    private String patientName;
-
-    private String registerLevelName;
+    private String refundCost;
 }

@@ -9,6 +9,7 @@ import com.chinacaring.hmsrmyy.dao.repository.OrdersRepository;
 import com.chinacaring.hmsrmyy.dao.repository.OutpatientRepository;
 import com.chinacaring.hmsrmyy.dto.front.request.*;
 import com.chinacaring.hmsrmyy.dto.front.response.*;
+import com.chinacaring.hmsrmyy.dto.front.response.payments.ClinicPayment;
 import com.chinacaring.hmsrmyy.dto.his.request.clinicRecords.ClinicRecordsRequestHis;
 import com.chinacaring.hmsrmyy.dto.his.request.outPatientMedicalRecords.OutpatientMedicalRecordsRequestHis;
 import com.chinacaring.hmsrmyy.dto.his.request.outpatientConfirm.OutpatientConfirmRequestHis;
@@ -277,7 +278,19 @@ public class OutPatientServiceImpl implements OutPatientService{
 
     @Override
     public Object getOutpatientStatus(Integer id) throws CommonException {
-        return null;
+
+        Outpatient outpatient = outpatientRepository.findOne(id);
+        if (Objects.isNull(outpatient)){
+            throw new CommonException("暂无相关记录");
+        }
+
+        ClinicPayment clinicPayment = BeanMapperUtil.map(outpatient, ClinicPayment.class);
+        clinicPayment.setPayTime(outpatient.getCreateTime());
+        clinicPayment.setTotalCost(df.format(outpatient.getCost().divide(new BigDecimal(100.0))));
+        String regDate = clinicPayment.getRegDate().split(" ")[0];
+        clinicPayment.setRegDate(regDate);
+        clinicPayment.setRefundCost(df.format(outpatient.getRefundCost().divide(new BigDecimal(100.0))));
+        return clinicPayment;
     }
 
     private List<OutpatientConfirmResult> outpatientConfirm(Outpatient outpatient){

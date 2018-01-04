@@ -19,7 +19,7 @@ public class Inbalance {
     @GeneratedValue
     private Integer id;
 
-    private String name;
+    private String patientName;
 
     private String idCard;
 
@@ -66,6 +66,8 @@ public class Inbalance {
     private String refundRes;
 
     private String refundNo;
+
+    private Date refundTime;
 
     @Column(columnDefinition = "TEXT")
     private String alipayRefundUrl;

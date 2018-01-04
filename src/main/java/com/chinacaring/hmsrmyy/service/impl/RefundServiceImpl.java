@@ -176,6 +176,10 @@ public class RefundServiceImpl implements RefundService {
         List<Inbalance> inbalances = inbalanceRepository.findByOrderNo(orderNo);
         Inbalance inbalance = inbalances.get(0);
 
+        //设置退款时间
+        inbalance.setRefundTime(new Date());
+        inbalanceRepository.saveAndFlush(inbalance);
+
         String fundingSource;
         if (inbalance.getPayChannel().startsWith("alipay")) {
             fundingSource = "";
@@ -237,6 +241,11 @@ public class RefundServiceImpl implements RefundService {
         logger.info("\n门诊结算退款 -- " + orderNo + "\n");
         List<Outpatient> outpatients = outpatientRepository.findByOrderNo(orderNo);
         Outpatient outpatient = outpatients.get(0);
+
+        //设置退款时间
+        outpatient.setRefundTime(new Date());
+        outpatientRepository.saveAndFlush(outpatient);
+
         String fundingSource;
         if (outpatient.getPayChannel().startsWith("alipay")) {
             fundingSource = "";

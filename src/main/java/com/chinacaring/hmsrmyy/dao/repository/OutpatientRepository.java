@@ -8,4 +8,6 @@ import java.util.List;
 public interface OutpatientRepository extends JpaRepository<Outpatient, Integer>{
 
     List<Outpatient> findByOrderNo(String orderNo);
+
+    List<Outpatient> findAllByIdCardAndUserIdAndPayState(String idCard, Integer userId, Integer state);
 }

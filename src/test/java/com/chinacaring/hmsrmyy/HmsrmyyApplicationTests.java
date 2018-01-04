@@ -7,6 +7,8 @@ import com.chinacaring.hmsrmyy.config.Constant;
 import com.chinacaring.hmsrmyy.dto.front.request.Prescription;
 import com.chinacaring.hmsrmyy.dto.front.response.Schedule;
 import com.chinacaring.hmsrmyy.dto.front.response.ScheduleResponse;
+import com.chinacaring.hmsrmyy.dto.front.response.payments.ClinicPayment;
+import com.chinacaring.hmsrmyy.dto.front.response.payments.InbalancePayment;
 import com.chinacaring.hmsrmyy.dto.his.response.createProfile.CreateProfileResponseHis;
 import com.chinacaring.hmsrmyy.dto.his.response.examineList.ExamineListResponseHis;
 import com.chinacaring.hmsrmyy.dto.his.response.examineList.ItemType;
@@ -298,9 +300,10 @@ public class HmsrmyyApplicationTests {
 
 //		appointmentService.doRegister("15148773221998o0p4j6");
 
-		String soap = "<Response><returnCode>1</returnCode><returnDesc /><patientNo>2638729</patientNo><MZH>1801030001</MZH></Response>";
+//		String soap = "<Response><returnCode>1</returnCode><returnDesc /><patientNo>2638729</patientNo><MZH>1801030001</MZH></Response>";
 
-		CreateProfileResponseHis getExistProfileResponseHis = JaxbXmlUtil.convertToJavaBean(soap, CreateProfileResponseHis.class);
+//		CreateProfileResponseHis getExistProfileResponseHis = JaxbXmlUtil.convertToJavaBean(soap, CreateProfileResponseHis.class);
+		System.out.println(JacksonUtil.toJson(new InbalancePayment()));
 	}
 
 }

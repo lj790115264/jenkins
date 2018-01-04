@@ -14,4 +14,7 @@ public interface InbalanceService {
     Object doInbalanceConfirm(String orderNO) throws CommonException;
 
     Object getInbalance(String name, String idCard) throws CommonException;
+
+    //查询单个订单详情
+    Object getInbalanceStatus(Integer id) throws CommonException;
 }

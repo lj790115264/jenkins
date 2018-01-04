@@ -28,4 +28,15 @@ public class OutpatientInfoRequest {
     //总金额
     private String totalCost;
 
+    private String deptName;
+
+    private String doctorName;
+
+    //号别
+    private String regLevelName;
+
+    //就诊时间
+    private String regDate;
+
+    private String patientName;
 }
