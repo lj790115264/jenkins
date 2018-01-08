@@ -9,12 +9,15 @@ import com.chinacaring.hmsrmyy.dao.repository.InbalanceRepository;
 import com.chinacaring.hmsrmyy.dao.repository.OrdersRepository;
 import com.chinacaring.hmsrmyy.dto.front.request.InbalanceInfoRequest;
 import com.chinacaring.hmsrmyy.dto.front.response.InbalanceResponse;
+import com.chinacaring.hmsrmyy.dto.front.response.inpatientList.*;
 import com.chinacaring.hmsrmyy.dto.front.response.OrderResponse;
 import com.chinacaring.hmsrmyy.dto.front.response.payments.InbalancePayment;
 import com.chinacaring.hmsrmyy.dto.his.request.confirmInbalance.ConfirmInbalanceRequestHis;
 import com.chinacaring.hmsrmyy.dto.his.request.getInpatient.GetInpatientRequestHis;
+import com.chinacaring.hmsrmyy.dto.his.request.inbalanceList.InbalanceListRequestHis;
 import com.chinacaring.hmsrmyy.dto.his.response.confirmInbalance.ConfirmInbalanceResponseHis;
 import com.chinacaring.hmsrmyy.dto.his.response.getInpatient.GetInpatientResponseHis;
+import com.chinacaring.hmsrmyy.dto.his.response.inbalanceList.InbalanceListResponseHis;
 import com.chinacaring.hmsrmyy.dto.pingpp.ChargeRequest;
 import com.chinacaring.hmsrmyy.service.InbalanceService;
 import com.chinacaring.hmsrmyy.utils.RequestUtil;
@@ -35,10 +38,7 @@ import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 @Service
 public class InbalanceServiceImpl implements InbalanceService{
@@ -163,7 +163,7 @@ public class InbalanceServiceImpl implements InbalanceService{
     }
 
     @Override
-    public Object getInbalance(String name, String idCard) throws CommonException {
+    public InbalanceResponse getInbalance(String name, String idCard) throws CommonException {
         GetInpatientRequestHis getInpatientRequestHis = new GetInpatientRequestHis();
         getInpatientRequestHis.setIcno(idCard);
         getInpatientRequestHis.setName(name);
@@ -197,6 +197,113 @@ public class InbalanceServiceImpl implements InbalanceService{
         inbalancePayment.setPatientName(inbalance.getPatientName());
         inbalancePayment.setPayTime(inbalance.getCreateTime());
         return inbalancePayment;
+    }
+
+    @Override
+    public Object getInbalanceList(String name, String idCard) throws CommonException {
+
+        InbalanceResponse inbalanceResponse = getInbalance(name, idCard);
+
+        InbalanceListRequestHis inbalanceListRequestHis = new InbalanceListRequestHis();
+        inbalanceListRequestHis.setIcno(idCard);
+        inbalanceListRequestHis.setInpatientNo(inbalanceResponse.getInpatientNo());
+        inbalanceListRequestHis.setDaily(Constant.ALL);
+        String soap = RequestUtil.soap(InterfaceName.inhosBill.name(), JaxbXmlUtil.convertToXml(inbalanceListRequestHis));
+        InbalanceListResponseHis inbalanceListResponseHis = JaxbXmlUtil.convertToJavaBean(soap, InbalanceListResponseHis.class);
+        if (!Objects.equals(Constant.RETURN_CODE_SUCCESS, inbalanceListResponseHis.getReturnCode())){
+            throw new CommonException("暂无相关数据");
+        }
+        List<InpatientBillResponse> inpatientBillResponses = BeanMapperUtil.mapList(inbalanceListResponseHis.getDatas().getData(), InpatientBillResponse.class);
+        for (InpatientBillResponse inpatientBillResponse : inpatientBillResponses){
+            String date = inpatientBillResponse.getDate();
+            StringBuilder dateBuilder = new StringBuilder();
+            String year = date.substring(0,4);
+            String month = date.substring(4,6);
+            String day = date.substring(6);
+            inpatientBillResponse.setDate(year + "-" + month + "-" + day);
+        }
+        DecimalFormat df = new DecimalFormat("#0.00");
+        InpatientBillTotalResponse totalResponse = new InpatientBillTotalResponse();
+        List<InpatientBillEXPResponse> inpatientBillEXPResponses = group(inpatientBillResponses);
+        List<InpatientBillDateAndClass> dateAndClasses = new ArrayList<>();
+        Double totalSum = 0.00;
+        for (InpatientBillEXPResponse expResponse : inpatientBillEXPResponses) {
+            //每天的
+            InpatientBillDateAndClass dateAndClass = new InpatientBillDateAndClass();
+            dateAndClass.setDate(expResponse.getDate());
+
+            List<InpatientBillWithClass> withClasses = groupWithClass(expResponse.getBills());
+            Double dateSum = 0.00;
+
+            for (InpatientBillWithClass withClass : withClasses) {
+                //每个项目的
+                Double sum = 0.00;
+                for (InpatientBillResponse billResponse : withClass.getBillResponses()) {
+                    sum = sum + billResponse.getTotalCost();
+                }
+                withClass.setTotalCost(Double.valueOf(df.format(sum)));
+                dateSum = dateSum + sum;
+            }
+
+            dateAndClass.setTotal(Double.valueOf(df.format(dateSum)));
+            dateAndClass.setBillWithClasses(withClasses);
+            dateAndClasses.add(dateAndClass);
+            totalSum = totalSum + dateSum;
+        }
+
+        totalResponse.setTotalCost(df.format(totalSum));
+        totalResponse.setBills(dateAndClasses);
+        totalResponse.setDeptName(inbalanceResponse.getDeptName());
+        totalResponse.setInbalance(inbalanceResponse.getInbalance());
+        totalResponse.setInhosTime(inbalanceResponse.getInhosTime().replace("/", "-"));
+
+        return totalResponse;
+    }
+
+    private List<InpatientBillEXPResponse> group(List<InpatientBillResponse> list) {
+        List<List<InpatientBillResponse>> result = new ArrayList<>();
+        Map<String, List<InpatientBillResponse>> map = new TreeMap<String, List<InpatientBillResponse>>();
+        List<InpatientBillEXPResponse> responses = new ArrayList<>();
+
+        for (InpatientBillResponse bean : list) {
+            if (map.containsKey(bean.getDate())) {
+                List<InpatientBillResponse> t = map.get(bean.getDate());
+                t.add(bean);
+
+                map.put(bean.getDate(), t);
+            } else {
+                List<InpatientBillResponse> t = new ArrayList<>();
+                t.add(bean);
+                map.put(bean.getDate(), t);
+            }
+        }
+        for (Map.Entry<String, List<InpatientBillResponse>> entry : map.entrySet()) {
+            responses.add(new InpatientBillEXPResponse(entry.getKey(), entry.getValue()));
+        }
+        return responses;
+    }
+
+    private List<InpatientBillWithClass> groupWithClass(List<InpatientBillResponse> list) {
+        List<List<InpatientBillResponse>> result = new ArrayList<>();
+        Map<String, List<InpatientBillResponse>> map = new TreeMap<String, List<InpatientBillResponse>>();
+        List<InpatientBillWithClass> responses = new ArrayList<>();
+
+        for (InpatientBillResponse bean : list) {
+            if (map.containsKey(bean.getItemClass())) {
+                List<InpatientBillResponse> t = map.get(bean.getItemClass());
+                t.add(bean);
+
+                map.put(bean.getItemClass(), t);
+            } else {
+                List<InpatientBillResponse> t = new ArrayList<>();
+                t.add(bean);
+                map.put(bean.getItemClass(), t);
+            }
+        }
+        for (Map.Entry<String, List<InpatientBillResponse>> entry : map.entrySet()) {
+            responses.add(new InpatientBillWithClass(entry.getKey(), entry.getValue()));
+        }
+        return responses;
     }
 
 }

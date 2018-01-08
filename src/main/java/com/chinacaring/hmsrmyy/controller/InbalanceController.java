@@ -35,6 +35,13 @@ public class InbalanceController {
         return new Result<>(inbalanceService.getInbalanceStatus(id));
     }
 
+    @GetMapping("in_hospital/bills")
+    public Object getInhospitalBills(@RequestParam("name") String name,
+                                     @RequestParam("id_card") String idcard) throws CommonException {
+        return new Result<>(inbalanceService.getInbalanceList(name, idcard));
+
+    }
+
 
 
 }

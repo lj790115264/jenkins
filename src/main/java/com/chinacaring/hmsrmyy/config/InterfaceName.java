@@ -2,6 +2,7 @@ package com.chinacaring.hmsrmyy.config;
 
 public enum InterfaceName {
 
+    inhosBill("住院清单"),
     getInpatientNo("查询当前的住院信息"),
     QueryPriceBoardInfo("价格公式"),
     getLisResultInfo("检验主表"),

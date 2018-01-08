@@ -1,0 +1,26 @@
+<Response>
+    <returnCode>1</returnCode>
+    <returnDesc />
+    <datas>
+        <data>
+            <date>20171201</date>
+            <itemClass>床位费</itemClass>
+            <itemName>监护病房床位费A</itemName>
+            <itemCode>110900003-A</itemCode>
+            <specifications />
+            <number>1</number>
+            <unitPrice>80</unitPrice>
+            <totCost>80</totCost>
+        </data>
+        <data>
+            <date>20171130</date>
+            <itemClass>护理费</itemClass>
+            <itemName>二级护理</itemName>
+            <itemCode>120100004</itemCode>
+            <specifications />
+            <number>1</number>
+            <unitPrice>20</unitPrice>
+            <totCost>20</totCost>
+        </data>
+    </datas>
+</Response>

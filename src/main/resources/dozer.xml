@@ -211,5 +211,29 @@
             <b>createTime</b>
         </field>
     </mapping>
+    <mapping>
+        <class-a>com.chinacaring.hmsrmyy.dto.his.response.schedule.Item</class-a>
+        <class-b>com.chinacaring.hmsrmyy.dto.front.response.Schedule</class-b>
+        <field>
+            <a>schemaID</a>
+            <b>scheduleId</b>
+        </field>
+    </mapping>
+    <mapping>
+        <class-a>com.chinacaring.hmsrmyy.dto.front.response.inpatientList.InpatientBillResponse</class-a>
+        <class-b>com.chinacaring.hmsrmyy.dto.his.response.inbalanceList.DataType</class-b>
+        <field>
+            <a>name</a>
+            <b>itemName</b>
+        </field>
+        <field>
+            <a>totalCost</a>
+            <b>totCost</b>
+        </field>
+        <field>
+            <a>amount</a>
+            <b>number</b>
+        </field>
+    </mapping>
 
 </mappings>

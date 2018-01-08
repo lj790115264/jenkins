@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class Schedule {
 
-    protected String schemaID;
+    protected String scheduleId;
     protected String seeDate;
     protected String week;
     protected String noonCode;
