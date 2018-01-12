@@ -120,7 +120,7 @@ public class CommonUsedPatientServiceImpl implements CommonUsedPatientService {
             //报 异常 则无法获取此人的 patientNo 则 直接 抛出异常
             CreateProfileResponseHis profileResponseHis = baseInfoService.createProfile(createProfileRequestHis);
             patientCode = profileResponseHis.getPatientNo();
-//            mcardNo = profileResponseHis.getMcardNo();
+            mcardNo = profileResponseHis.getMcardNo();
         }
 
         commonUsedPatient.setMcardNo(mcardNo);

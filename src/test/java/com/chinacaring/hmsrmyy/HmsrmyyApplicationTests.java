@@ -19,6 +19,7 @@ import com.chinacaring.hmsrmyy.dto.his.response.schedule.ScheduleResponseHis;
 import com.chinacaring.hmsrmyy.dto.pingpp.ChargeRequest;
 import com.chinacaring.hmsrmyy.service.AppointmentService;
 import com.chinacaring.hmsrmyy.service.BaseInfoService;
+import com.chinacaring.hmsrmyy.service.InbalanceService;
 import com.chinacaring.util.*;
 import com.google.gson.Gson;
 import org.apache.commons.lang.StringUtils;
@@ -49,6 +50,8 @@ public class HmsrmyyApplicationTests {
 	@Autowired
 	private AppointmentService appointmentService;
 
+	@Autowired
+	private InbalanceService inbalanceService;
 	@Test
 	public void contextLoads() {
 	}
@@ -303,7 +306,9 @@ public class HmsrmyyApplicationTests {
 //		String soap = "<Response><returnCode>1</returnCode><returnDesc /><patientNo>2638729</patientNo><MZH>1801030001</MZH></Response>";
 
 //		CreateProfileResponseHis getExistProfileResponseHis = JaxbXmlUtil.convertToJavaBean(soap, CreateProfileResponseHis.class);
-		System.out.println(JacksonUtil.toJson(new InbalancePayment()));
+//		System.out.println(JacksonUtil.toJson(new InbalancePayment()));
+//		appointmentService.doRegister("1515742529298v6veson");
+		inbalanceService.doInbalanceConfirm("1515749032794nei4t7s");
 	}
 
 }

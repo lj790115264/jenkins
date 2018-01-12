@@ -46,7 +46,7 @@ public class BaseInfoServiceImpl implements BaseInfoService{
     @Override
     public CreateProfileResponseHis createProfile(CreateProfileRequestHis createProfileRequestHis) throws CommonException {
 
-        String soap = RequestUtil.soap(InterfaceName.createProfile.name(), JaxbXmlUtil.convertToXml(createProfileRequestHis));
+        String soap = RequestUtil.soap(InterfaceName.CreateProfile.name(), JaxbXmlUtil.convertToXml(createProfileRequestHis));
         CreateProfileResponseHis createProfileResponseHis = JaxbXmlUtil.convertToJavaBean(soap, CreateProfileResponseHis.class);
         if (!Objects.equals(Constant.RETURN_CODE_SUCCESS, createProfileResponseHis.getReturnCode())){
             throw new CommonException(createProfileResponseHis.getReturnDesc());
@@ -58,7 +58,7 @@ public class BaseInfoServiceImpl implements BaseInfoService{
     public Object insertDepts() throws CommonException {
         DeptInfoRequestHis deptInfoRequestHis = new DeptInfoRequestHis();
         deptInfoRequestHis.setDeptCode(Constant.ALL);
-        String soap = RequestUtil.soap(InterfaceName.deptInfo.name(), JaxbXmlUtil.convertToXml(deptInfoRequestHis));
+        String soap = RequestUtil.soap(InterfaceName.DeptInfo.name(), JaxbXmlUtil.convertToXml(deptInfoRequestHis));
         DeptInfoResponseHis deptInfoResponseHis = JaxbXmlUtil.convertToJavaBean(soap, DeptInfoResponseHis.class);
 
         if (!Objects.equals(Constant.RETURN_CODE_SUCCESS, deptInfoResponseHis.getReturnCode())){
@@ -66,6 +66,7 @@ public class BaseInfoServiceImpl implements BaseInfoService{
         }
 
         List<Dept> depts = BeanMapperUtil.mapList(deptInfoResponseHis.getItems().getData(), Dept.class);
+        deptRepository.deleteAll();
         deptRepository.save(depts);
         return "ok";
     }

@@ -68,13 +68,17 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
+    private static SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMdd");
+
+    private static SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
+
     private static DecimalFormat df = new DecimalFormat("#0.00");
 
     @Override
     public ScheduleResponse getSchedule(ScheduleRequest scheduleRequest) throws CommonException, ParseException {
 
         ScheduleRequestHis scheduleRequestHis = BeanMapperUtil.map(scheduleRequest, ScheduleRequestHis.class);
-        String soap = RequestUtil.soap(InterfaceName.getSchemaInfo.name(), JaxbXmlUtil.convertToXml(scheduleRequestHis));
+        String soap = RequestUtil.soap(InterfaceName.GetSchemaInfo.name(), JaxbXmlUtil.convertToXml(scheduleRequestHis));
         ScheduleResponseHis scheduleResponseHis = JaxbXmlUtil.convertToJavaBean(soap, ScheduleResponseHis.class);
 
         if (!Objects.equals(Constant.RETURN_CODE_SUCCESS, scheduleResponseHis.getReturnCode())){
@@ -84,11 +88,11 @@ public class AppointmentServiceImpl implements AppointmentService {
         List<Schedule> schedules = BeanMapperUtil.mapList(scheduleResponseHis.getItems().getItem(), Schedule.class);
         List<Schedule> normal = new ArrayList<>();
         List<Schedule> expert = new ArrayList<>();
-        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMdd");
+
         for (Schedule schedule : schedules){
 
             String seeDate = schedule.getSeeDate();
-            seeDate = sdf.format(sdf1.parse(seeDate));
+            seeDate = sdf2.format(sdf1.parse(seeDate));
             schedule.setSeeDate(seeDate);
 
             if (Objects.equals(schedule.getRegLevelName(), "专家")){
@@ -307,6 +311,9 @@ public class AppointmentServiceImpl implements AppointmentService {
             appointmentRecord.setState(String.valueOf(appointment.getRegState()));
             appointmentRecord.setPatientName(appointment.getPatientName());
             String doctorName = appointment.getDoctorName();
+            if (Objects.isNull(doctorName) || doctorName.isEmpty()){
+                doctorName = "普通号";
+            }
             appointmentRecord.setDoctorName(doctorName);
             appointmentRecord.setPayTime(appointment.getCreateTime());
             //分 -> 元
@@ -316,15 +323,15 @@ public class AppointmentServiceImpl implements AppointmentService {
             appointmentRecord.setDeptName(appointment.getDeptName());
             appointmentRecord.setAppointmentTime(appointment.getAppointmentTime());
             String registerStatus = Constant.REGISTER_STATUS_HIS_TUI_HAO;
-//            try {
-//                RegisterStateRequestHis registerStateRequestHis = new RegisterStateRequestHis();
-//                registerStateRequestHis.setRegNO(appointment.getRegisterId());
-//                RegisterStateResponseHis registerStateResponseHis = getRegisterStatus(registerStateRequestHis);
-//                registerStatus = registerStateResponseHis.getState();
-//            } catch (CommonException e) {
-//                logger.info("获取挂号状态失败" + appointment.getRegisterId());
-//                continue;
-//            }
+            try {
+                RegisterStateRequestHis registerStateRequestHis = new RegisterStateRequestHis();
+                registerStateRequestHis.setRegNO(appointment.getRegisterId());
+                RegisterStateResponseHis registerStateResponseHis = getRegisterStatus(registerStateRequestHis);
+                registerStatus = registerStateResponseHis.getState();
+            } catch (CommonException e) {
+                logger.info("获取挂号状态失败" + appointment.getRegisterId());
+                continue;
+            }
             switch (registerStatus){
                 case Constant.REGISTER_STATUS_HIS_TUI_HAO:
                     canceled.add(appointmentRecord);

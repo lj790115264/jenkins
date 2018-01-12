@@ -47,17 +47,21 @@ public class InbalanceServiceImpl implements InbalanceService{
 
     private static DecimalFormat df = new DecimalFormat("#0.00");
 
-    @Autowired
-    private InbalanceRepository inbalanceRepository;
+    private final InbalanceRepository inbalanceRepository;
+
+    private final Gson gson;
+
+    private final RestTemplate restTemplate;
+
+    private final OrdersRepository ordersRepository;
 
     @Autowired
-    private Gson gson;
-
-    @Autowired
-    private RestTemplate restTemplate;
-
-    @Autowired
-    private OrdersRepository ordersRepository;
+    public InbalanceServiceImpl(InbalanceRepository inbalanceRepository, Gson gson, RestTemplate restTemplate, OrdersRepository ordersRepository) {
+        this.inbalanceRepository = inbalanceRepository;
+        this.gson = gson;
+        this.restTemplate = restTemplate;
+        this.ordersRepository = ordersRepository;
+    }
 
     @Override
     public Object createInbalanceOrder(InbalanceInfoRequest inbalanceInfoRequest, User user) throws ParseException {
@@ -85,7 +89,7 @@ public class InbalanceServiceImpl implements InbalanceService{
         chargeRequest.setChannel(inbalanceInfoRequest.getPayChannel());
         //订单信息 做处理
         chargeRequest.setSubject(Constant.CHARGE_SUBJECT_INBALANCE);
-        chargeRequest.setBody(inbalance.toString());
+        chargeRequest.setBody("inbalance");
         chargeRequest.setOpen_id(inbalanceInfoRequest.getOpenId());
         //获取支付信息
         HttpHeaders httpHeaders = new HttpHeaders();
@@ -175,6 +179,7 @@ public class InbalanceServiceImpl implements InbalanceService{
         String inhosTime = getInpatientResponseHis.getInhosTime();
         getInpatientResponseHis.setInhosTime(inhosTime.replace("/", "-"));
         return BeanMapperUtil.map(getInpatientResponseHis, InbalanceResponse.class);
+
     }
 
     @Override

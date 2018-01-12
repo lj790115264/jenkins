@@ -218,6 +218,22 @@
             <a>schemaID</a>
             <b>scheduleId</b>
         </field>
+        <field>
+            <a>emplCode</a>
+            <b>doctorCode</b>
+        </field>
+        <field>
+            <a>docName</a>
+            <b>doctorName</b>
+        </field>
+        <field>
+            <a>telLimit</a>
+            <b>totalLimit</b>
+        </field>
+        <field>
+            <a>telReged</a>
+            <b>registered</b>
+        </field>
     </mapping>
     <mapping>
         <class-a>com.chinacaring.hmsrmyy.dto.front.response.inpatientList.InpatientBillResponse</class-a>

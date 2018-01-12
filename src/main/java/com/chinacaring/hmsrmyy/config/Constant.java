@@ -4,7 +4,7 @@ import org.omg.CORBA.PUBLIC_MEMBER;
 
 public class Constant {
 
-    public static final String URL_WEBSERVICE = "http://192.168.21.77:9090/Webservice.asmx";
+    public static final String URL_WEBSERVICE = "http://172.17.10.246:9090/Webservice.asmx";
 
     public static final String ALL = "ALL";
 

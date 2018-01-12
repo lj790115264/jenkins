@@ -15,10 +15,10 @@ public class Schedule {
     protected String supDeptName;
     protected String deptCode;
     protected String deptName;
-    protected String emplCode;
-    protected String docName;
-    protected String telLimit;
-    protected String telReged;
+    protected String doctorCode;
+    protected String doctorName;
+    protected String totalLimit;
+    protected String registered;
     protected String regLevelCode;
     protected String regLevelName;
     protected String regCost;
