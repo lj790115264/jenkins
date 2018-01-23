@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="DeptSoap" type="DeptSoap"/>
+  <xs:complexType name="Dept">
+    <xs:sequence>
+      <xs:element type="xs:string" name="DEPTCODE"/>
+      <xs:element type="xs:string" name="DEPTNAME"/>
+      <xs:element type="xs:string" name="DEPTTYPE"/>
+      <xs:element type="xs:string" name="BRANCH"/>
+      <xs:element type="xs:string" name="VALIDSTATE"/>
+      <xs:element type="xs:string" name="REGFLAG"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DeptSoap">
+    <xs:sequence>
+      <xs:element type="result" name="result"/>
+      <xs:element type="Data" name="Data"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Data">
+    <xs:sequence>
+      <xs:element type="Dept" name="Dept" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="result">
+    <xs:sequence>
+      <xs:element type="xs:string" name="returnCode"/>
+      <xs:element type="xs:string" name="returnDesc"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

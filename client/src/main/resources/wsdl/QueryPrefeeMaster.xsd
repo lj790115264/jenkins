@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="QueryPrefeeMasterSoap" type="QueryPrefeeMasterSoap"/>
+  <xs:complexType name="Data">
+    <xs:choice maxOccurs="unbounded" minOccurs="0">
+      <xs:element type="QueryPrefeeMaster" name="QueryPrefeeMaster"/>
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="QueryPrefeeMaster">
+    <xs:sequence>
+      <xs:element type="xs:string" name="INPATIENT_NO"/>
+      <xs:element type="xs:string" name="PATIENT_ID"/>
+      <xs:element type="xs:string" name="PATIENT_NAME"/>
+      <xs:element type="xs:string" name="ID_NO"/>
+      <xs:element type="xs:string" name="SEX"/>
+      <xs:element type="xs:string" name="ADMISS_DATE"/>
+      <xs:element type="xs:string" name="ADMISS_TIMES"/>
+      <xs:element type="xs:string" name="SF_NAME"/>
+      <xs:element type="xs:string" name="BALANCE"/>
+      <xs:element type="xs:string" name="CHARGE_AMOUNT"/>
+      <xs:element type="xs:string" name="DEPO_AMOUNT"/>
+      <xs:element type="xs:string" name="WARD_NAME"/>
+      <xs:element type="xs:string" name="BED_NO"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="result">
+    <xs:sequence>
+      <xs:element type="xs:string" name="returnCode"/>
+      <xs:element type="xs:string" name="returnDesc"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="QueryPrefeeMasterSoap">
+    <xs:sequence>
+      <xs:element type="result" name="result"/>
+      <xs:element type="Data" name="Data"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

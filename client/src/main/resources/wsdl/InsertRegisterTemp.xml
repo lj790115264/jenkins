@@ -1,0 +1,13 @@
+﻿<InsertRegisterTempSoap>
+    <result>
+        <returnCode>1</returnCode>
+        <returnDesc></returnDesc>
+    </result>
+    <Data>
+        <InsertRegisterTemp>
+            <CLINICNO>14711 587</CLINICNO>
+            <SEENO>1</SEENO>
+            <PATIENTNAME>王孟</PATIENTNAME>
+        </InsertRegisterTemp>
+    </Data>
+</InsertRegisterTempSoap>

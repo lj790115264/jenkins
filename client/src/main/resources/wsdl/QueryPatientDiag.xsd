@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="QueryPatientDiagSoap" type="QueryPatientDiagSoap"/>
+  <xs:complexType name="QueryPatientDiag">
+    <xs:sequence>
+      <xs:element type="xs:string" name="PATIENT_ID"/>
+      <xs:element type="xs:string" name="VISIT_ID"/>
+      <xs:element type="xs:string" name="INP_NO"/>
+      <xs:element type="xs:string" name="DIAGNOSIS_TYPE"/>
+      <xs:element type="xs:string" name="DIAGNOSIS_NO"/>
+      <xs:element type="xs:string" name="DIAGNOSIS_CODE"/>
+      <xs:element type="xs:string" name="DIAGNOSIS_NAME"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="QueryPatientDiagSoap">
+    <xs:sequence>
+      <xs:element type="result" name="result"/>
+      <xs:element type="Data" name="Data"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Data">
+    <xs:sequence>
+      <xs:element type="QueryPatientDiag" name="QueryPatientDiag" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="result">
+    <xs:sequence>
+      <xs:element type="xs:string" name="returnCode"/>
+      <xs:element type="xs:string" name="returnDesc"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

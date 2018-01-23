@@ -1,0 +1,9 @@
+server:
+  port: 12345
+spring:
+  boot:
+    admin:
+      url: http://localhost:51236
+management:
+  security:
+    enabled: false

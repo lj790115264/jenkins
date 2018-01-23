@@ -1,0 +1,69 @@
+﻿<GetFeeListSoap>
+    <result>
+        <returnCode>1</returnCode>
+        <returnDesc></returnDesc>
+    </result>
+    <Data>
+        <FeeTable>
+            <RECIPE_KEY>1750376811</RECIPE_KEY>
+            <RECIPE_NO>17503768</RECIPE_NO>
+            <SEQNO>1</SEQNO>
+            <TRANS_TYPE>1</TRANS_TYPE>
+            <FEE_CODE>019</FEE_CODE>
+            <DRUG_FLAG>0</DRUG_FLAG>
+            <ITEM_CODE>F00000008887</ITEM_CODE>
+            <ITEM_NAME>ct头部大血管成像</ITEM_NAME>
+            <QTY>1</QTY>
+            <UNIT_PRICE>990</UNIT_PRICE>
+            <TOT_COST>990</TOT_COST>
+            <DOC_NAME>管理员</DOC_NAME>
+            <DOCDEPT_NAME>门诊内科</DOCDEPT_NAME>
+            <EXEC_DEPTCODE>6001</EXEC_DEPTCODE>
+            <EXEC_DEPTNAME>CT室</EXEC_DEPTNAME>
+            <MO_DATE>2018-01-04 14:37:43</MO_DATE>
+            <PAY_FLAG>0</PAY_FLAG>
+            <INVOICENO>NULL</INVOICENO>
+            <FEEDATE>0001-01-01 00:00:00</FEEDATE>
+            <COST_SOURCE>1</COST_SOURCE>
+            <OPER_CODE>009999</OPER_CODE>
+            <CONFIRM_FLAG>0</CONFIRM_FLAG>
+            <ITEM_CLASS>ct检查费</ITEM_CLASS>
+            <ORDER_NO>57969004</ORDER_NO>
+            <SUB_ORDER_NO>34925210</SUB_ORDER_NO>
+            <NAME>王孟</NAME>
+            <PATIENTID>0090000001</PATIENTID>
+            <PRICE_UNIT>次</PRICE_UNIT>
+        </FeeTable>
+        <FeeTable>
+            <RECIPE_KEY>1750376911</RECIPE_KEY>
+            <RECIPE_NO>17503769</RECIPE_NO>
+            <SEQNO>1</SEQNO>
+            <TRANS_TYPE>1</TRANS_TYPE>
+            <FEE_CODE>001</FEE_CODE>
+            <DRUG_FLAG>1</DRUG_FLAG>
+            <ITEM_CODE>Y00000002416</ITEM_CODE>
+            <ITEM_NAME>0.9%氯化钠注射液(非PVC)</ITEM_NAME>
+            <QTY>1</QTY>
+            <UNIT_PRICE>1.70</UNIT_PRICE>
+            <TOT_COST>1.70</TOT_COST>
+            <DOC_NAME>管理员</DOC_NAME>
+            <DOCDEPT_NAME>门诊内科</DOCDEPT_NAME>
+            <EXEC_DEPTCODE>4001</EXEC_DEPTCODE>
+            <EXEC_DEPTNAME>西药房</EXEC_DEPTNAME>
+            <MO_DATE>2018-01-04 14:37:43</MO_DATE>
+            <PAY_FLAG>0</PAY_FLAG>
+            <INVOICENO>NULL</INVOICENO>
+            <SPECS>100ml：0.9g/袋</SPECS>
+            <FEEDATE>0001-01-01 00:00:00</FEEDATE>
+            <COST_SOURCE>1</COST_SOURCE>
+            <OPER_CODE>009999</OPER_CODE>
+            <CONFIRM_FLAG>0</CONFIRM_FLAG>
+            <ITEM_CLASS>西药</ITEM_CLASS>
+            <ORDER_NO>57969005</ORDER_NO>
+            <SUB_ORDER_NO>34925209</SUB_ORDER_NO>
+            <NAME>王孟</NAME>
+            <PATIENTID>0090000001</PATIENTID>
+            <PRICE_UNIT>袋</PRICE_UNIT>
+        </FeeTable>
+    </Data>
+</GetFeeListSoap>

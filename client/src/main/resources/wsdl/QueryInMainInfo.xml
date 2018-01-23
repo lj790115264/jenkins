@@ -1,0 +1,32 @@
+﻿<QueryInMainInfoSoap>
+    <result>
+        <returnCode>1</returnCode>
+        <returnDesc></returnDesc>
+    </result>
+    <Data>
+        <QueryInMainInfo>
+            <PATIENT_ID>0002019017</PATIENT_ID>
+            <VISIT_ID>ZY012017048653</VISIT_ID>
+            <INP_NO>2017048653</INP_NO>
+            <PATIENT_NAME>刘德道</PATIENT_NAME>
+            <ID_NO>320322195707155615</ID_NO>
+            <PREPAYMENTS>7000</PREPAYMENTS>
+            <INHOSPITAL_DATE>2017-11-28T09:30:20+08:00</INHOSPITAL_DATE>
+            <DEPT_NAME>神经内科</DEPT_NAME>
+            <TREAT_DOCTOR>王妍</TREAT_DOCTOR>
+            <OUTHOSPITAL_DATE>0002-01-01T00:00:00+08:00</OUTHOSPITAL_DATE>
+        </QueryInMainInfo>
+        <QueryInMainInfo>
+            <PATIENT_ID>0002019017</PATIENT_ID>
+            <VISIT_ID>ZY012017048653</VISIT_ID>
+            <INP_NO>2017048653</INP_NO>
+            <PATIENT_NAME>刘德道</PATIENT_NAME>
+            <ID_NO>320322195707155615</ID_NO>
+            <PREPAYMENTS>7000</PREPAYMENTS>
+            <INHOSPITAL_DATE>2017-11-28T09:30:20+08:00</INHOSPITAL_DATE>
+            <DEPT_NAME>神经内科</DEPT_NAME>
+            <TREAT_DOCTOR>王妍</TREAT_DOCTOR>
+            <OUTHOSPITAL_DATE>0002-01-01T00:00:00+08:00</OUTHOSPITAL_DATE>
+        </QueryInMainInfo>
+    </Data>
+</QueryInMainInfoSoap>

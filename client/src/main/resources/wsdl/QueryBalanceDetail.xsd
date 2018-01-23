@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="QueryBalanceHeadSoap" type="QueryBalanceHeadSoap"/>
+  <xs:complexType name="QueryBalanceHead">
+    <xs:sequence>
+      <xs:element type="xs:string" name="RECEIPT_NO"/>
+      <xs:element type="xs:string" name="PATIENT_ID"/>
+      <xs:element type="xs:string" name="VISIT_ID"/>
+      <xs:element type="xs:string" name="INP_NO"/>
+      <xs:element type="xs:string" name="PATIENT_NAME"/>
+      <xs:element type="xs:string" name="ID_NO"/>
+      <xs:element type="xs:string" name="INSUR_TYPE"/>
+      <xs:element type="xs:string" name="INSUR_CARD_NO"/>
+      <xs:element type="xs:string" name="INVOICE_NO"/>
+      <xs:element type="xs:string" name="INVOICE_TYPE"/>
+      <xs:element type="xs:string" name="TOTAL_COST"/>
+      <xs:element type="xs:string" name="INSUR_PAY"/>
+      <xs:element type="xs:string" name="SELF_PAY"/>
+      <xs:element type="xs:string" name="INSUR_SELF_PAY"/>
+      <xs:element type="xs:string" name="ADMISSION_DATE"/>
+      <xs:element type="xs:string" name="DISCHARGE_DATE"/>
+      <xs:element type="xs:string" name="DEPT_NAME"/>
+      <xs:element type="xs:string" name="SETTLE_DATE"/>
+      <xs:element type="xs:string" name="DOCTOR_NAME"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Data">
+    <xs:sequence>
+      <xs:element type="QueryBalanceHead" name="QueryBalanceHead"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="result">
+    <xs:sequence>
+      <xs:element type="xs:string" name="returnCode"/>
+      <xs:element type="xs:string" name="returnDesc"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="QueryBalanceHeadSoap">
+    <xs:sequence>
+      <xs:element type="result" name="result"/>
+      <xs:element type="Data" name="Data"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

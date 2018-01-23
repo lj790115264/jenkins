@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="InsertRegisterTempSoap" type="InsertRegisterTempSoap"/>
+  <xs:complexType name="Data">
+    <xs:sequence>
+      <xs:element type="InsertRegisterTemp" name="InsertRegisterTemp"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="InsertRegisterTempSoap">
+    <xs:sequence>
+      <xs:element type="result" name="result"/>
+      <xs:element type="Data" name="Data"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="InsertRegisterTemp">
+    <xs:sequence>
+      <xs:element type="xs:string" name="CLINICNO"/>
+      <xs:element type="xs:string" name="SEENO"/>
+      <xs:element type="xs:string" name="PATIENTNAME"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="result">
+    <xs:sequence>
+      <xs:element type="xs:string" name="returnCode"/>
+      <xs:element type="xs:string" name="returnDesc"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

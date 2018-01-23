@@ -1,0 +1,11 @@
+<GetRegStateSoap>
+    <result>
+        <returnCode>1</returnCode>
+        <returnDesc></returnDesc>
+    </result>
+    <Data>
+        <GetRegState>
+            <state>2</state>
+        </GetRegState>
+    </Data>
+</GetRegStateSoap>

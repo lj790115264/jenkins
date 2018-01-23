@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="GetOutpfreeRecordsNewStatusSoap" type="GetOutpfreeRecordsNewStatusSoap"/>
+  <xs:complexType name="Data">
+    <xs:sequence>
+      <xs:element type="OutpfreeRecordsNewStatus" name="OutpfreeRecordsNewStatus" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="OutpfreeRecordsNewStatus">
+    <xs:sequence>
+      <xs:element name="PRESC_ATTR">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="17503772"/>
+            <xs:enumeration value="17503773"/>
+            <xs:enumeration value="17503768"/>
+            <xs:enumeration value="17503769"/>
+            <xs:enumeration value="8548929"/>
+            <xs:enumeration value="17503775"/>
+            <xs:enumeration value="17503774"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="RECEIPT_NO">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="000096940445"/>
+            <xs:enumeration value="000096940444"/>
+            <xs:enumeration value="000018344789"/>
+            <xs:enumeration value="000096940446"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="PATIENT_ID">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="0090000001"/>
+            <xs:enumeration value="0000193563"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="xs:string" name="PATIENT_NAME"/>
+      <xs:element name="DRUG_WINDOWS">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="西药房"/>
+            <xs:enumeration value="CT室"/>
+            <xs:enumeration value="急诊科"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="AMOUNT">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="1.70"/>
+            <xs:enumeration value="310"/>
+            <xs:enumeration value="990"/>
+            <xs:enumeration value="63"/>
+            <xs:enumeration value="1.85"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="STATUS1">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="1"/>
+            <xs:enumeration value="5"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="HIS_PAY_TIME">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="2018/01/05 10:30:45"/>
+            <xs:enumeration value="2018/01/04 18:52:43"/>
+            <xs:enumeration value="2013/01/20 10:06:21"/>
+            <xs:enumeration value="2018/01/05 10:52:30"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetOutpfreeRecordsNewStatusSoap">
+    <xs:sequence>
+      <xs:element type="result" name="result"/>
+      <xs:element type="Data" name="Data"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="result">
+    <xs:sequence>
+      <xs:element type="xs:string" name="returnCode"/>
+      <xs:element type="xs:string" name="returnDesc"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

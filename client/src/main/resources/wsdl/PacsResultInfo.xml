@@ -1,0 +1,46 @@
+﻿<PacsResultInfoSoap>
+    <result>
+        <returnCode>1</returnCode>
+        <returnDesc></returnDesc>
+    </result>
+    <Data>
+        <PacsResultInfo>
+            <HISPATIENTTYPE>1</HISPATIENTTYPE>
+            <CLINICPATIENTID>0002142777</CLINICPATIENTID>
+            <INFEEPATIENTID>ZY01</INFEEPATIENTID>
+            <STUDYID>171207194</STUDYID>
+            <CHECKSERIALNUM>20171207000790</CHECKSERIALNUM>
+            <PATIENTNAME>许瑞玲</PATIENTNAME>
+            <SEX>男</SEX>
+            <AGE>63岁</AGE>
+            <DEVICETYPE>DR</DEVICETYPE>
+            <DEVICENAME>东芝-DR</DEVICENAME>
+            <STUDYSCRIPTION>[腹部正位,常规]</STUDYSCRIPTION>
+            <STUDYTIME>2017-12-07T15:18:54+08:00</STUDYTIME>
+            <STUDYSTATUS>诊断完成</STUDYSTATUS>
+            <STUDYSTATUSNAME>诊断完成</STUDYSTATUSNAME>
+            <REPORTDESCRIBE>   两侧膈下未见明显游离气体影，上腹部示一枚小气液平面。结肠内见少许气粪影，两侧腰大肌及腹脂线清晰。</REPORTDESCRIBE>
+            <REPORTDIAGNOSE>  上腹部示一枚小气液平面影——请结合临床。</REPORTDIAGNOSE>
+            <DOCNAME>封雪    </DOCNAME>
+        </PacsResultInfo>
+        <PacsResultInfo>
+            <HISPATIENTTYPE>1</HISPATIENTTYPE>
+            <CLINICPATIENTID>0002142777</CLINICPATIENTID>
+            <INFEEPATIENTID>ZY01</INFEEPATIENTID>
+            <STUDYID>171207194</STUDYID>
+            <CHECKSERIALNUM>20171207000790</CHECKSERIALNUM>
+            <PATIENTNAME>许瑞玲</PATIENTNAME>
+            <SEX>男</SEX>
+            <AGE>63岁</AGE>
+            <DEVICETYPE>DR</DEVICETYPE>
+            <DEVICENAME>东芝-DR</DEVICENAME>
+            <STUDYSCRIPTION>[腹部正位,常规]</STUDYSCRIPTION>
+            <STUDYTIME>2017-12-07T15:18:54+08:00</STUDYTIME>
+            <STUDYSTATUS>诊断完成</STUDYSTATUS>
+            <STUDYSTATUSNAME>诊断完成</STUDYSTATUSNAME>
+            <REPORTDESCRIBE>   两侧膈下未见明显游离气体影，上腹部示一枚小气液平面。结肠内见少许气粪影，两侧腰大肌及腹脂线清晰。</REPORTDESCRIBE>
+            <REPORTDIAGNOSE>  上腹部示一枚小气液平面影——请结合临床。</REPORTDIAGNOSE>
+            <DOCNAME>封雪    </DOCNAME>
+        </PacsResultInfo>
+    </Data>
+</PacsResultInfoSoap>

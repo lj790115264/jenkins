@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="LisResultInfoSoap" type="LisResultInfoSoap"/>
+  <xs:complexType name="Data">
+    <xs:sequence>
+      <xs:element type="LisResultInfo" name="LisResultInfo" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LisResultInfoSoap">
+    <xs:sequence>
+      <xs:element type="result" name="result"/>
+      <xs:element type="Data" name="Data"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="result">
+    <xs:sequence>
+      <xs:element type="xs:string" name="returnCode"/>
+      <xs:element type="xs:string" name="returnDesc"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LisResultInfo">
+    <xs:sequence>
+      <xs:element type="xs:string" name="TESTDATE"/>
+      <xs:element type="xs:string" name="PATIENTID"/>
+      <xs:element type="xs:string" name="PATIENTNAME"/>
+      <xs:element type="xs:string" name="PATIENTSEX"/>
+      <xs:element type="xs:string" name="PATIENTAGE"/>
+      <xs:element type="xs:string" name="HISITEMNAMELIST"/>
+      <xs:element type="xs:string" name="ACCEPTTIME"/>
+      <xs:element type="xs:string" name="ITEMNAME"/>
+      <xs:element type="xs:string" name="REPORTVALUE"/>
+      <xs:element type="xs:string" name="RANGEINFO"/>
+      <xs:element type="xs:string" name="UNIT"/>
+      <xs:element type="xs:string" name="RESULTFLAG"/>
+      <xs:element type="xs:string" name="MACHINEID"/>
+      <xs:element type="xs:string" name="SAMPLEID"/>
+      <xs:element type="xs:string" name="BARCODE"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

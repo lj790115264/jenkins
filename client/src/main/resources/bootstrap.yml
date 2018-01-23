@@ -1,0 +1,34 @@
+management:
+  contextPath:
+  security:
+    enabled: false
+  health:
+    consul:
+      enabled: false
+endpoints:
+  health:
+    sensitive: false
+spring:
+  application:
+    name: peixian-patient
+  cloud:
+    consul:
+      host: ${consul.host:101.132.74.234}
+      port: ${consul.port:8500}
+      discovery:
+#        healthCheckPath: ${management.contextPath}/health
+        healthCheckInterval: 20s
+        instance-id: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
+        hostname: ${spring.application.name}
+        prefer-ip-address: true
+        acl-token: chinacaring2017.com
+        health-check-critical-timeout: 10s
+        ip-address: ${host.address}
+
+feign:
+  hystrix:
+    enabled: true
+
+logging:
+  level: warn
+  file: ${spring.application.name}.log

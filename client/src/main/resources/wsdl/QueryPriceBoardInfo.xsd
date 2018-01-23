@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="QueryPriceBoardInfoSoap" type="QueryPriceBoardInfoSoap"/>
+  <xs:complexType name="QueryPriceBoardInfo">
+    <xs:sequence>
+      <xs:element name="BOARD_STYLE">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="0"/>
+            <xs:enumeration value="1"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="ITEM_NAME">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="杞菊地黄丸"/>
+            <xs:enumeration value="双腔支气管导管"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="ITEM_CODE">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Y00000001912"/>
+            <xs:enumeration value="F00000021705"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="ITEM_PRICE">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="9.83"/>
+            <xs:enumeration value="1534"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="ITEM_CATEGORY">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="中成药"/>
+            <xs:enumeration value="材料费"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="xs:string" name="ITEM_MEASURE_UNIT" minOccurs="0"/>
+      <xs:element type="xs:string" name="MANUFACTORY" minOccurs="0"/>
+      <xs:element name="FORMATS">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="3g/8丸*200粒/瓶"/>
+            <xs:enumeration value="33#"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="CREATE_TIME">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="2017-09-15T08:56:28+08:00"/>
+            <xs:enumeration value="2013-10-01T09:52:06+08:00"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="QueryPriceBoardInfoSoap">
+    <xs:sequence>
+      <xs:element type="result" name="result"/>
+      <xs:element type="Data" name="Data"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Data">
+    <xs:sequence>
+      <xs:element type="QueryPriceBoardInfo" name="QueryPriceBoardInfo" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="result">
+    <xs:sequence>
+      <xs:element type="xs:string" name="returnCode"/>
+      <xs:element type="xs:string" name="returnDesc"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

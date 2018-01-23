@@ -1,0 +1,11 @@
+﻿<InsertBookingSoap>
+    <result>
+        <returnCode>1</returnCode>
+        <returnDesc></returnDesc>
+    </result>
+    <Data>
+        <InsertBooking>
+            <BOOKINGNO>2567</BOOKINGNO>
+        </InsertBooking>
+    </Data>
+</InsertBookingSoap>

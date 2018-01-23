@@ -1,0 +1,11 @@
+<GetPatientCardNo1Soap>
+    <result>
+        <returnCode>1</returnCode>
+        <returnDesc></returnDesc>
+    </result>
+    <Data>
+        <PatientCardNo1>
+            <CARD_NO>0090000021</CARD_NO>
+        </PatientCardNo1>
+    </Data>
+</GetPatientCardNo1Soap>

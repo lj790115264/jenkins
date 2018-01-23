@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="QueryInMainMxInfoSoap" type="QueryInMainMxInfoSoap"/>
+  <xs:complexType name="Data">
+    <xs:sequence>
+      <xs:element type="QueryInMainMxInfo" name="QueryInMainMxInfo" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="QueryInMainMxInfo">
+    <xs:sequence>
+      <xs:element type="xs:string" name="PATIENT_ID"/>
+      <xs:element type="xs:string" name="VISIT_ID"/>
+      <xs:element type="xs:string" name="INP_NO"/>
+      <xs:element type="xs:string" name="ITEM_CODE"/>
+      <xs:element type="xs:string" name="ITEM_NAME"/>
+      <xs:element type="xs:string" name="ITEM_CLASS"/>
+      <xs:element type="xs:string" name="TOTAL_COSTS"/>
+      <xs:element type="xs:string" name="SHOULD_PAY_FEE"/>
+      <xs:element type="xs:string" name="REAL_PAY_FEE"/>
+      <xs:element type="xs:string" name="BILLING_DATE_TIME"/>
+      <xs:element type="xs:string" name="ITEM_SPEC"/>
+      <xs:element type="xs:string" name="AMOUNT"/>
+      <xs:element type="xs:string" name="UNITS"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="result">
+    <xs:sequence>
+      <xs:element type="xs:string" name="returnCode"/>
+      <xs:element type="xs:string" name="returnDesc"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="QueryInMainMxInfoSoap">
+    <xs:sequence>
+      <xs:element type="result" name="result"/>
+      <xs:element type="Data" name="Data"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

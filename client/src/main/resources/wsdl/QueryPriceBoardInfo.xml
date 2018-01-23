@@ -1,0 +1,28 @@
+﻿<QueryPriceBoardInfoSoap>
+    <result>
+        <returnCode>1</returnCode>
+        <returnDesc></returnDesc>
+    </result>
+    <Data>
+        <QueryPriceBoardInfo>
+            <BOARD_STYLE>0</BOARD_STYLE>
+            <ITEM_NAME>杞菊地黄丸</ITEM_NAME>
+            <ITEM_CODE>Y00000001912</ITEM_CODE>
+            <ITEM_PRICE>9.83</ITEM_PRICE>
+            <ITEM_CATEGORY>中成药</ITEM_CATEGORY>
+            <ITEM_MEASURE_UNIT>瓶</ITEM_MEASURE_UNIT>
+            <MANUFACTORY>河南宛西</MANUFACTORY>
+            <FORMATS>3g/8丸*200粒/瓶</FORMATS>
+            <CREATE_TIME>2017-09-15T08:56:28+08:00</CREATE_TIME>
+        </QueryPriceBoardInfo>
+        <QueryPriceBoardInfo>
+            <BOARD_STYLE>1</BOARD_STYLE>
+            <ITEM_NAME>双腔支气管导管</ITEM_NAME>
+            <ITEM_CODE>F00000021705</ITEM_CODE>
+            <ITEM_PRICE>1534</ITEM_PRICE>
+            <ITEM_CATEGORY>材料费</ITEM_CATEGORY>
+            <FORMATS>33#</FORMATS>
+            <CREATE_TIME>2013-10-01T09:52:06+08:00</CREATE_TIME>
+        </QueryPriceBoardInfo>
+    </Data>
+</QueryPriceBoardInfoSoap>

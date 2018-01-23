@@ -1,0 +1,26 @@
+﻿<QueryPatientDiagSoap>
+    <result>
+        <returnCode>1</returnCode>
+        <returnDesc></returnDesc>
+    </result>
+    <Data>
+        <QueryPatientDiag>
+            <PATIENT_ID>0002019017</PATIENT_ID>
+            <VISIT_ID>01</VISIT_ID>
+            <INP_NO>ZY012017048653</INP_NO>
+            <DIAGNOSIS_TYPE>门诊诊断</DIAGNOSIS_TYPE>
+            <DIAGNOSIS_NO>6558113</DIAGNOSIS_NO>
+            <DIAGNOSIS_CODE>I61.900</DIAGNOSIS_CODE>
+            <DIAGNOSIS_NAME>脑出血</DIAGNOSIS_NAME>
+        </QueryPatientDiag>
+        <QueryPatientDiag>
+            <PATIENT_ID>0002019017</PATIENT_ID>
+            <VISIT_ID>01</VISIT_ID>
+            <INP_NO>ZY012017048653</INP_NO>
+            <DIAGNOSIS_TYPE>门诊诊断</DIAGNOSIS_TYPE>
+            <DIAGNOSIS_NO>6558113</DIAGNOSIS_NO>
+            <DIAGNOSIS_CODE>I61.900</DIAGNOSIS_CODE>
+            <DIAGNOSIS_NAME>脑出血</DIAGNOSIS_NAME>
+        </QueryPatientDiag>
+    </Data>
+</QueryPatientDiagSoap>

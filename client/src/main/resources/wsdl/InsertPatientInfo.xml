@@ -1,0 +1,11 @@
+<InsertPatientInfoSoap>
+    <result>
+        <returnCode>1</returnCode>
+        <returnDesc></returnDesc>
+    </result>
+    <Data>
+        <InsertPatientInfo>
+            <CARDNO>0090000021</CARDNO>
+        </InsertPatientInfo>
+    </Data>
+</InsertPatientInfoSoap>

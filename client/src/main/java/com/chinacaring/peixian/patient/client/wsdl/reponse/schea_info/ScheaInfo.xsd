@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="ShemaInfoSoap" type="ShemaInfoSoap"/>
+  <xs:complexType name="ShemaInfoSoap">
+    <xs:sequence>
+      <xs:element type="result" name="result"/>
+      <xs:element type="Data" name="Data"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ShemaInfo">
+    <xs:sequence>
+      <xs:element type="xs:string" name="ID"/>
+      <xs:element type="xs:string" name="SEE_DATE"/>
+      <xs:element type="xs:string" name="WEEK"/>
+      <xs:element type="xs:string" name="NOONCODE"/>
+      <xs:element type="xs:string" name="BEGIN_TIME"/>
+      <xs:element type="xs:string" name="END_TIME"/>
+      <xs:element type="xs:string" name="DEPT_CODE"/>
+      <xs:element type="xs:string" name="DEPT_NAME"/>
+      <xs:element type="xs:string" name="DOCT_CODE"/>
+      <xs:element type="xs:string" name="DOCT_NAME"/>
+      <xs:element name="TEL_LMT">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="10"/>
+            <xs:enumeration value="20"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="xs:string" name="TEL_REGED"/>
+      <xs:element name="REGLEVL_CODE">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="04"/>
+            <xs:enumeration value="03"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="REGLEVL_NAME">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="主任专家号"/>
+            <xs:enumeration value="副主任专家诊察"/>
+            <xs:enumeration value="主任专家诊察"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="CANREG">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="110"/>
+            <xs:enumeration value="120"/>
+            <xs:enumeration value="119"/>
+            <xs:enumeration value="109"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="xs:string" name="TOTCOST"/>
+      <xs:element type="xs:string" name="SCHEMA_TYPE"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Data">
+    <xs:sequence>
+      <xs:element type="ShemaInfo" name="ShemaInfo" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="result">
+    <xs:sequence>
+      <xs:element type="xs:string" name="returnCode"/>
+      <xs:element type="xs:string" name="returnDesc"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

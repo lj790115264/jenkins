@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://dozer.sourceforge.net
+          http://dozer.sourceforge.Net/schema/beanmapping.xsd">
+
+    <configuration>
+
+        <stop-on-errors>false</stop-on-errors>
+
+        <date-format>yyyy-MM-dd'T'HH:mm:ssX</date-format>
+        <!--<date-format>yyyy-MM-dd HH:mm:ss</date-format>-->
+
+        <wildcard>true</wildcard>
+
+    </configuration>
+
+    <mapping>
+        <class-a>com.chinacaring.peixian.patient.client.wsdl.reponse.dept_info.Dept</class-a>
+        <class-b>com.chinacaring.peixian.patient.client.dao.entity.Dept</class-b>
+        <field>
+            <a>deptcode</a>
+            <b>deptCode</b>
+        </field>
+        <field>
+            <a>deptname</a>
+            <b>deptName</b>
+        </field>
+        <field>
+            <a>depttype</a>
+            <b>deptType</b>
+        </field>
+        <field>
+            <a>branch</a>
+            <b>branch</b>
+        </field>
+        <field>
+            <a>regflag</a>
+            <b>regFlag</b>
+        </field>
+    </mapping>
+
+    <mapping>
+        <class-a>com.chinacaring.peixian.patient.client.wsdl.reponse.schea_info.ShemaInfo</class-a>
+        <class-b>com.chinacaring.peixian.patient.client.dto.front.response.Schedule</class-b>
+        <field>
+            <a>id</a>
+            <b>scheduleId</b>
+        </field>
+        <field>
+            <a>seedate</a>
+            <b>seeDate</b>
+        </field>
+        <field>
+            <a>week</a>
+            <b>week</b>
+        </field>
+        <field>
+            <a>nooncode</a>
+            <b>noonCode</b>
+        </field>
+        <field>
+            <a>begintime</a>
+            <b>beginTime</b>
+        </field>
+        <field>
+            <a>endtime</a>
+            <b>endTime</b>
+        </field>
+        <field>
+            <a>deptcode</a>
+            <b>deptCode</b>
+        </field>
+        <field>
+            <a>deptname</a>
+            <b>deptName</b>
+        </field>
+        <field>
+            <a>doctcode</a>
+            <b>doctorCode</b>
+        </field>
+        <field>
+            <a>doctname</a>
+            <b>doctorName</b>
+        </field>
+        <field>
+            <a>tellmt</a>
+            <b>totalLimit</b>
+        </field>
+        <field>
+            <a>telreged</a>
+            <b>registered</b>
+        </field>
+        <field>
+            <a>reglevlcode</a>
+            <b>regLevelCode</b>
+        </field>
+        <field>
+            <a>reglevlname</a>
+            <b>regLevelName</b>
+        </field>
+        <field>
+            <a>totcost</a>
+            <b>regCost</b>
+        </field>
+        <field>
+            <a>schematype</a>
+            <b>schemaType</b>
+        </field>
+    </mapping>
+
+</mappings>

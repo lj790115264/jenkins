@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="QueryPrescriptionInfoSoap" type="QueryPrescriptionInfoSoap"/>
+  <xs:complexType name="QueryPrescriptionInfoSoap">
+    <xs:sequence>
+      <xs:element type="result" name="result"/>
+      <xs:element type="Data" name="Data"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="QueryPrescriptionInfo">
+    <xs:sequence>
+      <xs:element type="xs:string" name="PRESCRIPTION_NO"/>
+      <xs:element type="xs:string" name="DOCTOR_ID"/>
+      <xs:element type="xs:string" name="DOCTOR_STAFF_ID"/>
+      <xs:element type="xs:string" name="DOCTOR_NAME"/>
+      <xs:element type="xs:string" name="PRESCRIPTION_DATE"/>
+      <xs:element type="xs:string" name="DEPT_NAME"/>
+      <xs:element type="xs:string" name="PATIENT_ID"/>
+      <xs:element type="xs:string" name="PATIENT_NAME"/>
+      <xs:element type="xs:string" name="CARD_NO"/>
+      <xs:element type="xs:string" name="REGISTER_ID"/>
+      <xs:element type="xs:string" name="GENDER"/>
+      <xs:element type="xs:string" name="AGE"/>
+      <xs:element type="xs:string" name="ADDRESS"/>
+      <xs:element type="xs:string" name="PRESCRIPTION_SOURCE"/>
+      <xs:element type="xs:string" name="VERIFY_1"/>
+      <xs:element type="xs:string" name="TOTAL_PRICE"/>
+      <xs:element type="xs:string" name="PAYMENTS"/>
+      <xs:element type="xs:string" name="CREATE_TIME"/>
+      <xs:element type="xs:string" name="HIS_ORDER_NO"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Data">
+    <xs:sequence>
+      <xs:element type="QueryPrescriptionInfo" name="QueryPrescriptionInfo" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="result">
+    <xs:sequence>
+      <xs:element type="xs:string" name="returnCode"/>
+      <xs:element type="xs:string" name="returnDesc"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

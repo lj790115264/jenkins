@@ -1,0 +1,68 @@
+server:
+  port: 11236
+
+ajax:
+  debug: true
+
+#mybatis
+mybatis-plus:
+  mapper-locations: classpath:com/chinacaring/user/dao/mapper/xml/*Mapper.xml
+#  mapper-locations: classpath:/mapper/*Mapper.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.chinacaring.user.dao.entity
+  global-config:
+    #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
+    id-type: 2
+    #字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
+    field-strategy: 2
+    #驼峰下划线转换
+    db-column-underline: true
+    #刷新mapper 调试神器
+    refresh-mapper: true
+    #数据库大写下划线转换
+    #capital-mode: true
+    #序列接口实现类配置
+    #key-generator: com.baomidou.springboot.xxx
+    #逻辑删除配置
+    #logic-delete-value: 0
+    #logic-not-delete-value: 1
+    #自定义填充策略接口实现
+    #meta-object-handler: com.baomidou.springboot.xxx
+    #自定义SQL注入器
+    #sql-injector: com.baomidou.springboot.xxx
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+spring:
+  jpa:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+        show_sql: false
+  profiles:
+    active: local
+
+ribbon:
+  ConnectTimeout: 60000
+  ReadTimeout: 600000
+
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 60000
+
+zuul:
+  host:
+    socket-timeout-millis: 60000
+    connect-timeout-millis: 60000
+  routes:
+    smart:
+      path: /smart/**
+      stripPrefix: false
+      sensitiveHeaders: Access-Control-Allow-Origin
+      url: http://172.17.10.12:2233
+    sms:
+      path: /sms/**
+      serviceId: sms
+      stripPrefix: false
+      sensitiveHeaders: Access-Control-Allow-Origin
+  add-proxy-headers: true
+  ignored-patterns: /user/**

@@ -1,0 +1,38 @@
+﻿<RegSoap>
+    <result>
+        <returnCode>1</returnCode>
+        <returnDesc></returnDesc>
+    </result>
+    <Data>
+        <RegTable>
+            <CLINIC_CODE>14711587</CLINIC_CODE>
+            <NAME>王孟</NAME>
+            <REG_DATE>2018-01-04 09:54:00</REG_DATE>
+            <CARD_NO>0090000001</CARD_NO>
+            <REGLEVL_NAME>主任专家号</REGLEVL_NAME>
+            <PACT_CODE>1</PACT_CODE>
+            <PACT_NAME>现金</PACT_NAME>
+            <PACTKIND_CODE>01</PACTKIND_CODE>
+            <PACTKIND_NAME>自费</PACTKIND_NAME>
+            <DEPT_CODE>3001</DEPT_CODE>
+            <DEPT_NAME>门诊内科</DEPT_NAME>
+            <DOCT_CODE>000017</DOCT_CODE>
+            <DOCT_NAME>朱述阳</DOCT_NAME>
+        </RegTable>
+        <RegTable>
+            <CLINIC_CODE>14711589</CLINIC_CODE>
+            <NAME>王孟</NAME>
+            <REG_DATE>2018-01-04 17:00:00</REG_DATE>
+            <CARD_NO>0090000001</CARD_NO>
+            <REGLEVL_NAME>主任专家号</REGLEVL_NAME>
+            <PACT_CODE>1</PACT_CODE>
+            <PACT_NAME>现金</PACT_NAME>
+            <PACTKIND_CODE>01</PACTKIND_CODE>
+            <PACTKIND_NAME>自费</PACTKIND_NAME>
+            <DEPT_CODE>3001</DEPT_CODE>
+            <DEPT_NAME>门诊内科</DEPT_NAME>
+            <DOCT_CODE>000017</DOCT_CODE>
+            <DOCT_NAME>朱述阳</DOCT_NAME>
+        </RegTable>
+    </Data>
+</RegSoap>

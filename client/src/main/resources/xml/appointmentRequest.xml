@@ -1,0 +1,26 @@
+<Request>
+    <bookingNO>1410</bookingNO>
+    <patientNO>2463229</patientNO>
+    <bookingTime>2017-12-06 14:00:00</bookingTime>
+    <bookingType>0</bookingType>
+    <operCode>chinacaring_app</operCode>
+</Request>
+
+
+<DeptSoap>
+    <result>
+        <returnCode>1</returnCode>
+        <returnDesc></returnDesc>
+    </result>
+    <Data>
+        <Dept>
+            <DEPTCODE>3042</DEPTCODE>
+            <DEPTNAME>鼓楼小区门诊</DEPTNAME>
+            <DEPTTYPE>门诊</DEPTTYPE>
+            <BRANCH>沛县人民医院</BRANCH>
+            <VALIDSTATE>1</VALIDSTATE>
+            <REGFLAG>1</REGFLAG>
+        </Dept>
+    </Data>
+</DeptSoap>
+

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="QueryInMainInfoSoap" type="QueryInMainInfoSoap"/>
+  <xs:complexType name="QueryInMainInfoSoap">
+    <xs:sequence>
+      <xs:element type="result" name="result"/>
+      <xs:element type="Data" name="Data"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Data">
+    <xs:sequence>
+      <xs:element type="QueryInMainInfo" name="QueryInMainInfo" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="QueryInMainInfo">
+    <xs:sequence>
+      <xs:element type="xs:string" name="PATIENT_ID"/>
+      <xs:element type="xs:string" name="VISIT_ID"/>
+      <xs:element type="xs:string" name="INP_NO"/>
+      <xs:element type="xs:string" name="PATIENT_NAME"/>
+      <xs:element type="xs:string" name="ID_NO"/>
+      <xs:element type="xs:string" name="PREPAYMENTS"/>
+      <xs:element type="xs:string" name="INHOSPITAL_DATE"/>
+      <xs:element type="xs:string" name="DEPT_NAME"/>
+      <xs:element type="xs:string" name="TREAT_DOCTOR"/>
+      <xs:element type="xs:string" name="OUTHOSPITAL_DATE"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="result">
+    <xs:sequence>
+      <xs:element type="xs:string" name="returnCode"/>
+      <xs:element type="xs:string" name="returnDesc"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

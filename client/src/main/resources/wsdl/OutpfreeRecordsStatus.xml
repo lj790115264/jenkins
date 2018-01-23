@@ -1,0 +1,78 @@
+﻿<GetOutpfreeRecordsNewStatusSoap>
+    <result>
+        <returnCode>1</returnCode>
+        <returnDesc></returnDesc>
+    </result>
+    <Data>
+        <OutpfreeRecordsNewStatus>
+            <PRESC_ATTR>17503772</PRESC_ATTR>
+            <RECEIPT_NO>000096940445</RECEIPT_NO>
+            <PATIENT_ID>0090000001</PATIENT_ID>
+            <PATIENT_NAME>王孟</PATIENT_NAME>
+            <DRUG_WINDOWS>西药房</DRUG_WINDOWS>
+            <AMOUNT>1.70</AMOUNT>
+            <STATUS1>1</STATUS1>
+            <HIS_PAY_TIME>2018/01/05 10:30:45</HIS_PAY_TIME>
+        </OutpfreeRecordsNewStatus>
+        <OutpfreeRecordsNewStatus>
+            <PRESC_ATTR>17503773</PRESC_ATTR>
+            <RECEIPT_NO>000096940445</RECEIPT_NO>
+            <PATIENT_ID>0090000001</PATIENT_ID>
+            <PATIENT_NAME>王孟</PATIENT_NAME>
+            <DRUG_WINDOWS>CT室</DRUG_WINDOWS>
+            <AMOUNT>310</AMOUNT>
+            <STATUS1>1</STATUS1>
+            <HIS_PAY_TIME>2018/01/05 10:30:45</HIS_PAY_TIME>
+        </OutpfreeRecordsNewStatus>
+        <OutpfreeRecordsNewStatus>
+            <PRESC_ATTR>17503768</PRESC_ATTR>
+            <RECEIPT_NO>000096940444</RECEIPT_NO>
+            <PATIENT_ID>0090000001</PATIENT_ID>
+            <PATIENT_NAME>王孟</PATIENT_NAME>
+            <DRUG_WINDOWS>CT室</DRUG_WINDOWS>
+            <AMOUNT>990</AMOUNT>
+            <STATUS1>1</STATUS1>
+            <HIS_PAY_TIME>2018/01/04 18:52:43</HIS_PAY_TIME>
+        </OutpfreeRecordsNewStatus>
+        <OutpfreeRecordsNewStatus>
+            <PRESC_ATTR>17503769</PRESC_ATTR>
+            <RECEIPT_NO>000096940444</RECEIPT_NO>
+            <PATIENT_ID>0090000001</PATIENT_ID>
+            <PATIENT_NAME>王孟</PATIENT_NAME>
+            <DRUG_WINDOWS>西药房</DRUG_WINDOWS>
+            <AMOUNT>1.70</AMOUNT>
+            <STATUS1>1</STATUS1>
+            <HIS_PAY_TIME>2018/01/04 18:52:43</HIS_PAY_TIME>
+        </OutpfreeRecordsNewStatus>
+        <OutpfreeRecordsNewStatus>
+            <PRESC_ATTR>8548929</PRESC_ATTR>
+            <RECEIPT_NO>000018344789</RECEIPT_NO>
+            <PATIENT_ID>0000193563</PATIENT_ID>
+            <PATIENT_NAME>王孟</PATIENT_NAME>
+            <DRUG_WINDOWS>急诊科</DRUG_WINDOWS>
+            <AMOUNT>63</AMOUNT>
+            <STATUS1>5</STATUS1>
+            <HIS_PAY_TIME>2013/01/20 10:06:21</HIS_PAY_TIME>
+        </OutpfreeRecordsNewStatus>
+        <OutpfreeRecordsNewStatus>
+            <PRESC_ATTR>17503775</PRESC_ATTR>
+            <RECEIPT_NO>000096940446</RECEIPT_NO>
+            <PATIENT_ID>0090000001</PATIENT_ID>
+            <PATIENT_NAME>王孟</PATIENT_NAME>
+            <DRUG_WINDOWS>西药房</DRUG_WINDOWS>
+            <AMOUNT>1.85</AMOUNT>
+            <STATUS1>1</STATUS1>
+            <HIS_PAY_TIME>2018/01/05 10:52:30</HIS_PAY_TIME>
+        </OutpfreeRecordsNewStatus>
+        <OutpfreeRecordsNewStatus>
+            <PRESC_ATTR>17503774</PRESC_ATTR>
+            <RECEIPT_NO>000096940445</RECEIPT_NO>
+            <PATIENT_ID>0090000001</PATIENT_ID>
+            <PATIENT_NAME>王孟</PATIENT_NAME>
+            <DRUG_WINDOWS>西药房</DRUG_WINDOWS>
+            <AMOUNT>1.70</AMOUNT>
+            <STATUS1>1</STATUS1>
+            <HIS_PAY_TIME>2018/01/05 10:30:45</HIS_PAY_TIME>
+        </OutpfreeRecordsNewStatus>
+    </Data>
+</GetOutpfreeRecordsNewStatusSoap>

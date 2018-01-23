@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="GetFeeListSoap" type="GetFeeListSoap"/>
+  <xs:complexType name="FeeTable">
+    <xs:sequence>
+      <xs:element name="RECIPE_KEY">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="1750376811"/>
+            <xs:enumeration value="1750376911"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="RECIPE_NO">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="17503768"/>
+            <xs:enumeration value="17503769"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="xs:string" name="SEQNO"/>
+      <xs:element type="xs:string" name="TRANS_TYPE"/>
+      <xs:element name="FEE_CODE">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="019"/>
+            <xs:enumeration value="001"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="DRUG_FLAG">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="0"/>
+            <xs:enumeration value="1"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="ITEM_CODE">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="F00000008887"/>
+            <xs:enumeration value="Y00000002416"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="ITEM_NAME">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="ct头部大血管成像"/>
+            <xs:enumeration value="0.9%氯化钠注射液(非PVC)"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="xs:string" name="QTY"/>
+      <xs:element name="UNIT_PRICE">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="990"/>
+            <xs:enumeration value="1.70"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="TOT_COST">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="990"/>
+            <xs:enumeration value="1.70"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="xs:string" name="DOC_NAME"/>
+      <xs:element type="xs:string" name="DOCDEPT_NAME"/>
+      <xs:element name="EXEC_DEPTCODE">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="6001"/>
+            <xs:enumeration value="4001"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="EXEC_DEPTNAME">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="CT室"/>
+            <xs:enumeration value="西药房"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="xs:string" name="MO_DATE"/>
+      <xs:element type="xs:string" name="PAY_FLAG"/>
+      <xs:element type="xs:string" name="INVOICENO"/>
+      <xs:element type="xs:string" name="SPECS" minOccurs="0"/>
+      <xs:element type="xs:string" name="FEEDATE"/>
+      <xs:element type="xs:string" name="COST_SOURCE"/>
+      <xs:element type="xs:string" name="OPER_CODE"/>
+      <xs:element type="xs:string" name="CONFIRM_FLAG"/>
+      <xs:element name="ITEM_CLASS">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="ct检查费"/>
+            <xs:enumeration value="西药"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="ORDER_NO">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="57969004"/>
+            <xs:enumeration value="57969005"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="SUB_ORDER_NO">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="34925210"/>
+            <xs:enumeration value="34925209"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="xs:string" name="NAME"/>
+      <xs:element type="xs:string" name="PATIENTID"/>
+      <xs:element name="PRICE_UNIT">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="次"/>
+            <xs:enumeration value="袋"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Data">
+    <xs:sequence>
+      <xs:element type="FeeTable" name="FeeTable" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="result">
+    <xs:sequence>
+      <xs:element type="xs:string" name="returnCode"/>
+      <xs:element type="xs:string" name="returnDesc"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetFeeListSoap">
+    <xs:sequence>
+      <xs:element type="result" name="result"/>
+      <xs:element type="Data" name="Data"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

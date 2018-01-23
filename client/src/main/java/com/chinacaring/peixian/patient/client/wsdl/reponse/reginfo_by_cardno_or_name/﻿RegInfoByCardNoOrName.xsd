@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="RegSoap" type="RegSoap"/>
+  <xs:complexType name="RegSoap">
+    <xs:sequence>
+      <xs:element type="result" name="result"/>
+      <xs:element type="Data" name="Data"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Data">
+    <xs:sequence>
+      <xs:element type="RegTable" name="RegTable" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="result">
+    <xs:sequence>
+      <xs:element type="xs:string" name="returnCode"/>
+      <xs:element type="xs:string" name="returnDesc"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RegTable">
+    <xs:sequence>
+      <xs:element name="CLINIC_CODE">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="14711587"/>
+            <xs:enumeration value="14711589"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="xs:string" name="NAME"/>
+      <xs:element name="REG_DATE">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="2018-01-04 09:54:00"/>
+            <xs:enumeration value="2018-01-04 17:00:00"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="xs:string" name="CARD_NO"/>
+      <xs:element type="xs:string" name="REGLEVL_NAME"/>
+      <xs:element type="xs:string" name="PACT_CODE"/>
+      <xs:element type="xs:string" name="PACT_NAME"/>
+      <xs:element type="xs:string" name="PACTKIND_CODE"/>
+      <xs:element type="xs:string" name="PACTKIND_NAME"/>
+      <xs:element type="xs:string" name="DEPT_CODE"/>
+      <xs:element type="xs:string" name="DEPT_NAME"/>
+      <xs:element type="xs:string" name="DOCT_CODE"/>
+      <xs:element type="xs:string" name="DOCT_NAME"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

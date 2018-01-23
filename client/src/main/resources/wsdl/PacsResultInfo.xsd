@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="PacsResultInfoSoap" type="PacsResultInfoSoap"/>
+  <xs:complexType name="PacsResultInfo">
+    <xs:sequence>
+      <xs:element type="xs:string" name="HISPATIENTTYPE"/>
+      <xs:element type="xs:string" name="CLINICPATIENTID"/>
+      <xs:element type="xs:string" name="INFEEPATIENTID"/>
+      <xs:element type="xs:string" name="STUDYID"/>
+      <xs:element type="xs:string" name="CHECKSERIALNUM"/>
+      <xs:element type="xs:string" name="PATIENTNAME"/>
+      <xs:element type="xs:string" name="SEX"/>
+      <xs:element type="xs:string" name="AGE"/>
+      <xs:element type="xs:string" name="DEVICETYPE"/>
+      <xs:element type="xs:string" name="DEVICENAME"/>
+      <xs:element type="xs:string" name="STUDYSCRIPTION"/>
+      <xs:element type="xs:string" name="STUDYTIME"/>
+      <xs:element type="xs:string" name="STUDYSTATUS"/>
+      <xs:element type="xs:string" name="STUDYSTATUSNAME"/>
+      <xs:element type="xs:string" name="REPORTDESCRIBE"/>
+      <xs:element type="xs:string" name="REPORTDIAGNOSE"/>
+      <xs:element type="xs:string" name="DOCNAME"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PacsResultInfoSoap">
+    <xs:sequence>
+      <xs:element type="result" name="result"/>
+      <xs:element type="Data" name="Data"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Data">
+    <xs:sequence>
+      <xs:element type="PacsResultInfo" name="PacsResultInfo" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="result">
+    <xs:sequence>
+      <xs:element type="xs:string" name="returnCode"/>
+      <xs:element type="xs:string" name="returnDesc"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

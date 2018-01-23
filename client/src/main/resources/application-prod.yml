@@ -1,0 +1,22 @@
+spring:
+  datasource:
+      driver-class-name: com.mysql.jdbc.Driver
+      username: ${mysql.username:root}
+      password: ${mysql.password:chinacaring}
+      url: jdbc:mysql://${mysql.host:101.132.74.234}:${mysql.port:3306}/peixian-patient?characterEncoding=utf8
+
+
+logging:
+  level: error
+# JWT
+jwt:
+  header: Authorization
+  secret: caring
+  expiration: 604800
+  tokenHead: "Bearer "
+  route:
+    authentication:
+      path: "session"
+      refresh: "session"
+      register: "user"
+  allowPath: /sms/**,/dept,/schedule/**,/baseinfo/**,/session/**,/user,/swagger-resources/**,/webhooks/**,/session/**,/user/**,/v2/**,/swagger-resources/**,/webjars/**,/health/**,/info/**,/img/**,/third-party/**,/api/**,/admin/**,/trace/**,/applications/**,/env/**,/dump/**,/logfile/**,/metrics/**,/loggers/**,/jolokia/**,/refresh/**,/heapdump/**,/flyway/**,/liquibase/**,/auditevents/**,/danger/**,/depts,/prices,/price,/schedule/**,/message_wechat/**,/test/**,/alipay/form/**

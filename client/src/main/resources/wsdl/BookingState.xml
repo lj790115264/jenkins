@@ -1,0 +1,11 @@
+﻿<BookingStateSoap>
+    <result>
+        <returnCode>1</returnCode>
+        <returnDesc></returnDesc>
+    </result>
+    <Data>
+        <BookingState>
+            <STATE>预约未看诊</STATE>
+        </BookingState>
+    </Data>
+</BookingStateSoap>
