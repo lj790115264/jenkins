@@ -224,17 +224,17 @@ public class InbalanceServiceImpl implements InbalanceService {
         queryInMainInfo.setINHOSPITALDATE(ValidateUtils.soapTime(inhosTime));
         InbalanceResponse inbalanceResponse = BeanMapperUtil.map(queryInMainInfo, InbalanceResponse.class);
 
-        String prefeeRes = service.getQuyiServiceNoSoap().queryPrefeeMaster(inbalanceResponse.getInpatientSeq());
-        QueryPrefeeMasterSoap prefeeSoap;
-        try {
-            prefeeSoap = JaxbXmlUtil.convertToJavaBean(prefeeRes, QueryPrefeeMasterSoap.class);
-        } catch (Exception e) {
-            throw new SoapException("暂无结算数据!!", res, name + "-" + idCard + "-" + "ALL");
-        }
-        if (!Objects.equals(Constant.RETURN_CODE_SUCCESS, prefeeSoap.getResult().getReturnCode())) {
-            throw new SoapException("暂无结算数据", soap.getResult().getReturnDesc(), name + "-" + idCard + "-" + "ALL");
-        }
-        inbalanceResponse.setInbalance(prefeeSoap.getData().getQueryPrefeeMaster().getChargeamount());
+//        String prefeeRes = service.getQuyiServiceNoSoap().queryPrefeeMaster(inbalanceResponse.getInpatientSeq());
+//        QueryPrefeeMasterSoap prefeeSoap;
+//        try {
+//            prefeeSoap = JaxbXmlUtil.convertToJavaBean(prefeeRes, QueryPrefeeMasterSoap.class);
+//        } catch (Exception e) {
+//            throw new SoapException("暂无结算数据!!", res, name + "-" + idCard + "-" + "ALL");
+//        }
+//        if (!Objects.equals(Constant.RETURN_CODE_SUCCESS, prefeeSoap.getResult().getReturnCode())) {
+//            throw new SoapException("暂无结算数据", soap.getResult().getReturnDesc(), name + "-" + idCard + "-" + "ALL");
+//        }
+//        inbalanceResponse.setInbalance(prefeeSoap.getData().getQueryPrefeeMaster().getChargeamount());
 
         return inbalanceResponse;
     }
