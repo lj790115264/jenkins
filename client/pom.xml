@@ -29,6 +29,12 @@
 </properties>
 
 	<dependencies>
+
+		<!--<dependency>-->
+			<!--<groupId>io.github.openfeign</groupId>-->
+			<!--<artifactId></artifactId>-->
+		<!--</dependency>-->
+
 		<dependency>
 			<groupId>Pingplusplus</groupId>
 			<artifactId>pingpp-java</artifactId>
@@ -97,7 +103,7 @@
 		<dependency>
 			<groupId>com.chinacaring</groupId>
 			<artifactId>auth</artifactId>
-			<version>0.1.7</version>
+			<version>0.1.8</version>
 			<exclusions>
 				<exclusion>
 					<groupId>com.chinacaring</groupId>
