@@ -5,6 +5,7 @@ import com.chinacaring.peixian.patient.client.dto.front.response.CheckResponse;
 import com.chinacaring.peixian.patient.client.exception.MyException;
 import com.chinacaring.peixian.patient.client.exception.SoapException;
 import com.chinacaring.peixian.patient.client.service.CheckService;
+import com.chinacaring.peixian.patient.client.utils.ValidateUtils;
 import com.chinacaring.peixian.patient.client.wsdl.reponse.pacs_resultinfo.PacsResultInfo;
 import com.chinacaring.peixian.patient.client.wsdl.reponse.pacs_resultinfo.PacsResultInfoSoap;
 import com.chinacaring.peixian.patient.client.wsdl.request.QuyiServiceNo;
@@ -41,15 +42,17 @@ public class CheckServiceImpl implements CheckService {
         List<CheckResponse> responseList = new ArrayList<>();
         for (PacsResultInfo department: soap.getData().getPacsResultInfo()) {
             CheckResponse response = new CheckResponse();
-            response.setDescript(department.getREPORTDESCRIBE());
-            response.setDiagnose(department.getREPORTDIAGNOSE());
-            response.setTime(department.getSTUDYTIME());
-            response.setDocName(department.getDOCNAME());
-            response.setDevice(department.getDEVICENAME());
-            response.setDescript(department.getSTUDYSCRIPTION());
+            response.setDescript(department.getReportdescribe());
+            response.setCheckId(department.getCheckserialnum());
+            response.setDiagnose(department.getReportdiagnose());
+            response.setTime(ValidateUtils.soapTime(department.getStudytime(), "yyyy-MM-dd"));
+            response.setDocName(department.getDocname());
+            response.setDevice(department.getDevicename());
+            response.setScription(department.getStudyscription());
+            response.setCheckId(department.getCheckserialnum());
             responseList.add(response);
         }
 
-        return null;
+        return responseList;
     }
 }

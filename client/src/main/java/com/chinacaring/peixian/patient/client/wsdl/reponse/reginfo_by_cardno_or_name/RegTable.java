@@ -97,6 +97,110 @@ public class RegTable {
     @XmlElement(name = "DOCT_NAME", required = true)
     protected String doctname;
 
+    public String getCliniccode() {
+        return cliniccode;
+    }
+
+    public void setCliniccode(String cliniccode) {
+        this.cliniccode = cliniccode;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getRegdate() {
+        return regdate;
+    }
+
+    public void setRegdate(String regdate) {
+        this.regdate = regdate;
+    }
+
+    public String getCardno() {
+        return cardno;
+    }
+
+    public void setCardno(String cardno) {
+        this.cardno = cardno;
+    }
+
+    public String getReglevlname() {
+        return reglevlname;
+    }
+
+    public void setReglevlname(String reglevlname) {
+        this.reglevlname = reglevlname;
+    }
+
+    public String getPactcode() {
+        return pactcode;
+    }
+
+    public void setPactcode(String pactcode) {
+        this.pactcode = pactcode;
+    }
+
+    public String getPactname() {
+        return pactname;
+    }
+
+    public void setPactname(String pactname) {
+        this.pactname = pactname;
+    }
+
+    public String getPactkindcode() {
+        return pactkindcode;
+    }
+
+    public void setPactkindcode(String pactkindcode) {
+        this.pactkindcode = pactkindcode;
+    }
+
+    public String getPactkindname() {
+        return pactkindname;
+    }
+
+    public void setPactkindname(String pactkindname) {
+        this.pactkindname = pactkindname;
+    }
+
+    public String getDeptcode() {
+        return deptcode;
+    }
+
+    public void setDeptcode(String deptcode) {
+        this.deptcode = deptcode;
+    }
+
+    public String getDeptname() {
+        return deptname;
+    }
+
+    public void setDeptname(String deptname) {
+        this.deptname = deptname;
+    }
+
+    public String getDoctcode() {
+        return doctcode;
+    }
+
+    public void setDoctcode(String doctcode) {
+        this.doctcode = doctcode;
+    }
+
+    public String getDoctname() {
+        return doctname;
+    }
+
+    public void setDoctname(String doctname) {
+        this.doctname = doctname;
+    }
+
     /**
      * 获取cliniccode属性的值。
      * 

@@ -61,7 +61,7 @@ zuul:
       url: http://172.17.10.12:2233
     sms:
       path: /sms/**
-      serviceId: sms
+      serviceId: http://172.17.10.12:8768
       stripPrefix: false
       sensitiveHeaders: Access-Control-Allow-Origin
   add-proxy-headers: true

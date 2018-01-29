@@ -70,7 +70,7 @@ public class CommonUsedPatientServiceImpl implements CommonUsedPatientService {
             Integer state = commonUsedPatient.getState();
             if (Constant.STATE_COMMON_USED_PATIENT_IN_USE.equals(state)){
                 throw new CommonException("身份证号已绑定过");
-            }else if (Constant.STATE_COMMON_USED_PATIENT_DELETED.equals(state)){
+            } else if (Constant.STATE_COMMON_USED_PATIENT_DELETED.equals(state)){
                 //之前已删除 想重新绑定
                 commonUsedPatient.setState(Constant.STATE_COMMON_USED_PATIENT_IN_USE);
                 commonUsedPatientRepository.save(commonUsedPatient);
@@ -97,7 +97,7 @@ public class CommonUsedPatientServiceImpl implements CommonUsedPatientService {
 
         try {
 
-            PatientCardNo1 existProfile = baseInfoService.getExistProfile(idCard, user.getName());
+            PatientCardNo1 existProfile = baseInfoService.getExistProfile(idCard, name);
             patientCode = existProfile.getCARDNO();
             mcardNo = existProfile.getCARDNO();
             //如果查询成功但是为空 则 还需要 重新建档
@@ -120,7 +120,22 @@ public class CommonUsedPatientServiceImpl implements CommonUsedPatientService {
         commonUsedPatient.setMcardNo(mcardNo);
         commonUsedPatient.setPatientCode(patientCode);
         commonUsedPatient.setMessage(message);
-        commonUsedPatientRepository.save(commonUsedPatient);
+        commonUsedPatients = commonUsedPatientRepository.findAllByIdCardAndUserId(idCard, user.getId());
+        //避免重复绑定
+        if (commonUsedPatients.size() > 0){
+            commonUsedPatient = commonUsedPatients.get(0);
+            Integer state = commonUsedPatient.getState();
+            if (Constant.STATE_COMMON_USED_PATIENT_IN_USE.equals(state)){
+                throw new CommonException("身份证号已绑定过");
+            } else if (Constant.STATE_COMMON_USED_PATIENT_DELETED.equals(state)){
+                //之前已删除 想重新绑定
+                commonUsedPatient.setState(Constant.STATE_COMMON_USED_PATIENT_IN_USE);
+                commonUsedPatientRepository.save(commonUsedPatient);
+                return BeanMapperUtil.map(commonUsedPatient, BindCommonUsedPatientResponse.class);
+            }
+        } else {
+            commonUsedPatientRepository.save(commonUsedPatient);
+        }
 
         //如果 常用就诊人是 自己  就将信息 写入 userinfo
         if (idCard.equals(user.getIdCard())){

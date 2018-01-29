@@ -19,20 +19,5 @@
             <WARD_NAME>ICU护</WARD_NAME>
             <BED_NO>10209</BED_NO>
         </QueryPrefeeMaster>
-        <QueryPrefeeMaster>
-            <INPATIENT_NO>ZY012017050906</INPATIENT_NO>
-            <PATIENT_ID>T017050906</PATIENT_ID>
-            <PATIENT_NAME>张永川</PATIENT_NAME>
-            <ID_NO>320322194003027610</ID_NO>
-            <SEX>男</SEX>
-            <ADMISS_DATE>2017-12-13T08:22:22+08:00</ADMISS_DATE>
-            <ADMISS_TIMES>1</ADMISS_TIMES>
-            <SF_NAME>沛县城乡居民</SF_NAME>
-            <BALANCE>-7682.35</BALANCE>
-            <CHARGE_AMOUNT>37682.35</CHARGE_AMOUNT>
-            <DEPO_AMOUNT>30000</DEPO_AMOUNT>
-            <WARD_NAME>ICU护</WARD_NAME>
-            <BED_NO>10209</BED_NO>
-        </QueryPrefeeMaster>
     </Data>
 </QueryPrefeeMasterSoap>

@@ -2,6 +2,8 @@ package com.chinacaring.peixian.patient.client.dto.front.response;
 
 public class CheckResponse {
 
+    // 检查单号
+    private String checkId;
     // 设备
     private String device;
     // 检查时间
@@ -14,6 +16,14 @@ public class CheckResponse {
     // 详情
     private String descript;
 
+
+    public String getCheckId() {
+        return checkId;
+    }
+
+    public void setCheckId(String checkId) {
+        this.checkId = checkId;
+    }
 
     public String getTime() {
         return time;

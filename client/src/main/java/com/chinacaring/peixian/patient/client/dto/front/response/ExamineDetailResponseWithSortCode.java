@@ -11,7 +11,6 @@ public class ExamineDetailResponseWithSortCode extends ExamineDetailResponse{
     @JsonProperty(value = "status_code")
     private Integer statusCode;
 
-
     public ExamineDetailResponseWithSortCode() {
     }
 

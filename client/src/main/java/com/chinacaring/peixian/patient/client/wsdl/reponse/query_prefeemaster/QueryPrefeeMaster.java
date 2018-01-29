@@ -83,6 +83,110 @@ public class QueryPrefeeMaster {
     @XmlElement(name = "BED_NO", required = true)
     protected String bedno;
 
+    public String getInpatientno() {
+        return inpatientno;
+    }
+
+    public void setInpatientno(String inpatientno) {
+        this.inpatientno = inpatientno;
+    }
+
+    public String getPatientid() {
+        return patientid;
+    }
+
+    public void setPatientid(String patientid) {
+        this.patientid = patientid;
+    }
+
+    public String getPatientname() {
+        return patientname;
+    }
+
+    public void setPatientname(String patientname) {
+        this.patientname = patientname;
+    }
+
+    public String getIdno() {
+        return idno;
+    }
+
+    public void setIdno(String idno) {
+        this.idno = idno;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getAdmissdate() {
+        return admissdate;
+    }
+
+    public void setAdmissdate(String admissdate) {
+        this.admissdate = admissdate;
+    }
+
+    public String getAdmisstimes() {
+        return admisstimes;
+    }
+
+    public void setAdmisstimes(String admisstimes) {
+        this.admisstimes = admisstimes;
+    }
+
+    public String getSfname() {
+        return sfname;
+    }
+
+    public void setSfname(String sfname) {
+        this.sfname = sfname;
+    }
+
+    public String getBalance() {
+        return balance;
+    }
+
+    public void setBalance(String balance) {
+        this.balance = balance;
+    }
+
+    public String getChargeamount() {
+        return chargeamount;
+    }
+
+    public void setChargeamount(String chargeamount) {
+        this.chargeamount = chargeamount;
+    }
+
+    public String getDepoamount() {
+        return depoamount;
+    }
+
+    public void setDepoamount(String depoamount) {
+        this.depoamount = depoamount;
+    }
+
+    public String getWardname() {
+        return wardname;
+    }
+
+    public void setWardname(String wardname) {
+        this.wardname = wardname;
+    }
+
+    public String getBedno() {
+        return bedno;
+    }
+
+    public void setBedno(String bedno) {
+        this.bedno = bedno;
+    }
+
     /**
      * 获取inpatientno属性的值。
      * 

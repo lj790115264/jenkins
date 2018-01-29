@@ -8,8 +8,11 @@ import com.chinacaring.peixian.patient.client.dao.repository.PriceRepository;
 import com.chinacaring.peixian.patient.client.dto.front.response.PriceListResponse;
 import com.chinacaring.peixian.patient.client.dto.his.request.price.PriceRequestHis;
 import com.chinacaring.peixian.patient.client.dto.his.response.price.PriceResponseHis;
+import com.chinacaring.peixian.patient.client.exception.SoapException;
 import com.chinacaring.peixian.patient.client.service.PriceService;
 import com.chinacaring.peixian.patient.client.utils.RequestUtil;
+import com.chinacaring.peixian.patient.client.wsdl.reponse.query_priceboardinfo.QueryPriceBoardInfoSoap;
+import com.chinacaring.peixian.patient.client.wsdl.request.QuyiServiceNo;
 import com.chinacaring.util.BeanMapperUtil;
 import com.chinacaring.util.JaxbXmlUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,20 +27,25 @@ public class PriceServiceImpl implements PriceService {
     @Autowired
     private PriceRepository priceRepository;
 
+    @Autowired
+    private QuyiServiceNo service;
+
     @Override
     public String insertDb() throws CommonException {
 
-        PriceRequestHis priceRequest = new PriceRequestHis();
-        priceRequest.setItemCode("ALL");
-        String xmlString = RequestUtil.soap(InterfaceName.QueryPriceBoardInfo.name(), JaxbXmlUtil.convertToXml(priceRequest));
-
-        PriceResponseHis priceResponse = JaxbXmlUtil.convertToJavaBean(xmlString, PriceResponseHis.class);
-
-        if (Objects.equals(Constant.RETURN_CODE_SUCCESS, priceResponse.getReturnCode())){
-            throw new CommonException("获取价格公示失败");
+        String res = service.getQuyiServiceNoSoap().queryPriceBoardInfo("ALL");
+        QueryPriceBoardInfoSoap soap;
+        try {
+            soap = JaxbXmlUtil.convertToJavaBean(res, QueryPriceBoardInfoSoap.class);
+        } catch (Exception e) {
+            throw new SoapException("获取价格公式信息失败", res, "ALL");
         }
 
-        List<Price> prices = BeanMapperUtil.mapList(priceResponse.getDatas().getData(), Price.class);
+        if (!Objects.equals(Constant.RETURN_CODE_SUCCESS, soap.getResult().getReturnCode())){
+            throw new SoapException("获取价格公示失败", soap.getResult().getReturnDesc(), "ALL");
+        }
+
+        List<Price> prices = BeanMapperUtil.mapList(soap.getData().getQueryPriceBoardInfo(), Price.class);
 
         priceRepository.save(prices);
 

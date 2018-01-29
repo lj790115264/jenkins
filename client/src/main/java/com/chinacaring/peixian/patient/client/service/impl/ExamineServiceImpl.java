@@ -6,6 +6,7 @@ import com.chinacaring.peixian.patient.client.dto.front.response.ExamineDetailRe
 import com.chinacaring.peixian.patient.client.exception.MyException;
 import com.chinacaring.peixian.patient.client.exception.SoapException;
 import com.chinacaring.peixian.patient.client.service.ExamineService;
+import com.chinacaring.peixian.patient.client.utils.ValidateUtils;
 import com.chinacaring.peixian.patient.client.wsdl.reponse.lis_resultinfo.LisResultInfo;
 import com.chinacaring.peixian.patient.client.wsdl.reponse.lis_resultinfo.LisResultInfoSoap;
 import com.chinacaring.peixian.patient.client.wsdl.request.QuyiServiceNo;
@@ -50,22 +51,31 @@ public class ExamineServiceImpl implements ExamineService {
         for (LisResultInfo departMent : soap.getData().getLisResultInfo()){
 
             ExamineDetailResponseWithSortCode examineResponse = new ExamineDetailResponseWithSortCode();
-            examineResponse.setName(departMent.getHISITEMNAMELIST());
-            examineResponse.setExamine_code(departMent.getSAMPLEID());
-            examineResponse.setReportTime((departMent.getACCEPTTIME()).replace("/", "-"));
-            examineResponse.setUnit(departMent.getUNIT());
-            examineResponse.setValue(departMent.getREPORTVALUE());
-            examineResponse.setRange(departMent.getRANGEINFO().trim());
-
-            switch (departMent.getRESULTFLAG()) {
-                case "高":examineResponse.setStatus("high");
-                    examineResponse.setStatusCode(3); break;
-                case "低":examineResponse.setStatus("lower");
-                    examineResponse.setStatusCode(2); break;
-                default: examineResponse.setStatus("normal");
-                    examineResponse.setStatusCode(1);
-
+            examineResponse.setName(departMent.getHisitemnamelist());
+            examineResponse.setExamine_code(departMent.getBarcode());
+            if (null != departMent.getAccepttime()) {
+                examineResponse.setReportTime((ValidateUtils.soapTime(departMent.getAccepttime())));
             }
+            examineResponse.setUnit(departMent.getUnit());
+            examineResponse.setValue(departMent.getReportvalue());
+            if (null != departMent.getRangeinfo()) {
+                examineResponse.setRange(departMent.getRangeinfo().trim());
+            }
+
+            if (null == departMent.getResultflag()) {
+                examineResponse.setStatus("normal");
+                examineResponse.setStatusCode(1);
+            } else {
+                switch (departMent.getResultflag()) {
+                    case "高":examineResponse.setStatus("high");
+                        examineResponse.setStatusCode(3); break;
+                    case "低":examineResponse.setStatus("lower");
+                        examineResponse.setStatusCode(2); break;
+                    default: examineResponse.setStatus("normal");
+                        examineResponse.setStatusCode(1);
+                }
+            }
+
             examineResponses.add(examineResponse);
         }
 

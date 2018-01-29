@@ -13,14 +13,17 @@ import com.chinacaring.peixian.patient.client.dto.front.response.OrderResponse;
 import com.chinacaring.peixian.patient.client.dto.front.response.inpatientList.*;
 import com.chinacaring.peixian.patient.client.dto.front.response.payments.InbalancePayment;
 import com.chinacaring.peixian.patient.client.dto.his.request.confirmInbalance.ConfirmInbalanceRequestHis;
-import com.chinacaring.peixian.patient.client.dto.his.request.getInpatient.GetInpatientRequestHis;
-import com.chinacaring.peixian.patient.client.dto.his.request.inbalanceList.InbalanceListRequestHis;
 import com.chinacaring.peixian.patient.client.dto.his.response.confirmInbalance.ConfirmInbalanceResponseHis;
-import com.chinacaring.peixian.patient.client.dto.his.response.getInpatient.GetInpatientResponseHis;
-import com.chinacaring.peixian.patient.client.dto.his.response.inbalanceList.InbalanceListResponseHis;
 import com.chinacaring.peixian.patient.client.dto.pingpp.ChargeRequest;
+import com.chinacaring.peixian.patient.client.exception.SoapException;
 import com.chinacaring.peixian.patient.client.service.InbalanceService;
 import com.chinacaring.peixian.patient.client.utils.RequestUtil;
+import com.chinacaring.peixian.patient.client.utils.ValidateUtils;
+import com.chinacaring.peixian.patient.client.wsdl.reponse.query_prefeemaster.QueryPrefeeMasterSoap;
+import com.chinacaring.peixian.patient.client.wsdl.reponse.queryin_maininfo.QueryInMainInfo;
+import com.chinacaring.peixian.patient.client.wsdl.reponse.queryin_maininfo.QueryInMainInfoSoap;
+import com.chinacaring.peixian.patient.client.wsdl.reponse.queryin_mainmxinfo.QueryInMainMxInfoSoap;
+import com.chinacaring.peixian.patient.client.wsdl.request.QuyiServiceNo;
 import com.chinacaring.user.dao.entity.User;
 import com.chinacaring.util.BeanMapperUtil;
 import com.chinacaring.util.JaxbXmlUtil;
@@ -39,9 +42,10 @@ import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
-public class InbalanceServiceImpl implements InbalanceService{
+public class InbalanceServiceImpl implements InbalanceService {
 
     private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -53,10 +57,15 @@ public class InbalanceServiceImpl implements InbalanceService{
 
     private final RestTemplate restTemplate;
 
+
     private final OrdersRepository ordersRepository;
 
     @Autowired
-    public InbalanceServiceImpl(InbalanceRepository inbalanceRepository, Gson gson, RestTemplate restTemplate, OrdersRepository ordersRepository) {
+    private QuyiServiceNo service;
+
+    @Autowired
+    public InbalanceServiceImpl(InbalanceRepository inbalanceRepository, Gson gson, RestTemplate restTemplate,
+                                OrdersRepository ordersRepository) {
         this.inbalanceRepository = inbalanceRepository;
         this.gson = gson;
         this.restTemplate = restTemplate;
@@ -97,12 +106,12 @@ public class InbalanceServiceImpl implements InbalanceService{
         httpHeaders.setContentType(type);
         httpHeaders.add("Authorization", Constant.PAY_BASE64_STRING);
         String param = gson.toJson(chargeRequest);
-        HttpEntity<String> httpEntity = new HttpEntity<>(param,httpHeaders);
+        HttpEntity<String> httpEntity = new HttpEntity<>(param, httpHeaders);
         String payResult = restTemplate.postForObject(Constant.PAY_URL, httpEntity, String.class);
 
         //保存  返回的所有数据
         inbalanceWithId.setPayData(payResult);
-        Map payMap= gson.fromJson(payResult, Map.class);
+        Map payMap = gson.fromJson(payResult, Map.class);
         //更新  order no
         String orderNo = payMap.get("order_no") + "";
         inbalanceWithId.setOrderNo(orderNo);
@@ -126,7 +135,7 @@ public class InbalanceServiceImpl implements InbalanceService{
     @Override
     public Object doInbalanceConfirm(String orderNO) throws CommonException {
         List<Inbalance> inbalances = inbalanceRepository.findByOrderNo(orderNO);
-        if (Objects.isNull(inbalances) || inbalances.isEmpty() || inbalances.size() > 1){
+        if (Objects.isNull(inbalances) || inbalances.isEmpty() || inbalances.size() > 1) {
             throw new CommonException("orderNo不存在或者不唯一");
         }
         Inbalance inbalance = inbalances.get(0);
@@ -144,18 +153,20 @@ public class InbalanceServiceImpl implements InbalanceService{
         confirmInbalanceRequestHis.setPayMode(inbalance.getPayChannel());
         confirmInbalanceRequestHis.setTime(sdf.format(new Date()));
         confirmInbalanceRequestHis.setTransNo(inbalance.getOrderNo());
-        String soap = RequestUtil.soap(InterfaceName.hospitalizationExpensesRecharge.name(), JaxbXmlUtil.convertToXml(confirmInbalanceRequestHis));
-        ConfirmInbalanceResponseHis confirmInbalanceResponseHis = JaxbXmlUtil.convertToJavaBean(soap, ConfirmInbalanceResponseHis.class);
+        String soap = RequestUtil.soap(InterfaceName.hospitalizationExpensesRecharge.name(), JaxbXmlUtil.convertToXml
+                (confirmInbalanceRequestHis));
+        ConfirmInbalanceResponseHis confirmInbalanceResponseHis = JaxbXmlUtil.convertToJavaBean(soap,
+                ConfirmInbalanceResponseHis.class);
 
         //保存his结果
         inbalanceWithId.setHisResult(soap);
 
-        if (!Objects.equals(Constant.RETURN_CODE_SUCCESS, confirmInbalanceResponseHis.getReturnCode())){
+        if (!Objects.equals(Constant.RETURN_CODE_SUCCESS, confirmInbalanceResponseHis.getReturnCode())) {
             //失败
             inbalanceWithId.setConfirmState(Constant.INBALANCE_CONFIRM_FAIL);
             inbalanceRepository.saveAndFlush(inbalanceWithId);
             throw new CommonException("住院押金充值失败" + confirmInbalanceResponseHis.getReturnDesc());
-        }else {
+        } else {
             //成功
             inbalanceWithId.setConfirmState(Constant.INBALANCE_CONFIRM_SUCCESS);
             inbalanceWithId.setInvoiceNo(confirmInbalanceResponseHis.getInvoiceNo());
@@ -168,24 +179,70 @@ public class InbalanceServiceImpl implements InbalanceService{
 
     @Override
     public InbalanceResponse getInbalance(String name, String idCard) throws CommonException {
-        GetInpatientRequestHis getInpatientRequestHis = new GetInpatientRequestHis();
-        getInpatientRequestHis.setIcno(idCard);
-        getInpatientRequestHis.setName(name);
-        String soap = RequestUtil.soap(InterfaceName.getInpatientNo.name(), JaxbXmlUtil.convertToXml(getInpatientRequestHis));
-        GetInpatientResponseHis getInpatientResponseHis = JaxbXmlUtil.convertToJavaBean(soap, GetInpatientResponseHis.class);
-        if (!Objects.equals(Constant.RETURN_CODE_SUCCESS, getInpatientResponseHis.getReturnCode())){
-            throw new CommonException("暂无相关数据");
-        }
-        String inhosTime = getInpatientResponseHis.getInhosTime();
-        getInpatientResponseHis.setInhosTime(inhosTime.replace("/", "-"));
-        return BeanMapperUtil.map(getInpatientResponseHis, InbalanceResponse.class);
 
+        String res = service.getQuyiServiceNoSoap().queryInMainInfo(name, idCard, "ALL");
+        QueryInMainInfoSoap soap;
+        try {
+            soap = JaxbXmlUtil.convertToJavaBean(res, QueryInMainInfoSoap.class);
+        } catch (Exception e) {
+            throw new SoapException("暂无住院数据!!", res, name + "-" + idCard + "-" + "ALL");
+        }
+        if (!Objects.equals(Constant.RETURN_CODE_SUCCESS, soap.getResult().getReturnCode())) {
+            throw new SoapException("暂无住院数据", soap.getResult().getReturnDesc(), name + "-" + idCard + "-" + "ALL");
+        }
+        List<QueryInMainInfo> queryInMainInfos = soap.getData().getQueryInMainInfo().stream()
+                .filter(item -> null ==item.getOUTHOSPITALDATE()).collect(Collectors.toList());
+
+        if (queryInMainInfos.size() == 0) {
+            throw new SoapException("暂无住院数据!!", "出院时间不为null的去掉后没有了", name + "-" + idCard + "-" + "ALL");
+        }
+        QueryInMainInfo queryInMainInfo;
+        // 如果不止一个出院日期为null ,取在院时间最近的。
+        if (queryInMainInfos.size() > 1) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HHmmss");
+            // 把时间近的放前面
+            queryInMainInfos.sort((a, b) -> {
+                try {
+                    Date _a = sdf.parse(a.getINHOSPITALDATE());
+                    Date _b;
+                    try {
+                        _b = sdf.parse(b.getINHOSPITALDATE());
+                    } catch (ParseException e) {
+                        // 如果后一个格式错误就不交换
+                        return -1;
+                    }
+                    return _b.compareTo(_a);
+                } catch (ParseException e) {
+                    // 若果前一个格式错误就交换
+                    e.printStackTrace();
+                    return 1;
+                }
+            });
+        }
+        queryInMainInfo = queryInMainInfos.get(0);
+        String inhosTime = queryInMainInfo.getINHOSPITALDATE();
+        queryInMainInfo.setINHOSPITALDATE(ValidateUtils.soapTime(inhosTime));
+        InbalanceResponse inbalanceResponse = BeanMapperUtil.map(queryInMainInfo, InbalanceResponse.class);
+
+        String prefeeRes = service.getQuyiServiceNoSoap().queryPrefeeMaster(inbalanceResponse.getInpatientSeq());
+        QueryPrefeeMasterSoap prefeeSoap;
+        try {
+            prefeeSoap = JaxbXmlUtil.convertToJavaBean(prefeeRes, QueryPrefeeMasterSoap.class);
+        } catch (Exception e) {
+            throw new SoapException("暂无结算数据!!", res, name + "-" + idCard + "-" + "ALL");
+        }
+        if (!Objects.equals(Constant.RETURN_CODE_SUCCESS, prefeeSoap.getResult().getReturnCode())) {
+            throw new SoapException("暂无结算数据", soap.getResult().getReturnDesc(), name + "-" + idCard + "-" + "ALL");
+        }
+        inbalanceResponse.setInbalance(prefeeSoap.getData().getQueryPrefeeMaster().getChargeamount());
+
+        return inbalanceResponse;
     }
 
     @Override
     public Object getInbalanceStatus(Integer id) throws CommonException {
         Inbalance inbalance = inbalanceRepository.findOne(id);
-        if (Objects.isNull(inbalance)){
+        if (Objects.isNull(inbalance)) {
             throw new CommonException("暂无相关记录");
         }
 
@@ -209,23 +266,27 @@ public class InbalanceServiceImpl implements InbalanceService{
 
         InbalanceResponse inbalanceResponse = getInbalance(name, idCard);
 
-        InbalanceListRequestHis inbalanceListRequestHis = new InbalanceListRequestHis();
-        inbalanceListRequestHis.setIcno(idCard);
-        inbalanceListRequestHis.setInpatientNo(inbalanceResponse.getInpatientNo());
-        inbalanceListRequestHis.setDaily(Constant.ALL);
-        String soap = RequestUtil.soap(InterfaceName.inhosBill.name(), JaxbXmlUtil.convertToXml(inbalanceListRequestHis));
-        InbalanceListResponseHis inbalanceListResponseHis = JaxbXmlUtil.convertToJavaBean(soap, InbalanceListResponseHis.class);
-        if (!Objects.equals(Constant.RETURN_CODE_SUCCESS, inbalanceListResponseHis.getReturnCode())){
-            throw new CommonException("暂无相关数据");
+        String res = service.getQuyiServiceNoSoap().queryInMainMxInfo(inbalanceResponse.getPatientId(),
+                inbalanceResponse.getInpatientSeq(),
+                inbalanceResponse.getInpatientNo());
+        QueryInMainMxInfoSoap soap;
+        try {
+            soap = JaxbXmlUtil.convertToJavaBean(res, QueryInMainMxInfoSoap.class);
+        } catch (Exception e) {
+            throw new SoapException("暂无在院患者费用记录", res, inbalanceResponse.getPatientId() + "-" + inbalanceResponse
+                    .getInpatientSeq() + "-" +
+                    inbalanceResponse.getInpatientNo());
         }
-        List<InpatientBillResponse> inpatientBillResponses = BeanMapperUtil.mapList(inbalanceListResponseHis.getDatas().getData(), InpatientBillResponse.class);
-        for (InpatientBillResponse inpatientBillResponse : inpatientBillResponses){
-            String date = inpatientBillResponse.getDate();
-            StringBuilder dateBuilder = new StringBuilder();
-            String year = date.substring(0,4);
-            String month = date.substring(4,6);
-            String day = date.substring(6);
-            inpatientBillResponse.setDate(year + "-" + month + "-" + day);
+
+        if (!Objects.equals(Constant.RETURN_CODE_SUCCESS, soap.getResult().getReturnCode())) {
+            throw new SoapException("暂无在院患者费用记录", soap.getResult().getReturnDesc(), inbalanceResponse.getPatientId()
+                    + "-" + inbalanceResponse
+                    .getInpatientSeq() + "-" + inbalanceResponse.getInpatientNo());
+        }
+        List<InpatientBillResponse> inpatientBillResponses = BeanMapperUtil.mapList(soap.getData()
+                .getQueryInMainMxInfo(), InpatientBillResponse.class);
+        for (InpatientBillResponse inpatientBillResponse : inpatientBillResponses) {
+            inpatientBillResponse.setDate(ValidateUtils.soapTime(inpatientBillResponse.getDate(), "yyyy-MM-dd"));
         }
         DecimalFormat df = new DecimalFormat("#0.00");
         InpatientBillTotalResponse totalResponse = new InpatientBillTotalResponse();

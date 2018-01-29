@@ -28,12 +28,9 @@ public class PrescriptionResponse {
     private String deptName;
     private String execDeptCode;
     private String execDeptName;
-    @JsonIgnore
-    private String moTime;
     private String itemClass;
     private String payFlag;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date time;
+    private String time;
 
 }

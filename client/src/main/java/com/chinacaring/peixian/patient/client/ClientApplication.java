@@ -6,11 +6,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.web.client.RestTemplate;
 
 import java.net.Authenticator;
+import java.net.InetSocketAddress;
 import java.net.PasswordAuthentication;
+import java.net.Proxy;
 
 @SpringBootApplication(scanBasePackages = {"com.chinacaring"})
 @MapperScan({"com.chinacaring.user.mapper", "com.chinacaring.user.dao.mapper"})
@@ -21,10 +26,20 @@ import java.net.PasswordAuthentication;
 @EnableFeignClients(basePackages = "com.chinacaring")
 public class ClientApplication {
 
+	@Bean(name = "proxy")
+	public RestTemplate restTemplate() {
+		SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
+
+		Proxy proxy= new Proxy(Proxy.Type.HTTP, new InetSocketAddress("172.17.10.89", 3128));
+		requestFactory.setProxy(proxy);
+
+		return new RestTemplate(requestFactory);
+	}
+
 	public static void main(String[] args) {
 
 		SpringApplication.run(ClientApplication.class, args);
-//
+
 //		System.setProperty("http.proxyHost", "172.17.10.89");
 //		System.setProperty("http.proxyPort", "3128");
 //

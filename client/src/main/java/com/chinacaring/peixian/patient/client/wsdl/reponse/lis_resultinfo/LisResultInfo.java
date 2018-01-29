@@ -91,6 +91,126 @@ public class LisResultInfo {
     @XmlElement(name = "BARCODE", required = true)
     protected String barcode;
 
+    public String getTestdate() {
+        return testdate;
+    }
+
+    public void setTestdate(String testdate) {
+        this.testdate = testdate;
+    }
+
+    public String getPatientid() {
+        return patientid;
+    }
+
+    public void setPatientid(String patientid) {
+        this.patientid = patientid;
+    }
+
+    public String getPatientname() {
+        return patientname;
+    }
+
+    public void setPatientname(String patientname) {
+        this.patientname = patientname;
+    }
+
+    public String getPatientsex() {
+        return patientsex;
+    }
+
+    public void setPatientsex(String patientsex) {
+        this.patientsex = patientsex;
+    }
+
+    public String getPatientage() {
+        return patientage;
+    }
+
+    public void setPatientage(String patientage) {
+        this.patientage = patientage;
+    }
+
+    public String getHisitemnamelist() {
+        return hisitemnamelist;
+    }
+
+    public void setHisitemnamelist(String hisitemnamelist) {
+        this.hisitemnamelist = hisitemnamelist;
+    }
+
+    public String getAccepttime() {
+        return accepttime;
+    }
+
+    public void setAccepttime(String accepttime) {
+        this.accepttime = accepttime;
+    }
+
+    public String getItemname() {
+        return itemname;
+    }
+
+    public void setItemname(String itemname) {
+        this.itemname = itemname;
+    }
+
+    public String getReportvalue() {
+        return reportvalue;
+    }
+
+    public void setReportvalue(String reportvalue) {
+        this.reportvalue = reportvalue;
+    }
+
+    public String getRangeinfo() {
+        return rangeinfo;
+    }
+
+    public void setRangeinfo(String rangeinfo) {
+        this.rangeinfo = rangeinfo;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
+    public String getResultflag() {
+        return resultflag;
+    }
+
+    public void setResultflag(String resultflag) {
+        this.resultflag = resultflag;
+    }
+
+    public String getMachineid() {
+        return machineid;
+    }
+
+    public void setMachineid(String machineid) {
+        this.machineid = machineid;
+    }
+
+    public String getSampleid() {
+        return sampleid;
+    }
+
+    public void setSampleid(String sampleid) {
+        this.sampleid = sampleid;
+    }
+
+    public String getBarcode() {
+        return barcode;
+    }
+
+    public void setBarcode(String barcode) {
+        this.barcode = barcode;
+    }
+
     /**
      * 获取testdate属性的值。
      * 

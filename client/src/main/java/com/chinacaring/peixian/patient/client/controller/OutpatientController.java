@@ -22,6 +22,7 @@ public class OutpatientController {
     @Autowired
     private OutPatientService outPatientService;
 
+    // 没用的
     @ApiOperation("历次门诊记录")
     @GetMapping("/clinic/record")
     public Object getClinicRecords(@RequestParam("begin_time") String beginTime,
@@ -39,13 +40,13 @@ public class OutpatientController {
 
     @ApiOperation("未缴费处方的门诊记录")
     @GetMapping("/clinic/bills")
-    public Object getOutpatientUnpaidRecords(@RequestParam("begin_time") String beginTime,
-                                             @RequestParam("end_time") String endTime,
+    public Object getOutpatientUnpaidRecords(@RequestParam("name") String name,
                                              @RequestParam("patient_code") String patientCode) throws CommonException, ParseException {
 
-        return new Result<>(outPatientService.getUnpaidClinicRecords(new UnpaidOutpatientRequest(patientCode, beginTime, endTime)));
+        return new Result<>(outPatientService.getUnpaidClinicRecords(new UnpaidOutpatientRequest(patientCode, name)));
     }
 
+    // 没用的
     @ApiOperation("门诊处方信息")
     @GetMapping("/clinic/recipe")
     public Object getPrescription(@RequestParam("register_id") String registerId,

@@ -46,6 +46,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -70,6 +71,9 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Autowired
     private RestTemplate restTemplate;
 
+    @Resource(name = "proxy")
+    private RestTemplate restTemplateProxy;
+
     @Autowired
     private QuyiServiceNo service;
 
@@ -88,18 +92,18 @@ public class AppointmentServiceImpl implements AppointmentService {
         try {
             shemaInfoSoap = JaxbXmlUtil.convertToJavaBean(soap, ShemaInfoSoap.class);
         } catch (Exception e) {
-            throw new SoapException("获取排班信息出错", soap, scheduleRequest.getBeginTime() + "-" + scheduleRequest
+            throw new SoapException("暂无排班信息", soap, scheduleRequest.getBeginTime() + "-" + scheduleRequest
                     .getEndTime() + "-" + scheduleRequest.getDeptCode());
         }
 
         if (!Objects.equals(Constant.RETURN_CODE_SUCCESS, shemaInfoSoap.getResult().getReturnCode())) {
-            throw new SoapException("获取排班信息出错", shemaInfoSoap.getResult().getReturnDesc(), scheduleRequest.getBeginTime
+            throw new SoapException("暂无排班信息", shemaInfoSoap.getResult().getReturnDesc(), scheduleRequest.getBeginTime
                     () + "-" + scheduleRequest.getEndTime() + "-" + scheduleRequest.getDeptCode());
         }
 
         List<ShemaInfo> shemaInfos = shemaInfoSoap.getData().getShemaInfo();
         if (shemaInfos.size() == 0) {
-            throw new SoapException("获取排班信息出错", shemaInfoSoap.getResult().getReturnDesc(), scheduleRequest.getBeginTime
+            throw new SoapException("暂无排班信息", shemaInfoSoap.getResult().getReturnDesc(), scheduleRequest.getBeginTime
                     () + "-" + scheduleRequest.getEndTime() + "-" + scheduleRequest.getDeptCode());
         }
         List<Schedule> schedules = BeanMapperUtil.mapList(shemaInfos, Schedule.class);
@@ -189,13 +193,14 @@ public class AppointmentServiceImpl implements AppointmentService {
         MediaType type = MediaType.parseMediaType("application/json; charset=UTF-8");
         httpHeaders.setContentType(type);
         httpHeaders.add("Authorization", Constant.PAY_BASE64_STRING);
+        httpHeaders.add("Proxy-Authorization", "Basic Y2FyaW5nOmNoaW5hY2FyaW5n");
 
         String param = gson.toJson(chargeRequest);
         HttpEntity<String> httpEntity = null;
         String payResult = null;
         try {
             httpEntity = new HttpEntity<>(param, httpHeaders);
-            payResult = restTemplate.postForObject(Constant.PAY_URL, httpEntity, String.class);
+            payResult = restTemplateProxy.postForObject(Constant.PAY_URL, httpEntity, String.class);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -274,7 +279,7 @@ public class AppointmentServiceImpl implements AppointmentService {
             appointment.setRegState(Constant.REG_STATE_GUA_HAO_SHI_BAI);
             appointment.setHisResult(soap);
             appointmentRepository.saveAndFlush(appointment);
-            throw new SoapException("挂号失败", soap, registerRequestHis.mixed());
+            throw new SoapException("挂号失败!!", soap, registerRequestHis.mixed());
         }
 
 
@@ -301,7 +306,7 @@ public class AppointmentServiceImpl implements AppointmentService {
             appointment.setRegState(Constant.REG_STATE_GUA_HAO_SHI_BAI);
             appointment.setHisResult(soap);
             appointmentRepository.saveAndFlush(appointment);
-            throw new SoapException("挂号失败", insertRegisterTempSoap.getResult().getReturnDesc(), registerRequestHis
+            throw new SoapException("挂号失败!", insertRegisterTempSoap.getResult().getReturnDesc(), registerRequestHis
                     .mixed());
         }
     }

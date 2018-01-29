@@ -17,24 +17,51 @@ public class InbalanceController {
     @Autowired
     private InbalanceService inbalanceService;
 
+    /**
+     * 没用
+     * @param name
+     * @param idcard
+     * @return
+     * @throws CommonException
+     */
     @GetMapping("in_hospital/balance")
     public Object getInbalance(@RequestParam("name") String name,
                                @RequestParam("id_card") String idcard) throws CommonException {
-
         return new Result<>(inbalanceService.getInbalance(name, idcard));
     }
 
+    /**
+     * 没用
+     * @param inbalanceInfoRequest
+     * @param user
+     * @return
+     * @throws ParseException
+     */
     @PostMapping("in_hospital/deposit/recharge")
     public Object createInbalanceOrder(@RequestBody InbalanceInfoRequest inbalanceInfoRequest, @CurrentUser User user) throws ParseException {
         return new Result<>(inbalanceService.createInbalanceOrder(inbalanceInfoRequest, user));
 
     }
 
+    /**
+     * 没用
+     * @param id
+     * @return
+     * @throws CommonException
+     */
     @GetMapping("in_hospital/balance/{id}")
     public Object getInbalanceStatus(@PathVariable("id") Integer id) throws CommonException {
         return new Result<>(inbalanceService.getInbalanceStatus(id));
     }
 
+    /**
+     * 住院清单
+     * @param name
+     * @param idcard
+     * @param cardNo
+     * @return
+     * @throws CommonException
+     */
     @GetMapping("in_hospital/bills")
     public Object getInhospitalBills(@RequestParam("name") String name,
                                      @RequestParam("id_card") String idcard) throws CommonException {

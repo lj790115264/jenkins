@@ -9,12 +9,7 @@ import java.util.Date;
 @Data
 public class UnpaidClinicRecordResponse {
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date appointmentTime;
-
-    @JsonIgnore
-    private String regDate;
-
+    private String appointmentTime;
     private String patientCode;
     private String regLevelName;
     private String regCost;

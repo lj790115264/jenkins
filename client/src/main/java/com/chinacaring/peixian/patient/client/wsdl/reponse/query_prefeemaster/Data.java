@@ -1,8 +1,6 @@
 
 package com.chinacaring.peixian.patient.client.wsdl.reponse.query_prefeemaster;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -18,9 +16,9 @@ import javax.xml.bind.annotation.XmlType;
  * &lt;complexType name="Data">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;choice maxOccurs="unbounded" minOccurs="0">
+ *       &lt;sequence>
  *         &lt;element name="QueryPrefeeMaster" type="{}QueryPrefeeMaster"/>
- *       &lt;/choice>
+ *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -34,36 +32,31 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class Data {
 
-    @XmlElement(name = "QueryPrefeeMaster")
-    protected List<QueryPrefeeMaster> queryPrefeeMaster;
+    @XmlElement(name = "QueryPrefeeMaster", required = true)
+    protected QueryPrefeeMaster queryPrefeeMaster;
 
     /**
-     * Gets the value of the queryPrefeeMaster property.
+     * 获取queryPrefeeMaster属性的值。
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the queryPrefeeMaster property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getQueryPrefeeMaster().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link QueryPrefeeMaster }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link QueryPrefeeMaster }
+     *     
      */
-    public List<QueryPrefeeMaster> getQueryPrefeeMaster() {
-        if (queryPrefeeMaster == null) {
-            queryPrefeeMaster = new ArrayList<QueryPrefeeMaster>();
-        }
-        return this.queryPrefeeMaster;
+    public QueryPrefeeMaster getQueryPrefeeMaster() {
+        return queryPrefeeMaster;
+    }
+
+    /**
+     * 设置queryPrefeeMaster属性的值。
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link QueryPrefeeMaster }
+     *     
+     */
+    public void setQueryPrefeeMaster(QueryPrefeeMaster value) {
+        this.queryPrefeeMaster = value;
     }
 
 }

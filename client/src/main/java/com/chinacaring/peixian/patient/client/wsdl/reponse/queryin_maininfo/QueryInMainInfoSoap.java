@@ -1,10 +1,7 @@
 
 package com.chinacaring.peixian.patient.client.wsdl.reponse.queryin_maininfo;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
@@ -32,6 +29,7 @@ import javax.xml.bind.annotation.XmlType;
     "result",
     "data"
 })
+@XmlRootElement(name = "QueryInMainInfoSoap")
 public class QueryInMainInfoSoap {
 
     @XmlElement(required = true)

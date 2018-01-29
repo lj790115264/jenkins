@@ -55,7 +55,7 @@ public class WebhookController {
         switch (event.getType()) {
             case "charge.succeeded":
                 // 开发者在此处加入对支付异步通知的处理代码
-                
+
                 callbackHandler(event, response);
                 break;
             case "refund.succeeded":
@@ -160,10 +160,5 @@ public class WebhookController {
 
         response.setStatus(200);
     }
-
-
-
-
-
 
 }

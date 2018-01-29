@@ -16,24 +16,6 @@ jwt:
       path: "session"
       refresh: "session"
       register: "user"
-  allowPath: /sms/**,/dept,/schedule/**,/baseinfo/**,/session/**,/user,/swagger-resources/**,/webhooks/**,/session/**,/user/**,/v2/**,/swagger-resources/**,/webjars/**,/health/**,/info/**,/img/**,/third-party/**,/api/**,/admin/**,/trace/**,/applications/**,/env/**,/dump/**,/logfile/**,/metrics/**,/loggers/**,/jolokia/**,/refresh/**,/heapdump/**,/flyway/**,/liquibase/**,/auditevents/**,/danger/**,/depts,/prices,/price,/schedule/**,/message_wechat/**,/test/**,/alipay/form/**
+  allowPath: /sms/**,/dept,/doctor,/schedule/**,/baseinfo/**,/session/**,/user,/swagger-resources/**,/webhooks/**,/session/**,/user/**,/v2/**,/swagger-resources/**,/webjars/**,/health/**,/info/**,/img/**,/third-party/**,/api/**,/admin/**,/trace/**,/applications/**,/env/**,/dump/**,/logfile/**,/metrics/**,/loggers/**,/jolokia/**,/refresh/**,/heapdump/**,/flyway/**,/liquibase/**,/auditevents/**,/danger/**,/depts,/prices,/price,/schedule/**,/message_wechat/**,/test/**,/alipay/form/**
 host:
   address: 172.17.10.17
-
-zuul:
-  host:
-    socket-timeout-millis: 60000
-    connect-timeout-millis: 60000
-  routes:
-    smart:
-      path: /smart/**
-      stripPrefix: false
-      sensitiveHeaders: Access-Control-Allow-Origin
-      url: http://172.17.10.12:2233
-    sms:
-      path: /sms/**
-      serviceId: http://172.17.10.89:8768
-      stripPrefix: false
-      sensitiveHeaders: Access-Control-Allow-Origin
-  add-proxy-headers: true
-  ignored-patterns: /user/**

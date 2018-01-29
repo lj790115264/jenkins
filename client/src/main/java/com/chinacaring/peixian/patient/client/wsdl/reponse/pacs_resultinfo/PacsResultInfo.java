@@ -99,6 +99,142 @@ public class PacsResultInfo {
     @XmlElement(name = "DOCNAME", required = true)
     protected String docname;
 
+    public String getHispatienttype() {
+        return hispatienttype;
+    }
+
+    public void setHispatienttype(String hispatienttype) {
+        this.hispatienttype = hispatienttype;
+    }
+
+    public String getClinicpatientid() {
+        return clinicpatientid;
+    }
+
+    public void setClinicpatientid(String clinicpatientid) {
+        this.clinicpatientid = clinicpatientid;
+    }
+
+    public String getInfeepatientid() {
+        return infeepatientid;
+    }
+
+    public void setInfeepatientid(String infeepatientid) {
+        this.infeepatientid = infeepatientid;
+    }
+
+    public String getStudyid() {
+        return studyid;
+    }
+
+    public void setStudyid(String studyid) {
+        this.studyid = studyid;
+    }
+
+    public String getCheckserialnum() {
+        return checkserialnum;
+    }
+
+    public void setCheckserialnum(String checkserialnum) {
+        this.checkserialnum = checkserialnum;
+    }
+
+    public String getPatientname() {
+        return patientname;
+    }
+
+    public void setPatientname(String patientname) {
+        this.patientname = patientname;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
+    public String getDevicetype() {
+        return devicetype;
+    }
+
+    public void setDevicetype(String devicetype) {
+        this.devicetype = devicetype;
+    }
+
+    public String getDevicename() {
+        return devicename;
+    }
+
+    public void setDevicename(String devicename) {
+        this.devicename = devicename;
+    }
+
+    public String getStudyscription() {
+        return studyscription;
+    }
+
+    public void setStudyscription(String studyscription) {
+        this.studyscription = studyscription;
+    }
+
+    public String getStudytime() {
+        return studytime;
+    }
+
+    public void setStudytime(String studytime) {
+        this.studytime = studytime;
+    }
+
+    public String getStudystatus() {
+        return studystatus;
+    }
+
+    public void setStudystatus(String studystatus) {
+        this.studystatus = studystatus;
+    }
+
+    public String getStudystatusname() {
+        return studystatusname;
+    }
+
+    public void setStudystatusname(String studystatusname) {
+        this.studystatusname = studystatusname;
+    }
+
+    public String getReportdescribe() {
+        return reportdescribe;
+    }
+
+    public void setReportdescribe(String reportdescribe) {
+        this.reportdescribe = reportdescribe;
+    }
+
+    public String getReportdiagnose() {
+        return reportdiagnose;
+    }
+
+    public void setReportdiagnose(String reportdiagnose) {
+        this.reportdiagnose = reportdiagnose;
+    }
+
+    public String getDocname() {
+        return docname;
+    }
+
+    public void setDocname(String docname) {
+        this.docname = docname;
+    }
+
     /**
      * 获取hispatienttype属性的值。
      * 

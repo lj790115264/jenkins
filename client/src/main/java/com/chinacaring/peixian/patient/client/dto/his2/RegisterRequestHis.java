@@ -63,11 +63,22 @@ public class RegisterRequestHis {
     public String mixed() {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String noonCode;
+
+        if (null == getNoonCode()) {
+            noonCode = "3";
+        } else {
+            switch (getNoonCode()) {
+                case "上午": noonCode = "1"; break;
+                case "下午": noonCode = "2"; break;
+                default: noonCode = "3";
+            }
+        }
 
         return "quyi|" + getIdCard() + "|01|0|" + getType() + "|" + (isMedicare() ? "1" : "0") + "|4|" +
                 (getDoctorCode() == null ? "0000" : getDoctorCode()) + "|" +
                 getRegisterLevelCode() + "|" +
-                getNoonCode() + "|" + getDeptCode() + "|" + getRegisterLevelName() + "|" + sdf.format(getCreateTime()) + "|" +
+                noonCode + "|" + getDeptCode() + "|" + getRegisterLevelName() + "|" + sdf.format(getCreateTime()) + "|" +
                 sdf.format(getAppointmentTime()) + "|" + getPatientCode() + "|" + getAppointmentId() + "|0000|" +
                 getPayChannel() + "|" + getScheduleId();
     }
