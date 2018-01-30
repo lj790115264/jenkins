@@ -63,7 +63,7 @@ public class RegisterRequestHis {
     public String mixed() {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String noonCode;
+        String noonCode, payChannel = "WX";
 
         if (null == getNoonCode()) {
             noonCode = "3";
@@ -75,12 +75,18 @@ public class RegisterRequestHis {
             }
         }
 
+        if (null != getPayChannel()) {
+            switch (getPayChannel()) {
+                case "wx_pub": payChannel = "WX";
+            }
+        }
+
         return "quyi|" + getIdCard() + "|01|0|" + getType() + "|" + (isMedicare() ? "1" : "0") + "|4|" +
                 (getDoctorCode() == null ? "0000" : getDoctorCode()) + "|" +
                 getRegisterLevelCode() + "|" +
                 noonCode + "|" + getDeptCode() + "|" + getRegisterLevelName() + "|" + sdf.format(getCreateTime()) + "|" +
                 sdf.format(getAppointmentTime()) + "|" + getPatientCode() + "|" + getAppointmentId() + "|0000|" +
-                getPayChannel() + "|" + getScheduleId();
+                payChannel + "|" + getScheduleId();
     }
 
     public String getRegisterLevelCode() {
