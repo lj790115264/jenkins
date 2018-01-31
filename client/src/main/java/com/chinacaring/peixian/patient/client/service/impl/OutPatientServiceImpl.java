@@ -25,6 +25,7 @@ import com.chinacaring.peixian.patient.client.dto.his.response.outpatientConfirm
 import com.chinacaring.peixian.patient.client.dto.his.response.prescription.PrescriptionResponseHis;
 import com.chinacaring.peixian.patient.client.dto.his.response.unpaidOutpatient.UnpaidOutpatientResponseHis;
 import com.chinacaring.peixian.patient.client.dto.pingpp.ChargeRequest;
+import com.chinacaring.peixian.patient.client.exception.MyException;
 import com.chinacaring.peixian.patient.client.exception.SoapException;
 import com.chinacaring.peixian.patient.client.service.OutPatientService;
 import com.chinacaring.peixian.patient.client.utils.RequestUtil;
@@ -276,7 +277,7 @@ public class OutPatientServiceImpl implements OutPatientService {
         chargeRequest.setAmount(1);
         //test
 
-        
+
         chargeRequest.setChannel(outpatientInfoRequest.getPayChannel());
         //订单信息 做处理
         chargeRequest.setSubject(Constant.CHARGE_SUBJECT_OUTPATIENT);
@@ -388,7 +389,7 @@ public class OutPatientServiceImpl implements OutPatientService {
         return clinicPayment;
     }
 
-    private OutpatientConfirmResult outpatientConfirm(Outpatient outpatient) throws SoapException {
+    private OutpatientConfirmResult outpatientConfirm(Outpatient outpatient) throws MyException {
 
         List<Map> prescriptionList = gson.fromJson(outpatient.getPrescriptionNo(), ArrayList.class);
         OutpatientConfirmRequestHis outpatientConfirmRequestHis = new OutpatientConfirmRequestHis();
@@ -397,10 +398,11 @@ public class OutPatientServiceImpl implements OutPatientService {
         outpatientConfirmRequestHis.setRegNO(outpatient.getRegisterId());
         outpatientConfirmRequestHis.setTransNo(outpatient.getOrderNo());
         String payChannel = "WX";
-
-        List<OutpatientConfirmResult> results = new ArrayList<>();
+        if (prescriptionList.size() == 0 || null == prescriptionList) {
+            throw new MyException("门诊结算失败", "没有处方数据");
+        }
         String prescriptionCollection = prescriptionList.stream().map(item -> item.get("prescriptionNo") + "").
-                reduce("", (a, b) -> a + "|" + b);
+                reduce((a, b) -> a + "|" + b).get();
         Integer fen = prescriptionList.stream().map(item -> Integer.valueOf(item.get("cost") + "")).reduce(0,
                 Integer::sum);
         String yuan = df.format(Integer.valueOf(fen) / 100.0);
