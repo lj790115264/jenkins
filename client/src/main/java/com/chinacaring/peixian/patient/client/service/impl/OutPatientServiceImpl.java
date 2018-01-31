@@ -228,10 +228,10 @@ public class OutPatientServiceImpl implements OutPatientService {
         Double totCost = 0.0;
         for (PrescriptionResponse prescriptionResponse : prescriptionResponses){
             //普通号 医生信息处理
-            if (StringUtils.isEmpty(prescriptionResponse.getDoctorCode())){
-                prescriptionResponse.setDoctorCode("普通号");
-                prescriptionResponse.setDoctorName("普通号");
-            }
+//            if (StringUtils.isEmpty(prescriptionResponse.getDoctorCode())){
+//                prescriptionResponse.setDoctorCode("普通号");
+//                prescriptionResponse.setDoctorName("普通号");
+//            }
             Double unitPrice = Double.valueOf(prescriptionResponse.getUnitPrice());
             Double unitTotCost = Double.valueOf(prescriptionResponse.getNumber()) * unitPrice;
             totCost += unitTotCost;
@@ -272,7 +272,7 @@ public class OutPatientServiceImpl implements OutPatientService {
         chargeRequest.setChannel(outpatientInfoRequest.getPayChannel());
         //订单信息 做处理
         chargeRequest.setSubject(Constant.CHARGE_SUBJECT_OUTPATIENT);
-        chargeRequest.setBody(outpatient.toString());
+        chargeRequest.setBody(Constant.CHARGE_SUBJECT_OUTPATIENT);
         chargeRequest.setOpen_id(outpatientInfoRequest.getOpenId());
         //获取支付信息
         HttpHeaders httpHeaders = new HttpHeaders();
@@ -382,13 +382,13 @@ public class OutPatientServiceImpl implements OutPatientService {
 
     private OutpatientConfirmResult outpatientConfirm(Outpatient outpatient) throws SoapException {
 
-
         List<Map> prescriptionList = gson.fromJson(outpatient.getPrescriptionNo(), ArrayList.class);
         OutpatientConfirmRequestHis outpatientConfirmRequestHis = new OutpatientConfirmRequestHis();
         outpatientConfirmRequestHis.setOperCode(outpatient.getOperCode());
         outpatientConfirmRequestHis.setPayMode(outpatient.getPayChannel());
         outpatientConfirmRequestHis.setRegNO(outpatient.getRegisterId());
         outpatientConfirmRequestHis.setTransNo(outpatient.getOrderNo());
+        String payChannel = "WX";
 
         List<OutpatientConfirmResult> results = new ArrayList<>();
         String prescriptionCollection = prescriptionList.stream().map(item -> item.get("prescriptionNo") + "").
@@ -397,7 +397,7 @@ public class OutPatientServiceImpl implements OutPatientService {
                 Integer::sum);
         String yuan = df.format(Integer.valueOf(fen) / 100.0);
         String res = serviceNo.getQuyiServiceNoSoap().saveFee(outpatient.getRegisterId(), prescriptionCollection, outpatient
-                .getOperCode(), outpatient.getPayChannel(),  yuan);
+                .getOperCode(), payChannel,  yuan);
         SaveFeeSoap soap;
         try {
             soap = JaxbXmlUtil.convertToJavaBean(res, SaveFeeSoap.class);

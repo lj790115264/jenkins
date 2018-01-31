@@ -33,6 +33,7 @@ public class Outpatient {
 
     private String orderNo;
 
+    @Column(columnDefinition = "TEXT")
     private String payData;
 
     private String openId;
