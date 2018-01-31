@@ -20,6 +20,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="CLINICNO" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="SEENO" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="PATIENTNAME" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="INVOICENO" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -32,7 +33,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "InsertRegisterTemp", propOrder = {
     "clinicno",
     "seeno",
-    "patientname"
+    "patientname",
+    "invoiceno"
 })
 public class InsertRegisterTemp {
 
@@ -42,6 +44,8 @@ public class InsertRegisterTemp {
     protected String seeno;
     @XmlElement(name = "PATIENTNAME", required = true)
     protected String patientname;
+    @XmlElement(name = "INVOICENO", required = true)
+    protected String invoiceno;
 
     /**
      * 获取clinicno属性的值。
@@ -113,6 +117,30 @@ public class InsertRegisterTemp {
      */
     public void setPATIENTNAME(String value) {
         this.patientname = value;
+    }
+
+    /**
+     * 获取invoiceno属性的值。
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getINVOICENO() {
+        return invoiceno;
+    }
+
+    /**
+     * 设置invoiceno属性的值。
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setINVOICENO(String value) {
+        this.invoiceno = value;
     }
 
 }

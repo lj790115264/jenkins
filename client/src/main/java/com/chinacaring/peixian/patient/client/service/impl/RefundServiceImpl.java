@@ -164,9 +164,9 @@ public class RefundServiceImpl implements RefundService {
             title = "微信退款通知";
         }
 
-        WechatPushResponse wechatPushResponse = wechatPushService.sendNews(alipayUrl, title, refundDes);
-        logger.info("\n退款推送 -- " + orderNo + "\n");
-        logger.info(wechatPushResponse.toString() + "\n");
+//        WechatPushResponse wechatPushResponse = wechatPushService.sendNews(alipayUrl, title, refundDes);
+//        logger.info("\n退款推送 -- " + orderNo + "\n");
+//        logger.info(wechatPushResponse.toString() + "\n");
 
     }
 

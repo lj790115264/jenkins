@@ -58,7 +58,6 @@ public class InbalanceController {
      * 住院清单
      * @param name
      * @param idcard
-     * @param cardNo
      * @return
      * @throws CommonException
      */

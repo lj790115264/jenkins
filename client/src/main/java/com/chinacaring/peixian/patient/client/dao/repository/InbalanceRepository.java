@@ -11,4 +11,6 @@ public interface InbalanceRepository extends JpaRepository<Inbalance, Integer> {
     List<Inbalance> findByOrderNo(String orderNo);
 
     List<Inbalance> findAllByIdCardAndUserIdAndPayState(String idCard, Integer userId, Integer payState);
+
+    List<Inbalance> findAllByIdCardAndUserIdAndPayStateNot(String idCard, Integer userId, Integer payState);
 }

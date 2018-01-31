@@ -33,4 +33,11 @@ public class ClinicPayment {
     private Date refundTime;
 
     private String refundCost;
+
+    private String registerId;
+
+    private String branchName = "沛县人民医院";
+
+    //收据号
+    private String receiptNo;
 }

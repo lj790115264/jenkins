@@ -3,7 +3,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     username: ${mysql.username:root}
     password: ${mysql.password:chinacaring}
-    url: jdbc:mysql://${mysql.host:101.132.74.234}:${mysql.port:3306}/peixian-patient?characterEncoding=utf8
+    url: jdbc:mysql://${mysql.host:192.168.1.161}:${mysql.port:3306}/peixian-patient?characterEncoding=utf8
 
 # JWT
 jwt:

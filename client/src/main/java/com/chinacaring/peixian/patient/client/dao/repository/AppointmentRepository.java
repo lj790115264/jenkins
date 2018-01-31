@@ -24,4 +24,6 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
             userId, Integer payState, Sort sort);
 
     List<Appointment> findAllByIdCardAndUserIdAndPayState(String idCard, Integer userId, Integer payState);
+
+    List<Appointment> findAllByIdCardAndUserIdAndPayStateNot(String idCard, Integer userId, Integer payState);
 }

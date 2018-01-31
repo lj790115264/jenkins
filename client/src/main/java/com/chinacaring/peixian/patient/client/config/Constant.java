@@ -86,7 +86,7 @@ public class Constant {
     public static final String BASIC_HEADER_WECHAT_PUSH = "Basic d2VjaGF0cHVzaDp3ZWNoYXRwdXNoc2VjcmV0";
     public static final String WECHAT_CP_NEWS_PUSH_URL = "http://121.196.219.153:8090/cp/news";
     public static final Integer AGENT_ID_TUI_KUAN_TONG_ZHI = 1000003;
-    public static final Integer HOSPITAL_ID_CHU_ZHOU_YI_YUAN = 1200;
+    public static final Integer HOSPITAL_ID_CHU_ZHOU_YI_YUAN = 1204;
 
     //退款来源
     //微信未结算 unsettled_funds

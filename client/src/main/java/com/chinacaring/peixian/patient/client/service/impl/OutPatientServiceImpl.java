@@ -412,6 +412,7 @@ public class OutPatientServiceImpl implements OutPatientService {
 
         OutpatientConfirmResult outpatientConfirmResult = new OutpatientConfirmResult();
         outpatientConfirmResult.setInvoiceNo(soap.getData().getSaveFeeSoap().getINVOICENO());
+        outpatientConfirmResult.setReceiptNo(soap.getData().getSaveFeeSoap().getINVOICENO());
         outpatientConfirmResult.setPrescriptionNo(prescriptionCollection);
         outpatientConfirmResult.setIsSuccess(true);
         outpatientConfirmResult.setCost(fen + "");

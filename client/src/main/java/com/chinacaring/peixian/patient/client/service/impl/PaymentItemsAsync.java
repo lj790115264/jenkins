@@ -41,7 +41,7 @@ public class PaymentItemsAsync {
 
     Future<List<RegisterPayment>> getRegisterPayments(String idCard, User user) {
 
-        List<Appointment> appointments = appointmentRepository.findAllByIdCardAndUserIdAndPayState(idCard, user.getId(), Constant.ORDERS_PAID);
+        List<Appointment> appointments = appointmentRepository.findAllByIdCardAndUserIdAndPayStateNot(idCard, user.getId(), Constant.ORDERS_NOT_PAY);
         List<RegisterPayment> registerPayments = new ArrayList<>();
         for (Appointment appointment : appointments) {
 
@@ -71,7 +71,7 @@ public class PaymentItemsAsync {
     }
 
     Future<List<InbalancePayment>> getInbalancePayments(String idCard, User user){
-        List<Inbalance> inbalances = inbalanceRepository.findAllByIdCardAndUserIdAndPayState(idCard, user.getId(), Constant.ORDERS_PAID);
+        List<Inbalance> inbalances = inbalanceRepository.findAllByIdCardAndUserIdAndPayStateNot(idCard, user.getId(), Constant.ORDERS_PAID);
         List<InbalancePayment> inbalancePayments = new ArrayList<>();
         for (Inbalance inbalance : inbalances){
 
@@ -96,16 +96,26 @@ public class PaymentItemsAsync {
     }
 
     Future<List<ClinicPayment>> getClinicPayments(String idCard, User user){
-        List<Outpatient> outpatients = outpatientRepository.findAllByIdCardAndUserIdAndPayState(idCard, user.getId(), Constant.ORDERS_PAID);
+        List<Outpatient> outpatients = outpatientRepository.findAllByIdCardAndUserIdAndPayStateNot(idCard, user.getId(), Constant.ORDERS_NOT_PAY);
         List<ClinicPayment> clinicPayments = new ArrayList<>();
 
         for (Outpatient outpatient : outpatients) {
             ClinicPayment clinicPayment = BeanMapperUtil.map(outpatient, ClinicPayment.class);
             clinicPayment.setPayTime(outpatient.getCreateTime());
-            clinicPayment.setTotalCost(df.format(outpatient.getCost().divide(new BigDecimal(100.0))));
-            String regDate = clinicPayment.getRegDate().split(" ")[0];
-            clinicPayment.setRegDate(regDate);
-            clinicPayment.setRefundCost(df.format(outpatient.getRefundCost().divide(new BigDecimal(100.0))));
+            BigDecimal cost = outpatient.getCost();
+            if (null != cost) {
+                clinicPayment.setTotalCost(df.format(cost.divide(new BigDecimal(100.0))));
+            }
+            String regDate = clinicPayment.getRegDate();;
+            if (null != regDate) {
+                clinicPayment.setRegDate(regDate.split(" ")[0]);
+            }
+            BigDecimal refondCost = outpatient.getRefundCost();
+            if (null != refondCost) {
+                clinicPayment.setRefundCost(df.format(refondCost.divide(new BigDecimal(100.0))));
+            } else {
+                clinicPayment.setRefundCost("0.0");
+            }
 
             clinicPayments.add(clinicPayment);
         }

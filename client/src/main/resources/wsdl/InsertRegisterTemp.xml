@@ -5,9 +5,10 @@
     </result>
     <Data>
         <InsertRegisterTemp>
-            <CLINICNO>14711 587</CLINICNO>
-            <SEENO>1</SEENO>
-            <PATIENTNAME>王孟</PATIENTNAME>
+            <CLINICNO>14711627</CLINICNO>
+            <SEENO>4</SEENO>
+            <PATIENTNAME>姬祥</PATIENTNAME>
+            <INVOICENO>000096940471</INVOICENO>
         </InsertRegisterTemp>
     </Data>
 </InsertRegisterTempSoap>
