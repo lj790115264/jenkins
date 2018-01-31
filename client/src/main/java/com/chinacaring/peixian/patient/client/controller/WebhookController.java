@@ -117,11 +117,15 @@ public class WebhookController {
                 try {
                     appointmentService.doRegister(orderNo);
                     logger.info(orderNo + "挂号成功");
+
                 } catch (SoapException e) {
                     logger.error("------------------------------");
                     logger.error("argument:" + e.getArguments());
                     logger.error("exception:" + e.getDevMessage());
-                    throw e;
+                    //挂号失败。退款
+                    refundService.refund(orderNo, Constant.ORDERS_APPOINTMENT, "退款原因" + e.getDetailMessage());
+                    response.setStatus(500);
+                    logger.info(orderNo + "挂号失败");
                 } catch (CommonException e) {
                     e.printStackTrace();
                     //挂号失败。退款
@@ -140,7 +144,10 @@ public class WebhookController {
                     logger.error("------------------------------");
                     logger.error("argument:" + e.getArguments());
                     logger.error("exception:" + e.getDevMessage());
-                    throw e;
+                    //挂号失败。退款
+                    refundService.refund(orderNo, Constant.ORDERS_CLINIC, "退款原因" + e.getDetailMessage());
+                    response.setStatus(500);
+                    logger.info(orderNo + "门诊确认成功");
                 } catch (CommonException e) {
                     e.printStackTrace();
                     //挂号失败。退款
