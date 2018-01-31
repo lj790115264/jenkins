@@ -8,6 +8,7 @@ import com.chinacaring.peixian.patient.client.dao.entity.Orders;
 import com.chinacaring.peixian.patient.client.dao.repository.AppointmentRepository;
 import com.chinacaring.peixian.patient.client.dao.repository.OrdersRepository;
 import com.chinacaring.peixian.patient.client.dto.pingpp.PayResponse;
+import com.chinacaring.peixian.patient.client.exception.SoapException;
 import com.chinacaring.peixian.patient.client.service.AppointmentService;
 import com.chinacaring.peixian.patient.client.service.InbalanceService;
 import com.chinacaring.peixian.patient.client.service.OutPatientService;
@@ -116,6 +117,11 @@ public class WebhookController {
                 try {
                     appointmentService.doRegister(orderNo);
                     logger.info(orderNo + "挂号成功");
+                } catch (SoapException e) {
+                    logger.error("------------------------------");
+                    logger.error("argument:" + e.getArguments());
+                    logger.error("exception:" + e.getDevMessage());
+                    throw e;
                 } catch (CommonException e) {
                     e.printStackTrace();
                     //挂号失败。退款
@@ -130,6 +136,11 @@ public class WebhookController {
                 try {
                     outPatientService.doOutpatientConfirm(orderNo);
                     logger.info(orderNo + "门诊确认成功");
+                } catch (SoapException e) {
+                    logger.error("------------------------------");
+                    logger.error("argument:" + e.getArguments());
+                    logger.error("exception:" + e.getDevMessage());
+                    throw e;
                 } catch (CommonException e) {
                     e.printStackTrace();
                     //挂号失败。退款
