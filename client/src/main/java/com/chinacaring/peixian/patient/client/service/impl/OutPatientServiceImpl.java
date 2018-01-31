@@ -261,12 +261,6 @@ public class OutPatientServiceImpl implements OutPatientService {
             throw new CommonException("单据金额总和和总金额不匹配");
         }
 
-
-
-        //test
-        outpatientInfoRequest.setTotalCost("1");
-        //test
-
         outpatient.setCost(new BigDecimal(outpatientInfoRequest.getTotalCost()));
         outpatient.setPrescriptionNo(gson.toJson(prescriptions));
         outpatient.setCreateTime(new Date());
@@ -277,6 +271,12 @@ public class OutPatientServiceImpl implements OutPatientService {
 
         ChargeRequest chargeRequest = new ChargeRequest();
         chargeRequest.setAmount(totalCost);
+
+        //test
+        chargeRequest.setAmount(1);
+        //test
+
+        
         chargeRequest.setChannel(outpatientInfoRequest.getPayChannel());
         //订单信息 做处理
         chargeRequest.setSubject(Constant.CHARGE_SUBJECT_OUTPATIENT);
