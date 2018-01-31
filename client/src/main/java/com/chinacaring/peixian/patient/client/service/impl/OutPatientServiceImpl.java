@@ -245,6 +245,7 @@ public class OutPatientServiceImpl implements OutPatientService {
     @Override
     public Object createOutpatientOrder(OutpatientInfoRequest outpatientInfoRequest, User user) throws CommonException {
 
+
         Outpatient outpatient = BeanMapperUtil.map(outpatientInfoRequest, Outpatient.class);
         List<Prescription> prescriptions = outpatientInfoRequest.getPrescriptions();
         if (Objects.equals(prescriptions.size(), 0)) {
@@ -259,6 +260,13 @@ public class OutPatientServiceImpl implements OutPatientService {
         if (!Objects.equals(add, totalCost)) {
             throw new CommonException("单据金额总和和总金额不匹配");
         }
+
+
+
+        //test
+        outpatientInfoRequest.setTotalCost("1");
+        //test
+
         outpatient.setCost(new BigDecimal(outpatientInfoRequest.getTotalCost()));
         outpatient.setPrescriptionNo(gson.toJson(prescriptions));
         outpatient.setCreateTime(new Date());
