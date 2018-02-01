@@ -423,6 +423,9 @@ public class AppointmentServiceImpl implements AppointmentService {
 //                logger.info("获取挂号状态失败" + appointment.getRegisterId());
 //                continue;
 //            }
+            if (null == registerStatus) {
+                continue;
+            }
             switch (registerStatus) {
                 case Constant.REGISTER_STATUS_HIS_TUI_HAO:
                     canceled.add(appointmentRecord);
