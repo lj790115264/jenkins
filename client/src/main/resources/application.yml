@@ -58,10 +58,10 @@ zuul:
       path: /smart/**
       stripPrefix: false
       sensitiveHeaders: Access-Control-Allow-Origin
-      url: http://172.17.10.12:2233
+      url: http://172.17.10.10:2233
     sms:
       path: /sms/**
-      serviceId: http://172.17.10.12:8768
+      serviceId: http://172.17.10.10:8768
       stripPrefix: false
       sensitiveHeaders: Access-Control-Allow-Origin
   add-proxy-headers: true
