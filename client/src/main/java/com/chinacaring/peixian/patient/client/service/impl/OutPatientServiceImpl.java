@@ -256,9 +256,6 @@ public class OutPatientServiceImpl implements OutPatientService {
         Integer add = 0;
         Integer totalCost = Integer.valueOf(outpatientInfoRequest.getTotalCost());
 
-        //
-        totalCost = 1;
-        //
 
         for (Prescription prescription : prescriptions) {
             add += Integer.valueOf(prescription.getCost());
@@ -266,6 +263,10 @@ public class OutPatientServiceImpl implements OutPatientService {
         if (!Objects.equals(add, totalCost)) {
             throw new CommonException("单据金额总和和总金额不匹配");
         }
+
+        //
+        totalCost = 1;
+        //
 
         outpatient.setCost(new BigDecimal(outpatientInfoRequest.getTotalCost()));
         outpatient.setPrescriptionNo(gson.toJson(prescriptions));
