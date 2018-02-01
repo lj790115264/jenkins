@@ -234,7 +234,7 @@ public class OutPatientServiceImpl implements OutPatientService {
 //                prescriptionResponse.setDoctorName("普通号");
 //            }
             Double unitPrice = Double.valueOf(prescriptionResponse.getUnitPrice());
-            Double unitTotCost = Double.valueOf(prescriptionResponse.getNumber()) * unitPrice;
+            Double unitTotCost = Double.valueOf(prescriptionResponse.getTotCost());
             totCost += unitTotCost;
             prescriptionResponse.setTotCost(String.format("%.2f", unitTotCost));
             prescriptionResponse.setUnitPrice(String.format("%.2f", unitPrice));
@@ -383,9 +383,17 @@ public class OutPatientServiceImpl implements OutPatientService {
         ClinicPayment clinicPayment = BeanMapperUtil.map(outpatient, ClinicPayment.class);
         clinicPayment.setPayTime(outpatient.getCreateTime());
         clinicPayment.setTotalCost(df.format(outpatient.getCost().divide(new BigDecimal(100.0))));
-        String regDate = clinicPayment.getRegDate().split(" ")[0];
-        clinicPayment.setRegDate(regDate);
-        clinicPayment.setRefundCost(df.format(outpatient.getRefundCost().divide(new BigDecimal(100.0))));
+        String regDate = clinicPayment.getRegDate();
+        if (null != regDate) {
+            clinicPayment.setRegDate(regDate.split(" ")[0]);
+        }
+        BigDecimal refondCost = outpatient.getRefundCost();
+        if (null != refondCost) {
+            clinicPayment.setRefundCost(df.format(refondCost.divide(new BigDecimal(100.0))));
+        } else {
+            clinicPayment.setRefundCost("0.0");
+        }
+
         return clinicPayment;
     }
 

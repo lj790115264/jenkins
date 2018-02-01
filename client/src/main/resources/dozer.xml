@@ -300,11 +300,7 @@
             <b>amount</b>
         </field>
         <field>
-            <a>units</a>
-            <b>unitPrice</b>
-        </field>
-        <field>
-            <a>totalcosts</a>
+            <a>realpayfee</a>
             <b>totalCost</b>
         </field>
         <field>

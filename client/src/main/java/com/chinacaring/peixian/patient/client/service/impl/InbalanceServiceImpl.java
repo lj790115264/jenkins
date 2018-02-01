@@ -177,6 +177,26 @@ public class InbalanceServiceImpl implements InbalanceService {
 
     }
 
+    boolean compareTime(String beginTime, String endTime) {
+        if (null == beginTime) {
+            return false;
+        }
+        if (null == endTime) {
+            return true;
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        try {
+            Date beginDate = sdf.parse(beginTime);
+            Date endDate = sdf.parse(endTime);
+            if (beginDate.compareTo(endDate) == -1) {
+                return false;
+            }
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     @Override
     public InbalanceResponse getInbalance(String name, String idCard) throws CommonException {
 
@@ -191,7 +211,7 @@ public class InbalanceServiceImpl implements InbalanceService {
             throw new SoapException("暂无住院数据", soap.getResult().getReturnDesc(), name + "-" + idCard + "-" + "ALL");
         }
         List<QueryInMainInfo> queryInMainInfos = soap.getData().getQueryInMainInfo().stream()
-                .filter(item -> null ==item.getOUTHOSPITALDATE()).collect(Collectors.toList());
+                .filter(item -> compareTime(item.getINHOSPITALDATE(), item.getOUTHOSPITALDATE())).collect(Collectors.toList());
 
         if (queryInMainInfos.size() == 0) {
             throw new SoapException("暂无住院数据!!", "出院时间不为null的去掉后没有了", name + "-" + idCard + "-" + "ALL");
@@ -287,6 +307,10 @@ public class InbalanceServiceImpl implements InbalanceService {
                 .getQueryInMainMxInfo(), InpatientBillResponse.class);
         for (InpatientBillResponse inpatientBillResponse : inpatientBillResponses) {
             inpatientBillResponse.setDate(ValidateUtils.soapTime(inpatientBillResponse.getDate(), "yyyy-MM-dd"));
+            if (0.0 != inpatientBillResponse.getAmount()) {
+                inpatientBillResponse.setUnitPrice(Double.valueOf(inpatientBillResponse.getTotalCost()) /
+                        Double.valueOf(inpatientBillResponse.getAmount()));
+            }
         }
         DecimalFormat df = new DecimalFormat("#0.00");
         InpatientBillTotalResponse totalResponse = new InpatientBillTotalResponse();
