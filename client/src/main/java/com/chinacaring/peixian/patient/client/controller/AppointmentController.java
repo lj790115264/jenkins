@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
+import java.util.concurrent.ExecutionException;
 
 @RestController
 public class AppointmentController {
@@ -47,7 +48,7 @@ public class AppointmentController {
 
     @ApiOperation("挂号记录")
     @GetMapping("/register/{patient_code}")
-    public Object getAppointmentRecords(@PathVariable("patient_code") String patientCode ,@CurrentUser User user) throws CommonException {
+    public Object getAppointmentRecords(@PathVariable("patient_code") String patientCode ,@CurrentUser User user) throws CommonException, ExecutionException, InterruptedException {
         return new Result<>(appointmentService.getAppointRecords(patientCode, user));
     }
 

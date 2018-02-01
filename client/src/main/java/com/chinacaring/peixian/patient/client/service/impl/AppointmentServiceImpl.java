@@ -1,6 +1,7 @@
 package com.chinacaring.peixian.patient.client.service.impl;
 
 import com.chinacaring.common.exception.CommonException;
+import com.chinacaring.peixian.patient.client.async.AppointRecord;
 import com.chinacaring.peixian.patient.client.config.Constant;
 import com.chinacaring.peixian.patient.client.dao.entity.Appointment;
 import com.chinacaring.peixian.patient.client.dao.entity.Orders;
@@ -46,6 +47,8 @@ import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 import java.util.logging.Logger;
 
 @Service
@@ -70,6 +73,9 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Autowired
     private QuyiServiceNo service;
+
+    @Autowired
+    private AppointRecord appointRecord;
 
     private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -350,7 +356,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 //    }
 
     @Override
-    public AppointmentRecordsResponse getAppointRecords(String patientCode, User user) throws CommonException {
+    public AppointmentRecordsResponse getAppointRecords(String patientCode, User user) throws CommonException, ExecutionException, InterruptedException {
 
         Sort sort = new Sort(Sort.Direction.DESC, "id");
         List<Appointment> appointments = appointmentRepository
@@ -362,8 +368,25 @@ public class AppointmentServiceImpl implements AppointmentService {
         List<AppointmentRecord> canceled = new ArrayList<>();
 
         DecimalFormat df = new DecimalFormat("#0.00");
+        List<Future<String>> futures = new ArrayList<>();
         for (Appointment appointment : appointments) {
-
+            futures.add(appointRecord.state(appointment));
+        }
+        while (true) {
+            boolean tag = true;
+            for (Future future: futures) {
+                if (!future.isDone()) {
+                    tag = false;
+                    break;
+                }
+            }
+            Thread.sleep(3);
+            if (tag) {
+                break;
+            }
+        }
+        for (int i = 0; i < appointments.size(); i++) {
+            Appointment appointment = appointments.get(i);
             AppointmentRecord appointmentRecord = new AppointmentRecord();
             appointmentRecord.setId(appointment.getId());
             appointmentRecord.setState(String.valueOf(appointment.getRegState()));
@@ -380,26 +403,26 @@ public class AppointmentServiceImpl implements AppointmentService {
             appointmentRecord.setSeeNo(seeNo);
             appointmentRecord.setDeptName(appointment.getDeptName());
             appointmentRecord.setAppointmentTime(appointment.getAppointmentTime());
-            String registerStatus;
-            try {
-                String soap = service.getQuyiServiceNoSoap().getRegState(appointment.getRegisterId());
-                GetRegStateSoap regSoap;
-                try {
-                    regSoap = JaxbXmlUtil.convertToJavaBean(soap, GetRegStateSoap.class);
-                    registerStatus = regSoap.getData().getGetRegState().getState();
-                } catch (Exception e) {
-                    throw new SoapException("获取挂号状态失败", soap, appointment.getRegisterId());
-                }
-
-                if (!Objects.equals(Constant.RETURN_CODE_SUCCESS, regSoap.getResult().getReturnCode())) {
-                    throw new SoapException("获取挂号状态失败", regSoap.getResult().getReturnDesc(), appointment
-                            .getRegisterId());
-                }
-
-            } catch (CommonException e) {
-                logger.info("获取挂号状态失败" + appointment.getRegisterId());
-                continue;
-            }
+            String registerStatus = futures.get(i).get();
+//            try {
+//                String soap = service.getQuyiServiceNoSoap().getRegState(appointment.getRegisterId());
+//                GetRegStateSoap regSoap;
+//                try {
+//                    regSoap = JaxbXmlUtil.convertToJavaBean(soap, GetRegStateSoap.class);
+//                    registerStatus = regSoap.getData().getGetRegState().getState();
+//                } catch (Exception e) {
+//                    throw new SoapException("获取挂号状态失败", soap, appointment.getRegisterId());
+//                }
+//
+//                if (!Objects.equals(Constant.RETURN_CODE_SUCCESS, regSoap.getResult().getReturnCode())) {
+//                    throw new SoapException("获取挂号状态失败", regSoap.getResult().getReturnDesc(), appointment
+//                            .getRegisterId());
+//                }
+//
+//            } catch (CommonException e) {
+//                logger.info("获取挂号状态失败" + appointment.getRegisterId());
+//                continue;
+//            }
             switch (registerStatus) {
                 case Constant.REGISTER_STATUS_HIS_TUI_HAO:
                     canceled.add(appointmentRecord);

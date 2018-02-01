@@ -11,6 +11,7 @@ import com.chinacaring.peixian.patient.client.wsdl.reponse.insert_booking.Insert
 import com.chinacaring.user.dao.entity.User;
 
 import java.text.ParseException;
+import java.util.concurrent.ExecutionException;
 
 public interface AppointmentService {
 
@@ -23,6 +24,6 @@ public interface AppointmentService {
     //判断挂号是否成功 （向his回写成功？）
     Object getRegisterStatus(Integer id) throws CommonException;
 
-    AppointmentRecordsResponse getAppointRecords(String patientCode, User user) throws CommonException;
+    AppointmentRecordsResponse getAppointRecords(String patientCode, User user) throws CommonException, ExecutionException, InterruptedException;
 
 }
