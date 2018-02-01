@@ -13,6 +13,8 @@ public class InbalanceResponse {
     private String deptName;
 
     private String inhosTime;
+
+    //押金余额，不做
     private String inbalance;
 
 }

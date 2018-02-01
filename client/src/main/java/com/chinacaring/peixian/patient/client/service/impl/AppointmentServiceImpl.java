@@ -380,12 +380,13 @@ public class AppointmentServiceImpl implements AppointmentService {
             appointmentRecord.setSeeNo(seeNo);
             appointmentRecord.setDeptName(appointment.getDeptName());
             appointmentRecord.setAppointmentTime(appointment.getAppointmentTime());
+            String registerStatus;
             try {
                 String soap = service.getQuyiServiceNoSoap().getRegState(appointment.getRegisterId());
                 GetRegStateSoap regSoap;
                 try {
                     regSoap = JaxbXmlUtil.convertToJavaBean(soap, GetRegStateSoap.class);
-                    appointmentRecord.setState(regSoap.getData().getGetRegState().getState());
+                    registerStatus = regSoap.getData().getGetRegState().getState();
                 } catch (Exception e) {
                     throw new SoapException("获取挂号状态失败", soap, appointment.getRegisterId());
                 }
@@ -399,7 +400,7 @@ public class AppointmentServiceImpl implements AppointmentService {
                 logger.info("获取挂号状态失败" + appointment.getRegisterId());
                 continue;
             }
-            switch (appointmentRecord.getState()) {
+            switch (registerStatus) {
                 case Constant.REGISTER_STATUS_HIS_TUI_HAO:
                     canceled.add(appointmentRecord);
                     break;
