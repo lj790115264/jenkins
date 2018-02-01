@@ -255,6 +255,11 @@ public class OutPatientServiceImpl implements OutPatientService {
         //计算多个单据的总金额 是否等于 totCost
         Integer add = 0;
         Integer totalCost = Integer.valueOf(outpatientInfoRequest.getTotalCost());
+
+        //
+        totalCost = 1;
+        //
+
         for (Prescription prescription : prescriptions) {
             add += Integer.valueOf(prescription.getCost());
         }
@@ -272,11 +277,6 @@ public class OutPatientServiceImpl implements OutPatientService {
 
         ChargeRequest chargeRequest = new ChargeRequest();
         chargeRequest.setAmount(totalCost);
-
-        //test
-        chargeRequest.setAmount(1);
-        //test
-
 
         chargeRequest.setChannel(outpatientInfoRequest.getPayChannel());
         //订单信息 做处理
