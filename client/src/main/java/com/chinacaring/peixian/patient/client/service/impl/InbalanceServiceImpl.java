@@ -340,7 +340,7 @@ public class InbalanceServiceImpl implements InbalanceService {
             dateAndClasses.add(dateAndClass);
             totalSum = totalSum + dateSum;
         }
-
+        Collections.reverse(dateAndClasses);
         totalResponse.setTotalCost(df.format(totalSum));
         totalResponse.setBills(dateAndClasses);
         totalResponse.setDeptName(inbalanceResponse.getDeptName());
