@@ -21,7 +21,7 @@ public interface OutPatientService {
 
     Object createOutpatientOrder(OutpatientInfoRequest outpatientInfoRequest, User user) throws CommonException;
 
-    Object doOutpatientConfirm(String orderNo) throws CommonException;
+    Boolean doOutpatientConfirm(String orderNo) throws CommonException;
 
     Object getOutpatientStatus(Integer id) throws CommonException;
 

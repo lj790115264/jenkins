@@ -251,8 +251,12 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public Object doRegister(String orderNo) throws CommonException {
+    public Boolean doRegister(String orderNo) throws CommonException {
         Appointment appointment = appointmentRepository.findOneByOrderNo(orderNo);
+
+        if (!Constant.ORDERS_NOT_PAY.equals(appointment.getPayState())) {
+            return false;
+        }
         //进入此方法时已经支付成功  设置状态为 已支付
         appointment.setPayState(Constant.ORDERS_PAID);
 

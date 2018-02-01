@@ -19,7 +19,7 @@ public interface AppointmentService {
 
     Object createAppointmentOrder(AppointmentInfoRequest appointmentInfoRequest, User user) throws CommonException, ParseException;
 
-    Object doRegister(String orderNo) throws CommonException;
+    Boolean doRegister(String orderNo) throws CommonException;
 
     //判断挂号是否成功 （向his回写成功？）
     Object getRegisterStatus(Integer id) throws CommonException;

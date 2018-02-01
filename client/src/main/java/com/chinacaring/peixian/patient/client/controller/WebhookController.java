@@ -115,8 +115,12 @@ public class WebhookController {
             case Constant.ORDERS_APPOINTMENT:
 
                 try {
-                    appointmentService.doRegister(orderNo);
-                    logger.info(orderNo + "挂号成功");
+                    boolean tag = (Boolean) appointmentService.doRegister(orderNo);
+                    if (tag) {
+                        logger.info(orderNo + "挂号成功");
+                    } else {
+                        logger.error("异常重复操作该订单");
+                    }
 
                 } catch (SoapException e) {
                     logger.error("------------------------------");
@@ -138,8 +142,12 @@ public class WebhookController {
             //门诊缴费
             case Constant.ORDERS_CLINIC:
                 try {
-                    outPatientService.doOutpatientConfirm(orderNo);
-                    logger.info(orderNo + "门诊确认成功");
+                    boolean tag = outPatientService.doOutpatientConfirm(orderNo);
+                    if (tag) {
+                        logger.info(orderNo + "门诊确认成功");
+                    } else {
+                        logger.error("异常重复操作该订单");
+                    }
                 } catch (SoapException e) {
                     logger.error("------------------------------");
                     logger.error("argument:" + e.getArguments());

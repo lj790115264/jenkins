@@ -318,13 +318,18 @@ public class OutPatientServiceImpl implements OutPatientService {
     }
 
     @Override
-    public Object doOutpatientConfirm(String orderNo) throws CommonException {
+    public Boolean doOutpatientConfirm(String orderNo) throws CommonException {
 
         List<Outpatient> outpatients = outpatientRepository.findByOrderNo(orderNo);
         if (Objects.isNull(outpatients) || outpatients.isEmpty() || outpatients.size() > 1) {
             throw new CommonException("orderNo不存在或者不唯一");
         }
         Outpatient outpatient = outpatients.get(0);
+
+        if (!Constant.ORDERS_NOT_PAY.equals(outpatient.getPayState())) {
+            return false;
+        }
+
         //进入此方法时已经支付成功  设置状态为 已支付
         outpatient.setPayState(Constant.ORDERS_PAID);
         outpatientRepository.saveAndFlush(outpatient);
