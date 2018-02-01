@@ -13,7 +13,7 @@ spring:
     name: peixian-patient
   cloud:
     consul:
-      host: ${consul.host:121.196.219.153}
+      host: ${consul.host:101.132.74.234}
       port: ${consul.port:8500}
       discovery:
 #        healthCheckPath: ${management.contextPath}/health
