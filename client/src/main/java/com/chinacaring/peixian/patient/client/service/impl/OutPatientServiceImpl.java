@@ -265,7 +265,7 @@ public class OutPatientServiceImpl implements OutPatientService {
         }
 
         //
-        totalCost = 1;
+//        totalCost = 1;
         //
 
         outpatient.setCost(new BigDecimal(outpatientInfoRequest.getTotalCost()));
