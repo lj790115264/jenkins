@@ -1,10 +1,12 @@
 package com.chinacaring.peixian.patient.client.service.impl;
 
 import com.chinacaring.peixian.patient.client.config.Constant;
+import com.chinacaring.peixian.patient.client.dto.front.response.CheckList;
 import com.chinacaring.peixian.patient.client.dto.front.response.CheckResponse;
 import com.chinacaring.peixian.patient.client.exception.MyException;
 import com.chinacaring.peixian.patient.client.exception.SoapException;
 import com.chinacaring.peixian.patient.client.service.CheckService;
+import com.chinacaring.peixian.patient.client.utils.ListUtils;
 import com.chinacaring.peixian.patient.client.utils.ValidateUtils;
 import com.chinacaring.peixian.patient.client.wsdl.reponse.pacs_resultinfo.PacsResultInfo;
 import com.chinacaring.peixian.patient.client.wsdl.reponse.pacs_resultinfo.PacsResultInfoSoap;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @Service
@@ -52,7 +55,20 @@ public class CheckServiceImpl implements CheckService {
             response.setCheckId(department.getCheckserialnum());
             responseList.add(response);
         }
+        ListUtils<CheckResponse> listUtils = new ListUtils<>(responseList);
 
-        return responseList;
+        Map<String, List<CheckResponse>> map = listUtils.groupBy(CheckResponse.class,
+                "getCheckId");
+
+        List<CheckList> checkLists = new ArrayList<>();
+        for (List<CheckResponse> list: map.values()) {
+            CheckList checkList = new CheckList();
+            checkList.setDetail(list);
+            checkList.setCheckId(list.get(0).getCheckId());
+            checkList.setScription(list.get(0).getScription());
+            checkList.setTime(list.get(0).getTime());
+            checkLists.add(checkList);
+        }
+        return checkLists;
     }
 }
