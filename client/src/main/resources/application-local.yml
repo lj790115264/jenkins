@@ -3,7 +3,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     username: ${mysql.username:root}
     password: ${mysql.password:chinacaring}
-    url: jdbc:mysql://${mysql.host:192.168.1.161}:${mysql.port:3306}/peixian-patient?characterEncoding=utf8
+    url: jdbc:mysql://${mysql.host:101.132.74.234}:${mysql.port:3306}/peixian-patient?characterEncoding=utf8
 
 # JWT
 jwt:
@@ -16,6 +16,8 @@ jwt:
       path: "session"
       refresh: "session"
       register: "user"
-  allowPath: /sms/**,/dept,/doctor,/schedule/**,/baseinfo/**,/session/**,/user,/swagger-resources/**,/webhooks/**,/session/**,/user/**,/v2/**,/swagger-resources/**,/webjars/**,/health/**,/info/**,/img/**,/third-party/**,/api/**,/admin/**,/trace/**,/applications/**,/env/**,/dump/**,/logfile/**,/metrics/**,/loggers/**,/jolokia/**,/refresh/**,/heapdump/**,/flyway/**,/liquibase/**,/auditevents/**,/danger/**,/depts,/prices,/price,/schedule/**,/message_wechat/**,/test/**,/alipay/form/**
+  allowPath: /smart**,/sms/**,/dept,/doctor,/schedule/**,/baseinfo/**,/session/**,/user,/swagger-resources/**,/webhooks/**,/session/**,/user/**,/v2/**,/swagger-resources/**,/webjars/**,/health/**,/info/**,/img/**,/third-party/**,/api/**,/admin/**,/trace/**,/applications/**,/env/**,/dump/**,/logfile/**,/metrics/**,/loggers/**,/jolokia/**,/refresh/**,/heapdump/**,/flyway/**,/liquibase/**,/auditevents/**,/danger/**,/depts,/prices,/price,/schedule/**,/message_wechat/**,/test/**,/alipay/form/**
 host:
   address: 172.17.10.17
+logging:
+  level: error
