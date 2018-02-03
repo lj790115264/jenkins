@@ -2,6 +2,7 @@ package com.chinacaring.peixian.patient.client.service;
 
 import com.chinacaring.common.exception.CommonException;
 import com.chinacaring.peixian.patient.client.dto.front.response.ExamineDetailResponseWithSortCode;
+import com.chinacaring.peixian.patient.client.dto.front.response.ExamineList;
 
 import java.text.ParseException;
 import java.util.List;
@@ -13,6 +14,6 @@ import java.util.List;
  */
 public interface ExamineService {
 
-    List<ExamineDetailResponseWithSortCode> getExamine(String regNo, String beginTime, String endTime) throws ParseException, CommonException;
+    List<ExamineList> getExamine(String regNo, String beginTime, String endTime) throws ParseException, CommonException;
 
 }

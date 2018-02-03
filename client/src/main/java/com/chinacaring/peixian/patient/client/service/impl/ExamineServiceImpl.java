@@ -3,9 +3,11 @@ package com.chinacaring.peixian.patient.client.service.impl;
 import com.chinacaring.common.exception.CommonException;
 import com.chinacaring.peixian.patient.client.config.Constant;
 import com.chinacaring.peixian.patient.client.dto.front.response.ExamineDetailResponseWithSortCode;
+import com.chinacaring.peixian.patient.client.dto.front.response.ExamineList;
 import com.chinacaring.peixian.patient.client.exception.MyException;
 import com.chinacaring.peixian.patient.client.exception.SoapException;
 import com.chinacaring.peixian.patient.client.service.ExamineService;
+import com.chinacaring.peixian.patient.client.utils.ListUtils;
 import com.chinacaring.peixian.patient.client.utils.ValidateUtils;
 import com.chinacaring.peixian.patient.client.wsdl.reponse.lis_resultinfo.LisResultInfo;
 import com.chinacaring.peixian.patient.client.wsdl.reponse.lis_resultinfo.LisResultInfoSoap;
@@ -17,6 +19,7 @@ import org.springframework.stereotype.Service;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -31,7 +34,7 @@ public class ExamineServiceImpl implements ExamineService {
     private QuyiServiceNo service;
 
     @Override
-    public List<ExamineDetailResponseWithSortCode> getExamine(String regNo, String beginTime, String endTime) throws ParseException, CommonException {
+    public List<ExamineList> getExamine(String regNo, String beginTime, String endTime) throws ParseException, CommonException {
 
         String result = service.getQuyiServiceNoSoap().getLisResultInfo(regNo, beginTime, endTime);
         LisResultInfoSoap soap;
@@ -53,6 +56,7 @@ public class ExamineServiceImpl implements ExamineService {
             ExamineDetailResponseWithSortCode examineResponse = new ExamineDetailResponseWithSortCode();
             examineResponse.setName(departMent.getHisitemnamelist());
             examineResponse.setExamine_code(departMent.getBarcode());
+            examineResponse.setItemName(departMent.getItemname());
             if (null != departMent.getAccepttime()) {
                 examineResponse.setReportTime((ValidateUtils.soapTime(departMent.getAccepttime())));
             }
@@ -79,7 +83,22 @@ public class ExamineServiceImpl implements ExamineService {
             examineResponses.add(examineResponse);
         }
 
-        return examineResponses;
+        ListUtils<ExamineDetailResponseWithSortCode> listUtils = new ListUtils<>(examineResponses);
+
+        Map<String, List<ExamineDetailResponseWithSortCode>> map = listUtils.groupBy(ExamineDetailResponseWithSortCode.class,
+                "getExamine_code");
+
+        List<ExamineList> examineListList = new ArrayList<>();
+        for (List<ExamineDetailResponseWithSortCode> list: map.values()) {
+            ExamineList examineList = new ExamineList();
+            examineList.setDetail(list);
+            examineList.setExamine_code(list.get(0).getExamine_code());
+            examineList.setName(list.get(0).getName());
+            examineList.setReport_time(list.get(0).getReportTime());
+            examineListList.add(examineList);
+        }
+
+        return examineListList;
     }
 
 //    @Override

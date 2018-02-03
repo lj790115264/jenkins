@@ -4,6 +4,7 @@ import com.chinacaring.common.dto.response.ExamineResponse;
 import com.chinacaring.common.exception.CommonException;
 import com.chinacaring.common.vo.Result;
 import com.chinacaring.peixian.patient.client.dto.front.response.ExamineDetailResponseWithSortCode;
+import com.chinacaring.peixian.patient.client.dto.front.response.ExamineList;
 import com.chinacaring.peixian.patient.client.service.ExamineService;
 import com.chinacaring.peixian.patient.client.utils.ValidateUtils;
 import io.swagger.annotations.Api;
@@ -39,7 +40,7 @@ public class ExamineController {
         beginTime = ValidateUtils.time(beginTime) + "000000";
         endTime = ValidateUtils.time(endTime) + "000000";
 
-        List<ExamineDetailResponseWithSortCode> examineResponses = examineService.getExamine(regNo, beginTime, endTime);
+        List<ExamineList> examineResponses = examineService.getExamine(regNo, beginTime, endTime);
         if (Objects.equals(0, examineResponses.size())){
             throw new CommonException("暂无相关记录");
         }

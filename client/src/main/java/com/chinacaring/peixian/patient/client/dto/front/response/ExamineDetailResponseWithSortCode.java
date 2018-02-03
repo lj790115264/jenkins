@@ -10,6 +10,15 @@ public class ExamineDetailResponseWithSortCode extends ExamineDetailResponse{
     private String reportTime;
     @JsonProperty(value = "status_code")
     private Integer statusCode;
+    private String itemName;
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
 
     public ExamineDetailResponseWithSortCode() {
     }
