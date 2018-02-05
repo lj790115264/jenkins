@@ -10,7 +10,7 @@ endpoints:
     sensitive: false
 spring:
   application:
-    name: peixian-patient
+    name: ${host.name:peixian-patient}
   cloud:
     consul:
       host: ${consul.host:101.132.74.234}
