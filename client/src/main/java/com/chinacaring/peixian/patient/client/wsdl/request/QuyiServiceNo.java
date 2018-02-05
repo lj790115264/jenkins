@@ -13,7 +13,8 @@ import java.net.URL;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "quyiServiceNo", targetNamespace = "http://tempuri.org/", wsdlLocation = "http://172.17.10.236/quyiService/quyiServiceNo.asmx?wsdl")
+// http://192.168.55.59/quyiServiceTest/quyiServiceNo.asmx
+@WebServiceClient(name = "quyiServiceNo", targetNamespace = "http://tempuri.org/", wsdlLocation = "http://172.17.10.236/quyiServiceTest/quyiServiceNo.asmx?wsdl")
 public class QuyiServiceNo
     extends Service
 {
@@ -26,7 +27,7 @@ public class QuyiServiceNo
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://172.17.10.236/quyiService/quyiServiceNo.asmx?wsdl");
+            url = new URL("http://172.17.10.236/quyiServiceTest/quyiServiceNo.asmx?wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }
