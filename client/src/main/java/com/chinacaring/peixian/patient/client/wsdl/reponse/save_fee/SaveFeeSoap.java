@@ -15,6 +15,7 @@ import javax.xml.bind.annotation.*;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="INVOICENO" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="WINDOWNAME" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="result" type="{}result" minOccurs="0"/>
  *         &lt;element name="Data" type="{}Data" minOccurs="0"/>
  *       &lt;/sequence>
@@ -28,6 +29,7 @@ import javax.xml.bind.annotation.*;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SaveFeeSoap", propOrder = {
     "invoiceno",
+    "windowname",
     "result",
     "data"
 })
@@ -36,6 +38,8 @@ public class SaveFeeSoap {
 
     @XmlElement(name = "INVOICENO")
     protected String invoiceno;
+    @XmlElement(name = "WINDOWNAME")
+    protected String windowname;
     protected Result result;
     @XmlElement(name = "Data")
     protected Data data;
@@ -62,6 +66,30 @@ public class SaveFeeSoap {
      */
     public void setINVOICENO(String value) {
         this.invoiceno = value;
+    }
+
+    /**
+     * 获取windowname属性的值。
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getWINDOWNAME() {
+        return windowname;
+    }
+
+    /**
+     * 设置windowname属性的值。
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setWINDOWNAME(String value) {
+        this.windowname = value;
     }
 
     /**

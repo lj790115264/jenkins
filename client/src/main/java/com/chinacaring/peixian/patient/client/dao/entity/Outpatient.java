@@ -85,4 +85,7 @@ public class Outpatient {
     private String regDate;
 
     private String patientName;
+
+    // 窗口名字
+    private String windowName;
 }

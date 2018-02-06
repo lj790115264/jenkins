@@ -40,4 +40,7 @@ public class ClinicPayment {
 
     //收据号
     private String receiptNo;
+
+    // 窗口名字
+    private String windowName;
 }

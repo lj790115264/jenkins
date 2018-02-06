@@ -3,7 +3,6 @@ package com.chinacaring.peixian.patient.client.service.impl;
 import com.chinacaring.common.exception.CommonException;
 import com.chinacaring.peixian.patient.client.config.Constant;
 import com.chinacaring.peixian.patient.client.config.InterfaceName;
-import com.chinacaring.peixian.patient.client.config.MyGlobalExceptionHandler;
 import com.chinacaring.peixian.patient.client.dao.entity.Orders;
 import com.chinacaring.peixian.patient.client.dao.entity.Outpatient;
 import com.chinacaring.peixian.patient.client.dao.repository.OrdersRepository;
@@ -11,19 +10,12 @@ import com.chinacaring.peixian.patient.client.dao.repository.OutpatientRepositor
 import com.chinacaring.peixian.patient.client.dto.front.request.*;
 import com.chinacaring.peixian.patient.client.dto.front.response.*;
 import com.chinacaring.peixian.patient.client.dto.front.response.payments.ClinicPayment;
-import com.chinacaring.peixian.patient.client.dto.his.request.clinicRecords.ClinicRecordsRequestHis;
 import com.chinacaring.peixian.patient.client.dto.his.request.outPatientMedicalRecords
         .OutpatientMedicalRecordsRequestHis;
 import com.chinacaring.peixian.patient.client.dto.his.request.outpatientConfirm.OutpatientConfirmRequestHis;
-import com.chinacaring.peixian.patient.client.dto.his.request.prescription.PrescriptionRequestHis;
-import com.chinacaring.peixian.patient.client.dto.his.request.unpaidOutpatient.UnpaidOutpatientRequestHis;
-import com.chinacaring.peixian.patient.client.dto.his.response.clinicRecords.ClinicRecordsResponseHis;
 import com.chinacaring.peixian.patient.client.dto.his.response.outPatientMedicalRecords.ItemType;
 import com.chinacaring.peixian.patient.client.dto.his.response.outPatientMedicalRecords
         .OutpatientMedicalRecordsResponseHis;
-import com.chinacaring.peixian.patient.client.dto.his.response.outpatientConfirm.OutpatientConfirmResponseHis;
-import com.chinacaring.peixian.patient.client.dto.his.response.prescription.PrescriptionResponseHis;
-import com.chinacaring.peixian.patient.client.dto.his.response.unpaidOutpatient.UnpaidOutpatientResponseHis;
 import com.chinacaring.peixian.patient.client.dto.pingpp.ChargeRequest;
 import com.chinacaring.peixian.patient.client.exception.MyException;
 import com.chinacaring.peixian.patient.client.exception.SoapException;
@@ -31,9 +23,6 @@ import com.chinacaring.peixian.patient.client.service.OutPatientService;
 import com.chinacaring.peixian.patient.client.utils.RequestUtil;
 import com.chinacaring.peixian.patient.client.wsdl.reponse.feelist_by_cliniccode.FeeTable;
 import com.chinacaring.peixian.patient.client.wsdl.reponse.feelist_by_cliniccode.GetFeeListSoap;
-import com.chinacaring.peixian.patient.client.wsdl.reponse.query_invoiceinfo.QueryInvoiceInfo;
-import com.chinacaring.peixian.patient.client.wsdl.reponse.query_invoiceinfo.QueryInvoiceInfoSoap;
-import com.chinacaring.peixian.patient.client.wsdl.reponse.query_invoicemxinfo.QueryInvoiceMxInfoSoap;
 import com.chinacaring.peixian.patient.client.wsdl.reponse.reginfo_by_cardno_or_name.RegSoap;
 import com.chinacaring.peixian.patient.client.wsdl.reponse.reginfo_by_cardno_or_name.RegTable;
 import com.chinacaring.peixian.patient.client.wsdl.reponse.save_fee.SaveFeeSoap;
@@ -181,22 +170,22 @@ public class OutPatientServiceImpl implements OutPatientService {
             GetFeeListSoap mxSoap;
             try {
                 mxSoap = JaxbXmlUtil.convertToJavaBean(mxRes, GetFeeListSoap.class);
-                if (!Objects.equals(Constant.RETURN_CODE_SUCCESS, mxSoap.getResult().getReturnCode())) {
-                    logger.error("-------------");
-                    logger.error("处方信息错误");
-                    logger.error(mxSoap.getResult().getReturnDesc());
-                    logger.error(item.getCLINICCODE() + "-0");
-                }
+//                if (!Objects.equals(Constant.RETURN_CODE_SUCCESS, mxSoap.getResult().getReturnCode())) {
+//                    logger.error("-------------");
+//                    logger.error("处方信息错误");
+//                    logger.error(mxSoap.getResult().getReturnDesc());
+//                    logger.error(item.getCLINICCODE() + "-0");
+//                }
                 // 如果有未缴费的处方的话，就把查询处方的门诊流水号添加进未缴费的里面
                 List<FeeTable> regTables = mxSoap.getData().getFeeTable();
                 if (null != regTables && !regTables.isEmpty()) {
                     unPayItemTypes.add(item);
                 }
             } catch (Exception e) {
-                logger.error("-------------");
-                logger.error("处方信息错误");
-                logger.error(mxRes);
-                logger.error(item.getCLINICCODE() + "-0");
+//                logger.error("-------------");
+//                logger.error("处方信息错误");
+//                logger.error(mxRes);
+//                logger.error(item.getCLINICCODE() + "-0");
             }
         }
 
@@ -339,43 +328,16 @@ public class OutPatientServiceImpl implements OutPatientService {
             outpatientConfirmResult = outpatientConfirm(outpatient);
             outpatient.setInvoiceNo(outpatientConfirmResult.getInvoiceNo());
             outpatient.setReceiptNo(outpatientConfirmResult.getReceiptNo());
+            outpatient.setWindowName(outpatientConfirmResult.getWindowName());
             outpatient.setConfirmState(Constant.OUTPATIENT_CONFIRM_SUCCESS);
             outpatientRepository.saveAndFlush(outpatient);
             return true;
         } catch (SoapException e) {
-            outpatient.setConfirmState(Constant.OUTPATIENT_CONFIRM_PARTLY_FAIL);
+            outpatient.setConfirmState(Constant.OUTPATIENT_CONFIRM_FAIL);
             outpatientRepository.saveAndFlush(outpatient);
             throw e;
         }
 
-//        //确认成功
-//        if (outpatientConfirmResult.getIsSuccess()) {
-//            receiptNo.add(outpatientConfirmResult.getReceiptNo());
-//            invoiceNo.add(outpatientConfirmResult.getInvoiceNo());
-//        } else {
-//            //确认失败
-//            refundFlag = true;
-//            refundCost = refundCost.add(new BigDecimal(fen));
-//            failConfirmedPrescription.add(outpatientConfirmResult.getPrescriptionNo());
-//        }
-//
-//        outpatient.setInvoiceNo(org.apache.commons.lang.StringUtils.join(invoiceNo, "|"));
-//        outpatient.setReceiptNo(org.apache.commons.lang.StringUtils.join(receiptNo, "|"));
-//        outpatient.setRefundCost(refundCost);
-//        String failpres = org.apache.commons.lang.StringUtils.join(failConfirmedPrescription, "|");
-//        outpatient.setFailConfirmedPrescription(failpres);
-//        outpatientRepository.saveAndFlush(outpatient);
-//
-//        if (refundFlag) {
-//            outpatient.setConfirmState(Constant.OUTPATIENT_CONFIRM_PARTLY_FAIL);
-//            outpatientRepository.saveAndFlush(outpatient);
-//            throw new CommonException("处方号：" + failpres + "确认失败");
-//        } else {
-//            outpatient.setConfirmState(Constant.OUTPATIENT_CONFIRM_SUCCESS);
-//            outpatientRepository.saveAndFlush(outpatient);
-//        }
-//
-//        return true;
     }
 
     @Override
@@ -438,6 +400,7 @@ public class OutPatientServiceImpl implements OutPatientService {
         outpatientConfirmResult.setInvoiceNo(soap.getData().getSaveFeeSoap().getINVOICENO());
         outpatientConfirmResult.setReceiptNo(soap.getData().getSaveFeeSoap().getINVOICENO());
         outpatientConfirmResult.setPrescriptionNo(prescriptionCollection);
+        outpatientConfirmResult.setWindowName(soap.getData().getSaveFeeSoap().getWINDOWNAME());
         outpatientConfirmResult.setIsSuccess(true);
         outpatientConfirmResult.setCost(fen + "");
 
@@ -452,6 +415,7 @@ public class OutPatientServiceImpl implements OutPatientService {
         private String cost;
         private String invoiceNo;
         private String receiptNo;
+        private String windowName;
     }
 }
 

@@ -42,7 +42,6 @@ spring:
         show_sql: false
   profiles:
     active: local
-
 ribbon:
   ConnectTimeout: 60000
   ReadTimeout: 600000
