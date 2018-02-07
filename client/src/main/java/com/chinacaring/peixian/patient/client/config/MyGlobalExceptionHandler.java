@@ -35,7 +35,7 @@ public class MyGlobalExceptionHandler extends GlobalExceptionHandler {
 
         logger.error("------------------------------");
         logger.error("exception:" + e.getDevMessage());
-        return new Result<>( 500, e.getDetailMessage(), e.getDevMessage(), null);
+        return new Result<>( 500, "暂时没有数据哦～", e.getDevMessage(), null);
     }
 
     @ExceptionHandler({SoapException.class})
@@ -44,6 +44,6 @@ public class MyGlobalExceptionHandler extends GlobalExceptionHandler {
         logger.error("------------------------------");
         logger.error("argument:" + e.getArguments());
         logger.error("exception:" + e.getDevMessage());
-        return new Result<>( 500, e.getDetailMessage(), e.getDevMessage(), null);
+        return new Result<>( 500, "暂时没有数据哦～", e.getDevMessage(), null);
     }
 }
