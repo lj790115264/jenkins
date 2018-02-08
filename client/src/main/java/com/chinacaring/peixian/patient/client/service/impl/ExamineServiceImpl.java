@@ -41,13 +41,13 @@ public class ExamineServiceImpl implements ExamineService {
         try {
             soap = JaxbXmlUtil.convertToJavaBean(result, LisResultInfoSoap.class);
         } catch (Exception e) {
-            throw new SoapException("检验无相关数据", result, regNo + "-" + beginTime + "-" + endTime);
+            throw new SoapException("暂时没有数据哦～", result, regNo + "-" + beginTime + "-" + endTime);
         }
 
         if (!Objects.equals(Constant.RETURN_CODE_SUCCESS, soap.getResult().getReturnCode())){
-            throw new SoapException("检验无相关数据", soap.getResult().getReturnDesc(), regNo + "-" + beginTime + "-" + endTime);
+            throw new SoapException("暂时没有数据哦～", soap.getResult().getReturnDesc(), regNo + "-" + beginTime + "-" + endTime);
         } else if (soap.getData().getLisResultInfo().isEmpty()){
-            throw new MyException("暂无相关数据", regNo + "-" + beginTime + "-" + endTime);
+            throw new MyException("暂时没有数据哦～", regNo + "-" + beginTime + "-" + endTime);
         }
 
         List<ExamineDetailResponseWithSortCode> examineResponses = new ArrayList<>();

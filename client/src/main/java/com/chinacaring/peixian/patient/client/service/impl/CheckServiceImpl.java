@@ -34,13 +34,13 @@ public class CheckServiceImpl implements CheckService {
         try {
             soap = JaxbXmlUtil.convertToJavaBean(res, PacsResultInfoSoap.class);
         } catch (Exception e) {
-            throw new SoapException("检查无相关数据", res, cardNo + "-" + beginDate + "-" + endDate);
+            throw new SoapException("暂时没有数据哦～", res, cardNo + "-" + beginDate + "-" + endDate);
         }
 
         if (!Objects.equals(Constant.RETURN_CODE_SUCCESS, soap.getResult().getReturnCode())){
-            throw new SoapException("检查无相关数据", soap.getResult().getReturnDesc(), cardNo + "-" + beginDate + "-" + endDate);
+            throw new SoapException("暂时没有数据哦～", soap.getResult().getReturnDesc(), cardNo + "-" + beginDate + "-" + endDate);
         } else if (soap.getData().getPacsResultInfo().isEmpty()){
-            throw new MyException("检查无相关数据", cardNo + "-" + beginDate + "-" + endDate);
+            throw new MyException("暂时没有数据哦～", cardNo + "-" + beginDate + "-" + endDate);
         }
         List<CheckResponse> responseList = new ArrayList<>();
         for (PacsResultInfo department: soap.getData().getPacsResultInfo()) {

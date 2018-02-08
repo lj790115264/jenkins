@@ -205,16 +205,16 @@ public class InbalanceServiceImpl implements InbalanceService {
         try {
             soap = JaxbXmlUtil.convertToJavaBean(res, QueryInMainInfoSoap.class);
         } catch (Exception e) {
-            throw new SoapException("暂无住院数据!!", res, name + "-" + idCard + "-" + "ALL");
+            throw new SoapException("暂时没有数据哦～", res, name + "-" + idCard + "-" + "ALL");
         }
         if (!Objects.equals(Constant.RETURN_CODE_SUCCESS, soap.getResult().getReturnCode())) {
-            throw new SoapException("暂无住院数据", soap.getResult().getReturnDesc(), name + "-" + idCard + "-" + "ALL");
+            throw new SoapException("暂时没有数据哦～", soap.getResult().getReturnDesc(), name + "-" + idCard + "-" + "ALL");
         }
         List<QueryInMainInfo> queryInMainInfos = soap.getData().getQueryInMainInfo().stream()
                 .filter(item -> compareTime(item.getINHOSPITALDATE(), item.getOUTHOSPITALDATE())).collect(Collectors.toList());
 
         if (queryInMainInfos.size() == 0) {
-            throw new SoapException("暂无住院数据!!", "出院时间不为null的去掉后没有了", name + "-" + idCard + "-" + "ALL");
+            throw new SoapException("暂时没有数据哦～", "出院时间不为null的去掉后没有了", name + "-" + idCard + "-" + "ALL");
         }
         QueryInMainInfo queryInMainInfo;
         // 如果不止一个出院日期为null ,取在院时间最近的。
@@ -263,7 +263,7 @@ public class InbalanceServiceImpl implements InbalanceService {
     public Object getInbalanceStatus(Integer id) throws CommonException {
         Inbalance inbalance = inbalanceRepository.findOne(id);
         if (Objects.isNull(inbalance)) {
-            throw new CommonException("暂无相关记录");
+            throw new CommonException("暂时没有数据哦～");
         }
 
         InbalancePayment inbalancePayment = new InbalancePayment();
@@ -293,13 +293,13 @@ public class InbalanceServiceImpl implements InbalanceService {
         try {
             soap = JaxbXmlUtil.convertToJavaBean(res, QueryInMainMxInfoSoap.class);
         } catch (Exception e) {
-            throw new SoapException("暂无在院患者费用记录", res, inbalanceResponse.getPatientId() + "-" + inbalanceResponse
+            throw new SoapException("暂时没有数据哦～", res, inbalanceResponse.getPatientId() + "-" + inbalanceResponse
                     .getInpatientSeq() + "-" +
                     inbalanceResponse.getInpatientNo());
         }
 
         if (!Objects.equals(Constant.RETURN_CODE_SUCCESS, soap.getResult().getReturnCode())) {
-            throw new SoapException("暂无在院患者费用记录", soap.getResult().getReturnDesc(), inbalanceResponse.getPatientId()
+            throw new SoapException("暂时没有数据哦～", soap.getResult().getReturnDesc(), inbalanceResponse.getPatientId()
                     + "-" + inbalanceResponse
                     .getInpatientSeq() + "-" + inbalanceResponse.getInpatientNo());
         }

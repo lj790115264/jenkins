@@ -147,12 +147,12 @@ public class OutPatientServiceImpl implements OutPatientService {
         try {
             soap = JaxbXmlUtil.convertToJavaBean(res, RegSoap.class);
         } catch (Exception e) {
-            throw new SoapException("暂无门诊缴费信息!!", res, unpaidOutpatientRequest.getPatientCode() + "-" +
+            throw new SoapException("暂时没有数据哦～", res, unpaidOutpatientRequest.getPatientCode() + "-" +
                     unpaidOutpatientRequest.getName());
         }
 
         if (!Objects.equals(Constant.RETURN_CODE_SUCCESS, soap.getResult().getReturnCode())) {
-            throw new SoapException("暂无门诊缴费信息!", soap.getResult().getReturnDesc(), unpaidOutpatientRequest
+            throw new SoapException("暂时没有数据哦～", soap.getResult().getReturnDesc(), unpaidOutpatientRequest
                     .getPatientCode() + "-" +
                     unpaidOutpatientRequest.getName());
         }
@@ -161,7 +161,7 @@ public class OutPatientServiceImpl implements OutPatientService {
         // 未缴费的门诊记录，初始化
         List<RegTable> unPayItemTypes = new ArrayList<>();
         if (Objects.isNull(itemTypes) || itemTypes.isEmpty()) {
-            throw new CommonException("暂无门诊记录");
+            throw new CommonException("暂时没有数据哦～");
         }
 
         for (RegTable item : itemTypes) {
@@ -204,11 +204,11 @@ public class OutPatientServiceImpl implements OutPatientService {
         try {
             mxSoap = JaxbXmlUtil.convertToJavaBean(mxRes, GetFeeListSoap.class);
         } catch (Exception e) {
-            throw new SoapException("暂无处方信息", mxRes, prescriptionRequest.getRegNO() + "-" + prescriptionRequest
+            throw new SoapException("暂时没有数据哦～", mxRes, prescriptionRequest.getRegNO() + "-" + prescriptionRequest
                     .getIsFee());
         }
         if (!Objects.equals(Constant.RETURN_CODE_SUCCESS, mxSoap.getResult().getReturnCode())) {
-            throw new SoapException("暂无处方信息", mxSoap.getResult().getReturnDesc(), prescriptionRequest.getRegNO() +
+            throw new SoapException("暂时没有数据哦～", mxSoap.getResult().getReturnDesc(), prescriptionRequest.getRegNO() +
                     "-" + prescriptionRequest.getIsFee());
         }
 
@@ -345,7 +345,7 @@ public class OutPatientServiceImpl implements OutPatientService {
 
         Outpatient outpatient = outpatientRepository.findOne(id);
         if (Objects.isNull(outpatient)) {
-            throw new CommonException("暂无相关记录");
+            throw new CommonException("暂时没有数据哦～");
         }
 
         ClinicPayment clinicPayment = BeanMapperUtil.map(outpatient, ClinicPayment.class);

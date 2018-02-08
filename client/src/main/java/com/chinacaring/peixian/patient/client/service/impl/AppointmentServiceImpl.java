@@ -92,18 +92,18 @@ public class AppointmentServiceImpl implements AppointmentService {
         try {
             shemaInfoSoap = JaxbXmlUtil.convertToJavaBean(soap, ShemaInfoSoap.class);
         } catch (Exception e) {
-            throw new SoapException("暂无排班信息", soap, scheduleRequest.getBeginTime() + "-" + scheduleRequest
+            throw new SoapException("暂时没有数据哦～", soap, scheduleRequest.getBeginTime() + "-" + scheduleRequest
                     .getEndTime() + "-" + scheduleRequest.getDeptCode());
         }
 
         if (!Objects.equals(Constant.RETURN_CODE_SUCCESS, shemaInfoSoap.getResult().getReturnCode())) {
-            throw new SoapException("暂无排班信息", shemaInfoSoap.getResult().getReturnDesc(), scheduleRequest.getBeginTime
+            throw new SoapException("暂时没有数据哦～", shemaInfoSoap.getResult().getReturnDesc(), scheduleRequest.getBeginTime
                     () + "-" + scheduleRequest.getEndTime() + "-" + scheduleRequest.getDeptCode());
         }
 
         List<ShemaInfo> shemaInfos = shemaInfoSoap.getData().getShemaInfo();
         if (shemaInfos.size() == 0) {
-            throw new SoapException("暂无排班信息", shemaInfoSoap.getResult().getReturnDesc(), scheduleRequest.getBeginTime
+            throw new SoapException("暂时没有数据哦～", shemaInfoSoap.getResult().getReturnDesc(), scheduleRequest.getBeginTime
                     () + "-" + scheduleRequest.getEndTime() + "-" + scheduleRequest.getDeptCode());
         }
         List<Schedule> schedules = BeanMapperUtil.mapList(shemaInfos, Schedule.class);

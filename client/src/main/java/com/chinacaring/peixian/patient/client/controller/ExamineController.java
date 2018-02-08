@@ -42,7 +42,7 @@ public class ExamineController {
 
         List<ExamineList> examineResponses = examineService.getExamine(regNo, beginTime, endTime);
         if (Objects.equals(0, examineResponses.size())){
-            throw new CommonException("暂无相关记录");
+            throw new CommonException("暂时没有数据哦～");
         }
         return new Result<>(examineResponses);
 

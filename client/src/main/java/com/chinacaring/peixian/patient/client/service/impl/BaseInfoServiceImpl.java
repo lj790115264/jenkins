@@ -38,7 +38,7 @@ public class BaseInfoServiceImpl implements BaseInfoService{
         String res = soap.getQuyiServiceNoSoap().getPatientCardNo1(name, null, idCard);
         GetPatientCardNo1Soap getPatientCardNo1Soap = JaxbXmlUtil.convertToJavaBean(res, GetPatientCardNo1Soap.class);
         if (!Objects.equals("1", getPatientCardNo1Soap.getResult().getReturnCode())){
-            throw new MyException("暂无相关信息", getPatientCardNo1Soap.getResult().getReturnDesc());
+            throw new MyException("暂时没有数据哦～", getPatientCardNo1Soap.getResult().getReturnDesc());
         }
         return getPatientCardNo1Soap.getData().getPatientCardNo1();
     }
@@ -61,7 +61,7 @@ public class BaseInfoServiceImpl implements BaseInfoService{
         DeptSoap deptSoap = JaxbXmlUtil.convertToJavaBean(soap, DeptSoap.class);
 
         if (!Objects.equals(Constant.RETURN_CODE_SUCCESS, deptSoap.getResult().getReturnCode())){
-            throw new CommonException("暂无相关信息");
+            throw new CommonException("暂时没有数据哦～");
         }
 
         List<Dept> depts = BeanMapperUtil.mapList(deptSoap.getData().getDept(), Dept.class);
