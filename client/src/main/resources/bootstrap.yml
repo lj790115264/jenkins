@@ -28,7 +28,3 @@ spring:
 feign:
   hystrix:
     enabled: true
-
-logging:
-  level: warn
-  file: ${spring.application.name}.log

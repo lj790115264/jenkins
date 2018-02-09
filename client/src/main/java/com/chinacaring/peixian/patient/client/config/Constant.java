@@ -79,12 +79,12 @@ public class Constant {
 
     //支付basic认证
     public static final String PAY_BASE64_STRING = "Basic cGF5OnBheWNhcmluZzIwMTc=";
-    public static final String PAY_URL =  "http://121.196.219.153:8780/charge";
-    public static final String REFUND_URL = "http://121.196.219.153:8780/refund";
+    public static final String PAY_URL =  "http://172.17.10.91:8780/charge";
+    public static final String REFUND_URL = "http://172.17.10.91:8780/refund";
 
     //企业号推送相关
     public static final String BASIC_HEADER_WECHAT_PUSH = "Basic d2VjaGF0cHVzaDp3ZWNoYXRwdXNoc2VjcmV0";
-    public static final String WECHAT_CP_NEWS_PUSH_URL = "http://121.196.219.153:8090/cp/news";
+    public static final String WECHAT_CP_NEWS_PUSH_URL = "http://172.17.10.91:8090/cp/news";
     public static final Integer AGENT_ID_TUI_KUAN_TONG_ZHI = 1000003;
     public static final Integer HOSPITAL_ID_CHU_ZHOU_YI_YUAN = 1204;
 
