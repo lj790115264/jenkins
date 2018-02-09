@@ -116,13 +116,13 @@ public class AppointmentServiceImpl implements AppointmentService {
             schedule.setBeginTime(ValidateUtils.soapTime(schedule.getBeginTime()));
             schedule.setEndTime(ValidateUtils.soapTime(schedule.getEndTime()));
 
-            if (Objects.equals(schedule.getSchemaType(), Constant.SHEEMA_TYPE_EXPERT)) {
+//            if (Objects.equals(schedule.getSchemaType(), Constant.SHEEMA_TYPE_EXPERT)) {
                 expert.add(schedule);
                 schedule.setSchemaType(Constant.SHEEMA_EXPERT);
-            } else {
-                normal.add(schedule);
-                schedule.setSchemaType(Constant.SHEEMA_COMMON);
-            }
+//            } else {
+//                normal.add(schedule);
+//                schedule.setSchemaType(Constant.SHEEMA_COMMON);
+//            }
         }
 
         return new ScheduleResponse(normal, expert);

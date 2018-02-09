@@ -22,9 +22,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
-public class BaseInfoServiceImpl implements BaseInfoService{
+public class BaseInfoServiceImpl implements BaseInfoService {
 
     @Autowired
     private DeptRepository deptRepository;
@@ -37,7 +38,7 @@ public class BaseInfoServiceImpl implements BaseInfoService{
 
         String res = soap.getQuyiServiceNoSoap().getPatientCardNo1(name, null, idCard);
         GetPatientCardNo1Soap getPatientCardNo1Soap = JaxbXmlUtil.convertToJavaBean(res, GetPatientCardNo1Soap.class);
-        if (!Objects.equals("1", getPatientCardNo1Soap.getResult().getReturnCode())){
+        if (!Objects.equals("1", getPatientCardNo1Soap.getResult().getReturnCode())) {
             throw new MyException("暂时没有数据哦～", getPatientCardNo1Soap.getResult().getReturnDesc());
         }
         return getPatientCardNo1Soap.getData().getPatientCardNo1();
@@ -48,7 +49,7 @@ public class BaseInfoServiceImpl implements BaseInfoService{
 
         String res = soap.getQuyiServiceNoSoap().insertPatientInfo(createProfileRequestHis.mixed());
         InsertPatientInfoSoap insertPatientInfoSoap = JaxbXmlUtil.convertToJavaBean(res, InsertPatientInfoSoap.class);
-        if (!Objects.equals("1", insertPatientInfoSoap.getResult().getReturnCode())){
+        if (!Objects.equals("1", insertPatientInfoSoap.getResult().getReturnCode())) {
             throw new MyException("操作失败", insertPatientInfoSoap.getResult().getReturnDesc());
         }
         return insertPatientInfoSoap.getData().getInsertPatientInfo();
@@ -60,11 +61,13 @@ public class BaseInfoServiceImpl implements BaseInfoService{
         String soap = no.getQuyiServiceNoSoap().getDeptInfo("ALL");
         DeptSoap deptSoap = JaxbXmlUtil.convertToJavaBean(soap, DeptSoap.class);
 
-        if (!Objects.equals(Constant.RETURN_CODE_SUCCESS, deptSoap.getResult().getReturnCode())){
+        if (!Objects.equals(Constant.RETURN_CODE_SUCCESS, deptSoap.getResult().getReturnCode())) {
             throw new CommonException("暂时没有数据哦～");
         }
 
-        List<Dept> depts = BeanMapperUtil.mapList(deptSoap.getData().getDept(), Dept.class);
+        List<Dept> depts = BeanMapperUtil.mapList(deptSoap.getData().getDept().stream().filter
+                        (item -> "1".equals(item.getVALIDSTATE()) && "1".equals(item.getREGFLAG()))
+                        .collect(Collectors.toList()), Dept.class);
         deptRepository.deleteAll();
         deptRepository.save(depts);
         return "ok";
@@ -73,7 +76,7 @@ public class BaseInfoServiceImpl implements BaseInfoService{
     @Override
     public Object getDepts() {
         List<Dept> depts = deptRepository.findByRegFlag(Constant.REG_FLAG_SHI_GUA_HAO_KE_SHI);
-        List<DeptResponse> res =  BeanMapperUtil.mapList(depts, DeptResponse.class);
+        List<DeptResponse> res = BeanMapperUtil.mapList(depts, DeptResponse.class);
         return res;
     }
 
