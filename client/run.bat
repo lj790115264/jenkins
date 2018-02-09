@@ -1,1 +1,1 @@
-java -jar api-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod >> log.txt
+java -jar api-0.0.1-SNAPSHOT.jar --spring.profiles.active=formal
