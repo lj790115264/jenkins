@@ -25,7 +25,7 @@ public class CheckController {
                                   @RequestParam("end_time") String endTime) throws CommonException, ParseException {
 
         beginTime = ValidateUtils.time(beginTime) + "000000";
-        endTime = ValidateUtils.time(endTime) + "000000";
+        endTime = ValidateUtils.time(endTime) + "235959";
         return new Result<>(checkService.getCheck(cardNo, beginTime, endTime));
     }
 

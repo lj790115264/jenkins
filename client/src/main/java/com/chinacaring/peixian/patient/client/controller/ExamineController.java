@@ -38,7 +38,7 @@ public class ExamineController {
                              @RequestParam("end_time") String endTime) throws ParseException, CommonException {
 
         beginTime = ValidateUtils.time(beginTime) + "000000";
-        endTime = ValidateUtils.time(endTime) + "000000";
+        endTime = ValidateUtils.time(endTime) + "235959";
 
         List<ExamineList> examineResponses = examineService.getExamine(regNo, beginTime, endTime);
         if (Objects.equals(0, examineResponses.size())){

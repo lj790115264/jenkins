@@ -29,7 +29,7 @@ public class AppointmentController {
                               @PathVariable("dept_code") String deptCode) throws CommonException, ParseException {
 
         beginTime = ValidateUtils.time(beginTime) + "000000";
-        endTime = ValidateUtils.time(endTime) + "000000";
+        endTime = ValidateUtils.time(endTime) + "235959";
 
         return new Result<>(appointmentService.getSchedule(new ScheduleRequest(beginTime, endTime, deptCode)));
     }
