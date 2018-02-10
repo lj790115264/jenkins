@@ -1,1 +1,1 @@
-java -jar api-0.0.1-SNAPSHOT.jar --spring.profiles.active=formal
+java -jar target/client-0.0.1-SNAPSHOT.jar --spring.profiles.active=formal
