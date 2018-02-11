@@ -27,13 +27,19 @@ import java.net.Proxy;
 public class ClientApplication {
 
 	@Bean(name = "proxy")
-	public RestTemplate restTemplate() {
+	public RestTemplate restTemplateProxy() {
 		SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
 
 		Proxy proxy= new Proxy(Proxy.Type.HTTP, new InetSocketAddress("172.17.10.89", 3128));
 		requestFactory.setProxy(proxy);
 
 		return new RestTemplate(requestFactory);
+	}
+
+	@Bean
+	public RestTemplate restTemplate() {
+
+		return new RestTemplate();
 	}
 
 	public static void main(String[] args) {

@@ -195,14 +195,14 @@ public class AppointmentServiceImpl implements AppointmentService {
         MediaType type = MediaType.parseMediaType("application/json; charset=UTF-8");
         httpHeaders.setContentType(type);
         httpHeaders.add("Authorization", Constant.PAY_BASE64_STRING);
-        httpHeaders.add("Proxy-Authorization", "Basic Y2FyaW5nOmNoaW5hY2FyaW5n");
+//        httpHeaders.add("Proxy-Authorization", "Basic Y2FyaW5nOmNoaW5hY2FyaW5n");
 
         String param = gson.toJson(chargeRequest);
         HttpEntity<String> httpEntity = null;
         String payResult = null;
         try {
             httpEntity = new HttpEntity<>(param, httpHeaders);
-            payResult = restTemplateProxy.postForObject(Constant.PAY_URL, httpEntity, String.class);
+            payResult = restTemplate.postForObject(Constant.PAY_URL, httpEntity, String.class);
         } catch (Exception e) {
             e.printStackTrace();
         }
