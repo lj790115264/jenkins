@@ -306,9 +306,7 @@ public class OutPatientServiceImpl implements OutPatientService {
         return new OrderResponse(outpatientWithId.getId(), payResult);
     }
 
-    @Override
-    public Boolean doOutpatientConfirm(String orderNo) throws CommonException {
-
+    synchronized Outpatient checkOrder(String orderNo) throws CommonException {
         List<Outpatient> outpatients = outpatientRepository.findByOrderNo(orderNo);
         if (Objects.isNull(outpatients) || outpatients.isEmpty() || outpatients.size() > 1) {
             throw new CommonException("orderNo不存在或者不唯一");
@@ -316,6 +314,16 @@ public class OutPatientServiceImpl implements OutPatientService {
         Outpatient outpatient = outpatients.get(0);
 
         if (!Constant.ORDERS_NOT_PAY.equals(outpatient.getPayState())) {
+            return null;
+        }
+        return outpatient;
+    }
+
+    @Override
+    public Boolean doOutpatientConfirm(String orderNo) throws CommonException {
+
+        Outpatient outpatient = checkOrder(orderNo);
+        if (null == outpatient) {
             return false;
         }
 

@@ -250,15 +250,25 @@ public class AppointmentServiceImpl implements AppointmentService {
         return insertBookingSoap;
     }
 
-    @Override
-    public Boolean doRegister(String orderNo) throws CommonException {
+    synchronized Appointment checkOrder(String orderNo) {
         Appointment appointment = appointmentRepository.findOneByOrderNo(orderNo);
-
         if (!Constant.ORDERS_NOT_PAY.equals(appointment.getPayState())) {
-            return false;
+            return null;
         }
         //进入此方法时已经支付成功  设置状态为 已支付
         appointment.setPayState(Constant.ORDERS_PAID);
+        appointmentRepository.saveAndFlush(appointment);
+        return appointment;
+    }
+
+
+    @Override
+    public  Boolean doRegister(String orderNo) throws CommonException {
+
+        Appointment appointment = checkOrder(orderNo);
+        if (null == appointment) {
+            return false;
+        }
 
         RegisterRequestHis registerRequestHis = BeanMapperUtil.map(appointment, RegisterRequestHis.class);
         registerRequestHis.setMedicare(false);
