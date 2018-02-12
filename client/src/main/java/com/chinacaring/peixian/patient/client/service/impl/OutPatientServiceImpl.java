@@ -309,7 +309,7 @@ public class OutPatientServiceImpl implements OutPatientService {
     synchronized Outpatient checkOrder(String orderNo) throws CommonException {
         List<Outpatient> outpatients = outpatientRepository.findByOrderNo(orderNo);
         if (Objects.isNull(outpatients) || outpatients.isEmpty() || outpatients.size() > 1) {
-            throw new CommonException("orderNo不存在或者不唯一");
+            return null;
         }
         Outpatient outpatient = outpatients.get(0);
 
