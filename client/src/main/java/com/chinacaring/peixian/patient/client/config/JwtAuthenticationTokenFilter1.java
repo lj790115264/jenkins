@@ -34,6 +34,8 @@ public class JwtAuthenticationTokenFilter1 extends OncePerRequestFilter {
 
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
         Long time2 = System.currentTimeMillis();
+        System.out.println("------------------------");
+        System.out.println("------------------------");
         logger.error(String.valueOf(time2));
 
         chain.doFilter(request, response);
