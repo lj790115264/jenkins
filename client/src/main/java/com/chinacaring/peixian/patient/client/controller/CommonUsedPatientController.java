@@ -48,11 +48,7 @@ public class CommonUsedPatientController {
     @ApiOperation("查询常用就诊人")
     @GetMapping("/patient")
     public Object getCommonUsedPatient(@CurrentUser User user) throws CommonException {
-        Long time = System.currentTimeMillis();
         List<CommonUsedPatientResponse> list = commonUsedPatientService.getCommonUsedPatient(user);
-        Long time2 = System.currentTimeMillis();
-        logger.error(String.valueOf(time));
-        logger.error(String.valueOf(time2));
         return new Result<>(list);
 
     }
