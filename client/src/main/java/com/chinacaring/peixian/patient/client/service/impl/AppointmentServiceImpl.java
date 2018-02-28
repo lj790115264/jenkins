@@ -249,7 +249,9 @@ public class AppointmentServiceImpl implements AppointmentService {
         } catch (Exception e) {
             throw new SoapException("预约号失败", soap, appointmentRequestHis.mixed());
         }
-
+        if (null == insertBookingSoap) {
+            throw new SoapException("预约号失败", soap, appointmentRequestHis.mixed());
+        }
         if (!Objects.equals(Constant.RETURN_CODE_SUCCESS, insertBookingSoap.getResult().getReturnCode())) {
             throw new SoapException("预约号失败", insertBookingSoap.getResult().getReturnDesc(), appointmentRequestHis
                     .mixed());
