@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <configuration>
-    <!--<appender name="consoleLog" class="ch.qos.logback.core.ConsoleAppender">-->
-        <!--<layout class="ch.qos.logback.classic.PatternLayout">-->
-            <!--<pattern>%d - %msg%n</pattern>-->
-        <!--</layout>-->
-    <!--</appender>-->
+    <appender name="consoleLog" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%d - %msg%n</pattern>
+        </layout>
+    </appender>
     <appender name="fileInfoLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>INFO</level>
@@ -20,6 +20,6 @@
     </appender>
     <root level="info">
         <appender-ref ref="fileInfoLog" />
-        <!--<appender-ref ref="consoleLog" />-->
+        <appender-ref ref="consoleLog" />
     </root>
 </configuration>
