@@ -52,6 +52,8 @@ public class Appointment {
     //预约时间
     private Date appointmentTime;
 
+    private Date showTime;
+
     //午别 1 ：表示上午 2 ：表示下午
     private String noonCode;
 

@@ -54,6 +54,11 @@ public class CommonUsedPatientServiceImpl implements CommonUsedPatientService {
         //身份证大写
         String idCard = commonUsedPatientRequest.getIdCard().toUpperCase();
         commonUsedPatientRequest.setIdCard(idCard);
+        String userName = commonUsedPatientRequest.getName();
+
+        if (userName.length() > 8) {
+            throw new CommonException("姓名不能超过8位");
+        }
 
         if (!PhoneUtils.isPhoneLegal(phone)){
             throw new CommonException("电话号码格式有误");

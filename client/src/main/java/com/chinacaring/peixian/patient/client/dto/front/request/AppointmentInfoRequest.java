@@ -23,6 +23,8 @@ public class AppointmentInfoRequest {
     //预约时间
     private String appointmentTime;
 
+    private String showTime;
+
     //午别 1 ：表示上午 2 ：表示下午
     private String noonCode;
 

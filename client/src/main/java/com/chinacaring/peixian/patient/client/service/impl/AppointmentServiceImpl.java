@@ -160,6 +160,14 @@ public class AppointmentServiceImpl implements AppointmentService {
         //转换时间
         appointment.setRegisterLevelName(appointmentInfoRequest.getRegisterLevelName());
         appointment.setAppointmentTime(sdf.parse(appointmentInfoRequest.getAppointmentTime()));
+
+        // 额外的显示的时间
+        if (null == appointmentInfoRequest.getShowTime()) {
+            appointment.setShowTime(appointment.getAppointmentTime());
+        } else {
+            appointment.setShowTime(appointment.getShowTime());
+        }
+
         appointment.setOpenid(appointmentInfoRequest.getOpenId());
         appointment.setCost(BigDecimal.valueOf(TextUtil.getDouble(appointmentInfoRequest.getCost())));
         appointment.setCreateTime(new Date());
@@ -341,7 +349,9 @@ public class AppointmentServiceImpl implements AppointmentService {
         registerPayment.setRegState(appointment.getRegState());
         registerPayment.setRefundTime(appointment.getRefundTime());
         String doctorName = appointment.getDoctorName();
-        registerPayment.setAppointmentTime(appointment.getAppointmentTime());
+//        registerPayment.setAppointmentTime(appointment.getAppointmentTime());
+        // 这里是因为沛县做的特殊处理，一般使用上面那个
+        registerPayment.setAppointmentTime(appointment.getShowTime());
         registerPayment.setDeptName(appointment.getDeptName());
         registerPayment.setSeeNo(appointment.getSeeNo());
         registerPayment.setDoctorName(doctorName);
