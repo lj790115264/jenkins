@@ -134,7 +134,9 @@ public class OutPatientServiceImpl implements OutPatientService {
             throw new CommonException("暂无相关信息");
         }
 
-        return BeanMapperUtil.mapList(itemTypes, OutpatientMedicalRecordsResponse.class);
+        List<OutpatientMedicalRecordsResponse> outpatientMedicalRecordsResponse = BeanMapperUtil.mapList(itemTypes, OutpatientMedicalRecordsResponse.class);
+
+        return outpatientMedicalRecordsResponse;
     }
 
     @Override
@@ -218,10 +220,10 @@ public class OutPatientServiceImpl implements OutPatientService {
         Double totCost = 0.0;
         for (PrescriptionResponse prescriptionResponse : prescriptionResponses){
             //普通号 医生信息处理
-//            if (StringUtils.isEmpty(prescriptionResponse.getDoctorCode())){
+            if (StringUtils.isEmpty(prescriptionResponse.getDoctorName())){
 //                prescriptionResponse.setDoctorCode("普通号");
-//                prescriptionResponse.setDoctorName("普通号");
-//            }
+                prescriptionResponse.setDoctorName("普通号");
+            }
             Double unitPrice = Double.valueOf(prescriptionResponse.getUnitPrice());
             Double unitTotCost = Double.valueOf(prescriptionResponse.getTotCost());
             totCost += unitTotCost;

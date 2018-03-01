@@ -27,6 +27,7 @@ import org.springframework.util.StringUtils;
 
 import java.text.ParseException;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class CommonUsedPatientServiceImpl implements CommonUsedPatientService {
@@ -45,6 +46,31 @@ public class CommonUsedPatientServiceImpl implements CommonUsedPatientService {
         this.iUserInfoService = iUserInfoService;
         this.idCardUtil = idCardUtil;
         this.baseInfoService = baseInfoService;
+    }
+
+    synchronized CommonUsedPatient createUser(CommonUsedPatientRequest commonUsedPatientRequest, User user, String idCard) throws CommonException {
+        Integer userPatientCount = commonUsedPatientRepository.countByUserIdAndState(user.getId(), Constant.STATE_COMMON_USED_PATIENT_IN_USE);
+        if (Objects.nonNull(userPatientCount) && userPatientCount >= 5) {
+            throw new CommonException("最多只能绑定五个常用就诊人");
+        }
+        List<CommonUsedPatient> commonUsedPatients = commonUsedPatientRepository.findAllByIdCardAndUserId(idCard, user.getId());
+        //避免重复绑定
+        if (commonUsedPatients.size() > 0) {
+            CommonUsedPatient commonUsedPatient = commonUsedPatients.get(0);
+            Integer state = commonUsedPatient.getState();
+            if (Constant.STATE_COMMON_USED_PATIENT_IN_USE.equals(state)) {
+                throw new CommonException("身份证号已绑定过");
+            } else if (Constant.STATE_COMMON_USED_PATIENT_DELETED.equals(state)) {
+                //之前已删除 想重新绑定
+                commonUsedPatient.setState(Constant.STATE_COMMON_USED_PATIENT_IN_USE);
+                return null;
+            }
+        }
+        CommonUsedPatient commonUsedPatient = BeanMapperUtil.map(commonUsedPatientRequest, CommonUsedPatient.class);
+        commonUsedPatient.setUserId(user.getId());
+        //设置 state为 1  正在使用
+        commonUsedPatient.setState(Constant.STATE_COMMON_USED_PATIENT_IN_USE);
+        return commonUsedPatientRepository.save(commonUsedPatient);
     }
 
     @Override
@@ -67,27 +93,11 @@ public class CommonUsedPatientServiceImpl implements CommonUsedPatientService {
             throw new CommonException("身份证格式有误");
         }
 
-        List<CommonUsedPatient> commonUsedPatients = commonUsedPatientRepository.findAllByIdCardAndUserId(idCard, user.getId());
-
-        //避免重复绑定
-        if (commonUsedPatients.size() > 0){
-            CommonUsedPatient commonUsedPatient = commonUsedPatients.get(0);
-            Integer state = commonUsedPatient.getState();
-            if (Constant.STATE_COMMON_USED_PATIENT_IN_USE.equals(state)){
-                throw new CommonException("身份证号已绑定过");
-            } else if (Constant.STATE_COMMON_USED_PATIENT_DELETED.equals(state)){
-                //之前已删除 想重新绑定
-                commonUsedPatient.setState(Constant.STATE_COMMON_USED_PATIENT_IN_USE);
-                commonUsedPatientRepository.save(commonUsedPatient);
-                return BeanMapperUtil.map(commonUsedPatient, BindCommonUsedPatientResponse.class);
-            }
-
+        CommonUsedPatient commonUsedPatient = createUser(commonUsedPatientRequest, user, idCard);
+        // 之前已删除 想重新绑定
+        if (null == commonUsedPatient) {
+            return new BindCommonUsedPatientResponse();
         }
-
-        CommonUsedPatient commonUsedPatient = BeanMapperUtil.map(commonUsedPatientRequest, CommonUsedPatient.class);
-        commonUsedPatient.setUserId(user.getId());
-        //设置 state为 1  正在使用
-        commonUsedPatient.setState(Constant.STATE_COMMON_USED_PATIENT_IN_USE);
 
         //需查询门诊档案获取 cardNo
         //没有则 创建门诊档案
@@ -117,30 +127,22 @@ public class CommonUsedPatientServiceImpl implements CommonUsedPatientService {
             createProfileRequestHis.setIdCard(idCard);
 
             //报 异常 则无法获取此人的 patientNo 则 直接 抛出异常
-            InsertPatientInfo profileResponseHis = baseInfoService.createProfile(createProfileRequestHis);
-            patientCode = profileResponseHis.getCARDNO();
-            mcardNo = profileResponseHis.getCARDNO();
+            try {
+                InsertPatientInfo profileResponseHis = baseInfoService.createProfile(createProfileRequestHis);
+                patientCode = profileResponseHis.getCARDNO();
+                mcardNo = profileResponseHis.getCARDNO();
+            } catch (Exception ex) {
+                commonUsedPatientRepository.delete(commonUsedPatient.getId());
+                throw new CommonException("建立档案失败");
+            }
+
         }
 
         commonUsedPatient.setMcardNo(mcardNo);
         commonUsedPatient.setPatientCode(patientCode);
         commonUsedPatient.setMessage(message);
-        commonUsedPatients = commonUsedPatientRepository.findAllByIdCardAndUserId(idCard, user.getId());
-        //避免重复绑定
-        if (commonUsedPatients.size() > 0){
-            commonUsedPatient = commonUsedPatients.get(0);
-            Integer state = commonUsedPatient.getState();
-            if (Constant.STATE_COMMON_USED_PATIENT_IN_USE.equals(state)){
-                throw new CommonException("身份证号已绑定过");
-            } else if (Constant.STATE_COMMON_USED_PATIENT_DELETED.equals(state)){
-                //之前已删除 想重新绑定
-                commonUsedPatient.setState(Constant.STATE_COMMON_USED_PATIENT_IN_USE);
-                commonUsedPatientRepository.save(commonUsedPatient);
-                return BeanMapperUtil.map(commonUsedPatient, BindCommonUsedPatientResponse.class);
-            }
-        } else {
-            commonUsedPatientRepository.save(commonUsedPatient);
-        }
+
+        commonUsedPatientRepository.save(commonUsedPatient);
 
         //如果 常用就诊人是 自己  就将信息 写入 userinfo
         if (idCard.equals(user.getIdCard())){

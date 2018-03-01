@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -117,6 +118,10 @@ public class PaymentItemsAsync {
                 clinicPayment.setRefundCost("0.0");
             }
 
+            if (StringUtils.isEmpty(clinicPayment.getDoctorName())){
+//                prescriptionResponse.setDoctorCode("普通号");
+                clinicPayment.setDoctorName("普通号");
+            }
             clinicPayments.add(clinicPayment);
         }
 

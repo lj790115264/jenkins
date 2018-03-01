@@ -46,7 +46,6 @@ public class OutpatientController {
         return new Result<>(outPatientService.getUnpaidClinicRecords(new UnpaidOutpatientRequest(patientCode, name)));
     }
 
-    // 没用的
     @ApiOperation("门诊处方信息")
     @GetMapping("/clinic/recipe")
     public Object getPrescription(@RequestParam("register_id") String registerId,

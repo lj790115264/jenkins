@@ -18,4 +18,6 @@ public interface CommonUsedPatientRepository extends JpaRepository<CommonUsedPat
 
     List<CommonUsedPatient> findByUserIdAndPatientCode(Integer userId, String patientCode);
 
+    Integer countByUserIdAndState(Integer userId, Integer state);
+
 }
