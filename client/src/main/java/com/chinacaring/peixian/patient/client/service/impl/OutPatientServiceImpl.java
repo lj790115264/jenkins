@@ -172,28 +172,23 @@ public class OutPatientServiceImpl implements OutPatientService {
             GetFeeListSoap mxSoap;
             try {
                 mxSoap = JaxbXmlUtil.convertToJavaBean(mxRes, GetFeeListSoap.class);
-//                if (!Objects.equals(Constant.RETURN_CODE_SUCCESS, mxSoap.getResult().getReturnCode())) {
-//                    logger.error("-------------");
-//                    logger.error("处方信息错误");
-//                    logger.error(mxSoap.getResult().getReturnDesc());
-//                    logger.error(item.getCLINICCODE() + "-0");
-//                }
                 // 如果有未缴费的处方的话，就把查询处方的门诊流水号添加进未缴费的里面
                 List<FeeTable> regTables = mxSoap.getData().getFeeTable();
                 if (null != regTables && !regTables.isEmpty()) {
                     unPayItemTypes.add(item);
                 }
             } catch (Exception e) {
-//                logger.error("-------------");
-//                logger.error("处方信息错误");
-//                logger.error(mxRes);
-//                logger.error(item.getCLINICCODE() + "-0");
+
             }
         }
 
         List<UnpaidClinicRecordResponse> unpaidClinicRecordResponses = BeanMapperUtil.mapList(unPayItemTypes,
                 UnpaidClinicRecordResponse.class);
-
+        unpaidClinicRecordResponses.stream().forEach(item -> {
+            if (null == item.getDoctorName()) {
+                item.setDoctorName("普通号");
+            }
+        });
         return unpaidClinicRecordResponses;
     }
 
@@ -237,7 +232,9 @@ public class OutPatientServiceImpl implements OutPatientService {
     @Override
     public Object createOutpatientOrder(OutpatientInfoRequest outpatientInfoRequest, User user) throws CommonException {
 
-
+        if (null == outpatientInfoRequest.getDoctorName()) {
+            outpatientInfoRequest.setDoctorName("普通号");
+        }
         Outpatient outpatient = BeanMapperUtil.map(outpatientInfoRequest, Outpatient.class);
         List<Prescription> prescriptions = outpatientInfoRequest.getPrescriptions();
         if (Objects.equals(prescriptions.size(), 0)) {
@@ -371,7 +368,9 @@ public class OutPatientServiceImpl implements OutPatientService {
         } else {
             clinicPayment.setRefundCost("0.0");
         }
-
+        if (null == clinicPayment.getDoctorName()) {
+            clinicPayment.setDoctorName("普通号");
+        }
         return clinicPayment;
     }
 

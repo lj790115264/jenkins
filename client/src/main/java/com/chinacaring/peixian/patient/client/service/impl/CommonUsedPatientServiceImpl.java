@@ -63,6 +63,7 @@ public class CommonUsedPatientServiceImpl implements CommonUsedPatientService {
             } else if (Constant.STATE_COMMON_USED_PATIENT_DELETED.equals(state)) {
                 //之前已删除 想重新绑定
                 commonUsedPatient.setState(Constant.STATE_COMMON_USED_PATIENT_IN_USE);
+                commonUsedPatientRepository.save(commonUsedPatient);
                 return null;
             }
         }
