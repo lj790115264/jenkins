@@ -131,7 +131,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Override
     public OrderResponse createAppointmentOrder(AppointmentInfoRequest appointmentInfoRequest, User user) throws
             CommonException, ParseException {
-//        appointmentInfoRequest.setCost("1");
+        appointmentInfoRequest.setCost("1");
 
         Appointment appointment = new Appointment();
 
@@ -159,14 +159,10 @@ public class AppointmentServiceImpl implements AppointmentService {
         appointment.setRegState(Constant.REG_STATE_WEI_GUA_HAO);
         //转换时间
         appointment.setRegisterLevelName(appointmentInfoRequest.getRegisterLevelName());
-        appointment.setAppointmentTime(sdf.parse(appointmentInfoRequest.getAppointmentTime()));
 
-        // 额外的显示的时间
-        if (null == appointmentInfoRequest.getShowTime()) {
-            appointment.setShowTime(appointment.getAppointmentTime());
-        } else {
-            appointment.setShowTime(appointment.getShowTime());
-        }
+        // appointTime废除了， 使用showTime，原因不解释
+        appointment.setAppointmentTime(sdf.parse(appointmentInfoRequest.getShowTime()));
+        appointment.setShowTime(sdf.parse(appointmentInfoRequest.getShowTime()));
 
         appointment.setOpenid(appointmentInfoRequest.getOpenId());
         appointment.setCost(BigDecimal.valueOf(TextUtil.getDouble(appointmentInfoRequest.getCost())));
