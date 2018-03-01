@@ -23,6 +23,7 @@ public class AppointmentInfoRequest {
     //预约时间
     private String appointmentTime;
 
+    // 上面那个废除了，下面的才是预约时间
     private String showTime;
 
     //午别 1 ：表示上午 2 ：表示下午
