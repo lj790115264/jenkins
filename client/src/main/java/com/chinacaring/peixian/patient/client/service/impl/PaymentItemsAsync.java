@@ -52,7 +52,7 @@ public class PaymentItemsAsync {
             registerPayment.setRegState(appointment.getRegState());
             registerPayment.setRefundTime(appointment.getRefundTime());
             String doctorName = appointment.getDoctorName();
-            registerPayment.setAppointmentTime(appointment.getAppointmentTime());
+            registerPayment.setAppointmentTime(appointment.getShowTime());
             registerPayment.setDeptName(appointment.getDeptName());
             registerPayment.setSeeNo(appointment.getSeeNo());
             registerPayment.setDoctorName(doctorName);
