@@ -131,7 +131,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Override
     public OrderResponse createAppointmentOrder(AppointmentInfoRequest appointmentInfoRequest, User user) throws
             CommonException, ParseException {
-        appointmentInfoRequest.setCost("1");
+//        appointmentInfoRequest.setCost("1");
 
         Appointment appointment = new Appointment();
 
