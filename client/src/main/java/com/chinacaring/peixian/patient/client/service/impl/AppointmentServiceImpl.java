@@ -428,7 +428,7 @@ public class AppointmentServiceImpl implements AppointmentService {
             Integer seeNo = (null == (appointment.getSeeNo())) ? 0 : appointment.getSeeNo();
             appointmentRecord.setSeeNo(seeNo);
             appointmentRecord.setDeptName(appointment.getDeptName());
-            appointmentRecord.setAppointmentTime(appointment.getAppointmentTime());
+            appointmentRecord.setAppointmentTime(appointment.getShowTime());
             String registerStatus = futures.get(i).get();
 //            try {
 //                String soap = service.getQuyiServiceNoSoap().getRegState(appointment.getRegisterId());
