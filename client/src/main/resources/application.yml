@@ -63,5 +63,15 @@ zuul:
       serviceId: sms
       stripPrefix: false
       sensitiveHeaders: Access-Control-Allow-Origin
+    cms:
+      path: /cms/**
+      url: http://172.17.10.91:18089/
+      stripPrefix: false
+      sensitiveHeaders: Access-Control-Allow-Origin
+    basic_info:
+      path: /basic_info/**
+      url: http://172.17.10.91:18089/
+      stripPrefix: false
+      sensitiveHeaders: Access-Control-Allow-Origin
   add-proxy-headers: true
   ignored-patterns: /user/**
