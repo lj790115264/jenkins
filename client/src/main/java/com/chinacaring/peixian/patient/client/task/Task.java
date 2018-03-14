@@ -2,11 +2,12 @@ package com.chinacaring.peixian.patient.client.task;
 
 import com.chinacaring.common.exception.CommonException;
 import com.chinacaring.peixian.patient.client.service.BaseInfoService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import java.util.logging.Logger;
 
 
 @Component
@@ -15,12 +16,12 @@ public class Task {
     @Autowired
     private BaseInfoService baseInfoService;
 
-    private Logger logger = Logger.getLogger(this.getClass().getName());
+    private Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
     @Scheduled(cron = "0 59 23 * * ?")
     public void updateDept() throws CommonException {
-        logger.info("开始插入科室");
+        logger.error("开始插入科室");
         baseInfoService.insertDepts();
-        logger.info("结束插入科室");
+        logger.error("结束插入科室");
     }
 }

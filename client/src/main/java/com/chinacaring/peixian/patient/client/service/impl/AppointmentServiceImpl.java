@@ -442,7 +442,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 //                }
 //
 //            } catch (CommonException e) {
-//                logger.info("获取挂号状态失败" + appointment.getRegisterId());
+//                logger.error("获取挂号状态失败" + appointment.getRegisterId());
 //                continue;
 //            }
             if (null == registerStatus) {

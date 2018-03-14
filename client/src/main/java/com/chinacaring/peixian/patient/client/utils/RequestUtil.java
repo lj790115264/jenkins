@@ -39,9 +39,9 @@ public class RequestUtil {
         strInput = strInput.replace("<", "&lt;");
         strInput = strInput.replace(">", "&gt;");
         String soapRequest = String.format(SOAPENV, interfaceName, strInput, interfaceName);
-        logger.info("入参\n\n\n" + soapRequest + "\n\n\n");
+        logger.error("入参\n\n\n" + soapRequest + "\n\n\n");
         String soapResponse = soap(soapRequest);
-        logger.info("出参\n\n\n" + soapResponse + "\n\n\n");
+        logger.error("出参\n\n\n" + soapResponse + "\n\n\n");
         return getResult(soapResponse, interfaceName);
     }
 

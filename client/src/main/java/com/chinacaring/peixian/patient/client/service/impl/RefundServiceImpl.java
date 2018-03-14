@@ -72,7 +72,7 @@ public class RefundServiceImpl implements RefundService {
                 try{
                     refundAppointment(orderNo, refundDes);
                 }catch (Exception e){
-                    logger.info("\norderType :" + orderType + "  orderNo :" + orderNo + "  退款出现异常！！\n");
+                    logger.error("\norderType :" + orderType + "  orderNo :" + orderNo + "  退款出现异常！！\n");
                     e.printStackTrace();
                 }
                 break;
@@ -81,7 +81,7 @@ public class RefundServiceImpl implements RefundService {
                 try{
                     refundOutpatient(orderNo, refundDes);
                 }catch (Exception e){
-                    logger.info("\norderType :" + orderType + "  orderNo :" + orderNo + "  退款出现异常！！\n");
+                    logger.error("\norderType :" + orderType + "  orderNo :" + orderNo + "  退款出现异常！！\n");
                     e.printStackTrace();
                 }
                 break;
@@ -91,7 +91,7 @@ public class RefundServiceImpl implements RefundService {
                 try{
                     refundInbalance(orderNo, refundDes);
                 }catch (Exception e){
-                    logger.info("\norderType :" + orderType + "  orderNo :" + orderNo + "  退款出现异常！！\n");
+                    logger.error("\norderType :" + orderType + "  orderNo :" + orderNo + "  退款出现异常！！\n");
                     e.printStackTrace();
                 }
                 break;
@@ -104,7 +104,7 @@ public class RefundServiceImpl implements RefundService {
 
     private void refundAppointment(String orderNo, String refundDes){
 
-        logger.info("\n挂号退款 -- " + orderNo + "\n");
+        logger.error("\n挂号退款 -- " + orderNo + "\n");
 
         Appointment appointment = appointmentRepository.findOneByOrderNo(orderNo);
         //设置退款时间
@@ -165,14 +165,14 @@ public class RefundServiceImpl implements RefundService {
         }
 
 //        WechatPushResponse wechatPushResponse = wechatPushService.sendNews(alipayUrl, title, refundDes);
-//        logger.info("\n退款推送 -- " + orderNo + "\n");
-//        logger.info(wechatPushResponse.toString() + "\n");
+//        logger.error("\n退款推送 -- " + orderNo + "\n");
+//        logger.error(wechatPushResponse.toString() + "\n");
 
     }
 
     private void refundInbalance(String orderNo, String refundDes){
 
-        logger.info("\n住院预交金退款 -- " + orderNo + "\n");
+        logger.error("\n住院预交金退款 -- " + orderNo + "\n");
         List<Inbalance> inbalances = inbalanceRepository.findByOrderNo(orderNo);
         Inbalance inbalance = inbalances.get(0);
 
@@ -232,13 +232,13 @@ public class RefundServiceImpl implements RefundService {
         }
 
         WechatPushResponse wechatPushResponse = wechatPushService.sendNews(alipayUrl, title, refundDes);
-        logger.info("\n退款推送 -- " + orderNo + "\n");
-        logger.info("\n" + wechatPushResponse.toString() + "\n");
+        logger.error("\n退款推送 -- " + orderNo + "\n");
+        logger.error("\n" + wechatPushResponse.toString() + "\n");
     }
 
     private void refundOutpatient(String orderNo, String refundDes){
 
-        logger.info("\n门诊结算退款 -- " + orderNo + "\n");
+        logger.error("\n门诊结算退款 -- " + orderNo + "\n");
         List<Outpatient> outpatients = outpatientRepository.findByOrderNo(orderNo);
         Outpatient outpatient = outpatients.get(0);
 
@@ -253,7 +253,7 @@ public class RefundServiceImpl implements RefundService {
             fundingSource = Constant.REFUND_FUNDING_SOURCE_WX_UNSETTLED_FUNDS;
         }
 
-        String refundRes = refundByPaydata(outpatient.getPayData(), "门诊结算失败退款", fundingSource, outpatient.getRefundCost().intValue());
+        String refundRes = refundByPaydata(outpatient.getPayData(), "门诊结算失败退款", fundingSource, outpatient.getCost().intValue());
 
         //如果重复退款 退款接口会返回 null
         if (Objects.equals(refundRes, null)){
@@ -300,8 +300,8 @@ public class RefundServiceImpl implements RefundService {
         }
 
         WechatPushResponse wechatPushResponse = wechatPushService.sendNews(alipayUrl, title, refundDes);
-        logger.info("\n退款推送 -- " + orderNo + "\n");
-        logger.info("\n" + wechatPushResponse.toString() + "\n");
+        logger.error("\n退款推送 -- " + orderNo + "\n");
+        logger.error("\n" + wechatPushResponse.toString() + "\n");
     }
 
     private String refundByPaydata(String paydata, String description, String fundingSource, Integer refundAmount){

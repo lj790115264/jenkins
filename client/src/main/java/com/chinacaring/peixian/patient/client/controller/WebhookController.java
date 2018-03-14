@@ -44,14 +44,14 @@ public class WebhookController {
     public Object registerWebhook(@RequestBody String data, HttpServletRequest request, HttpServletResponse response) throws CommonException {
         Event event = Webhooks.eventParse(data);
         String signature = request.getHeader("x-pingplusplus-signature");
-        logger.info("signature：" + signature);
+        logger.error("signature：" + signature);
 
         //验证签名。重要！！！
         if (!WebhooksUtils.verify(data, signature)) {
             return new Result<>(ResultStatusCode.SYSTEM_ERR, "签名验证失败", null);
         }
 
-        logger.info(event.toString());
+        logger.error(event.toString());
 
         switch (event.getType()) {
             case "charge.succeeded":
@@ -117,7 +117,7 @@ public class WebhookController {
                 try {
                     boolean tag = (Boolean) appointmentService.doRegister(orderNo);
                     if (tag) {
-                        logger.info(orderNo + "挂号成功");
+                        logger.error(orderNo + "挂号成功");
                     } else {
                         logger.error("异常重复操作该订单");
                     }
@@ -129,13 +129,13 @@ public class WebhookController {
                     //挂号失败。退款
                     refundService.refund(orderNo, Constant.ORDERS_APPOINTMENT, "退款原因" + e.getDetailMessage());
                     response.setStatus(500);
-                    logger.info(orderNo + "挂号失败");
+                    logger.error(orderNo + "挂号失败");
                 } catch (CommonException e) {
                     e.printStackTrace();
                     //挂号失败。退款
                     refundService.refund(orderNo, Constant.ORDERS_APPOINTMENT, "退款原因" + e.getDetailMessage());
                     response.setStatus(500);
-                    logger.info(orderNo + "挂号失败");
+                    logger.error(orderNo + "挂号失败");
                 }
                 break;
 
@@ -144,7 +144,7 @@ public class WebhookController {
                 try {
                     boolean tag = outPatientService.doOutpatientConfirm(orderNo);
                     if (tag) {
-                        logger.info(orderNo + "门诊确认成功");
+                        logger.error(orderNo + "门诊确认成功");
                     } else {
                         logger.error("异常重复操作该订单");
                     }
@@ -155,13 +155,13 @@ public class WebhookController {
                     //挂号失败。退款
                     refundService.refund(orderNo, Constant.ORDERS_CLINIC, "退款原因" + e.getDetailMessage());
                     response.setStatus(500);
-                    logger.info(orderNo + "门诊确认成功");
+                    logger.error(orderNo + "门诊确认成功");
                 } catch (CommonException e) {
                     e.printStackTrace();
                     //挂号失败。退款
                     refundService.refund(orderNo, Constant.ORDERS_CLINIC, "退款原因" + e.getDetailMessage());
                     response.setStatus(500);
-                    logger.info(orderNo + "门诊确认成功");
+                    logger.error(orderNo + "门诊确认成功");
                 }
                 break;
 
@@ -169,13 +169,13 @@ public class WebhookController {
             case Constant.ORDERS_INHOS_PRE_CHARGE:
                 try {
                     inbalanceService.doInbalanceConfirm(orderNo);
-                    logger.info(orderNo + "住院预交金确认成功");
+                    logger.error(orderNo + "住院预交金确认成功");
                 } catch (CommonException e) {
                     e.printStackTrace();
                     //挂号失败。退款
                     refundService.refund(orderNo, Constant.ORDERS_INHOS_PRE_CHARGE, "退款原因" + e.getDetailMessage());
                     response.setStatus(500);
-                    logger.info(orderNo + "住院预交金确认成功");
+                    logger.error(orderNo + "住院预交金确认成功");
                 }
                 break;
 

@@ -8,6 +8,8 @@ import com.chinacaring.peixian.patient.client.exception.SoapException;
 import com.chinacaring.peixian.patient.client.wsdl.reponse.get_regstate.GetRegStateSoap;
 import com.chinacaring.peixian.patient.client.wsdl.request.QuyiServiceNo;
 import com.chinacaring.util.JaxbXmlUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
@@ -17,13 +19,12 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.Objects;
 import java.util.concurrent.Future;
-import java.util.logging.Logger;
 
 @Async
 @Component
 public class AppointRecord {
 
-    private Logger logger = Logger.getLogger(this.getClass().getName());
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private QuyiServiceNo service;
     private static DecimalFormat df = new DecimalFormat("#0.00");
@@ -48,7 +49,7 @@ public class AppointRecord {
             return new AsyncResult(registerStatus);
 
         } catch (CommonException e) {
-            logger.info("获取挂号状态失败" + appointment.getRegisterId());
+            logger.error("获取挂号状态失败" + appointment.getRegisterId());
             return new AsyncResult<>(null);
         }
     }
