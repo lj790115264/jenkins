@@ -2,6 +2,7 @@ package com.chinacaring.peixian.patient.client.dto.check;
 
 import com.chinacaring.peixian.patient.client.enumeration.PayWay;
 import com.chinacaring.peixian.patient.client.enumeration.TradeType;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
 
@@ -12,6 +13,7 @@ public class CheckCompare {
     // 姓名
     private String name;
     // 交易时间
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date tradeTime;
     // 交易类型
     private TradeType tradeType;
@@ -19,17 +21,29 @@ public class CheckCompare {
     private Integer tradeMoney;
     // 支付方式
     private PayWay payWay;
+
+    // 收据号
+    private String invoiceNo;
     // -----以下为his提供
     // 收据号
     private String hisInvoiceNo;
     // 姓名
     private String hisName;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     // 交易时间
     private Date hisTradeTime;
     // 交易类型
     private TradeType hisTradeType;
     // 支付金额
     private Integer hisTradeMoney;
+
+    public String getInvoiceNo() {
+        return invoiceNo;
+    }
+
+    public void setInvoiceNo(String invoiceNo) {
+        this.invoiceNo = invoiceNo;
+    }
 
     public String getChargeId() {
         return chargeId;

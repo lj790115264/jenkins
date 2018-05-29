@@ -4,6 +4,7 @@ public class OrdersPayData {
 
     private Integer id;
     private String payData;
+    private String invoiceNo;
 
     public Integer getId() {
         return id;
@@ -19,5 +20,13 @@ public class OrdersPayData {
 
     public void setPayData(String payData) {
         this.payData = payData;
+    }
+
+    public String getInvoiceNo() {
+        return invoiceNo;
+    }
+
+    public void setInvoiceNo(String invoiceNo) {
+        this.invoiceNo = invoiceNo;
     }
 }

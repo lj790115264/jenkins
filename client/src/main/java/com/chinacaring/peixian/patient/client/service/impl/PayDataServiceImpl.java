@@ -33,6 +33,7 @@ public class PayDataServiceImpl implements PayDataService {
             Map map = gson.fromJson(l.getPayData(), Map.class);
             String chargeId = (String)map.get("id");
             order.setChargeId(chargeId);
+            order.setInvoiceNo(l.getInvoiceNo());
             orders.add(order);
         }
         ordersRepository.save(orders);

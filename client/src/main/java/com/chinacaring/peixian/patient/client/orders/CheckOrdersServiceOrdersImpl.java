@@ -24,6 +24,36 @@ public class CheckOrdersServiceOrdersImpl implements CheckOrdersService {
     @Autowired
     private OrdersRepository ordersRepository;
 
+    void setMoneyHis(CheckCount c, HisOrder h) {
+        c.getTotalMoney().setHisVal(c.getTotalMoney().getHisVal() + h.getFee());
+        c.getCount().setHisVal(c.getCount().getHisVal() + 1);
+        if (null != h.getPayWay()) {
+            if (h.getPayWay().equals(PayWay.WX)) {
+                c.getWxMoney().setHisVal(c.getWxMoney().getHisVal() + h.getFee());
+                c.getWxCount().setHisVal(c.getWxCount().getHisVal() + 1);
+            }
+            if (h.getPayWay().equals(PayWay.ALI)) {
+                c.getAliMoney().setHisVal(c.getAliMoney().getHisVal() + h.getFee());
+                c.getAliCount().setHisVal(c.getAliCount().getHisVal() + 1);
+            }
+        }
+    }
+
+    void setMoneyUs(CheckCount c, Orders o ) {
+        c.getTotalMoney().setCaringVal(c.getTotalMoney().getCaringVal() + o.getAmount());
+        c.getCount().setCaringVal(c.getCount().getCaringVal() + 1);
+        if (null != o.getPayChannel()) {
+            if (o.getPayChannel().indexOf("wx") > -1) {
+                c.getWxMoney().setCaringVal(c.getWxMoney().getCaringVal() + o.getAmount());
+                c.getWxCount().setCaringVal(c.getWxCount().getCaringVal() + 1);
+            }
+            if (o.getPayChannel().indexOf("ali") > -1) {
+                c.getAliMoney().setCaringVal(c.getAliMoney().getCaringVal() + o.getAmount());
+                c.getAliCount().setCaringVal(c.getAliCount().getCaringVal() + 1);
+            }
+        }
+    }
+
     @Override
     public List<CheckCount> checkCount(Date begin, Date end) throws CommonException {
 
@@ -40,32 +70,24 @@ public class CheckOrdersServiceOrdersImpl implements CheckOrdersService {
         for (HisOrder his: hisList) {
             // 如果这条记录his有钱
             if (null != his.getFee()) {
-                total.getTotalMoney().setHisVal(total.getTotalMoney().getHisVal() + his.getFee());
-                total.getCount().setHisVal(total.getCount().getHisVal() + 1);
-                if (null != his.getPayWay()) {
-                    if (his.getPayWay().equals(PayWay.WX)) {
-                        total.getWxMoney().setHisVal(total.getWxMoney().getHisVal() + his.getFee());
-                        total.getWxCount().setHisVal(total.getWxCount().getHisVal() + 1);
-                    }
-                    if (his.getPayWay().equals(PayWay.ALI)) {
-                        total.getAliMoney().setHisVal(total.getAliMoney().getHisVal() + his.getFee());
-                        total.getAliCount().setHisVal(total.getAliCount().getHisVal() + 1);
-                    }
+                setMoneyHis(total, his);
+                if (his.getTradeType().equals((TradeType.REGISTER))) {
+                    setMoneyHis(register, his);
+                } else if (his.getTradeType().equals((TradeType.RECIPE))) {
+                    setMoneyHis(recipe, his);
+                } else if (his.getTradeType().equals(TradeType.INBALACNCE)) {
+                    setMoneyHis(inbalance, his);
                 }
             }
         }
         for (Orders order: orders) {
             if (null != order.getAmount()) {
-                total.getTotalMoney().setCaringVal(total.getTotalMoney().getCaringVal() + order.getAmount());
-                total.getCount().setCaringVal(total.getCount().getCaringVal() + 1);
-                if (null != order.getPayChannel()) {
-                    if (order.getPayChannel().indexOf("wx") > -1) {
-                        total.getWxMoney().setCaringVal(total.getWxMoney().getCaringVal() + order.getAmount());
-                        total.getWxCount().setCaringVal(total.getWxCount().getCaringVal() + 1);
-                    }
-                    if (order.getPayChannel().indexOf("ali") > -1) {
-                        total.getAliMoney().setCaringVal(total.getAliMoney().getCaringVal() + order.getAmount());
-                        total.getAliCount().setCaringVal(total.getAliCount().getCaringVal() + 1);
+                setMoneyUs(total, order);
+                if (null != order.getType()) {
+                    switch (order.getType()) {
+                        case "clinic": setMoneyUs(recipe, order); break;
+                        case "appointment": setMoneyUs(register, order); break;
+                        case "inhos_pre_charge": setMoneyUs(inbalance, order); break;
                     }
                 }
             }
@@ -89,6 +111,8 @@ public class CheckOrdersServiceOrdersImpl implements CheckOrdersService {
     void injectPPPOrder(CheckCompare c, Orders order) {
         c.setChargeId(order.getChargeId());
         c.setName(order.getUsername());
+        c.setInvoiceNo(order.getInvoiceNo());
+        c.setTradeTime(order.getPayTime());
         String channel = order.getPayChannel();
         if (null != channel) {
             if (channel.indexOf("wx") > -1) {
@@ -129,7 +153,7 @@ public class CheckOrdersServiceOrdersImpl implements CheckOrdersService {
                 continue;
             }
             for (int n = i; n < hisList.size(); n++) {
-                HisOrder hisOrder = hisList.get(i);
+                HisOrder hisOrder = hisList.get(n);
                 // 处方号互相匹配代表同一次交易
                 if (order.getInvoiceNo().equals(hisOrder.getRecipe())) {
                     // 把his的数据补充进来
@@ -144,7 +168,8 @@ public class CheckOrdersServiceOrdersImpl implements CheckOrdersService {
                 }
                 // 如果到最后了都没有匹配到，就从i的位置向前再匹配
                 if (n == hisList.size() - 1) {
-                    for (int k = i; k > 0; k --) {
+                    for (int k = i; k >= 0; k --) {
+                        hisOrder = hisList.get(k);
                         if (order.getInvoiceNo().equals(hisOrder.getRecipe())) {
                             // 把his的数据补充进来
                             injectHisOrder(c, hisOrder);
@@ -178,7 +203,7 @@ public class CheckOrdersServiceOrdersImpl implements CheckOrdersService {
             boolean equal = false;
             injectHisOrder(c, hisOrder);
             for (int n = i; n < orders.size(); n++) {
-                Orders order = orders.get(i);
+                Orders order = orders.get(n);
                 if (null == order.getInvoiceNo()) {
                     continue;
                 }
@@ -195,7 +220,8 @@ public class CheckOrdersServiceOrdersImpl implements CheckOrdersService {
                 }
                 // 如果到最后了都没有匹配到，就从i的位置向前再匹配
                 if (n == hisList.size() - 1) {
-                    for (int k = i; k > 0; k --) {
+                    for (int k = i; k >= 0; k --) {
+                        order = orders.get(k);
                         if (order.getInvoiceNo().equals(hisOrder.getRecipe())) {
                             // 把his的数据补充进来
                             injectPPPOrder(c, order);

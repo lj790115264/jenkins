@@ -11,6 +11,7 @@ import java.util.List;
  * @date 2018/3/6
  * @intro
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ChargeResponse implements Serializable {
 
     /**
@@ -312,6 +313,7 @@ public class ChargeResponse implements Serializable {
         this.description = description;
     }
 
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class RefundsBean {
         private String object;
         private String url;
@@ -351,9 +353,11 @@ public class ChargeResponse implements Serializable {
         }
     }
 
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class MetadataBean {
     }
 
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class CredentialBean {
     }
 

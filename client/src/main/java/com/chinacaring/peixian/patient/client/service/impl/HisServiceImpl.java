@@ -38,7 +38,7 @@ public class HisServiceImpl implements HisService {
         List<HisOrder> iHisOrders = new ArrayList<>();
         for (GetOrderInfoByOperCode hisOrder: hisOrders) {
             HisOrder iHisOrder = new HisOrder();
-            iHisOrder.setFee(1000 * Double.valueOf(hisOrder.getFEE()).intValue());
+            iHisOrder.setFee((int) (100 * Double.valueOf(hisOrder.getFEE())));
             iHisOrder.setName(hisOrder.getNAME());
             if (null != hisOrder.getPAYMODE()) {
                 if ("wechat".equals(hisOrder.getPAYMODE())) {
