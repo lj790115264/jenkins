@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>anonymous complex type�� Java �ࡣ
+ * <p>anonymous complex type的 Java 类。
  * 
- * <p>����ģʽƬ��ָ�������ڴ����е�Ԥ�����ݡ�
+ * <p>以下模式片段指定包含在此类中的预期内容。
  * 
  * <pre>
  * &lt;complexType>
@@ -42,7 +42,7 @@ public class GetShemaInfoNew {
     protected String deptCode;
 
     /**
-     * ��ȡbeginDate���Ե�ֵ��
+     * 获取beginDate属性的值。
      * 
      * @return
      *     possible object is
@@ -54,7 +54,7 @@ public class GetShemaInfoNew {
     }
 
     /**
-     * ����beginDate���Ե�ֵ��
+     * 设置beginDate属性的值。
      * 
      * @param value
      *     allowed object is
@@ -66,7 +66,7 @@ public class GetShemaInfoNew {
     }
 
     /**
-     * ��ȡendDate���Ե�ֵ��
+     * 获取endDate属性的值。
      * 
      * @return
      *     possible object is
@@ -78,7 +78,7 @@ public class GetShemaInfoNew {
     }
 
     /**
-     * ����endDate���Ե�ֵ��
+     * 设置endDate属性的值。
      * 
      * @param value
      *     allowed object is
@@ -90,7 +90,7 @@ public class GetShemaInfoNew {
     }
 
     /**
-     * ��ȡdeptCode���Ե�ֵ��
+     * 获取deptCode属性的值。
      * 
      * @return
      *     possible object is
@@ -102,7 +102,7 @@ public class GetShemaInfoNew {
     }
 
     /**
-     * ����deptCode���Ե�ֵ��
+     * 设置deptCode属性的值。
      * 
      * @param value
      *     allowed object is

@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>anonymous complex type�� Java �ࡣ
+ * <p>anonymous complex type的 Java 类。
  * 
- * <p>����ģʽƬ��ָ�������ڴ����е�Ԥ�����ݡ�
+ * <p>以下模式片段指定包含在此类中的预期内容。
  * 
  * <pre>
  * &lt;complexType>
@@ -42,7 +42,7 @@ public class QueryInMainInfo {
     protected String inDate;
 
     /**
-     * ��ȡname���Ե�ֵ��
+     * 获取name属性的值。
      * 
      * @return
      *     possible object is
@@ -54,7 +54,7 @@ public class QueryInMainInfo {
     }
 
     /**
-     * ����name���Ե�ֵ��
+     * 设置name属性的值。
      * 
      * @param value
      *     allowed object is
@@ -66,7 +66,7 @@ public class QueryInMainInfo {
     }
 
     /**
-     * ��ȡiden���Ե�ֵ��
+     * 获取iden属性的值。
      * 
      * @return
      *     possible object is
@@ -78,7 +78,7 @@ public class QueryInMainInfo {
     }
 
     /**
-     * ����iden���Ե�ֵ��
+     * 设置iden属性的值。
      * 
      * @param value
      *     allowed object is
@@ -90,7 +90,7 @@ public class QueryInMainInfo {
     }
 
     /**
-     * ��ȡinDate���Ե�ֵ��
+     * 获取inDate属性的值。
      * 
      * @return
      *     possible object is
@@ -102,7 +102,7 @@ public class QueryInMainInfo {
     }
 
     /**
-     * ����inDate���Ե�ֵ��
+     * 设置inDate属性的值。
      * 
      * @param value
      *     allowed object is

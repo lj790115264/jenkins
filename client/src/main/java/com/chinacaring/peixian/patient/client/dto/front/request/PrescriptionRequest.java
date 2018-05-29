@@ -12,4 +12,20 @@ public class PrescriptionRequest {
         this.regNO = regNO;
         this.isFee = isFee;
     }
+
+    public String getRegNO() {
+        return regNO;
+    }
+
+    public void setRegNO(String regNO) {
+        this.regNO = regNO;
+    }
+
+    public String getIsFee() {
+        return isFee;
+    }
+
+    public void setIsFee(String isFee) {
+        this.isFee = isFee;
+    }
 }

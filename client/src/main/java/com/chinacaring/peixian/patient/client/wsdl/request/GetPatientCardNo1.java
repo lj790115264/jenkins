@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>anonymous complex type�� Java �ࡣ
+ * <p>anonymous complex type的 Java 类。
  * 
- * <p>����ģʽƬ��ָ�������ڴ����е�Ԥ�����ݡ�
+ * <p>以下模式片段指定包含在此类中的预期内容。
  * 
  * <pre>
  * &lt;complexType>
@@ -42,7 +42,7 @@ public class GetPatientCardNo1 {
     protected String iden;
 
     /**
-     * ��ȡname���Ե�ֵ��
+     * 获取name属性的值。
      * 
      * @return
      *     possible object is
@@ -54,7 +54,7 @@ public class GetPatientCardNo1 {
     }
 
     /**
-     * ����name���Ե�ֵ��
+     * 设置name属性的值。
      * 
      * @param value
      *     allowed object is
@@ -66,7 +66,7 @@ public class GetPatientCardNo1 {
     }
 
     /**
-     * ��ȡcardNo���Ե�ֵ��
+     * 获取cardNo属性的值。
      * 
      * @return
      *     possible object is
@@ -78,7 +78,7 @@ public class GetPatientCardNo1 {
     }
 
     /**
-     * ����cardNo���Ե�ֵ��
+     * 设置cardNo属性的值。
      * 
      * @param value
      *     allowed object is
@@ -90,7 +90,7 @@ public class GetPatientCardNo1 {
     }
 
     /**
-     * ��ȡiden���Ե�ֵ��
+     * 获取iden属性的值。
      * 
      * @return
      *     possible object is
@@ -102,7 +102,7 @@ public class GetPatientCardNo1 {
     }
 
     /**
-     * ����iden���Ե�ֵ��
+     * 设置iden属性的值。
      * 
      * @param value
      *     allowed object is

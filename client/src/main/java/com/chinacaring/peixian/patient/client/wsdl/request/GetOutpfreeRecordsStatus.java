@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>anonymous complex type�� Java �ࡣ
+ * <p>anonymous complex type的 Java 类。
  * 
- * <p>����ģʽƬ��ָ�������ڴ����е�Ԥ�����ݡ�
+ * <p>以下模式片段指定包含在此类中的预期内容。
  * 
  * <pre>
  * &lt;complexType>
@@ -45,7 +45,7 @@ public class GetOutpfreeRecordsStatus {
     protected String cardNo;
 
     /**
-     * ��ȡname���Ե�ֵ��
+     * 获取name属性的值。
      * 
      * @return
      *     possible object is
@@ -57,7 +57,7 @@ public class GetOutpfreeRecordsStatus {
     }
 
     /**
-     * ����name���Ե�ֵ��
+     * 设置name属性的值。
      * 
      * @param value
      *     allowed object is
@@ -69,7 +69,7 @@ public class GetOutpfreeRecordsStatus {
     }
 
     /**
-     * ��ȡrecipeNo���Ե�ֵ��
+     * 获取recipeNo属性的值。
      * 
      * @return
      *     possible object is
@@ -81,7 +81,7 @@ public class GetOutpfreeRecordsStatus {
     }
 
     /**
-     * ����recipeNo���Ե�ֵ��
+     * 设置recipeNo属性的值。
      * 
      * @param value
      *     allowed object is
@@ -93,7 +93,7 @@ public class GetOutpfreeRecordsStatus {
     }
 
     /**
-     * ��ȡinvoiceNo���Ե�ֵ��
+     * 获取invoiceNo属性的值。
      * 
      * @return
      *     possible object is
@@ -105,7 +105,7 @@ public class GetOutpfreeRecordsStatus {
     }
 
     /**
-     * ����invoiceNo���Ե�ֵ��
+     * 设置invoiceNo属性的值。
      * 
      * @param value
      *     allowed object is
@@ -117,7 +117,7 @@ public class GetOutpfreeRecordsStatus {
     }
 
     /**
-     * ��ȡcardNo���Ե�ֵ��
+     * 获取cardNo属性的值。
      * 
      * @return
      *     possible object is
@@ -129,7 +129,7 @@ public class GetOutpfreeRecordsStatus {
     }
 
     /**
-     * ����cardNo���Ե�ֵ��
+     * 设置cardNo属性的值。
      * 
      * @param value
      *     allowed object is

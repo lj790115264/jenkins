@@ -88,4 +88,229 @@ public class Outpatient {
 
     // 窗口名字
     private String windowName;
+
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getRegisterId() {
+        return registerId;
+    }
+
+    public void setRegisterId(String registerId) {
+        this.registerId = registerId;
+    }
+
+    public String getPrescriptionNo() {
+        return prescriptionNo;
+    }
+
+    public void setPrescriptionNo(String prescriptionNo) {
+        this.prescriptionNo = prescriptionNo;
+    }
+
+    public String getOperCode() {
+        return operCode;
+    }
+
+    public void setOperCode(String operCode) {
+        this.operCode = operCode;
+    }
+
+    public String getPayChannel() {
+        return payChannel;
+    }
+
+    public void setPayChannel(String payChannel) {
+        this.payChannel = payChannel;
+    }
+
+    public BigDecimal getCost() {
+        return cost;
+    }
+
+    public void setCost(BigDecimal cost) {
+        this.cost = cost;
+    }
+
+    public String getOrderNo() {
+        return orderNo;
+    }
+
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo;
+    }
+
+    public String getPayData() {
+        return payData;
+    }
+
+    public void setPayData(String payData) {
+        this.payData = payData;
+    }
+
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
+    }
+
+    public String getIdCard() {
+        return idCard;
+    }
+
+    public void setIdCard(String idCard) {
+        this.idCard = idCard;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public String getInvoiceNo() {
+        return invoiceNo;
+    }
+
+    public void setInvoiceNo(String invoiceNo) {
+        this.invoiceNo = invoiceNo;
+    }
+
+    public String getReceiptNo() {
+        return receiptNo;
+    }
+
+    public void setReceiptNo(String receiptNo) {
+        this.receiptNo = receiptNo;
+    }
+
+    public Integer getConfirmState() {
+        return confirmState;
+    }
+
+    public void setConfirmState(Integer confirmState) {
+        this.confirmState = confirmState;
+    }
+
+    public Integer getPayState() {
+        return payState;
+    }
+
+    public void setPayState(Integer payState) {
+        this.payState = payState;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getRefundRes() {
+        return refundRes;
+    }
+
+    public void setRefundRes(String refundRes) {
+        this.refundRes = refundRes;
+    }
+
+    public String getRefundNo() {
+        return refundNo;
+    }
+
+    public void setRefundNo(String refundNo) {
+        this.refundNo = refundNo;
+    }
+
+    public Date getRefundTime() {
+        return refundTime;
+    }
+
+    public void setRefundTime(Date refundTime) {
+        this.refundTime = refundTime;
+    }
+
+    public String getAlipayRefundUrl() {
+        return alipayRefundUrl;
+    }
+
+    public void setAlipayRefundUrl(String alipayRefundUrl) {
+        this.alipayRefundUrl = alipayRefundUrl;
+    }
+
+    public BigDecimal getRefundCost() {
+        return refundCost;
+    }
+
+    public void setRefundCost(BigDecimal refundCost) {
+        this.refundCost = refundCost;
+    }
+
+    public String getFailConfirmedPrescription() {
+        return failConfirmedPrescription;
+    }
+
+    public void setFailConfirmedPrescription(String failConfirmedPrescription) {
+        this.failConfirmedPrescription = failConfirmedPrescription;
+    }
+
+    public String getDeptName() {
+        return deptName;
+    }
+
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
+    }
+
+    public String getDoctorName() {
+        return doctorName;
+    }
+
+    public void setDoctorName(String doctorName) {
+        this.doctorName = doctorName;
+    }
+
+    public String getRegLevelName() {
+        return regLevelName;
+    }
+
+    public void setRegLevelName(String regLevelName) {
+        this.regLevelName = regLevelName;
+    }
+
+    public String getRegDate() {
+        return regDate;
+    }
+
+    public void setRegDate(String regDate) {
+        this.regDate = regDate;
+    }
+
+    public String getPatientName() {
+        return patientName;
+    }
+
+    public void setPatientName(String patientName) {
+        this.patientName = patientName;
+    }
+
+    public String getWindowName() {
+        return windowName;
+    }
+
+    public void setWindowName(String windowName) {
+        this.windowName = windowName;
+    }
 }

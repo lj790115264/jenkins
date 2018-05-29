@@ -16,7 +16,8 @@ import java.net.InetSocketAddress;
 import java.net.Proxy;
 
 @SpringBootApplication(scanBasePackages = {"com.chinacaring"})
-@MapperScan({"com.chinacaring.user.mapper", "com.chinacaring.user.dao.mapper"})
+@MapperScan({"com.chinacaring.user.mapper", "com.chinacaring.user.dao.mapper", "com.chinacaring.peixian.patient" +
+        ".client.dao.mapper"})
 @EnableAsync
 @EnableScheduling
 @EnableDiscoveryClient
@@ -24,25 +25,25 @@ import java.net.Proxy;
 @EnableFeignClients(basePackages = "com.chinacaring")
 public class ClientApplication {
 
-	@Bean(name = "proxy")
-	public RestTemplate restTemplateProxy() {
-		SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
+    @Bean(name = "proxy")
+    public RestTemplate restTemplateProxy() {
+        SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
 
-		Proxy proxy= new Proxy(Proxy.Type.HTTP, new InetSocketAddress("172.17.10.89", 3128));
-		requestFactory.setProxy(proxy);
+        Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("172.17.10.89", 3128));
+        requestFactory.setProxy(proxy);
 
-		return new RestTemplate(requestFactory);
-	}
+        return new RestTemplate(requestFactory);
+    }
 
-	@Bean
-	public RestTemplate restTemplate() {
+    @Bean
+    public RestTemplate restTemplate() {
 
-		return new RestTemplate();
-	}
+        return new RestTemplate();
+    }
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 
-		SpringApplication.run(ClientApplication.class, args);
+        SpringApplication.run(ClientApplication.class, args);
 
 //		System.setProperty("http.proxyHost", "172.17.10.89");
 //		System.setProperty("http.proxyPort", "3128");
@@ -54,5 +55,5 @@ public class ClientApplication {
 //		};
 //
 //		Authenticator.setDefault(authenticator);
-	}
+    }
 }

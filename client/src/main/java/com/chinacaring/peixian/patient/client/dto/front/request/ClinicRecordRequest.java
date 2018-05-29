@@ -15,4 +15,36 @@ public class ClinicRecordRequest {
         this.beginTime = beginTime;
         this.endTime = endTime;
     }
+
+    public String getPatientCode() {
+        return patientCode;
+    }
+
+    public void setPatientCode(String patientCode) {
+        this.patientCode = patientCode;
+    }
+
+    public String getBeginTime() {
+        return beginTime;
+    }
+
+    public void setBeginTime(String beginTime) {
+        this.beginTime = beginTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

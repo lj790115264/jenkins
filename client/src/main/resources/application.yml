@@ -1,6 +1,7 @@
 server:
   port: 11236
-
+caring:
+  hospital: 1204
 ajax:
   debug: true
 

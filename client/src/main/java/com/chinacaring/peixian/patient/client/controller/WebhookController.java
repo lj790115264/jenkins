@@ -117,6 +117,8 @@ public class WebhookController {
                 try {
                     boolean tag = (Boolean) appointmentService.doRegister(orderNo);
                     if (tag) {
+                        orderByOrderNo.setIsPaid(1);
+                        ordersRepository.save(orderByOrderNo);
                         logger.error(orderNo + "挂号成功");
                     } else {
                         logger.error("异常重复操作该订单");
@@ -129,12 +131,18 @@ public class WebhookController {
                     //挂号失败。退款
                     refundService.refund(orderNo, Constant.ORDERS_APPOINTMENT, "退款原因" + e.getDetailMessage());
                     response.setStatus(500);
+                    orderByOrderNo.setRefundReason("挂号失败");
+                    orderByOrderNo.setIsRefund(1);
+                    ordersRepository.save(orderByOrderNo);
                     logger.error(orderNo + "挂号失败");
                 } catch (CommonException e) {
                     e.printStackTrace();
                     //挂号失败。退款
                     refundService.refund(orderNo, Constant.ORDERS_APPOINTMENT, "退款原因" + e.getDetailMessage());
                     response.setStatus(500);
+                    orderByOrderNo.setRefundReason("挂号失败");
+                    orderByOrderNo.setIsRefund(1);
+                    ordersRepository.save(orderByOrderNo);
                     logger.error(orderNo + "挂号失败");
                 }
                 break;
@@ -144,6 +152,8 @@ public class WebhookController {
                 try {
                     boolean tag = outPatientService.doOutpatientConfirm(orderNo);
                     if (tag) {
+                        orderByOrderNo.setIsPaid(1);
+                        ordersRepository.save(orderByOrderNo);
                         logger.error(orderNo + "门诊确认成功");
                     } else {
                         logger.error("异常重复操作该订单");
@@ -155,27 +165,54 @@ public class WebhookController {
                     //挂号失败。退款
                     refundService.refund(orderNo, Constant.ORDERS_CLINIC, "退款原因" + e.getDetailMessage());
                     response.setStatus(500);
-                    logger.error(orderNo + "门诊确认成功");
+                    orderByOrderNo.setRefundReason("门诊缴费确认失败");
+                    orderByOrderNo.setIsRefund(1);
+                    ordersRepository.save(orderByOrderNo);
+                    logger.error(orderNo + "门诊缴费确认失败");
                 } catch (CommonException e) {
                     e.printStackTrace();
                     //挂号失败。退款
                     refundService.refund(orderNo, Constant.ORDERS_CLINIC, "退款原因" + e.getDetailMessage());
                     response.setStatus(500);
-                    logger.error(orderNo + "门诊确认成功");
+                    //更新订单状态
+                    orderByOrderNo.setRefundReason("门诊缴费确认失败");
+                    orderByOrderNo.setIsRefund(1);
+                    ordersRepository.save(orderByOrderNo);
+                    logger.error(orderNo + "门诊缴费确认失败");
                 }
                 break;
 
             //住院预交金
             case Constant.ORDERS_INHOS_PRE_CHARGE:
                 try {
-                    inbalanceService.doInbalanceConfirm(orderNo);
-                    logger.error(orderNo + "住院预交金确认成功");
-                } catch (CommonException e) {
+                    boolean tag = inbalanceService.doInbalanceConfirm(orderNo);
+                    if (tag) {
+                        logger.error(orderNo + "住院预交金确认成功");
+                        orderByOrderNo.setIsPaid(1);
+                        ordersRepository.save(orderByOrderNo);
+                    } else {
+                        logger.error("异常重复操作该订单");
+                    }
+                } catch (SoapException e) {
+                    logger.error("------------------------------");
+                    logger.error("argument:" + e.getArguments());
+                    logger.error("exception:" + e.getDevMessage());
+                    //挂号失败。退款
+                    refundService.refund(orderNo, Constant.ORDERS_INHOS_PRE_CHARGE, "退款原因" + e.getDetailMessage());
+                    response.setStatus(500);
+                    orderByOrderNo.setRefundReason("住院预交金确认失败");
+                    orderByOrderNo.setIsRefund(1);
+                    ordersRepository.save(orderByOrderNo);
+                    logger.error(orderNo + "住院预交金确认失败");
+                }  catch (CommonException e) {
                     e.printStackTrace();
                     //挂号失败。退款
                     refundService.refund(orderNo, Constant.ORDERS_INHOS_PRE_CHARGE, "退款原因" + e.getDetailMessage());
                     response.setStatus(500);
-                    logger.error(orderNo + "住院预交金确认成功");
+                    orderByOrderNo.setRefundReason("住院预交金确认失败");
+                    orderByOrderNo.setIsRefund(1);
+                    ordersRepository.save(orderByOrderNo);
+                    logger.error(orderNo + "住院预交金确认失败");
                 }
                 break;
 

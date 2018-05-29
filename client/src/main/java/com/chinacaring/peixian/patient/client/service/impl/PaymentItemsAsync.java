@@ -72,7 +72,7 @@ public class PaymentItemsAsync {
     }
 
     Future<List<InbalancePayment>> getInbalancePayments(String idCard, User user){
-        List<Inbalance> inbalances = inbalanceRepository.findAllByIdCardAndUserIdAndPayStateNot(idCard, user.getId(), Constant.ORDERS_PAID);
+        List<Inbalance> inbalances = inbalanceRepository.findAllByIdCardAndUserIdAndPayStateNot(idCard, user.getId(), Constant.ORDERS_NOT_PAY);
         List<InbalancePayment> inbalancePayments = new ArrayList<>();
         for (Inbalance inbalance : inbalances){
 

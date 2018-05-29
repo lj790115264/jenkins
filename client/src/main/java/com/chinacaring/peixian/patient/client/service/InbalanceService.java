@@ -11,7 +11,7 @@ public interface InbalanceService {
 
     Object createInbalanceOrder(InbalanceInfoRequest inbalanceInfoRequest, User user) throws ParseException;
 
-    Object doInbalanceConfirm(String orderNO) throws CommonException;
+    Boolean doInbalanceConfirm(String orderNO) throws CommonException;
 
     InbalanceResponse getInbalance(String name, String idCard) throws CommonException;
 

@@ -1,0 +1,24 @@
+<response>
+    <code>0</code>
+    <message>成功</message>
+    <data>
+        <item>
+            <his_ord_num>T4084135066003</his_ord_num>
+            <dept_code>6003</dept_code>
+            <dept_name>彩超室</dept_name>
+            <see_no>9</see_no>
+            <show_no>172</show_no>
+            <next_no></next_no>
+            <wait_num>1</wait_num>
+        </item>
+        <item>
+            <his_ord_num>T4084135066003</his_ord_num>
+            <dept_code>6003</dept_code>
+            <dept_name>彩超室</dept_name>
+            <see_no>9</see_no>
+            <show_no>172</show_no>
+            <next_no></next_no>
+            <wait_num>1</wait_num>
+        </item>
+    </data>
+</response>

@@ -218,4 +218,20 @@ public class AppointmentInfoRequest {
     public void setRegisterLevelName(String registerLevelName) {
         this.registerLevelName = registerLevelName;
     }
+
+    public String getShowTime() {
+        return showTime;
+    }
+
+    public void setShowTime(String showTime) {
+        this.showTime = showTime;
+    }
+
+    public String getRegisterLevelCode() {
+        return registerLevelCode;
+    }
+
+    public void setRegisterLevelCode(String registerLevelCode) {
+        this.registerLevelCode = registerLevelCode;
+    }
 }

@@ -30,12 +30,12 @@ public interface QuyiServiceNoSoap {
      */
     @WebMethod(operationName = "HelloWorld", action = "http://tempuri.org/HelloWorld")
     @WebResult(name = "HelloWorldResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "HelloWorld", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.HelloWorld")
-    @ResponseWrapper(localName = "HelloWorldResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.HelloWorldResponse")
+    @RequestWrapper(localName = "HelloWorld", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.HelloWorld")
+    @ResponseWrapper(localName = "HelloWorldResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.HelloWorldResponse")
     public String helloWorld();
 
     /**
-     * ��ȡ�۸�ʾ��Ϣ
+     * 查取价格公示信息
      * 
      * @param itemCode
      * @return
@@ -43,45 +43,84 @@ public interface QuyiServiceNoSoap {
      */
     @WebMethod(operationName = "QueryPriceBoardInfo", action = "http://tempuri.org/QueryPriceBoardInfo")
     @WebResult(name = "QueryPriceBoardInfoResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "QueryPriceBoardInfo", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.QueryPriceBoardInfo")
-    @ResponseWrapper(localName = "QueryPriceBoardInfoResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.QueryPriceBoardInfoResponse")
+    @RequestWrapper(localName = "QueryPriceBoardInfo", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.QueryPriceBoardInfo")
+    @ResponseWrapper(localName = "QueryPriceBoardInfoResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.QueryPriceBoardInfoResponse")
     public String queryPriceBoardInfo(
-            @WebParam(name = "itemCode", targetNamespace = "http://tempuri.org/")
-                    String itemCode);
+        @WebParam(name = "itemCode", targetNamespace = "http://tempuri.org/")
+        String itemCode);
 
     /**
-     * ��ѯ������Ϣ
-     *
+     * 住院患者信息查询
+     * 
+     * @param idType
+     * @param name
+     * @param idNo
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod(operationName = "get_inhos_patient_info", action = "http://tempuri.org/get_inhos_patient_info")
+    @WebResult(name = "get_inhos_patient_infoResult", targetNamespace = "http://tempuri.org/")
+    @RequestWrapper(localName = "get_inhos_patient_info", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetInhosPatientInfo")
+    @ResponseWrapper(localName = "get_inhos_patient_infoResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetInhosPatientInfoResponse")
+    public String getInhosPatientInfo(
+        @WebParam(name = "id_type", targetNamespace = "http://tempuri.org/")
+        String idType,
+        @WebParam(name = "id_no", targetNamespace = "http://tempuri.org/")
+        String idNo,
+        @WebParam(name = "name", targetNamespace = "http://tempuri.org/")
+        String name);
+
+    /**
+     * 住院预交金查询
+     * 
+     * @param inpatientNo
+     * @param name
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod(operationName = "get_inhos_patient_inbalance", action = "http://tempuri.org/get_inhos_patient_inbalance")
+    @WebResult(name = "get_inhos_patient_inbalanceResult", targetNamespace = "http://tempuri.org/")
+    @RequestWrapper(localName = "get_inhos_patient_inbalance", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetInhosPatientInbalance")
+    @ResponseWrapper(localName = "get_inhos_patient_inbalanceResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetInhosPatientInbalanceResponse")
+    public String getInhosPatientInbalance(
+        @WebParam(name = "inpatientNo", targetNamespace = "http://tempuri.org/")
+        String inpatientNo,
+        @WebParam(name = "name", targetNamespace = "http://tempuri.org/")
+        String name);
+
+    /**
+     * 查询科室信息
+     * 
      * @param deptCode
      * @return
      *     returns java.lang.String
      */
     @WebMethod(operationName = "GetDeptInfo", action = "http://tempuri.org/GetDeptInfo")
     @WebResult(name = "GetDeptInfoResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "GetDeptInfo", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.GetDeptInfo")
-    @ResponseWrapper(localName = "GetDeptInfoResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.GetDeptInfoResponse")
+    @RequestWrapper(localName = "GetDeptInfo", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetDeptInfo")
+    @ResponseWrapper(localName = "GetDeptInfoResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetDeptInfoResponse")
     public String getDeptInfo(
-            @WebParam(name = "deptCode", targetNamespace = "http://tempuri.org/")
-                    String deptCode);
+        @WebParam(name = "deptCode", targetNamespace = "http://tempuri.org/")
+        String deptCode);
 
     /**
-     * ��ѯҽ����Ϣ
-     *
+     * 查询医生信息
+     * 
      * @param doctCode
      * @return
      *     returns java.lang.String
      */
     @WebMethod(operationName = "GetDocInfo", action = "http://tempuri.org/GetDocInfo")
     @WebResult(name = "GetDocInfoResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "GetDocInfo", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.GetDocInfo")
-    @ResponseWrapper(localName = "GetDocInfoResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.GetDocInfoResponse")
+    @RequestWrapper(localName = "GetDocInfo", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetDocInfo")
+    @ResponseWrapper(localName = "GetDocInfoResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetDocInfoResponse")
     public String getDocInfo(
-            @WebParam(name = "doctCode", targetNamespace = "http://tempuri.org/")
-                    String doctCode);
+        @WebParam(name = "doctCode", targetNamespace = "http://tempuri.org/")
+        String doctCode);
 
     /**
-     * ��ѯ������Ϣ
-     *
+     * 查询检验信息
+     * 
      * @param beginDate
      * @param endDate
      * @param cardNo
@@ -90,19 +129,19 @@ public interface QuyiServiceNoSoap {
      */
     @WebMethod(operationName = "GetLisResultInfo", action = "http://tempuri.org/GetLisResultInfo")
     @WebResult(name = "GetLisResultInfoResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "GetLisResultInfo", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.GetLisResultInfo")
-    @ResponseWrapper(localName = "GetLisResultInfoResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.GetLisResultInfoResponse")
+    @RequestWrapper(localName = "GetLisResultInfo", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetLisResultInfo")
+    @ResponseWrapper(localName = "GetLisResultInfoResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetLisResultInfoResponse")
     public String getLisResultInfo(
-            @WebParam(name = "cardNo", targetNamespace = "http://tempuri.org/")
-                    String cardNo,
-            @WebParam(name = "beginDate", targetNamespace = "http://tempuri.org/")
-                    String beginDate,
-            @WebParam(name = "endDate", targetNamespace = "http://tempuri.org/")
-                    String endDate);
+        @WebParam(name = "cardNo", targetNamespace = "http://tempuri.org/")
+        String cardNo,
+        @WebParam(name = "beginDate", targetNamespace = "http://tempuri.org/")
+        String beginDate,
+        @WebParam(name = "endDate", targetNamespace = "http://tempuri.org/")
+        String endDate);
 
     /**
-     * ��ѯ�����Ϣ
-     *
+     * 查询检查信息
+     * 
      * @param beginDate
      * @param endDate
      * @param cardNo
@@ -111,51 +150,49 @@ public interface QuyiServiceNoSoap {
      */
     @WebMethod(operationName = "GetPacsResultInfo", action = "http://tempuri.org/GetPacsResultInfo")
     @WebResult(name = "GetPacsResultInfoResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "GetPacsResultInfo", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.GetPacsResultInfo")
-    @ResponseWrapper(localName = "GetPacsResultInfoResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.GetPacsResultInfoResponse")
+    @RequestWrapper(localName = "GetPacsResultInfo", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetPacsResultInfo")
+    @ResponseWrapper(localName = "GetPacsResultInfoResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetPacsResultInfoResponse")
     public String getPacsResultInfo(
-            @WebParam(name = "cardNo", targetNamespace = "http://tempuri.org/")
-                    String cardNo,
-            @WebParam(name = "beginDate", targetNamespace = "http://tempuri.org/")
-                    String beginDate,
-            @WebParam(name = "endDate", targetNamespace = "http://tempuri.org/")
-                    String endDate);
+        @WebParam(name = "cardNo", targetNamespace = "http://tempuri.org/")
+        String cardNo,
+        @WebParam(name = "beginDate", targetNamespace = "http://tempuri.org/")
+        String beginDate,
+        @WebParam(name = "endDate", targetNamespace = "http://tempuri.org/")
+        String endDate);
 
     /**
-     * ��ѯסԺ������Ϣ
-     *
+     * 查询住院检验信息
+     * 
      * @param cardNo
      * @return
      *     returns java.lang.String
      */
     @WebMethod(operationName = "GetZYLisResultInfo", action = "http://tempuri.org/GetZYLisResultInfo")
     @WebResult(name = "GetZYLisResultInfoResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "GetZYLisResultInfo", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.GetZYLisResultInfo")
-    @ResponseWrapper(localName = "GetZYLisResultInfoResponse", targetNamespace = "http://tempuri.org/", className =
-            "com.chinacaring.czyy.hospital.xmldomain.test.GetZYLisResultInfoResponse")
+    @RequestWrapper(localName = "GetZYLisResultInfo", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetZYLisResultInfo")
+    @ResponseWrapper(localName = "GetZYLisResultInfoResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetZYLisResultInfoResponse")
     public String getZYLisResultInfo(
-            @WebParam(name = "cardNo", targetNamespace = "http://tempuri.org/")
-                    String cardNo);
+        @WebParam(name = "cardNo", targetNamespace = "http://tempuri.org/")
+        String cardNo);
 
     /**
-     * ��ѯסԺ�����Ϣ
-     *
+     * 查询住院检查信息
+     * 
      * @param cardNo
      * @return
      *     returns java.lang.String
      */
     @WebMethod(operationName = "GetZYPacsResultInfo", action = "http://tempuri.org/GetZYPacsResultInfo")
     @WebResult(name = "GetZYPacsResultInfoResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "GetZYPacsResultInfo", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.GetZYPacsResultInfo")
-    @ResponseWrapper(localName = "GetZYPacsResultInfoResponse", targetNamespace = "http://tempuri.org/", className =
-            "com.chinacaring.czyy.hospital.xmldomain.test.GetZYPacsResultInfoResponse")
+    @RequestWrapper(localName = "GetZYPacsResultInfo", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetZYPacsResultInfo")
+    @ResponseWrapper(localName = "GetZYPacsResultInfoResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetZYPacsResultInfoResponse")
     public String getZYPacsResultInfo(
-            @WebParam(name = "cardNo", targetNamespace = "http://tempuri.org/")
-                    String cardNo);
+        @WebParam(name = "cardNo", targetNamespace = "http://tempuri.org/")
+        String cardNo);
 
     /**
-     * ��ѯ������ҽԺ�п���ͨ��ʵ�￨
-     *
+     * 查询患者在医院中卡号通过实物卡
+     * 
      * @param name
      * @param mcardNo
      * @return
@@ -163,18 +200,17 @@ public interface QuyiServiceNoSoap {
      */
     @WebMethod(operationName = "GetPatientCardNo", action = "http://tempuri.org/GetPatientCardNo")
     @WebResult(name = "GetPatientCardNoResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "GetPatientCardNo", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.GetPatientCardNo")
-    @ResponseWrapper(localName = "GetPatientCardNoResponse", targetNamespace = "http://tempuri.org/", className =
-            "com.chinacaring.czyy.hospital.xmldomain.test.GetPatientCardNoResponse")
+    @RequestWrapper(localName = "GetPatientCardNo", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetPatientCardNo")
+    @ResponseWrapper(localName = "GetPatientCardNoResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetPatientCardNoResponse")
     public String getPatientCardNo(
-            @WebParam(name = "mcardNo", targetNamespace = "http://tempuri.org/")
-                    String mcardNo,
-            @WebParam(name = "name", targetNamespace = "http://tempuri.org/")
-                    String name);
+        @WebParam(name = "mcardNo", targetNamespace = "http://tempuri.org/")
+        String mcardNo,
+        @WebParam(name = "name", targetNamespace = "http://tempuri.org/")
+        String name);
 
     /**
-     * ��ѯ������ҽԺ�п���
-     *
+     * 查询患者在医院中卡号
+     * 
      * @param iden
      * @param name
      * @param cardNo
@@ -183,52 +219,64 @@ public interface QuyiServiceNoSoap {
      */
     @WebMethod(operationName = "GetPatientCardNo1", action = "http://tempuri.org/GetPatientCardNo1")
     @WebResult(name = "GetPatientCardNo1Result", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "GetPatientCardNo1", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.GetPatientCardNo1")
-    @ResponseWrapper(localName = "GetPatientCardNo1Response", targetNamespace = "http://tempuri.org/", className =
-            "com.chinacaring.czyy.hospital.xmldomain.test.GetPatientCardNo1Response")
+    @RequestWrapper(localName = "GetPatientCardNo1", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetPatientCardNo1")
+    @ResponseWrapper(localName = "GetPatientCardNo1Response", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetPatientCardNo1Response")
     public String getPatientCardNo1(
-            @WebParam(name = "name", targetNamespace = "http://tempuri.org/")
-                    String name,
-            @WebParam(name = "cardNo", targetNamespace = "http://tempuri.org/")
-                    String cardNo,
-            @WebParam(name = "iden", targetNamespace = "http://tempuri.org/")
-                    String iden);
+        @WebParam(name = "name", targetNamespace = "http://tempuri.org/")
+        String name,
+        @WebParam(name = "cardNo", targetNamespace = "http://tempuri.org/")
+        String cardNo,
+        @WebParam(name = "iden", targetNamespace = "http://tempuri.org/")
+        String iden);
 
     /**
-     * �½�������Ϣ
-     *
+     * 新建患者信息
+     * 
      * @param input
      * @return
      *     returns java.lang.String
      */
     @WebMethod(operationName = "InsertPatientInfo", action = "http://tempuri.org/InsertPatientInfo")
     @WebResult(name = "InsertPatientInfoResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "InsertPatientInfo", targetNamespace = "http://tempuri.org/", className = "com" +
-            ".chinacaring.czyy.hospital.xmldomain.test.InsertPatientInfo")
-    @ResponseWrapper(localName = "InsertPatientInfoResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.InsertPatientInfoResponse")
+    @RequestWrapper(localName = "InsertPatientInfo", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.InsertPatientInfo")
+    @ResponseWrapper(localName = "InsertPatientInfoResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.InsertPatientInfoResponse")
     public String insertPatientInfo(
-            @WebParam(name = "input", targetNamespace = "http://tempuri.org/")
-                    String input);
+        @WebParam(name = "input", targetNamespace = "http://tempuri.org/")
+        String input);
 
     /**
-     * ��ѯ�����Ϣ
-     *
+     * 直接挂号、预约转挂号
+     * 
+     * @param input
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod(operationName = "InsertRegisterTemp", action = "http://tempuri.org/InsertRegisterTemp")
+    @WebResult(name = "InsertRegisterTempResult", targetNamespace = "http://tempuri.org/")
+    @RequestWrapper(localName = "InsertRegisterTemp", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.InsertRegisterTemp")
+    @ResponseWrapper(localName = "InsertRegisterTempResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.InsertRegisterTempResponse")
+    public String insertRegisterTemp(
+        @WebParam(name = "input", targetNamespace = "http://tempuri.org/")
+        String input);
+
+    /**
+     * 查询午别信息
+     * 
      * @param noonCode
      * @return
      *     returns java.lang.String
      */
     @WebMethod(operationName = "GetNoonInfo", action = "http://tempuri.org/GetNoonInfo")
     @WebResult(name = "GetNoonInfoResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "GetNoonInfo", targetNamespace = "http://tempuri.org/", className = "com.chinacaring" +
-            ".czyy.hospital.xmldomain.test.GetNoonInfo")
-    @ResponseWrapper(localName = "GetNoonInfoResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.GetNoonInfoResponse")
+    @RequestWrapper(localName = "GetNoonInfo", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetNoonInfo")
+    @ResponseWrapper(localName = "GetNoonInfoResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetNoonInfoResponse")
     public String getNoonInfo(
-            @WebParam(name = "noonCode", targetNamespace = "http://tempuri.org/")
-                    String noonCode);
+        @WebParam(name = "noonCode", targetNamespace = "http://tempuri.org/")
+        String noonCode);
 
     /**
-     * ��ѯ�Ű���Ϣ
-     *
+     * 查询排班信息
+     * 
      * @param beginDate
      * @param endDate
      * @return
@@ -236,18 +284,17 @@ public interface QuyiServiceNoSoap {
      */
     @WebMethod(operationName = "GetShemaInfo", action = "http://tempuri.org/GetShemaInfo")
     @WebResult(name = "GetShemaInfoResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "GetShemaInfo", targetNamespace = "http://tempuri.org/", className = "com.chinacaring" +
-            ".czyy.hospital.xmldomain.test.GetShemaInfo")
-    @ResponseWrapper(localName = "GetShemaInfoResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.GetShemaInfoResponse")
+    @RequestWrapper(localName = "GetShemaInfo", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetShemaInfo")
+    @ResponseWrapper(localName = "GetShemaInfoResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetShemaInfoResponse")
     public String getShemaInfo(
-            @WebParam(name = "beginDate", targetNamespace = "http://tempuri.org/")
-                    String beginDate,
-            @WebParam(name = "endDate", targetNamespace = "http://tempuri.org/")
-                    String endDate);
+        @WebParam(name = "beginDate", targetNamespace = "http://tempuri.org/")
+        String beginDate,
+        @WebParam(name = "endDate", targetNamespace = "http://tempuri.org/")
+        String endDate);
 
     /**
-     * ��ѯ�Ű���Ϣ��ͨ�����һ���ҽ����ѯ
-     *
+     * 查询排班信息可通过科室或者医生查询
+     * 
      * @param beginDate
      * @param endDate
      * @param deptCode
@@ -256,20 +303,19 @@ public interface QuyiServiceNoSoap {
      */
     @WebMethod(operationName = "GetShemaInfoNew", action = "http://tempuri.org/GetShemaInfoNew")
     @WebResult(name = "GetShemaInfoNewResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "GetShemaInfoNew", targetNamespace = "http://tempuri.org/", className = "com" +
-            ".chinacaring.czyy.hospital.xmldomain.test.GetShemaInfoNew")
-    @ResponseWrapper(localName = "GetShemaInfoNewResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.GetShemaInfoNewResponse")
+    @RequestWrapper(localName = "GetShemaInfoNew", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetShemaInfoNew")
+    @ResponseWrapper(localName = "GetShemaInfoNewResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetShemaInfoNewResponse")
     public String getShemaInfoNew(
-            @WebParam(name = "beginDate", targetNamespace = "http://tempuri.org/")
-                    String beginDate,
-            @WebParam(name = "endDate", targetNamespace = "http://tempuri.org/")
-                    String endDate,
-            @WebParam(name = "deptCode", targetNamespace = "http://tempuri.org/")
-                    String deptCode);
+        @WebParam(name = "beginDate", targetNamespace = "http://tempuri.org/")
+        String beginDate,
+        @WebParam(name = "endDate", targetNamespace = "http://tempuri.org/")
+        String endDate,
+        @WebParam(name = "deptCode", targetNamespace = "http://tempuri.org/")
+        String deptCode);
 
     /**
-     * ��ѯ���ϵ��Ű���Ϣ
-     *
+     * 查询作废的排班信息
+     * 
      * @param beginDate
      * @param endDate
      * @return
@@ -277,93 +323,125 @@ public interface QuyiServiceNoSoap {
      */
     @WebMethod(operationName = "GetShemaInfoNoVaild", action = "http://tempuri.org/GetShemaInfoNoVaild")
     @WebResult(name = "GetShemaInfoNoVaildResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "GetShemaInfoNoVaild", targetNamespace = "http://tempuri.org/", className = "com" +
-            ".chinacaring.czyy.hospital.xmldomain.test.GetShemaInfoNoVaild")
-    @ResponseWrapper(localName = "GetShemaInfoNoVaildResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.GetShemaInfoNoVaildResponse")
+    @RequestWrapper(localName = "GetShemaInfoNoVaild", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetShemaInfoNoVaild")
+    @ResponseWrapper(localName = "GetShemaInfoNoVaildResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetShemaInfoNoVaildResponse")
     public String getShemaInfoNoVaild(
-            @WebParam(name = "beginDate", targetNamespace = "http://tempuri.org/")
-                    String beginDate,
-            @WebParam(name = "endDate", targetNamespace = "http://tempuri.org/")
-                    String endDate);
+        @WebParam(name = "beginDate", targetNamespace = "http://tempuri.org/")
+        String beginDate,
+        @WebParam(name = "endDate", targetNamespace = "http://tempuri.org/")
+        String endDate);
 
     /**
-     * ����δ���š���ѯԤԼʱ�����Ϣ
-     *
+     * 【暂未开放】查询预约时间点信息
+     * 
      * @param shemaId
      * @return
      *     returns java.lang.String
      */
     @WebMethod(operationName = "GetShemaPointInfo", action = "http://tempuri.org/GetShemaPointInfo")
     @WebResult(name = "GetShemaPointInfoResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "GetShemaPointInfo", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.GetShemaPointInfo")
-    @ResponseWrapper(localName = "GetShemaPointInfoResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.GetShemaPointInfoResponse")
+    @RequestWrapper(localName = "GetShemaPointInfo", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetShemaPointInfo")
+    @ResponseWrapper(localName = "GetShemaPointInfoResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetShemaPointInfoResponse")
     public String getShemaPointInfo(
-            @WebParam(name = "shemaId", targetNamespace = "http://tempuri.org/")
-                    String shemaId);
+        @WebParam(name = "shemaId", targetNamespace = "http://tempuri.org/")
+        String shemaId);
 
     /**
-     * ԤԼ�Һš�ȡ��ԤԼ�Һ�
-     *
+     * 预约挂号、取消预约挂号
+     * 
      * @param input
      * @return
      *     returns java.lang.String
      */
     @WebMethod(operationName = "InsertBooking", action = "http://tempuri.org/InsertBooking")
     @WebResult(name = "InsertBookingResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "InsertBooking", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.InsertBooking")
-    @ResponseWrapper(localName = "InsertBookingResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.InsertBookingResponse")
+    @RequestWrapper(localName = "InsertBooking", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.InsertBooking")
+    @ResponseWrapper(localName = "InsertBookingResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.InsertBookingResponse")
     public String insertBooking(
-            @WebParam(name = "input", targetNamespace = "http://tempuri.org/")
-                    String input);
+        @WebParam(name = "input", targetNamespace = "http://tempuri.org/")
+        String input);
 
     /**
-     * ��ѯ�Һ�״̬2Ϊ�ѿ���,0Ϊδ����,3Ϊ�˺�
-     *
+     * 插入住院预约金
+     * 
+     * @param patientName
+     * @param payMode
+     * @param operCode
+     * @param fee
+     * @param rechargeTime
+     * @param inpatientSeq
+     * @param transNo
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod(operationName = "inhos_patient_inbalance_recharge", action = "http://tempuri.org/inhos_patient_inbalance_recharge")
+    @WebResult(name = "inhos_patient_inbalance_rechargeResult", targetNamespace = "http://tempuri.org/")
+    @RequestWrapper(localName = "inhos_patient_inbalance_recharge", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.InhosPatientInbalanceRecharge")
+    @ResponseWrapper(localName = "inhos_patient_inbalance_rechargeResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.InhosPatientInbalanceRechargeResponse")
+    public String inhosPatientInbalanceRecharge(
+        @WebParam(name = "inpatient_seq", targetNamespace = "http://tempuri.org/")
+        String inpatientSeq,
+        @WebParam(name = "patient_name", targetNamespace = "http://tempuri.org/")
+        String patientName,
+        @WebParam(name = "oper_code", targetNamespace = "http://tempuri.org/")
+        String operCode,
+        @WebParam(name = "pay_mode", targetNamespace = "http://tempuri.org/")
+        String payMode,
+        @WebParam(name = "fee", targetNamespace = "http://tempuri.org/")
+        String fee,
+        @WebParam(name = "recharge_time", targetNamespace = "http://tempuri.org/")
+        String rechargeTime,
+        @WebParam(name = "trans_no", targetNamespace = "http://tempuri.org/")
+        String transNo);
+
+    /**
+     * 查询挂号状态2为已看诊,0为未看诊,3为退号
+     * 
      * @param clinicCode
      * @return
      *     returns java.lang.String
      */
     @WebMethod(operationName = "GetRegState", action = "http://tempuri.org/GetRegState")
     @WebResult(name = "GetRegStateResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "GetRegState", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.GetRegState")
-    @ResponseWrapper(localName = "GetRegStateResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.GetRegStateResponse")
+    @RequestWrapper(localName = "GetRegState", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetRegState")
+    @ResponseWrapper(localName = "GetRegStateResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetRegStateResponse")
     public String getRegState(
-            @WebParam(name = "clinicCode", targetNamespace = "http://tempuri.org/")
-                    String clinicCode);
+        @WebParam(name = "clinicCode", targetNamespace = "http://tempuri.org/")
+        String clinicCode);
 
     /**
-     * ��ѯ�Һ�״̬2Ϊ�ѿ���,1Ϊδ����,3Ϊ�˺�
-     *
+     * 查询挂号状态2为已看诊,1为未看诊,3为退号
+     * 
      * @param clinicCode
      * @return
      *     returns java.lang.String
      */
     @WebMethod(operationName = "GetRegisterStatus", action = "http://tempuri.org/GetRegisterStatus")
     @WebResult(name = "GetRegisterStatusResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "GetRegisterStatus", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.GetRegisterStatus")
-    @ResponseWrapper(localName = "GetRegisterStatusResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.GetRegisterStatusResponse")
+    @RequestWrapper(localName = "GetRegisterStatus", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetRegisterStatus")
+    @ResponseWrapper(localName = "GetRegisterStatusResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetRegisterStatusResponse")
     public String getRegisterStatus(
-            @WebParam(name = "clinicCode", targetNamespace = "http://tempuri.org/")
-                    String clinicCode);
+        @WebParam(name = "clinicCode", targetNamespace = "http://tempuri.org/")
+        String clinicCode);
 
     /**
-     * ��ѯԤԼ�Һ�״̬
-     *
+     * 查询预约挂号状态
+     * 
      * @param bookId
      * @return
      *     returns java.lang.String
      */
     @WebMethod(operationName = "GetBookingState", action = "http://tempuri.org/GetBookingState")
     @WebResult(name = "GetBookingStateResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "GetBookingState", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.GetBookingState")
-    @ResponseWrapper(localName = "GetBookingStateResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.GetBookingStateResponse")
+    @RequestWrapper(localName = "GetBookingState", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetBookingState")
+    @ResponseWrapper(localName = "GetBookingStateResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetBookingStateResponse")
     public String getBookingState(
-            @WebParam(name = "bookId", targetNamespace = "http://tempuri.org/")
-                    String bookId);
+        @WebParam(name = "bookId", targetNamespace = "http://tempuri.org/")
+        String bookId);
 
     /**
-     * ��ȡʱ�䷶Χ�ڹҺ���Ϣ
-     *
+     * 获取时间范围内挂号信息
+     * 
      * @param internalDays
      * @param name
      * @param cardNo
@@ -372,19 +450,19 @@ public interface QuyiServiceNoSoap {
      */
     @WebMethod(operationName = "GetRegInfoByCardNoOrName", action = "http://tempuri.org/GetRegInfoByCardNoOrName")
     @WebResult(name = "GetRegInfoByCardNoOrNameResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "GetRegInfoByCardNoOrName", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.GetRegInfoByCardNoOrName")
-    @ResponseWrapper(localName = "GetRegInfoByCardNoOrNameResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.GetRegInfoByCardNoOrNameResponse")
+    @RequestWrapper(localName = "GetRegInfoByCardNoOrName", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetRegInfoByCardNoOrName")
+    @ResponseWrapper(localName = "GetRegInfoByCardNoOrNameResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetRegInfoByCardNoOrNameResponse")
     public String getRegInfoByCardNoOrName(
-            @WebParam(name = "cardNo", targetNamespace = "http://tempuri.org/")
-                    String cardNo,
-            @WebParam(name = "Name", targetNamespace = "http://tempuri.org/")
-                    String name,
-            @WebParam(name = "internalDays", targetNamespace = "http://tempuri.org/")
-                    String internalDays);
+        @WebParam(name = "cardNo", targetNamespace = "http://tempuri.org/")
+        String cardNo,
+        @WebParam(name = "Name", targetNamespace = "http://tempuri.org/")
+        String name,
+        @WebParam(name = "internalDays", targetNamespace = "http://tempuri.org/")
+        String internalDays);
 
     /**
-     * ��ȡ�Ŷӽкű�
-     *
+     * 获取排队叫号表
+     * 
      * @param beginDate
      * @param endDate
      * @param cardNo
@@ -393,34 +471,19 @@ public interface QuyiServiceNoSoap {
      */
     @WebMethod(operationName = "GetQueue", action = "http://tempuri.org/GetQueue")
     @WebResult(name = "GetQueueResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "GetQueue", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.GetQueue")
-    @ResponseWrapper(localName = "GetQueueResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.GetQueueResponse")
+    @RequestWrapper(localName = "GetQueue", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetQueue")
+    @ResponseWrapper(localName = "GetQueueResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetQueueResponse")
     public String getQueue(
-            @WebParam(name = "cardNo", targetNamespace = "http://tempuri.org/")
-                    String cardNo,
-            @WebParam(name = "beginDate", targetNamespace = "http://tempuri.org/")
-                    String beginDate,
-            @WebParam(name = "endDate", targetNamespace = "http://tempuri.org/")
-                    String endDate);
+        @WebParam(name = "cardNo", targetNamespace = "http://tempuri.org/")
+        String cardNo,
+        @WebParam(name = "beginDate", targetNamespace = "http://tempuri.org/")
+        String beginDate,
+        @WebParam(name = "endDate", targetNamespace = "http://tempuri.org/")
+        String endDate);
 
     /**
-     * ֱ�ӹҺš�ԤԼת�Һ�
-     *
-     * @param input
-     * @return
-     *     returns java.lang.String
-     */
-    @WebMethod(operationName = "InsertRegisterTemp", action = "http://tempuri.org/InsertRegisterTemp")
-    @WebResult(name = "InsertRegisterTempResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "InsertRegisterTemp", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.InsertRegisterTemp")
-    @ResponseWrapper(localName = "InsertRegisterTempResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.InsertRegisterTempResponse")
-    public String insertRegisterTemp(
-            @WebParam(name = "input", targetNamespace = "http://tempuri.org/")
-                    String input);
-
-    /**
-     * ����δ���š��Һš�ԤԼת�Һ�(��ʱ��)ҽ���ѿ�֧��
-     *
+     * 【暂未开放】挂号、预约转挂号(临时表)医保脱卡支付
+     * 
      * @param input
      * @param readSiReturn
      * @param operCode
@@ -431,24 +494,23 @@ public interface QuyiServiceNoSoap {
      */
     @WebMethod(operationName = "InsertSIRegisterTemp", action = "http://tempuri.org/InsertSIRegisterTemp")
     @WebResult(name = "InsertSIRegisterTempResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "InsertSIRegisterTemp", targetNamespace = "http://tempuri.org/", className = "com" +
-            ".chinacaring.czyy.hospital.xmldomain.test.InsertSIRegisterTemp")
-    @ResponseWrapper(localName = "InsertSIRegisterTempResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.InsertSIRegisterTempResponse")
+    @RequestWrapper(localName = "InsertSIRegisterTemp", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.InsertSIRegisterTemp")
+    @ResponseWrapper(localName = "InsertSIRegisterTempResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.InsertSIRegisterTempResponse")
     public String insertSIRegisterTemp(
-            @WebParam(name = "input", targetNamespace = "http://tempuri.org/")
-                    String input,
-            @WebParam(name = "chargeSiReturn", targetNamespace = "http://tempuri.org/")
-                    String chargeSiReturn,
-            @WebParam(name = "readSiReturn", targetNamespace = "http://tempuri.org/")
-                    String readSiReturn,
-            @WebParam(name = "operCode", targetNamespace = "http://tempuri.org/")
-                    String operCode,
-            @WebParam(name = "ybInvoice", targetNamespace = "http://tempuri.org/")
-                    String ybInvoice);
+        @WebParam(name = "input", targetNamespace = "http://tempuri.org/")
+        String input,
+        @WebParam(name = "chargeSiReturn", targetNamespace = "http://tempuri.org/")
+        String chargeSiReturn,
+        @WebParam(name = "readSiReturn", targetNamespace = "http://tempuri.org/")
+        String readSiReturn,
+        @WebParam(name = "operCode", targetNamespace = "http://tempuri.org/")
+        String operCode,
+        @WebParam(name = "ybInvoice", targetNamespace = "http://tempuri.org/")
+        String ybInvoice);
 
     /**
-     * ��ѯ��APP�Һż�¼
-     *
+     * 查询非APP挂号记录
+     * 
      * @param iden
      * @param name
      * @param cardNo
@@ -458,21 +520,21 @@ public interface QuyiServiceNoSoap {
      */
     @WebMethod(operationName = "QueryZDBookingInfo", action = "http://tempuri.org/QueryZDBookingInfo")
     @WebResult(name = "QueryZDBookingInfoResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "QueryZDBookingInfo", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.QueryZDBookingInfo")
-    @ResponseWrapper(localName = "QueryZDBookingInfoResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.QueryZDBookingInfoResponse")
+    @RequestWrapper(localName = "QueryZDBookingInfo", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.QueryZDBookingInfo")
+    @ResponseWrapper(localName = "QueryZDBookingInfoResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.QueryZDBookingInfoResponse")
     public String queryZDBookingInfo(
-            @WebParam(name = "cardNo", targetNamespace = "http://tempuri.org/")
-                    String cardNo,
-            @WebParam(name = "name", targetNamespace = "http://tempuri.org/")
-                    String name,
-            @WebParam(name = "iden", targetNamespace = "http://tempuri.org/")
-                    String iden,
-            @WebParam(name = "phoneNo", targetNamespace = "http://tempuri.org/")
-                    String phoneNo);
+        @WebParam(name = "cardNo", targetNamespace = "http://tempuri.org/")
+        String cardNo,
+        @WebParam(name = "name", targetNamespace = "http://tempuri.org/")
+        String name,
+        @WebParam(name = "iden", targetNamespace = "http://tempuri.org/")
+        String iden,
+        @WebParam(name = "phoneNo", targetNamespace = "http://tempuri.org/")
+        String phoneNo);
 
     /**
-     * ��ѯ���йҺ���Ϣ
-     *
+     * 查询所有挂号信息
+     * 
      * @param iden
      * @param cardNo
      * @return
@@ -480,17 +542,17 @@ public interface QuyiServiceNoSoap {
      */
     @WebMethod(operationName = "QueryAppRegistRecords", action = "http://tempuri.org/QueryAppRegistRecords")
     @WebResult(name = "QueryAppRegistRecordsResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "QueryAppRegistRecords", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.QueryAppRegistRecords")
-    @ResponseWrapper(localName = "QueryAppRegistRecordsResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.QueryAppRegistRecordsResponse")
+    @RequestWrapper(localName = "QueryAppRegistRecords", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.QueryAppRegistRecords")
+    @ResponseWrapper(localName = "QueryAppRegistRecordsResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.QueryAppRegistRecordsResponse")
     public String queryAppRegistRecords(
-            @WebParam(name = "cardNo", targetNamespace = "http://tempuri.org/")
-                    String cardNo,
-            @WebParam(name = "iden", targetNamespace = "http://tempuri.org/")
-                    String iden);
+        @WebParam(name = "cardNo", targetNamespace = "http://tempuri.org/")
+        String cardNo,
+        @WebParam(name = "iden", targetNamespace = "http://tempuri.org/")
+        String iden);
 
     /**
-     * ��ѯ����ԤԼ��Ϣ
-     *
+     * 查询所有预约信息
+     * 
      * @param inden
      * @param cardNo
      * @return
@@ -498,17 +560,17 @@ public interface QuyiServiceNoSoap {
      */
     @WebMethod(operationName = "QueryAppAppointRecords", action = "http://tempuri.org/QueryAppAppointRecords")
     @WebResult(name = "QueryAppAppointRecordsResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "QueryAppAppointRecords", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.QueryAppAppointRecords")
-    @ResponseWrapper(localName = "QueryAppAppointRecordsResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.QueryAppAppointRecordsResponse")
+    @RequestWrapper(localName = "QueryAppAppointRecords", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.QueryAppAppointRecords")
+    @ResponseWrapper(localName = "QueryAppAppointRecordsResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.QueryAppAppointRecordsResponse")
     public String queryAppAppointRecords(
-            @WebParam(name = "cardNo", targetNamespace = "http://tempuri.org/")
-                    String cardNo,
-            @WebParam(name = "inden", targetNamespace = "http://tempuri.org/")
-                    String inden);
+        @WebParam(name = "cardNo", targetNamespace = "http://tempuri.org/")
+        String cardNo,
+        @WebParam(name = "inden", targetNamespace = "http://tempuri.org/")
+        String inden);
 
     /**
-     * ��ѯAPP�ҺŶ�����Ϣ
-     *
+     * 查询APP挂号对账信息
+     * 
      * @param beginDate
      * @param endDate
      * @return
@@ -516,17 +578,17 @@ public interface QuyiServiceNoSoap {
      */
     @WebMethod(operationName = "QueryQuYiRegInfo", action = "http://tempuri.org/QueryQuYiRegInfo")
     @WebResult(name = "QueryQuYiRegInfoResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "QueryQuYiRegInfo", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.QueryQuYiRegInfo")
-    @ResponseWrapper(localName = "QueryQuYiRegInfoResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.QueryQuYiRegInfoResponse")
+    @RequestWrapper(localName = "QueryQuYiRegInfo", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.QueryQuYiRegInfo")
+    @ResponseWrapper(localName = "QueryQuYiRegInfoResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.QueryQuYiRegInfoResponse")
     public String queryQuYiRegInfo(
-            @WebParam(name = "beginDate", targetNamespace = "http://tempuri.org/")
-                    String beginDate,
-            @WebParam(name = "endDate", targetNamespace = "http://tempuri.org/")
-                    String endDate);
+        @WebParam(name = "beginDate", targetNamespace = "http://tempuri.org/")
+        String beginDate,
+        @WebParam(name = "endDate", targetNamespace = "http://tempuri.org/")
+        String endDate);
 
     /**
-     * ��ѯAPP�ҺŶ�����Ϣ�����շѹ���
-     *
+     * 查询APP挂号对账信息根据收费工号
+     * 
      * @param beginDate
      * @param endDate
      * @param operCode
@@ -535,19 +597,19 @@ public interface QuyiServiceNoSoap {
      */
     @WebMethod(operationName = "QueryRegInfoOper", action = "http://tempuri.org/QueryRegInfoOper")
     @WebResult(name = "QueryRegInfoOperResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "QueryRegInfoOper", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.QueryRegInfoOper")
-    @ResponseWrapper(localName = "QueryRegInfoOperResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.QueryRegInfoOperResponse")
+    @RequestWrapper(localName = "QueryRegInfoOper", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.QueryRegInfoOper")
+    @ResponseWrapper(localName = "QueryRegInfoOperResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.QueryRegInfoOperResponse")
     public String queryRegInfoOper(
-            @WebParam(name = "beginDate", targetNamespace = "http://tempuri.org/")
-                    String beginDate,
-            @WebParam(name = "endDate", targetNamespace = "http://tempuri.org/")
-                    String endDate,
-            @WebParam(name = "operCode", targetNamespace = "http://tempuri.org/")
-                    String operCode);
+        @WebParam(name = "beginDate", targetNamespace = "http://tempuri.org/")
+        String beginDate,
+        @WebParam(name = "endDate", targetNamespace = "http://tempuri.org/")
+        String endDate,
+        @WebParam(name = "operCode", targetNamespace = "http://tempuri.org/")
+        String operCode);
 
     /**
-     * ��ѯAPP�ҺŶ�����Ϣ�����շѹ��ź�ҽ��
-     *
+     * 查询APP挂号对账信息根据收费工号含医保
+     * 
      * @param beginDate
      * @param endDate
      * @param operCode
@@ -556,19 +618,19 @@ public interface QuyiServiceNoSoap {
      */
     @WebMethod(operationName = "QueryRegInfoOperSi", action = "http://tempuri.org/QueryRegInfoOperSi")
     @WebResult(name = "QueryRegInfoOperSiResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "QueryRegInfoOperSi", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.QueryRegInfoOperSi")
-    @ResponseWrapper(localName = "QueryRegInfoOperSiResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.QueryRegInfoOperSiResponse")
+    @RequestWrapper(localName = "QueryRegInfoOperSi", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.QueryRegInfoOperSi")
+    @ResponseWrapper(localName = "QueryRegInfoOperSiResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.QueryRegInfoOperSiResponse")
     public String queryRegInfoOperSi(
-            @WebParam(name = "beginDate", targetNamespace = "http://tempuri.org/")
-                    String beginDate,
-            @WebParam(name = "endDate", targetNamespace = "http://tempuri.org/")
-                    String endDate,
-            @WebParam(name = "operCode", targetNamespace = "http://tempuri.org/")
-                    String operCode);
+        @WebParam(name = "beginDate", targetNamespace = "http://tempuri.org/")
+        String beginDate,
+        @WebParam(name = "endDate", targetNamespace = "http://tempuri.org/")
+        String endDate,
+        @WebParam(name = "operCode", targetNamespace = "http://tempuri.org/")
+        String operCode);
 
     /**
-     * �������
-     *
+     * 门诊结算
+     * 
      * @param payMode
      * @param operCode
      * @param recipeNo
@@ -579,23 +641,23 @@ public interface QuyiServiceNoSoap {
      */
     @WebMethod(operationName = "SaveFee", action = "http://tempuri.org/SaveFee")
     @WebResult(name = "SaveFeeResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "SaveFee", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.SaveFee")
-    @ResponseWrapper(localName = "SaveFeeResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.SaveFeeResponse")
+    @RequestWrapper(localName = "SaveFee", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.SaveFee")
+    @ResponseWrapper(localName = "SaveFeeResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.SaveFeeResponse")
     public String saveFee(
-            @WebParam(name = "clinicCode", targetNamespace = "http://tempuri.org/")
-                    String clinicCode,
-            @WebParam(name = "recipeNo", targetNamespace = "http://tempuri.org/")
-                    String recipeNo,
-            @WebParam(name = "operCode", targetNamespace = "http://tempuri.org/")
-                    String operCode,
-            @WebParam(name = "payMode", targetNamespace = "http://tempuri.org/")
-                    String payMode,
-            @WebParam(name = "totCost", targetNamespace = "http://tempuri.org/")
-                    String totCost);
+        @WebParam(name = "clinicCode", targetNamespace = "http://tempuri.org/")
+        String clinicCode,
+        @WebParam(name = "recipeNo", targetNamespace = "http://tempuri.org/")
+        String recipeNo,
+        @WebParam(name = "operCode", targetNamespace = "http://tempuri.org/")
+        String operCode,
+        @WebParam(name = "payMode", targetNamespace = "http://tempuri.org/")
+        String payMode,
+        @WebParam(name = "totCost", targetNamespace = "http://tempuri.org/")
+        String totCost);
 
     /**
-     * ����δ���š��������ҽ���Ͽ�֧��
-     *
+     * 【暂未开放】门诊结算医保拖卡支付
+     * 
      * @param readSiReturn
      * @param payMode
      * @param operCode
@@ -609,29 +671,29 @@ public interface QuyiServiceNoSoap {
      */
     @WebMethod(operationName = "SaveSIFee", action = "http://tempuri.org/SaveSIFee")
     @WebResult(name = "SaveSIFeeResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "SaveSIFee", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.SaveSIFee")
-    @ResponseWrapper(localName = "SaveSIFeeResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.SaveSIFeeResponse")
+    @RequestWrapper(localName = "SaveSIFee", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.SaveSIFee")
+    @ResponseWrapper(localName = "SaveSIFeeResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.SaveSIFeeResponse")
     public String saveSIFee(
-            @WebParam(name = "clinicCode", targetNamespace = "http://tempuri.org/")
-                    String clinicCode,
-            @WebParam(name = "recipeNo", targetNamespace = "http://tempuri.org/")
-                    String recipeNo,
-            @WebParam(name = "operCode", targetNamespace = "http://tempuri.org/")
-                    String operCode,
-            @WebParam(name = "payMode", targetNamespace = "http://tempuri.org/")
-                    String payMode,
-            @WebParam(name = "totCost", targetNamespace = "http://tempuri.org/")
-                    String totCost,
-            @WebParam(name = "chargeSiReturn", targetNamespace = "http://tempuri.org/")
-                    String chargeSiReturn,
-            @WebParam(name = "readSiReturn", targetNamespace = "http://tempuri.org/")
-                    String readSiReturn,
-            @WebParam(name = "ybInvoice", targetNamespace = "http://tempuri.org/")
-                    String ybInvoice);
+        @WebParam(name = "clinicCode", targetNamespace = "http://tempuri.org/")
+        String clinicCode,
+        @WebParam(name = "recipeNo", targetNamespace = "http://tempuri.org/")
+        String recipeNo,
+        @WebParam(name = "operCode", targetNamespace = "http://tempuri.org/")
+        String operCode,
+        @WebParam(name = "payMode", targetNamespace = "http://tempuri.org/")
+        String payMode,
+        @WebParam(name = "totCost", targetNamespace = "http://tempuri.org/")
+        String totCost,
+        @WebParam(name = "chargeSiReturn", targetNamespace = "http://tempuri.org/")
+        String chargeSiReturn,
+        @WebParam(name = "readSiReturn", targetNamespace = "http://tempuri.org/")
+        String readSiReturn,
+        @WebParam(name = "ybInvoice", targetNamespace = "http://tempuri.org/")
+        String ybInvoice);
 
     /**
-     * ����δ���š���ȡ������Ϣ
-     *
+     * 【暂未开放】获取辅材信息
+     * 
      * @param recipeNo
      * @param clinicCode
      * @return
@@ -639,33 +701,32 @@ public interface QuyiServiceNoSoap {
      */
     @WebMethod(operationName = "GetFcInfo", action = "http://tempuri.org/GetFcInfo")
     @WebResult(name = "GetFcInfoResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "GetFcInfo", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.GetFcInfo")
-    @ResponseWrapper(localName = "GetFcInfoResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.GetFcInfoResponse")
+    @RequestWrapper(localName = "GetFcInfo", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetFcInfo")
+    @ResponseWrapper(localName = "GetFcInfoResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetFcInfoResponse")
     public String getFcInfo(
-            @WebParam(name = "clinicCode", targetNamespace = "http://tempuri.org/")
-                    String clinicCode,
-            @WebParam(name = "recipeNo", targetNamespace = "http://tempuri.org/")
-                    String recipeNo);
+        @WebParam(name = "clinicCode", targetNamespace = "http://tempuri.org/")
+        String clinicCode,
+        @WebParam(name = "recipeNo", targetNamespace = "http://tempuri.org/")
+        String recipeNo);
 
     /**
-     * ����δ���š�ɾ��������Ϣ
-     *
+     * 【暂未开放】删除辅材信息
+     * 
      * @param clinicCode
      * @return
      *     returns java.lang.String
      */
     @WebMethod(operationName = "DeleteFcInfo", action = "http://tempuri.org/DeleteFcInfo")
     @WebResult(name = "DeleteFcInfoResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "DeleteFcInfo", targetNamespace = "http://tempuri.org/", className = "com.chinacaring" +
-            ".czyy.hospital.xmldomain.test.DeleteFcInfo")
-    @ResponseWrapper(localName = "DeleteFcInfoResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.DeleteFcInfoResponse")
+    @RequestWrapper(localName = "DeleteFcInfo", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.DeleteFcInfo")
+    @ResponseWrapper(localName = "DeleteFcInfoResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.DeleteFcInfoResponse")
     public String deleteFcInfo(
-            @WebParam(name = "clinicCode", targetNamespace = "http://tempuri.org/")
-                    String clinicCode);
+        @WebParam(name = "clinicCode", targetNamespace = "http://tempuri.org/")
+        String clinicCode);
 
     /**
-     * ��ȡ�����շ���Ϣ
-     *
+     * 获取病人收费信息
+     * 
      * @param isFee
      * @param clinicCode
      * @return
@@ -673,18 +734,17 @@ public interface QuyiServiceNoSoap {
      */
     @WebMethod(operationName = "GetFeeListByClinicCode", action = "http://tempuri.org/GetFeeListByClinicCode")
     @WebResult(name = "GetFeeListByClinicCodeResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "GetFeeListByClinicCode", targetNamespace = "http://tempuri.org/", className = "com" +
-            ".chinacaring.czyy.hospital.xmldomain.test.GetFeeListByClinicCode")
-    @ResponseWrapper(localName = "GetFeeListByClinicCodeResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.GetFeeListByClinicCodeResponse")
+    @RequestWrapper(localName = "GetFeeListByClinicCode", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetFeeListByClinicCode")
+    @ResponseWrapper(localName = "GetFeeListByClinicCodeResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetFeeListByClinicCodeResponse")
     public String getFeeListByClinicCode(
-            @WebParam(name = "clinicCode", targetNamespace = "http://tempuri.org/")
-                    String clinicCode,
-            @WebParam(name = "isFee", targetNamespace = "http://tempuri.org/")
-                    String isFee);
+        @WebParam(name = "clinicCode", targetNamespace = "http://tempuri.org/")
+        String clinicCode,
+        @WebParam(name = "isFee", targetNamespace = "http://tempuri.org/")
+        String isFee);
 
     /**
-     * ��ȡ�����շ���Ϣ����λ
-     *
+     * 获取病人收费信息含单位
+     * 
      * @param isFee
      * @param clinicCode
      * @return
@@ -692,19 +752,17 @@ public interface QuyiServiceNoSoap {
      */
     @WebMethod(operationName = "GetFeeListByClinicCode1", action = "http://tempuri.org/GetFeeListByClinicCode1")
     @WebResult(name = "GetFeeListByClinicCode1Result", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "GetFeeListByClinicCode1", targetNamespace = "http://tempuri.org/", className = "com" +
-            ".chinacaring.czyy.hospital.xmldomain.test.GetFeeListByClinicCode1")
-    @ResponseWrapper(localName = "GetFeeListByClinicCode1Response", targetNamespace = "http://tempuri.org/",
-            className = "com.chinacaring.czyy.hospital.xmldomain.test.GetFeeListByClinicCode1Response")
+    @RequestWrapper(localName = "GetFeeListByClinicCode1", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetFeeListByClinicCode1")
+    @ResponseWrapper(localName = "GetFeeListByClinicCode1Response", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetFeeListByClinicCode1Response")
     public String getFeeListByClinicCode1(
-            @WebParam(name = "clinicCode", targetNamespace = "http://tempuri.org/")
-                    String clinicCode,
-            @WebParam(name = "isFee", targetNamespace = "http://tempuri.org/")
-                    String isFee);
+        @WebParam(name = "clinicCode", targetNamespace = "http://tempuri.org/")
+        String clinicCode,
+        @WebParam(name = "isFee", targetNamespace = "http://tempuri.org/")
+        String isFee);
 
     /**
-     * ��ȡ����ɷѼ�¼��ѯ(�˷Ѽ�¼)
-     *
+     * 获取门诊缴费记录查询(退费记录)
+     * 
      * @param name
      * @param recipeNo
      * @param invoiceNo
@@ -714,22 +772,21 @@ public interface QuyiServiceNoSoap {
      */
     @WebMethod(operationName = "GetOutpfreeRecordsStatus", action = "http://tempuri.org/GetOutpfreeRecordsStatus")
     @WebResult(name = "GetOutpfreeRecordsStatusResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "GetOutpfreeRecordsStatus", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.GetOutpfreeRecordsStatus")
-    @ResponseWrapper(localName = "GetOutpfreeRecordsStatusResponse", targetNamespace = "http://tempuri.org/",
-            className = "com.chinacaring.czyy.hospital.xmldomain.test.GetOutpfreeRecordsStatusResponse")
+    @RequestWrapper(localName = "GetOutpfreeRecordsStatus", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetOutpfreeRecordsStatus")
+    @ResponseWrapper(localName = "GetOutpfreeRecordsStatusResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetOutpfreeRecordsStatusResponse")
     public String getOutpfreeRecordsStatus(
-            @WebParam(name = "name", targetNamespace = "http://tempuri.org/")
-                    String name,
-            @WebParam(name = "recipeNo", targetNamespace = "http://tempuri.org/")
-                    String recipeNo,
-            @WebParam(name = "invoiceNo", targetNamespace = "http://tempuri.org/")
-                    String invoiceNo,
-            @WebParam(name = "cardNo", targetNamespace = "http://tempuri.org/")
-                    String cardNo);
+        @WebParam(name = "name", targetNamespace = "http://tempuri.org/")
+        String name,
+        @WebParam(name = "recipeNo", targetNamespace = "http://tempuri.org/")
+        String recipeNo,
+        @WebParam(name = "invoiceNo", targetNamespace = "http://tempuri.org/")
+        String invoiceNo,
+        @WebParam(name = "cardNo", targetNamespace = "http://tempuri.org/")
+        String cardNo);
 
     /**
-     * ��ȡ����ɷѼ�¼��ѯ
-     *
+     * 获取门诊缴费记录查询
+     * 
      * @param name
      * @param recipeNo
      * @param invoiceNo
@@ -739,22 +796,21 @@ public interface QuyiServiceNoSoap {
      */
     @WebMethod(operationName = "GetOutpfreeRecordsNewStatus", action = "http://tempuri.org/GetOutpfreeRecordsNewStatus")
     @WebResult(name = "GetOutpfreeRecordsNewStatusResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "GetOutpfreeRecordsNewStatus", targetNamespace = "http://tempuri.org/", className =
-            "com.chinacaring.czyy.hospital.xmldomain.test.GetOutpfreeRecordsNewStatus")
-    @ResponseWrapper(localName = "GetOutpfreeRecordsNewStatusResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.GetOutpfreeRecordsNewStatusResponse")
+    @RequestWrapper(localName = "GetOutpfreeRecordsNewStatus", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetOutpfreeRecordsNewStatus")
+    @ResponseWrapper(localName = "GetOutpfreeRecordsNewStatusResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetOutpfreeRecordsNewStatusResponse")
     public String getOutpfreeRecordsNewStatus(
-            @WebParam(name = "name", targetNamespace = "http://tempuri.org/")
-                    String name,
-            @WebParam(name = "recipeNo", targetNamespace = "http://tempuri.org/")
-                    String recipeNo,
-            @WebParam(name = "invoiceNo", targetNamespace = "http://tempuri.org/")
-                    String invoiceNo,
-            @WebParam(name = "cardNo", targetNamespace = "http://tempuri.org/")
-                    String cardNo);
+        @WebParam(name = "name", targetNamespace = "http://tempuri.org/")
+        String name,
+        @WebParam(name = "recipeNo", targetNamespace = "http://tempuri.org/")
+        String recipeNo,
+        @WebParam(name = "invoiceNo", targetNamespace = "http://tempuri.org/")
+        String invoiceNo,
+        @WebParam(name = "cardNo", targetNamespace = "http://tempuri.org/")
+        String cardNo);
 
     /**
-     * ��ȡ�����������
-     *
+     * 查取门诊费用主表
+     * 
      * @param name
      * @param cardNo
      * @return
@@ -762,17 +818,17 @@ public interface QuyiServiceNoSoap {
      */
     @WebMethod(operationName = "QueryInvoiceInfo", action = "http://tempuri.org/QueryInvoiceInfo")
     @WebResult(name = "QueryInvoiceInfoResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "QueryInvoiceInfo", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.QueryInvoiceInfo")
-    @ResponseWrapper(localName = "QueryInvoiceInfoResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.QueryInvoiceInfoResponse")
+    @RequestWrapper(localName = "QueryInvoiceInfo", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.QueryInvoiceInfo")
+    @ResponseWrapper(localName = "QueryInvoiceInfoResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.QueryInvoiceInfoResponse")
     public String queryInvoiceInfo(
-            @WebParam(name = "cardNo", targetNamespace = "http://tempuri.org/")
-                    String cardNo,
-            @WebParam(name = "name", targetNamespace = "http://tempuri.org/")
-                    String name);
+        @WebParam(name = "cardNo", targetNamespace = "http://tempuri.org/")
+        String cardNo,
+        @WebParam(name = "name", targetNamespace = "http://tempuri.org/")
+        String name);
 
     /**
-     * ��ȡ���������������Ա
-     *
+     * 查取门诊费用主表传操作员
+     * 
      * @param beginDate
      * @param endDate
      * @param operCode
@@ -781,20 +837,19 @@ public interface QuyiServiceNoSoap {
      */
     @WebMethod(operationName = "QueryInvoiceInfoOper", action = "http://tempuri.org/QueryInvoiceInfoOper")
     @WebResult(name = "QueryInvoiceInfoOperResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "QueryInvoiceInfoOper", targetNamespace = "http://tempuri.org/", className = "com" +
-            ".chinacaring.czyy.hospital.xmldomain.test.QueryInvoiceInfoOper")
-    @ResponseWrapper(localName = "QueryInvoiceInfoOperResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.QueryInvoiceInfoOperResponse")
+    @RequestWrapper(localName = "QueryInvoiceInfoOper", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.QueryInvoiceInfoOper")
+    @ResponseWrapper(localName = "QueryInvoiceInfoOperResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.QueryInvoiceInfoOperResponse")
     public String queryInvoiceInfoOper(
-            @WebParam(name = "beginDate", targetNamespace = "http://tempuri.org/")
-                    String beginDate,
-            @WebParam(name = "endDate", targetNamespace = "http://tempuri.org/")
-                    String endDate,
-            @WebParam(name = "operCode", targetNamespace = "http://tempuri.org/")
-                    String operCode);
+        @WebParam(name = "beginDate", targetNamespace = "http://tempuri.org/")
+        String beginDate,
+        @WebParam(name = "endDate", targetNamespace = "http://tempuri.org/")
+        String endDate,
+        @WebParam(name = "operCode", targetNamespace = "http://tempuri.org/")
+        String operCode);
 
     /**
-     * ����δ���š���ȡ���������������Ա��ҽ��
-     *
+     * 【暂未开放】查取门诊费用主表传操作员含医保
+     * 
      * @param beginDate
      * @param endDate
      * @param operCode
@@ -803,64 +858,64 @@ public interface QuyiServiceNoSoap {
      */
     @WebMethod(operationName = "QueryInvoiceInfoOperSi", action = "http://tempuri.org/QueryInvoiceInfoOperSi")
     @WebResult(name = "QueryInvoiceInfoOperSiResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "QueryInvoiceInfoOperSi", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.QueryInvoiceInfoOperSi")
-    @ResponseWrapper(localName = "QueryInvoiceInfoOperSiResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.QueryInvoiceInfoOperSiResponse")
+    @RequestWrapper(localName = "QueryInvoiceInfoOperSi", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.QueryInvoiceInfoOperSi")
+    @ResponseWrapper(localName = "QueryInvoiceInfoOperSiResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.QueryInvoiceInfoOperSiResponse")
     public String queryInvoiceInfoOperSi(
-            @WebParam(name = "beginDate", targetNamespace = "http://tempuri.org/")
-                    String beginDate,
-            @WebParam(name = "endDate", targetNamespace = "http://tempuri.org/")
-                    String endDate,
-            @WebParam(name = "operCode", targetNamespace = "http://tempuri.org/")
-                    String operCode);
+        @WebParam(name = "beginDate", targetNamespace = "http://tempuri.org/")
+        String beginDate,
+        @WebParam(name = "endDate", targetNamespace = "http://tempuri.org/")
+        String endDate,
+        @WebParam(name = "operCode", targetNamespace = "http://tempuri.org/")
+        String operCode);
 
     /**
-     * ��ȡ���������ϸ��
-     *
+     * 查取门诊费用明细表
+     * 
      * @param invoiceNo
      * @return
      *     returns java.lang.String
      */
     @WebMethod(operationName = "QueryInvoiceMxInfo", action = "http://tempuri.org/QueryInvoiceMxInfo")
     @WebResult(name = "QueryInvoiceMxInfoResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "QueryInvoiceMxInfo", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.QueryInvoiceMxInfo")
-    @ResponseWrapper(localName = "QueryInvoiceMxInfoResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.QueryInvoiceMxInfoResponse")
+    @RequestWrapper(localName = "QueryInvoiceMxInfo", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.QueryInvoiceMxInfo")
+    @ResponseWrapper(localName = "QueryInvoiceMxInfoResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.QueryInvoiceMxInfoResponse")
     public String queryInvoiceMxInfo(
-            @WebParam(name = "invoiceNo", targetNamespace = "http://tempuri.org/")
-                    String invoiceNo);
+        @WebParam(name = "invoiceNo", targetNamespace = "http://tempuri.org/")
+        String invoiceNo);
 
     /**
-     * ��ѯ��������Ϣ
-     *
+     * 查询处方主信息
+     * 
      * @param clinicNo
      * @return
      *     returns java.lang.String
      */
     @WebMethod(operationName = "QueryPrescriptionInfo", action = "http://tempuri.org/QueryPrescriptionInfo")
     @WebResult(name = "QueryPrescriptionInfoResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "QueryPrescriptionInfo", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.QueryPrescriptionInfo")
-    @ResponseWrapper(localName = "QueryPrescriptionInfoResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.QueryPrescriptionInfoResponse")
+    @RequestWrapper(localName = "QueryPrescriptionInfo", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.QueryPrescriptionInfo")
+    @ResponseWrapper(localName = "QueryPrescriptionInfoResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.QueryPrescriptionInfoResponse")
     public String queryPrescriptionInfo(
-            @WebParam(name = "clinicNo", targetNamespace = "http://tempuri.org/")
-                    String clinicNo);
+        @WebParam(name = "clinicNo", targetNamespace = "http://tempuri.org/")
+        String clinicNo);
 
     /**
-     * ��ѯ����ҩƷ��Ϣ
-     *
+     * 查询处方药品信息
+     * 
      * @param recipeNo
      * @return
      *     returns java.lang.String
      */
     @WebMethod(operationName = "QueryPrescriptionMedicione", action = "http://tempuri.org/QueryPrescriptionMedicione")
     @WebResult(name = "QueryPrescriptionMedicioneResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "QueryPrescriptionMedicione", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.QueryPrescriptionMedicione")
-    @ResponseWrapper(localName = "QueryPrescriptionMedicioneResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.QueryPrescriptionMedicioneResponse")
+    @RequestWrapper(localName = "QueryPrescriptionMedicione", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.QueryPrescriptionMedicione")
+    @ResponseWrapper(localName = "QueryPrescriptionMedicioneResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.QueryPrescriptionMedicioneResponse")
     public String queryPrescriptionMedicione(
-            @WebParam(name = "recipeNo", targetNamespace = "http://tempuri.org/")
-                    String recipeNo);
+        @WebParam(name = "recipeNo", targetNamespace = "http://tempuri.org/")
+        String recipeNo);
 
     /**
-     * ��ѯ��Ժ����סԺ����
-     *
+     * 查询在院患者住院费用
+     * 
      * @param iden
      * @param name
      * @param inDate
@@ -869,19 +924,19 @@ public interface QuyiServiceNoSoap {
      */
     @WebMethod(operationName = "QueryInMainInfo", action = "http://tempuri.org/QueryInMainInfo")
     @WebResult(name = "QueryInMainInfoResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "QueryInMainInfo", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.QueryInMainInfo")
-    @ResponseWrapper(localName = "QueryInMainInfoResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.QueryInMainInfoResponse")
+    @RequestWrapper(localName = "QueryInMainInfo", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.QueryInMainInfo")
+    @ResponseWrapper(localName = "QueryInMainInfoResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.QueryInMainInfoResponse")
     public String queryInMainInfo(
-            @WebParam(name = "name", targetNamespace = "http://tempuri.org/")
-                    String name,
-            @WebParam(name = "iden", targetNamespace = "http://tempuri.org/")
-                    String iden,
-            @WebParam(name = "inDate", targetNamespace = "http://tempuri.org/")
-                    String inDate);
+        @WebParam(name = "name", targetNamespace = "http://tempuri.org/")
+        String name,
+        @WebParam(name = "iden", targetNamespace = "http://tempuri.org/")
+        String iden,
+        @WebParam(name = "inDate", targetNamespace = "http://tempuri.org/")
+        String inDate);
 
     /**
-     * ��ѯ��Ժ���߷��ü�¼
-     *
+     * 查询在院患者费用记录
+     * 
      * @param inPatientNo
      * @param patientNo
      * @param cardNo
@@ -890,34 +945,34 @@ public interface QuyiServiceNoSoap {
      */
     @WebMethod(operationName = "QueryInMainMxInfo", action = "http://tempuri.org/QueryInMainMxInfo")
     @WebResult(name = "QueryInMainMxInfoResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "QueryInMainMxInfo", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.QueryInMainMxInfo")
-    @ResponseWrapper(localName = "QueryInMainMxInfoResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.QueryInMainMxInfoResponse")
+    @RequestWrapper(localName = "QueryInMainMxInfo", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.QueryInMainMxInfo")
+    @ResponseWrapper(localName = "QueryInMainMxInfoResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.QueryInMainMxInfoResponse")
     public String queryInMainMxInfo(
-            @WebParam(name = "cardNo", targetNamespace = "http://tempuri.org/")
-                    String cardNo,
-            @WebParam(name = "inPatientNo", targetNamespace = "http://tempuri.org/")
-                    String inPatientNo,
-            @WebParam(name = "patientNo", targetNamespace = "http://tempuri.org/")
-                    String patientNo);
+        @WebParam(name = "cardNo", targetNamespace = "http://tempuri.org/")
+        String cardNo,
+        @WebParam(name = "inPatientNo", targetNamespace = "http://tempuri.org/")
+        String inPatientNo,
+        @WebParam(name = "patientNo", targetNamespace = "http://tempuri.org/")
+        String patientNo);
 
     /**
-     * ��ѯ����סԺ������Ϣ
-     *
+     * 查询病人住院费用信息
+     * 
      * @param inPatientNo
      * @return
      *     returns java.lang.String
      */
     @WebMethod(operationName = "QueryPrefeeMaster", action = "http://tempuri.org/QueryPrefeeMaster")
     @WebResult(name = "QueryPrefeeMasterResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "QueryPrefeeMaster", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.QueryPrefeeMaster")
-    @ResponseWrapper(localName = "QueryPrefeeMasterResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.QueryPrefeeMasterResponse")
+    @RequestWrapper(localName = "QueryPrefeeMaster", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.QueryPrefeeMaster")
+    @ResponseWrapper(localName = "QueryPrefeeMasterResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.QueryPrefeeMasterResponse")
     public String queryPrefeeMaster(
-            @WebParam(name = "inPatientNo", targetNamespace = "http://tempuri.org/")
-                    String inPatientNo);
+        @WebParam(name = "inPatientNo", targetNamespace = "http://tempuri.org/")
+        String inPatientNo);
 
     /**
-     * ��ȡסԺ��������
-     *
+     * 查取住院结算主表
+     * 
      * @param inden
      * @param inTimes
      * @param patient
@@ -928,23 +983,23 @@ public interface QuyiServiceNoSoap {
      */
     @WebMethod(operationName = "QueryBalanceHead", action = "http://tempuri.org/QueryBalanceHead")
     @WebResult(name = "QueryBalanceHeadResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "QueryBalanceHead", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.QueryBalanceHead")
-    @ResponseWrapper(localName = "QueryBalanceHeadResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.QueryBalanceHeadResponse")
+    @RequestWrapper(localName = "QueryBalanceHead", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.QueryBalanceHead")
+    @ResponseWrapper(localName = "QueryBalanceHeadResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.QueryBalanceHeadResponse")
     public String queryBalanceHead(
-            @WebParam(name = "cardNo", targetNamespace = "http://tempuri.org/")
-                    String cardNo,
-            @WebParam(name = "inTimes", targetNamespace = "http://tempuri.org/")
-                    String inTimes,
-            @WebParam(name = "patient", targetNamespace = "http://tempuri.org/")
-                    String patient,
-            @WebParam(name = "name", targetNamespace = "http://tempuri.org/")
-                    String name,
-            @WebParam(name = "inden", targetNamespace = "http://tempuri.org/")
-                    String inden);
+        @WebParam(name = "cardNo", targetNamespace = "http://tempuri.org/")
+        String cardNo,
+        @WebParam(name = "inTimes", targetNamespace = "http://tempuri.org/")
+        String inTimes,
+        @WebParam(name = "patient", targetNamespace = "http://tempuri.org/")
+        String patient,
+        @WebParam(name = "name", targetNamespace = "http://tempuri.org/")
+        String name,
+        @WebParam(name = "inden", targetNamespace = "http://tempuri.org/")
+        String inden);
 
     /**
-     * ��ȡסԺ������ϸ��
-     *
+     * 查取住院结算明细表
+     * 
      * @param patientNo
      * @param invoiceNo
      * @return
@@ -952,18 +1007,17 @@ public interface QuyiServiceNoSoap {
      */
     @WebMethod(operationName = "QueryBalanceDetail", action = "http://tempuri.org/QueryBalanceDetail")
     @WebResult(name = "QueryBalanceDetailResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "QueryBalanceDetail", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.QueryBalanceDetail")
-    @ResponseWrapper(localName = "QueryBalanceDetailResponse", targetNamespace = "http://tempuri.org/", className =
-            "com.chinacaring.czyy.hospital.xmldomain.test.QueryBalanceDetailResponse")
+    @RequestWrapper(localName = "QueryBalanceDetail", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.QueryBalanceDetail")
+    @ResponseWrapper(localName = "QueryBalanceDetailResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.QueryBalanceDetailResponse")
     public String queryBalanceDetail(
-            @WebParam(name = "invoiceNo", targetNamespace = "http://tempuri.org/")
-                    String invoiceNo,
-            @WebParam(name = "patientNo", targetNamespace = "http://tempuri.org/")
-                    String patientNo);
+        @WebParam(name = "invoiceNo", targetNamespace = "http://tempuri.org/")
+        String invoiceNo,
+        @WebParam(name = "patientNo", targetNamespace = "http://tempuri.org/")
+        String patientNo);
 
     /**
-     * ��ȡסԺ��ϱ�
-     *
+     * 查取住院诊断表
+     * 
      * @param patientNo
      * @param cardNo
      * @return
@@ -971,18 +1025,17 @@ public interface QuyiServiceNoSoap {
      */
     @WebMethod(operationName = "QueryPatientDiag", action = "http://tempuri.org/QueryPatientDiag")
     @WebResult(name = "QueryPatientDiagResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "QueryPatientDiag", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.QueryPatientDiag")
-    @ResponseWrapper(localName = "QueryPatientDiagResponse", targetNamespace = "http://tempuri.org/", className =
-            "com.chinacaring.czyy.hospital.xmldomain.test.QueryPatientDiagResponse")
+    @RequestWrapper(localName = "QueryPatientDiag", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.QueryPatientDiag")
+    @ResponseWrapper(localName = "QueryPatientDiagResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.QueryPatientDiagResponse")
     public String queryPatientDiag(
-            @WebParam(name = "cardNo", targetNamespace = "http://tempuri.org/")
-                    String cardNo,
-            @WebParam(name = "patientNo", targetNamespace = "http://tempuri.org/")
-                    String patientNo);
+        @WebParam(name = "cardNo", targetNamespace = "http://tempuri.org/")
+        String cardNo,
+        @WebParam(name = "patientNo", targetNamespace = "http://tempuri.org/")
+        String patientNo);
 
     /**
-     * ��ȡҽ���Һ��ϴ���ϸ
-     *
+     * 获取医保挂号上传明细
+     * 
      * @param input
      * @param cardInfo
      * @return
@@ -990,17 +1043,17 @@ public interface QuyiServiceNoSoap {
      */
     @WebMethod(operationName = "GetSIRegUpload", action = "http://tempuri.org/GetSIRegUpload")
     @WebResult(name = "GetSIRegUploadResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "GetSIRegUpload", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.GetSIRegUpload")
-    @ResponseWrapper(localName = "GetSIRegUploadResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.GetSIRegUploadResponse")
+    @RequestWrapper(localName = "GetSIRegUpload", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetSIRegUpload")
+    @ResponseWrapper(localName = "GetSIRegUploadResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetSIRegUploadResponse")
     public String getSIRegUpload(
-            @WebParam(name = "input", targetNamespace = "http://tempuri.org/")
-                    String input,
-            @WebParam(name = "cardInfo", targetNamespace = "http://tempuri.org/")
-                    String cardInfo);
+        @WebParam(name = "input", targetNamespace = "http://tempuri.org/")
+        String input,
+        @WebParam(name = "cardInfo", targetNamespace = "http://tempuri.org/")
+        String cardInfo);
 
     /**
-     * ��ȡҽ���շ��ϴ���ϸ
-     *
+     * 获取医保收费上传明细
+     * 
      * @param input
      * @param cardInfo
      * @param recipeNo
@@ -1010,46 +1063,97 @@ public interface QuyiServiceNoSoap {
      */
     @WebMethod(operationName = "GetSIFeeUpload", action = "http://tempuri.org/GetSIFeeUpload")
     @WebResult(name = "GetSIFeeUploadResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "GetSIFeeUpload", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.GetSIFeeUpload")
-    @ResponseWrapper(localName = "GetSIFeeUploadResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.GetSIFeeUploadResponse")
+    @RequestWrapper(localName = "GetSIFeeUpload", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetSIFeeUpload")
+    @ResponseWrapper(localName = "GetSIFeeUploadResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetSIFeeUploadResponse")
     public String getSIFeeUpload(
-            @WebParam(name = "input", targetNamespace = "http://tempuri.org/")
-                    String input,
-            @WebParam(name = "recipeNo", targetNamespace = "http://tempuri.org/")
-                    String recipeNo,
-            @WebParam(name = "clinicCode", targetNamespace = "http://tempuri.org/")
-                    String clinicCode,
-            @WebParam(name = "cardInfo", targetNamespace = "http://tempuri.org/")
-                    String cardInfo);
+        @WebParam(name = "input", targetNamespace = "http://tempuri.org/")
+        String input,
+        @WebParam(name = "recipeNo", targetNamespace = "http://tempuri.org/")
+        String recipeNo,
+        @WebParam(name = "clinicCode", targetNamespace = "http://tempuri.org/")
+        String clinicCode,
+        @WebParam(name = "cardInfo", targetNamespace = "http://tempuri.org/")
+        String cardInfo);
 
     /**
-     * ��ȡҽ���ҺŽ������
-     *
+     * 获取医保挂号结算入参
+     * 
      * @param input
      * @return
      *     returns java.lang.String
      */
     @WebMethod(operationName = "GetSIRegBalance", action = "http://tempuri.org/GetSIRegBalance")
     @WebResult(name = "GetSIRegBalanceResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "GetSIRegBalance", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.GetSIRegBalance")
-    @ResponseWrapper(localName = "GetSIRegBalanceResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.GetSIRegBalanceResponse")
+    @RequestWrapper(localName = "GetSIRegBalance", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetSIRegBalance")
+    @ResponseWrapper(localName = "GetSIRegBalanceResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetSIRegBalanceResponse")
     public String getSIRegBalance(
-            @WebParam(name = "input", targetNamespace = "http://tempuri.org/")
-                    String input);
+        @WebParam(name = "input", targetNamespace = "http://tempuri.org/")
+        String input);
 
     /**
-     * ��ȡҽ���ҺŽ������
-     *
+     * 获取医保挂号结算入参
+     * 
      * @param input
      * @return
      *     returns java.lang.String
      */
     @WebMethod(operationName = "GetSIFeeBalance", action = "http://tempuri.org/GetSIFeeBalance")
     @WebResult(name = "GetSIFeeBalanceResult", targetNamespace = "http://tempuri.org/")
-    @RequestWrapper(localName = "GetSIFeeBalance", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.GetSIFeeBalance")
-    @ResponseWrapper(localName = "GetSIFeeBalanceResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.czyy.hospital.xmldomain.test.GetSIFeeBalanceResponse")
+    @RequestWrapper(localName = "GetSIFeeBalance", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetSIFeeBalance")
+    @ResponseWrapper(localName = "GetSIFeeBalanceResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetSIFeeBalanceResponse")
     public String getSIFeeBalance(
-            @WebParam(name = "input", targetNamespace = "http://tempuri.org/")
-                    String input);
+        @WebParam(name = "input", targetNamespace = "http://tempuri.org/")
+        String input);
+
+    /**
+     * 查询门诊处方收据的退款状态，此接口为了对账
+     * 
+     * @param receiptNum
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod(operationName = "GetRecieptRefundStatus", action = "http://tempuri.org/GetRecieptRefundStatus")
+    @WebResult(name = "GetRecieptRefundStatusResult", targetNamespace = "http://tempuri.org/")
+    @RequestWrapper(localName = "GetRecieptRefundStatus", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetRecieptRefundStatus")
+    @ResponseWrapper(localName = "GetRecieptRefundStatusResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetRecieptRefundStatusResponse")
+    public String getRecieptRefundStatus(
+        @WebParam(name = "receiptNum", targetNamespace = "http://tempuri.org/")
+        String receiptNum);
+
+    /**
+     * 查询门诊处方的缴费，执行，退款状态
+     * 
+     * @param recipeNo
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod(operationName = "GetRecieptStatus", action = "http://tempuri.org/GetRecieptStatus")
+    @WebResult(name = "GetRecieptStatusResult", targetNamespace = "http://tempuri.org/")
+    @RequestWrapper(localName = "GetRecieptStatus", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetRecieptStatus")
+    @ResponseWrapper(localName = "GetRecieptStatusResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetRecieptStatusResponse")
+    public String getRecieptStatus(
+        @WebParam(name = "recipeNo", targetNamespace = "http://tempuri.org/")
+        String recipeNo);
+
+    /**
+     * 根据时间段查询此操作员下的所有订单信息，查询我方操作员的订单信息，此接口为了对账
+     * 
+     * @param operCode
+     * @param beginTime
+     * @param endTime
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod(operationName = "GetOrderInfoByOperCode", action = "http://tempuri.org/GetOrderInfoByOperCode")
+    @WebResult(name = "GetOrderInfoByOperCodeResult", targetNamespace = "http://tempuri.org/")
+    @RequestWrapper(localName = "GetOrderInfoByOperCode", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetOrderInfoByOperCode")
+    @ResponseWrapper(localName = "GetOrderInfoByOperCodeResponse", targetNamespace = "http://tempuri.org/", className = "com.chinacaring.peixian.patient.client.wsdl.request.GetOrderInfoByOperCodeResponse")
+    public String getOrderInfoByOperCode(
+        @WebParam(name = "operCode", targetNamespace = "http://tempuri.org/")
+        String operCode,
+        @WebParam(name = "beginTime", targetNamespace = "http://tempuri.org/")
+        String beginTime,
+        @WebParam(name = "endTime", targetNamespace = "http://tempuri.org/")
+        String endTime);
 
 }

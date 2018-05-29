@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>anonymous complex type�� Java �ࡣ
+ * <p>anonymous complex type的 Java 类。
  * 
- * <p>����ģʽƬ��ָ�������ڴ����е�Ԥ�����ݡ�
+ * <p>以下模式片段指定包含在此类中的预期内容。
  * 
  * <pre>
  * &lt;complexType>
@@ -57,7 +57,7 @@ public class SaveSIFee {
     protected String ybInvoice;
 
     /**
-     * ��ȡclinicCode���Ե�ֵ��
+     * 获取clinicCode属性的值。
      * 
      * @return
      *     possible object is
@@ -69,7 +69,7 @@ public class SaveSIFee {
     }
 
     /**
-     * ����clinicCode���Ե�ֵ��
+     * 设置clinicCode属性的值。
      * 
      * @param value
      *     allowed object is
@@ -81,7 +81,7 @@ public class SaveSIFee {
     }
 
     /**
-     * ��ȡrecipeNo���Ե�ֵ��
+     * 获取recipeNo属性的值。
      * 
      * @return
      *     possible object is
@@ -93,7 +93,7 @@ public class SaveSIFee {
     }
 
     /**
-     * ����recipeNo���Ե�ֵ��
+     * 设置recipeNo属性的值。
      * 
      * @param value
      *     allowed object is
@@ -105,7 +105,7 @@ public class SaveSIFee {
     }
 
     /**
-     * ��ȡoperCode���Ե�ֵ��
+     * 获取operCode属性的值。
      * 
      * @return
      *     possible object is
@@ -117,7 +117,7 @@ public class SaveSIFee {
     }
 
     /**
-     * ����operCode���Ե�ֵ��
+     * 设置operCode属性的值。
      * 
      * @param value
      *     allowed object is
@@ -129,7 +129,7 @@ public class SaveSIFee {
     }
 
     /**
-     * ��ȡpayMode���Ե�ֵ��
+     * 获取payMode属性的值。
      * 
      * @return
      *     possible object is
@@ -141,7 +141,7 @@ public class SaveSIFee {
     }
 
     /**
-     * ����payMode���Ե�ֵ��
+     * 设置payMode属性的值。
      * 
      * @param value
      *     allowed object is
@@ -153,7 +153,7 @@ public class SaveSIFee {
     }
 
     /**
-     * ��ȡtotCost���Ե�ֵ��
+     * 获取totCost属性的值。
      * 
      * @return
      *     possible object is
@@ -165,7 +165,7 @@ public class SaveSIFee {
     }
 
     /**
-     * ����totCost���Ե�ֵ��
+     * 设置totCost属性的值。
      * 
      * @param value
      *     allowed object is
@@ -177,7 +177,7 @@ public class SaveSIFee {
     }
 
     /**
-     * ��ȡchargeSiReturn���Ե�ֵ��
+     * 获取chargeSiReturn属性的值。
      * 
      * @return
      *     possible object is
@@ -189,7 +189,7 @@ public class SaveSIFee {
     }
 
     /**
-     * ����chargeSiReturn���Ե�ֵ��
+     * 设置chargeSiReturn属性的值。
      * 
      * @param value
      *     allowed object is
@@ -201,7 +201,7 @@ public class SaveSIFee {
     }
 
     /**
-     * ��ȡreadSiReturn���Ե�ֵ��
+     * 获取readSiReturn属性的值。
      * 
      * @return
      *     possible object is
@@ -213,7 +213,7 @@ public class SaveSIFee {
     }
 
     /**
-     * ����readSiReturn���Ե�ֵ��
+     * 设置readSiReturn属性的值。
      * 
      * @param value
      *     allowed object is
@@ -225,7 +225,7 @@ public class SaveSIFee {
     }
 
     /**
-     * ��ȡybInvoice���Ե�ֵ��
+     * 获取ybInvoice属性的值。
      * 
      * @return
      *     possible object is
@@ -237,7 +237,7 @@ public class SaveSIFee {
     }
 
     /**
-     * ����ybInvoice���Ե�ֵ��
+     * 设置ybInvoice属性的值。
      * 
      * @param value
      *     allowed object is

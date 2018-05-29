@@ -13,4 +13,19 @@ public class UnpaidOutpatientRequest {
         this.name = name;
     }
 
+    public String getPatientCode() {
+        return patientCode;
+    }
+
+    public void setPatientCode(String patientCode) {
+        this.patientCode = patientCode;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

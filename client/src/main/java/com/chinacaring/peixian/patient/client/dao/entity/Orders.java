@@ -1,10 +1,13 @@
 package com.chinacaring.peixian.patient.client.dao.entity;
 
+import com.chinacaring.util.TimeUtil;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 import java.util.Date;
 
 @Entity
@@ -17,12 +20,17 @@ public class Orders {
 
     //订单号
     private String orderNo;
+    private String chargeId;
 
     //下单时间
+    @JsonFormat(pattern = TimeUtil.FORMAT_LONG, timezone = "GMT+8")
     private Date createTime;
-
     //订单更新时间
+    @JsonFormat(pattern = TimeUtil.FORMAT_LONG, timezone = "GMT+8")
     private Date updateTime;
+    //订单支付时间
+    @JsonFormat(pattern = TimeUtil.FORMAT_LONG, timezone = "GMT+8")
+    private Date payTime;
 
     //用户id
     private Integer userId;
@@ -49,6 +57,25 @@ public class Orders {
     private String type;
     //订单类型关联的id
     private String typeNo;
+    //是否已支付。1为支付，0为未支付
+    private Integer isPaid;
+    //退款原因
+    private String refundReason;
+    //是否退款，0否，1是
+    private Integer isRefund;
+    private Integer amountRefunded; //已退金额
+
+    @Transient
+    //his 是否退款 0 未退款 1 部分退款 2全部退款
+    private Integer offlineRefundStatus;
+    @Transient
+    //线下退款金额
+    private Double offlineRefundAmount;
+
+    //发票号
+    private String invoiceNo;
+
+
 
     public Integer getId() {
         return id;
@@ -128,5 +155,77 @@ public class Orders {
 
     public void setTypeNo(String typeNo) {
         this.typeNo = typeNo;
+    }
+
+    public String getChargeId() {
+        return chargeId;
+    }
+
+    public void setChargeId(String chargeId) {
+        this.chargeId = chargeId;
+    }
+
+    public Integer getIsPaid() {
+        return isPaid;
+    }
+
+    public void setIsPaid(Integer isPaid) {
+        this.isPaid = isPaid;
+    }
+
+    public String getRefundReason() {
+        return refundReason;
+    }
+
+    public void setRefundReason(String refundReason) {
+        this.refundReason = refundReason;
+    }
+
+    public Integer getIsRefund() {
+        return isRefund;
+    }
+
+    public void setIsRefund(Integer isRefund) {
+        this.isRefund = isRefund;
+    }
+
+    public String getInvoiceNo() {
+        return invoiceNo;
+    }
+
+    public void setInvoiceNo(String invoiceNo) {
+        this.invoiceNo = invoiceNo;
+    }
+
+    public Integer getOfflineRefundStatus() {
+        return offlineRefundStatus;
+    }
+
+    public void setOfflineRefundStatus(Integer offlineRefundStatus) {
+        this.offlineRefundStatus = offlineRefundStatus;
+    }
+
+    public Double getOfflineRefundAmount() {
+        return offlineRefundAmount;
+    }
+
+    public void setOfflineRefundAmount(Double offlineRefundAmount) {
+        this.offlineRefundAmount = offlineRefundAmount;
+    }
+
+    public Integer getAmountRefunded() {
+        return amountRefunded;
+    }
+
+    public void setAmountRefunded(Integer amountRefunded) {
+        this.amountRefunded = amountRefunded;
+    }
+
+    public Date getPayTime() {
+        return payTime;
+    }
+
+    public void setPayTime(Date payTime) {
+        this.payTime = payTime;
     }
 }

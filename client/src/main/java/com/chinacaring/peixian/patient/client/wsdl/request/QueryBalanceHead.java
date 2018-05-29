@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>anonymous complex type�� Java �ࡣ
+ * <p>anonymous complex type的 Java 类。
  * 
- * <p>����ģʽƬ��ָ�������ڴ����е�Ԥ�����ݡ�
+ * <p>以下模式片段指定包含在此类中的预期内容。
  * 
  * <pre>
  * &lt;complexType>
@@ -48,7 +48,7 @@ public class QueryBalanceHead {
     protected String inden;
 
     /**
-     * ��ȡcardNo���Ե�ֵ��
+     * 获取cardNo属性的值。
      * 
      * @return
      *     possible object is
@@ -60,7 +60,7 @@ public class QueryBalanceHead {
     }
 
     /**
-     * ����cardNo���Ե�ֵ��
+     * 设置cardNo属性的值。
      * 
      * @param value
      *     allowed object is
@@ -72,7 +72,7 @@ public class QueryBalanceHead {
     }
 
     /**
-     * ��ȡinTimes���Ե�ֵ��
+     * 获取inTimes属性的值。
      * 
      * @return
      *     possible object is
@@ -84,7 +84,7 @@ public class QueryBalanceHead {
     }
 
     /**
-     * ����inTimes���Ե�ֵ��
+     * 设置inTimes属性的值。
      * 
      * @param value
      *     allowed object is
@@ -96,7 +96,7 @@ public class QueryBalanceHead {
     }
 
     /**
-     * ��ȡpatient���Ե�ֵ��
+     * 获取patient属性的值。
      * 
      * @return
      *     possible object is
@@ -108,7 +108,7 @@ public class QueryBalanceHead {
     }
 
     /**
-     * ����patient���Ե�ֵ��
+     * 设置patient属性的值。
      * 
      * @param value
      *     allowed object is
@@ -120,7 +120,7 @@ public class QueryBalanceHead {
     }
 
     /**
-     * ��ȡname���Ե�ֵ��
+     * 获取name属性的值。
      * 
      * @return
      *     possible object is
@@ -132,7 +132,7 @@ public class QueryBalanceHead {
     }
 
     /**
-     * ����name���Ե�ֵ��
+     * 设置name属性的值。
      * 
      * @param value
      *     allowed object is
@@ -144,7 +144,7 @@ public class QueryBalanceHead {
     }
 
     /**
-     * ��ȡinden���Ե�ֵ��
+     * 获取inden属性的值。
      * 
      * @return
      *     possible object is
@@ -156,7 +156,7 @@ public class QueryBalanceHead {
     }
 
     /**
-     * ����inden���Ե�ֵ��
+     * 设置inden属性的值。
      * 
      * @param value
      *     allowed object is

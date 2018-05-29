@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="GetOrderInfoByOperCode" type="GetOrderInfoByOperCode"/>
+  <xs:complexType name="GetOrderInfoByOperCode">
+    <xs:sequence>
+      <xs:element type="xs:string" name="RECEIPT_NUM" minOccurs="0"/>
+      <xs:element name="FEE" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="10"/>
+            <xs:enumeration value="51.37"/>
+            <xs:enumeration value="802"/>
+            <xs:enumeration value="132"/>
+            <xs:enumeration value="70.40"/>
+            <xs:enumeration value="1070"/>
+            <xs:enumeration value="130"/>
+            <xs:enumeration value="23"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="RECIEPT_TYPE" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="0"/>
+            <xs:enumeration value="1"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="xs:string" name="NAME" minOccurs="0"/>
+      <xs:element type="xs:string" name="TRANS_TIME" minOccurs="0"/>
+      <xs:element type="xs:string" name="PAY_MODE" minOccurs="0"/>
+      <xs:element type="xs:string" name="REFUND_STATUS" minOccurs="0"/>
+      <xs:element type="xs:string" name="REFUND_FEE" minOccurs="0"/>
+      <xs:element type="xs:string" name="REFUND_TIME" minOccurs="0"/>
+      <xs:element type="xs:string" name="REFUND_WAY" minOccurs="0"/>
+      <xs:element type="result" name="result" minOccurs="0"/>
+      <xs:element type="Data" name="Data" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Data">
+    <xs:sequence>
+      <xs:element type="GetOrderInfoByOperCode" name="GetOrderInfoByOperCode" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="result">
+    <xs:sequence>
+      <xs:element type="xs:string" name="returnCode"/>
+      <xs:element type="xs:string" name="returnDesc"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

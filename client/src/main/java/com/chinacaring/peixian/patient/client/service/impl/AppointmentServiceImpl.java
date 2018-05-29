@@ -221,6 +221,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 
         //将订单信息保存到 订单主表
         Orders orders = new Orders();
+        orders.setChargeId(payMap.get("id") + "");
         orders.setOrderNo(appointmentWithID.getOrderNo());
         orders.setCreateTime(new Date());
         orders.setUpdateTime(new Date());
@@ -296,6 +297,14 @@ public class AppointmentServiceImpl implements AppointmentService {
         InsertRegisterTempSoap insertRegisterTempSoap;
 
         try {
+            Orders byOrderNo = ordersRepository.findByOrderNo(appointment.getOrderNo());
+            byOrderNo.setInvoiceNo(appointment.getInvoiceNo());
+            ordersRepository.save(byOrderNo);
+        }catch (Exception ignore){
+        }
+
+
+        try {
             insertRegisterTempSoap = JaxbXmlUtil.convertToJavaBean(soap, InsertRegisterTempSoap.class);
         } catch (Exception e) {
             appointment.setRegState(Constant.REG_STATE_GUA_HAO_SHI_BAI);
@@ -322,6 +331,12 @@ public class AppointmentServiceImpl implements AppointmentService {
             appointment.setReceiptNo(insertRegisterTemp.getINVOICENO());
             appointment.setSeeNo(Integer.valueOf(insertRegisterTemp.getSEENO()));
             appointmentRepository.saveAndFlush(appointment);
+            try {
+                Orders byOrderNo = ordersRepository.findByOrderNo(appointment.getOrderNo());
+                byOrderNo.setInvoiceNo(appointment.getInvoiceNo());
+                ordersRepository.save(byOrderNo);
+            }catch (Exception ignore){
+            }
             return true;
         } else {
             //挂号失败

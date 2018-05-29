@@ -292,6 +292,7 @@ public class OutPatientServiceImpl implements OutPatientService {
         //将订单信息保存到 订单主表
         Orders orders = new Orders();
         orders.setOrderNo(outpatientWithId.getOrderNo());
+        orders.setChargeId(payMap.get("id") + "");
         orders.setCreateTime(new Date());
         orders.setUpdateTime(new Date());
         orders.setUserId(user.getId());
@@ -338,6 +339,13 @@ public class OutPatientServiceImpl implements OutPatientService {
             outpatient.setWindowName(outpatientConfirmResult.getWindowName());
             outpatient.setConfirmState(Constant.OUTPATIENT_CONFIRM_SUCCESS);
             outpatientRepository.saveAndFlush(outpatient);
+            try {
+                Orders byOrderNo = ordersRepository.findByOrderNo(outpatient.getOrderNo());
+                byOrderNo.setInvoiceNo(outpatientConfirmResult.getInvoiceNo());
+                ordersRepository.save(byOrderNo);
+            }catch (Exception ignore){
+            }
+
             return true;
         } catch (SoapException e) {
             outpatient.setConfirmState(Constant.OUTPATIENT_CONFIRM_FAIL);
@@ -425,6 +433,54 @@ public class OutPatientServiceImpl implements OutPatientService {
         private String invoiceNo;
         private String receiptNo;
         private String windowName;
+
+        public Boolean getIsSuccess() {
+            return isSuccess;
+        }
+
+        public void setIsSuccess(Boolean success) {
+            isSuccess = success;
+        }
+
+        public String getPrescriptionNo() {
+            return prescriptionNo;
+        }
+
+        public void setPrescriptionNo(String prescriptionNo) {
+            this.prescriptionNo = prescriptionNo;
+        }
+
+        public String getCost() {
+            return cost;
+        }
+
+        public void setCost(String cost) {
+            this.cost = cost;
+        }
+
+        public String getInvoiceNo() {
+            return invoiceNo;
+        }
+
+        public void setInvoiceNo(String invoiceNo) {
+            this.invoiceNo = invoiceNo;
+        }
+
+        public String getReceiptNo() {
+            return receiptNo;
+        }
+
+        public void setReceiptNo(String receiptNo) {
+            this.receiptNo = receiptNo;
+        }
+
+        public String getWindowName() {
+            return windowName;
+        }
+
+        public void setWindowName(String windowName) {
+            this.windowName = windowName;
+        }
     }
 }
 

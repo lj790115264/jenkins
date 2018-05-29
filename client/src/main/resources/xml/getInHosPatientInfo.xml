@@ -1,0 +1,25 @@
+<queryinhospatient>
+    <result>
+        <returnCode>1</returnCode>
+        <returnDesc></returnDesc>
+    </result>
+    <Data>
+        <item>
+            <inpatient_code>2012015290</inpatient_code>
+            <name>曹用国</name>
+            <inhos_patient_serial>ZY012012015290</inhos_patient_serial>
+            <diagnose_code></diagnose_code>
+            <diagnose_name></diagnose_name>
+            <state>1</state>
+            <dept_code>2001</dept_code>
+            <dept_name>内科一</dept_name>
+            <ward_code>1001</ward_code>
+            <ward_name>一区护</ward_name>
+            <bed_no>100131</bed_no>
+            <inhos_time>2012/6/15 12:19:52</inhos_time>
+            <outhos_time>2012/6/28 11:11:38</outhos_time>
+            <total_fee>0</total_fee>
+            <balance>0</balance>
+        </item>
+    </Data>
+</queryinhospatient>

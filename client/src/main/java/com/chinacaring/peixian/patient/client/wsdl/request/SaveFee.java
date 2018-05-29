@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>anonymous complex type�� Java �ࡣ
+ * <p>anonymous complex type的 Java 类。
  * 
- * <p>����ģʽƬ��ָ�������ڴ����е�Ԥ�����ݡ�
+ * <p>以下模式片段指定包含在此类中的预期内容。
  * 
  * <pre>
  * &lt;complexType>
@@ -48,7 +48,7 @@ public class SaveFee {
     protected String totCost;
 
     /**
-     * ��ȡclinicCode���Ե�ֵ��
+     * 获取clinicCode属性的值。
      * 
      * @return
      *     possible object is
@@ -60,7 +60,7 @@ public class SaveFee {
     }
 
     /**
-     * ����clinicCode���Ե�ֵ��
+     * 设置clinicCode属性的值。
      * 
      * @param value
      *     allowed object is
@@ -72,7 +72,7 @@ public class SaveFee {
     }
 
     /**
-     * ��ȡrecipeNo���Ե�ֵ��
+     * 获取recipeNo属性的值。
      * 
      * @return
      *     possible object is
@@ -84,7 +84,7 @@ public class SaveFee {
     }
 
     /**
-     * ����recipeNo���Ե�ֵ��
+     * 设置recipeNo属性的值。
      * 
      * @param value
      *     allowed object is
@@ -96,7 +96,7 @@ public class SaveFee {
     }
 
     /**
-     * ��ȡoperCode���Ե�ֵ��
+     * 获取operCode属性的值。
      * 
      * @return
      *     possible object is
@@ -108,7 +108,7 @@ public class SaveFee {
     }
 
     /**
-     * ����operCode���Ե�ֵ��
+     * 设置operCode属性的值。
      * 
      * @param value
      *     allowed object is
@@ -120,7 +120,7 @@ public class SaveFee {
     }
 
     /**
-     * ��ȡpayMode���Ե�ֵ��
+     * 获取payMode属性的值。
      * 
      * @return
      *     possible object is
@@ -132,7 +132,7 @@ public class SaveFee {
     }
 
     /**
-     * ����payMode���Ե�ֵ��
+     * 设置payMode属性的值。
      * 
      * @param value
      *     allowed object is
@@ -144,7 +144,7 @@ public class SaveFee {
     }
 
     /**
-     * ��ȡtotCost���Ե�ֵ��
+     * 获取totCost属性的值。
      * 
      * @return
      *     possible object is
@@ -156,7 +156,7 @@ public class SaveFee {
     }
 
     /**
-     * ����totCost���Ե�ֵ��
+     * 设置totCost属性的值。
      * 
      * @param value
      *     allowed object is

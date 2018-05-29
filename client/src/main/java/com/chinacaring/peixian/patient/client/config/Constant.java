@@ -82,7 +82,7 @@ public class Constant {
     public static final String PAY_URL =  "http://172.17.10.91:8780/charge";
     public static final String REFUND_URL = "http://172.17.10.91:8780/refund";
 
-    //企业号推送相关
+    //企业号推送相关1
     public static final String BASIC_HEADER_WECHAT_PUSH = "Basic d2VjaGF0cHVzaDp3ZWNoYXRwdXNoc2VjcmV0";
     public static final String WECHAT_CP_NEWS_PUSH_URL = "http://172.17.10.91:8090/cp/news";
     public static final Integer AGENT_ID_TUI_KUAN_TONG_ZHI = 1000003;

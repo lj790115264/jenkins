@@ -1,10 +1,14 @@
 
 package com.chinacaring.peixian.patient.client.wsdl.request;
 
-import javax.xml.namespace.QName;
-import javax.xml.ws.*;
 import java.net.MalformedURLException;
 import java.net.URL;
+import javax.xml.namespace.QName;
+import javax.xml.ws.Service;
+import javax.xml.ws.WebEndpoint;
+import javax.xml.ws.WebServiceClient;
+import javax.xml.ws.WebServiceException;
+import javax.xml.ws.WebServiceFeature;
 
 
 /**
@@ -13,8 +17,7 @@ import java.net.URL;
  * Generated source version: 2.2
  * 
  */
-// http://192.168.55.59/quyiServiceTest/quyiServiceNo.asmx
-@WebServiceClient(name = "quyiServiceNo", targetNamespace = "http://tempuri.org/", wsdlLocation = "http://172.17.10.236/quyiService/quyiServiceNo.asmx?wsdl")
+@WebServiceClient(name = "quyiServiceNo", targetNamespace = "http://tempuri.org/", wsdlLocation = "http://172.17.10.236/quyiServiceTest/quyiServiceNo.asmx?wsdl")
 public class QuyiServiceNo
     extends Service
 {
@@ -27,7 +30,7 @@ public class QuyiServiceNo
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://172.17.10.236/quyiService/quyiServiceNo.asmx?wsdl");
+            url = new URL("http://172.17.10.236/quyiServiceTest/quyiServiceNo.asmx?wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }
@@ -72,7 +75,7 @@ public class QuyiServiceNo
     /**
      * 
      * @param features
-     *     A list of {@link WebServiceFeature} to configure on the proxy.  Supported features not in the <code>features</code> parameter will have their default values.
+     *     A list of {@link javax.xml.ws.WebServiceFeature} to configure on the proxy.  Supported features not in the <code>features</code> parameter will have their default values.
      * @return
      *     returns QuyiServiceNoSoap
      */
@@ -82,7 +85,7 @@ public class QuyiServiceNo
     }
 
     /**
-     *
+     * 
      * @return
      *     returns QuyiServiceNoSoap
      */
@@ -92,9 +95,9 @@ public class QuyiServiceNo
     }
 
     /**
-     *
+     * 
      * @param features
-     *     A list of {@link WebServiceFeature} to configure on the proxy.  Supported features not in the <code>features</code> parameter will have their default values.
+     *     A list of {@link javax.xml.ws.WebServiceFeature} to configure on the proxy.  Supported features not in the <code>features</code> parameter will have their default values.
      * @return
      *     returns QuyiServiceNoSoap
      */

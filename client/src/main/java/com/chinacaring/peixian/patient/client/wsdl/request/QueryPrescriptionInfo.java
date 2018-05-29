@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>anonymous complex type�� Java �ࡣ
+ * <p>anonymous complex type的 Java 类。
  * 
- * <p>����ģʽƬ��ָ�������ڴ����е�Ԥ�����ݡ�
+ * <p>以下模式片段指定包含在此类中的预期内容。
  * 
  * <pre>
  * &lt;complexType>
@@ -36,7 +36,7 @@ public class QueryPrescriptionInfo {
     protected String clinicNo;
 
     /**
-     * ��ȡclinicNo���Ե�ֵ��
+     * 获取clinicNo属性的值。
      * 
      * @return
      *     possible object is
@@ -48,7 +48,7 @@ public class QueryPrescriptionInfo {
     }
 
     /**
-     * ����clinicNo���Ե�ֵ��
+     * 设置clinicNo属性的值。
      * 
      * @param value
      *     allowed object is

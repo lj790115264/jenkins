@@ -150,4 +150,5 @@ public class RegisterPayment {
     public void setRegisterLevelName(String registerLevelName) {
         this.registerLevelName = registerLevelName;
     }
+
 }

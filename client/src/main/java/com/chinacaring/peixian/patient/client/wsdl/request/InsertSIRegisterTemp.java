@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>anonymous complex type�� Java �ࡣ
+ * <p>anonymous complex type的 Java 类。
  * 
- * <p>����ģʽƬ��ָ�������ڴ����е�Ԥ�����ݡ�
+ * <p>以下模式片段指定包含在此类中的预期内容。
  * 
  * <pre>
  * &lt;complexType>
@@ -48,7 +48,7 @@ public class InsertSIRegisterTemp {
     protected String ybInvoice;
 
     /**
-     * ��ȡinput���Ե�ֵ��
+     * 获取input属性的值。
      * 
      * @return
      *     possible object is
@@ -60,7 +60,7 @@ public class InsertSIRegisterTemp {
     }
 
     /**
-     * ����input���Ե�ֵ��
+     * 设置input属性的值。
      * 
      * @param value
      *     allowed object is
@@ -72,7 +72,7 @@ public class InsertSIRegisterTemp {
     }
 
     /**
-     * ��ȡchargeSiReturn���Ե�ֵ��
+     * 获取chargeSiReturn属性的值。
      * 
      * @return
      *     possible object is
@@ -84,7 +84,7 @@ public class InsertSIRegisterTemp {
     }
 
     /**
-     * ����chargeSiReturn���Ե�ֵ��
+     * 设置chargeSiReturn属性的值。
      * 
      * @param value
      *     allowed object is
@@ -96,7 +96,7 @@ public class InsertSIRegisterTemp {
     }
 
     /**
-     * ��ȡreadSiReturn���Ե�ֵ��
+     * 获取readSiReturn属性的值。
      * 
      * @return
      *     possible object is
@@ -108,7 +108,7 @@ public class InsertSIRegisterTemp {
     }
 
     /**
-     * ����readSiReturn���Ե�ֵ��
+     * 设置readSiReturn属性的值。
      * 
      * @param value
      *     allowed object is
@@ -120,7 +120,7 @@ public class InsertSIRegisterTemp {
     }
 
     /**
-     * ��ȡoperCode���Ե�ֵ��
+     * 获取operCode属性的值。
      * 
      * @return
      *     possible object is
@@ -132,7 +132,7 @@ public class InsertSIRegisterTemp {
     }
 
     /**
-     * ����operCode���Ե�ֵ��
+     * 设置operCode属性的值。
      * 
      * @param value
      *     allowed object is
@@ -144,7 +144,7 @@ public class InsertSIRegisterTemp {
     }
 
     /**
-     * ��ȡybInvoice���Ե�ֵ��
+     * 获取ybInvoice属性的值。
      * 
      * @return
      *     possible object is
@@ -156,7 +156,7 @@ public class InsertSIRegisterTemp {
     }
 
     /**
-     * ����ybInvoice���Ե�ֵ��
+     * 设置ybInvoice属性的值。
      * 
      * @param value
      *     allowed object is

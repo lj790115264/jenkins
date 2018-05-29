@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>anonymous complex type�� Java �ࡣ
+ * <p>anonymous complex type的 Java 类。
  * 
- * <p>����ģʽƬ��ָ�������ڴ����е�Ԥ�����ݡ�
+ * <p>以下模式片段指定包含在此类中的预期内容。
  * 
  * <pre>
  * &lt;complexType>
@@ -39,7 +39,7 @@ public class GetSIRegUpload {
     protected String cardInfo;
 
     /**
-     * ��ȡinput���Ե�ֵ��
+     * 获取input属性的值。
      * 
      * @return
      *     possible object is
@@ -51,7 +51,7 @@ public class GetSIRegUpload {
     }
 
     /**
-     * ����input���Ե�ֵ��
+     * 设置input属性的值。
      * 
      * @param value
      *     allowed object is
@@ -63,7 +63,7 @@ public class GetSIRegUpload {
     }
 
     /**
-     * ��ȡcardInfo���Ե�ֵ��
+     * 获取cardInfo属性的值。
      * 
      * @return
      *     possible object is
@@ -75,7 +75,7 @@ public class GetSIRegUpload {
     }
 
     /**
-     * ����cardInfo���Ե�ֵ��
+     * 设置cardInfo属性的值。
      * 
      * @param value
      *     allowed object is

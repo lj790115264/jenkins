@@ -419,4 +419,12 @@ public class Appointment {
     public void setRegisterLevelName(String registerLevelName) {
         this.registerLevelName = registerLevelName;
     }
+
+    public Date getShowTime() {
+        return showTime;
+    }
+
+    public void setShowTime(Date showTime) {
+        this.showTime = showTime;
+    }
 }
