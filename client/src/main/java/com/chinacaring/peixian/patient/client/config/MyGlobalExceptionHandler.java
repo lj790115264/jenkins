@@ -24,7 +24,7 @@ public class MyGlobalExceptionHandler extends GlobalExceptionHandler {
 
     @ExceptionHandler({NullPointerException.class})
     public Object nullExceptionHandler(HttpServletRequest req, NullPointerException e){
-        logger.error(e.getMessage());
+        e.printStackTrace();
         return new Result<>(ResultStatusCode.SYSTEM_ERR.getErrorCode(), e.toString(),  "接口异常",null);
     }
 
