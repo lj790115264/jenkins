@@ -372,6 +372,7 @@ public class InbalanceServiceImpl implements InbalanceService {
         inbalancePayment.setInpatientCode(inbalance.getInpatientCode());
         inbalancePayment.setPatientName(inbalance.getPatientName());
         inbalancePayment.setPayTime(inbalance.getCreateTime());
+        inbalancePayment.setMcardNo(inbalance.getReceiptNo());
         return inbalancePayment;
     }
 
