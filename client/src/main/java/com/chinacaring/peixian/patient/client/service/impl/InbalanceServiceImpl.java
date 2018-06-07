@@ -365,6 +365,7 @@ public class InbalanceServiceImpl implements InbalanceService {
         inbalancePayment.setPayState(inbalance.getPayState());
         inbalancePayment.setRefundTime(inbalance.getRefundTime());
         inbalancePayment.setCost(df.format(inbalance.getCost().divide(new BigDecimal(100.0))));
+        inbalancePayment.setPayment(df.format(inbalance.getCost().divide(new BigDecimal(100.0))));
         inbalancePayment.setDeptName(inbalance.getDeptName());
         inbalancePayment.setId(inbalance.getId());
         inbalancePayment.setInbalance(df.format(inbalance.getInbalance().divide(new BigDecimal(100.0))));
@@ -372,7 +373,7 @@ public class InbalanceServiceImpl implements InbalanceService {
         inbalancePayment.setInpatientCode(inbalance.getInpatientCode());
         inbalancePayment.setPatientName(inbalance.getPatientName());
         inbalancePayment.setPayTime(inbalance.getCreateTime());
-        inbalancePayment.setMcardNo(inbalance.getReceiptNo());
+        inbalancePayment.setInpatientSerialCode(inbalance.getReceiptNo());
         return inbalancePayment;
     }
 

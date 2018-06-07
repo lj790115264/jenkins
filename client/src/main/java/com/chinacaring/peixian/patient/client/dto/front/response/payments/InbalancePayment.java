@@ -22,6 +22,8 @@ public class InbalancePayment {
 
     private String inbalance;
 
+    private String payment;
+
     private String cost;
 
     private Integer confirmState;
@@ -33,14 +35,22 @@ public class InbalancePayment {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date refundTime;
 
-    private String mcardNo;
+    private String inpatientSerialCode;
 
-    public String getMcardNo() {
-        return mcardNo;
+    public String getInpatientSerialCode() {
+        return inpatientSerialCode;
     }
 
-    public void setMcardNo(String mcardNo) {
-        this.mcardNo = mcardNo;
+    public void setInpatientSerialCode(String inpatientSerialCode) {
+        this.inpatientSerialCode = inpatientSerialCode;
+    }
+
+    public String getPayment() {
+        return payment;
+    }
+
+    public void setPayment(String payment) {
+        this.payment = payment;
     }
 
     public Integer getId() {

@@ -81,6 +81,7 @@ public class PaymentItemsAsync {
             inbalancePayment.setPayState(inbalance.getPayState());
             inbalancePayment.setRefundTime(inbalance.getRefundTime());
             inbalancePayment.setCost(df.format(inbalance.getCost().divide(new BigDecimal(100.0))));
+            inbalancePayment.setPayment(df.format(inbalance.getCost().divide(new BigDecimal(100.0))));
             inbalancePayment.setDeptName(inbalance.getDeptName());
             inbalancePayment.setId(inbalance.getId());
             inbalancePayment.setInbalance(df.format(inbalance.getInbalance().divide(new BigDecimal(100.0))));
