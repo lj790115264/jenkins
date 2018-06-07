@@ -203,6 +203,17 @@ public class InbalanceServiceImpl implements InbalanceService {
                     sdf.format(new Date()) + "-" +
                     inbalance.getOrderNo());
         }
+        if (null == soap) {
+            inbalanceWithId.setConfirmState(Constant.INBALANCE_CONFIRM_FAIL);
+            inbalanceRepository.saveAndFlush(inbalanceWithId);
+            throw new SoapException("暂时没有数据哦～", res, inbalance.getInpatientCode() + "-" +
+                    inbalance.getPatientName() + "-" +
+                    inbalance.getOperCode() + "-" +
+                    inbalance.getPayChannel() + "-" +
+                    df.format(inbalance.getCost().divide(new BigDecimal(100))) + "-" +
+                    sdf.format(new Date()) + "-" +
+                    inbalance.getOrderNo());
+        }
         if (!Objects.equals(Constant.RETURN_CODE_SUCCESS, soap.getCode())) {
             inbalanceWithId.setConfirmState(Constant.INBALANCE_CONFIRM_FAIL);
             inbalanceRepository.saveAndFlush(inbalanceWithId);
