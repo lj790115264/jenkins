@@ -33,6 +33,10 @@ public interface ChargeFeignService {
                              @PathVariable(value = "charge_id") String charge_id);
 
     @PostMapping("refund")
+    String refund1(@RequestHeader(value = "Authorization") String authorization,
+                  @RequestBody PingxxRefundRequest request);
+
+    @PostMapping("refund")
     Refund refund(@RequestHeader(value = "Authorization") String authorization,
                   @RequestBody PingxxRefundRequest request);
 

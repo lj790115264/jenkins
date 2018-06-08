@@ -158,6 +158,8 @@ public class OrdersServiceImpl implements OrdersService {
         pingxxRequest.setCharge_id(orders.getChargeId());
         pingxxRequest.setDescription(request.getDescription());
         pingxxRequest.setFunding_source(request.getFunding_source());
+        String res =  chargeFeignService.refund1(ChargeFeignService.AUTHORIZATION, pingxxRequest);
+        logger.error(res);
         Refund refund = chargeFeignService.refund(ChargeFeignService.AUTHORIZATION, pingxxRequest);
         return refund;
     }
