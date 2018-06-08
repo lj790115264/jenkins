@@ -12,6 +12,8 @@ import com.chinacaring.peixian.patient.client.exception.SoapException;
 import com.chinacaring.peixian.patient.client.wsdl.orders.request.QuyiServiceNo;
 import com.chinacaring.peixian.patient.client.wsdl.orders.response.get_order_infoby_opercode.GetOrderInfoByOperCode;
 import com.chinacaring.util.JaxbXmlUtil;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import org.apache.poi.hssf.usermodel.HSSFDataFormat;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
@@ -159,8 +161,8 @@ public class OrdersServiceImpl implements OrdersService {
         pingxxRequest.setDescription(request.getDescription());
         pingxxRequest.setFunding_source(request.getFunding_source());
         String res =  chargeFeignService.refund1(ChargeFeignService.AUTHORIZATION, pingxxRequest);
-        logger.error(res);
-        Refund refund = chargeFeignService.refund(ChargeFeignService.AUTHORIZATION, pingxxRequest);
+        Gson gson = new Gson();
+        Refund refund = gson.fromJson(res, Refund.class);
         return refund;
     }
 
