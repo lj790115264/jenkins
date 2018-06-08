@@ -41,6 +41,6 @@ public interface ChargeFeignService {
                   @RequestBody PingxxRefundRequest request);
 
     @GetMapping("refund")
-    List<Refund> getRefund(@RequestHeader(value = "Authorization") String authorization,
+    String getRefund(@RequestHeader(value = "Authorization") String authorization,
                            @RequestParam(value = "charge_id") String charge_id);
 }

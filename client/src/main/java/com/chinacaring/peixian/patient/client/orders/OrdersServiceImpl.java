@@ -174,7 +174,10 @@ public class OrdersServiceImpl implements OrdersService {
 
     @Override
     public List<Refund> getRefundByChargeId(String charge_id) {
-        return chargeFeignService.getRefund(ChargeFeignService.AUTHORIZATION, charge_id);
+        String res = chargeFeignService.getRefund(ChargeFeignService.AUTHORIZATION, charge_id);
+        Gson gson = new Gson();
+        List<Refund> refund = gson.fromJson(res, new TypeToken<List<Refund>>(){}.getType());
+        return refund;
     }
 
     @Override
