@@ -149,7 +149,7 @@ public class OrdersServiceImpl implements OrdersService {
     @Override
     public Refund refund(RefundRequest request) throws CommonException {
         Orders orders = ordersRepository.findByOrderNo(request.getOrder_no());
-        if (StringUtils.isEmpty(orders.getChargeId())) {
+        if (null == orders || StringUtils.isEmpty(orders.getChargeId())) {
             throw new CommonException("该订单没有charge_id", ResultStatusCode.WEBSERVICE_WRONG_RESPONSE);
         }
 
@@ -159,7 +159,7 @@ public class OrdersServiceImpl implements OrdersService {
         pingxxRequest.setDescription(request.getDescription());
         pingxxRequest.setFunding_source(request.getFunding_source());
         String res =  chargeFeignService.refund1(ChargeFeignService.AUTHORIZATION, pingxxRequest);
-        logger.error(res);
+        logger.error("结果是:", res);
         Refund refund = chargeFeignService.refund(ChargeFeignService.AUTHORIZATION, pingxxRequest);
         return refund;
     }
