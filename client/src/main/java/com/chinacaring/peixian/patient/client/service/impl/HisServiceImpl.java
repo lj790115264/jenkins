@@ -35,7 +35,12 @@ public class HisServiceImpl implements HisService {
         }
 
         List<GetOrderInfoByOperCode> hisOrders;
-        hisOrders = ordersService.getHisOrders(start, end);
+        try {
+            hisOrders = ordersService.getHisOrders(start, end);
+        } catch (CommonException e) {
+            hisOrders = new ArrayList<>();
+        }
+
         List<HisOrder> iHisOrders = new ArrayList<>();
         for (GetOrderInfoByOperCode hisOrder: hisOrders) {
             HisOrder iHisOrder = new HisOrder();
