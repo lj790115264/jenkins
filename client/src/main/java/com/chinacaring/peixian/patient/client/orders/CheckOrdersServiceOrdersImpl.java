@@ -114,6 +114,7 @@ public class CheckOrdersServiceOrdersImpl implements CheckOrdersService {
         c.setName(order.getUsername());
         c.setInvoiceNo(order.getInvoiceNo());
         c.setTradeTime(order.getPayTime());
+        c.setOrderNo(order.getOrderNo());
         String channel = order.getPayChannel();
         if (null != channel) {
             if (channel.indexOf("wx") > -1) {

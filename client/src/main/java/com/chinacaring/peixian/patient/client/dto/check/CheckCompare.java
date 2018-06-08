@@ -21,7 +21,8 @@ public class CheckCompare {
     private Integer tradeMoney;
     // 支付方式
     private PayWay payWay;
-
+    // 订单号
+    private String orderNo;
     // 收据号
     private String invoiceNo;
     // -----以下为his提供
@@ -36,6 +37,14 @@ public class CheckCompare {
     private TradeType hisTradeType;
     // 支付金额
     private Integer hisTradeMoney;
+
+    public String getOrderNo() {
+        return orderNo;
+    }
+
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo;
+    }
 
     public String getInvoiceNo() {
         return invoiceNo;
