@@ -9,6 +9,7 @@ import java.util.Map;
  * @date 2017/12/11
  * @intro
  */
+
 public class Refund extends BaseBean {
 
     private String id;
