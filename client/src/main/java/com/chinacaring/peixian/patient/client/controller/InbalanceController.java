@@ -18,7 +18,6 @@ public class InbalanceController {
     private InbalanceService inbalanceService;
 
     /**
-     * 没用
      * @param name
      * @param idcard
      * @return
@@ -31,7 +30,6 @@ public class InbalanceController {
     }
 
     /**
-     * 没用
      * @param inbalanceInfoRequest
      * @param user
      * @return
@@ -44,7 +42,6 @@ public class InbalanceController {
     }
 
     /**
-     * 没用
      * @param id
      * @return
      * @throws CommonException

@@ -89,6 +89,7 @@ public class PaymentItemsAsync {
             inbalancePayment.setInpatientCode(inbalance.getInpatientCode());
             inbalancePayment.setPatientName(inbalance.getPatientName());
             inbalancePayment.setPayTime(inbalance.getCreateTime());
+            inbalancePayment.setInpatientSerialCode(inbalance.getReceiptNo());
 
             inbalancePayments.add(inbalancePayment);
         }

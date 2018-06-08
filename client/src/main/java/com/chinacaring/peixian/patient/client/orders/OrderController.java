@@ -8,6 +8,7 @@ import com.chinacaring.peixian.patient.client.dto.front.response.CheckOrderRespo
 import com.chinacaring.peixian.patient.client.dto.front.response.CheckResponse;
 import com.chinacaring.peixian.patient.client.dto.pingpp.Refund;
 import com.chinacaring.peixian.patient.client.dto.wechatpush.WechatPushResponse;
+import com.chinacaring.peixian.patient.client.exception.SoapException;
 import com.chinacaring.peixian.patient.client.service.WechatPushService;
 import com.chinacaring.util.TimeUtil;
 import io.swagger.annotations.ApiOperation;
@@ -22,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -223,11 +225,26 @@ public class OrderController {
         } else {
             endDate = new Date();
         }
+        Result result = new Result();
         CheckOrderResponse checkOrderResponse = new CheckOrderResponse();
-        checkOrderResponse.setCount(checkOrdersService.checkCount(startDate, endDate));
-        checkOrderResponse.setCheckLong(checkOrdersService.longMoney(startDate, endDate));
-        checkOrderResponse.setCheckShort(checkOrdersService.shortMoney(startDate, endDate));
-        return new Result(checkOrderResponse);
+        try {
+            checkOrderResponse.setCount(checkOrdersService.checkCount(startDate, endDate));
+        } catch (SoapException e) {
+            checkOrderResponse.setCount(new ArrayList<>());
+        }
+        try {
+            checkOrderResponse.setCheckLong(checkOrdersService.longMoney(startDate, endDate));
+        } catch (SoapException e) {
+            checkOrderResponse.setCheckLong(new ArrayList<>());
+        }
+        try {
+            checkOrderResponse.setCheckShort(checkOrdersService.shortMoney(startDate, endDate));
+        } catch (SoapException e) {
+            checkOrderResponse.setCheckShort(new ArrayList<>());
+        }
+
+        result.setData(checkOrderResponse);
+        return result;
     }
 
     /**

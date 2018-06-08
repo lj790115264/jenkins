@@ -57,7 +57,8 @@ public class CheckOrdersServiceOrdersImpl implements CheckOrdersService {
     @Override
     public List<CheckCount> checkCount(Date begin, Date end) throws CommonException {
 
-        List<HisOrder> hisList = hisService.getHisOrders(begin, end);
+        List<HisOrder> hisList;
+        hisList = hisService.getHisOrders(begin, end);
         List<Orders> orders = ordersRepository.findAllByPayTimeBetweenAndIsPaidAndIsRefund(begin, end, 1, 0);
         CheckCount total = new CheckCount();
         total.setName("总交易");
