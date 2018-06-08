@@ -227,21 +227,9 @@ public class OrderController {
         }
         Result result = new Result();
         CheckOrderResponse checkOrderResponse = new CheckOrderResponse();
-        try {
-            checkOrderResponse.setCount(checkOrdersService.checkCount(startDate, endDate));
-        } catch (SoapException e) {
-            checkOrderResponse.setCount(new ArrayList<>());
-        }
-        try {
-            checkOrderResponse.setCheckLong(checkOrdersService.longMoney(startDate, endDate));
-        } catch (SoapException e) {
-            checkOrderResponse.setCheckLong(new ArrayList<>());
-        }
-        try {
-            checkOrderResponse.setCheckShort(checkOrdersService.shortMoney(startDate, endDate));
-        } catch (SoapException e) {
-            checkOrderResponse.setCheckShort(new ArrayList<>());
-        }
+        checkOrderResponse.setCount(checkOrdersService.checkCount(startDate, endDate));
+        checkOrderResponse.setCheckLong(checkOrdersService.longMoney(startDate, endDate));
+        checkOrderResponse.setCheckShort(checkOrdersService.shortMoney(startDate, endDate));
 
         result.setData(checkOrderResponse);
         return result;
