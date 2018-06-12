@@ -30,7 +30,7 @@ public class QuyiServiceNo
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://172.17.10.236/queryServiceTest1/quyiServiceNo.asmx?wsdl");
+            url = new URL("http://172.17.10.236/quyiServiceTest/quyiServiceNo.asmx?wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }
