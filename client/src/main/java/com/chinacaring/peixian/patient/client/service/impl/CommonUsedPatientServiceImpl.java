@@ -185,8 +185,31 @@ public class CommonUsedPatientServiceImpl implements CommonUsedPatientService {
         }
         CommonUsedPatient commonUsedPatient = commonUsedPatientRepository.findByIdCardAndUserIdAndState(commonUsedPatientRequest.getIdCard(), user.getId(), Constant.STATE_COMMON_USED_PATIENT_IN_USE);
         commonUsedPatient.setPhone(commonUsedPatientRequest.getPhone());
+        commonUsedPatient.setName(commonUsedPatientRequest.getName());
 
+        CreateProfileRequestHis createProfileRequestHis = new CreateProfileRequestHis();
+        createProfileRequestHis.setPhone(commonUsedPatient.getPhone());
+        createProfileRequestHis.setName(commonUsedPatient.getName());
+        createProfileRequestHis.setIdCard(commonUsedPatient.getIdCard());
+
+        String patientCode = "";
+        String idCard = commonUsedPatientRequest.getIdCard().toUpperCase();
+
+        try {
+            InsertPatientInfo profileResponseHis = baseInfoService.createProfile(createProfileRequestHis);
+            patientCode = profileResponseHis.getCARDNO();
+        } catch (Exception ex) {
+
+            throw new CommonException("建立档案失败");
+        }
+        commonUsedPatient.setPatientCode(patientCode);
+        commonUsedPatient.setMcardNo(patientCode);
         commonUsedPatientRepository.save(commonUsedPatient);
+        if (idCard.equals(user.getIdCard())){
+            UserInfo userInfo = new UserInfo();
+            userInfo.setPatientCode(patientCode);
+            iUserInfoService.update(userInfo, (new EntityWrapper<UserInfo>()).eq("user_id", user.getId()));
+        }
         return true;
     }
 
