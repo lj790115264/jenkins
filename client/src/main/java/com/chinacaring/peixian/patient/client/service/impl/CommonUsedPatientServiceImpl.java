@@ -180,12 +180,19 @@ public class CommonUsedPatientServiceImpl implements CommonUsedPatientService {
     @Override
     public boolean modifyPhone(CommonUsedPatientRequest commonUsedPatientRequest, User user) throws CommonException {
 
+        // 姓名是否相同
+        boolean sameName = false;
         if (!PhoneUtils.isPhoneLegal(commonUsedPatientRequest.getPhone())){
             throw new CommonException("手机号格式不正确");
         }
         CommonUsedPatient commonUsedPatient = commonUsedPatientRepository.findByIdCardAndUserIdAndState(commonUsedPatientRequest.getIdCard(), user.getId(), Constant.STATE_COMMON_USED_PATIENT_IN_USE);
+
+        if (commonUsedPatientRequest.getName().equals(commonUsedPatient.getName())) {
+            sameName = true;
+        }
         commonUsedPatient.setPhone(commonUsedPatientRequest.getPhone());
         commonUsedPatient.setName(commonUsedPatientRequest.getName());
+
 
         CreateProfileRequestHis createProfileRequestHis = new CreateProfileRequestHis();
         createProfileRequestHis.setPhone(commonUsedPatient.getPhone());
@@ -195,17 +202,20 @@ public class CommonUsedPatientServiceImpl implements CommonUsedPatientService {
         String patientCode = "";
         String idCard = commonUsedPatientRequest.getIdCard().toUpperCase();
 
-        try {
-            InsertPatientInfo profileResponseHis = baseInfoService.createProfile(createProfileRequestHis);
-            patientCode = profileResponseHis.getCARDNO();
-        } catch (Exception ex) {
+        if (!sameName) {
+            try {
+                InsertPatientInfo profileResponseHis = baseInfoService.createProfile(createProfileRequestHis);
+                patientCode = profileResponseHis.getCARDNO();
+            } catch (Exception ex) {
 
-            throw new CommonException("建立档案失败");
+                throw new CommonException("建立档案失败");
+            }
+            commonUsedPatient.setPatientCode(patientCode);
+            commonUsedPatient.setMcardNo(patientCode);
+            commonUsedPatientRepository.save(commonUsedPatient);
         }
-        commonUsedPatient.setPatientCode(patientCode);
-        commonUsedPatient.setMcardNo(patientCode);
-        commonUsedPatientRepository.save(commonUsedPatient);
-        if (idCard.equals(user.getIdCard())){
+
+        if (!sameName && idCard.equals(user.getIdCard())) {
             UserInfo userInfo = new UserInfo();
             userInfo.setPatientCode(patientCode);
             iUserInfoService.update(userInfo, (new EntityWrapper<UserInfo>()).eq("user_id", user.getId()));
