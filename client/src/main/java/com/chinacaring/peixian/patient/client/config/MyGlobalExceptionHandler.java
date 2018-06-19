@@ -30,6 +30,7 @@ public class MyGlobalExceptionHandler extends GlobalExceptionHandler {
 
     @ExceptionHandler({CommonException.class})
     public Object commonExceptionHandler(HttpServletRequest req, CommonException e){
+        logger.error("捕获的错误", e);
         return new Result<>( ResultStatusCode.WEBSERVICE_WRONG_RESPONSE.getErrorCode(), e.getDetailMessage(), "接口返回码 非 1", null);
     }
 
