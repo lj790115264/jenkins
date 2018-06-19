@@ -59,8 +59,7 @@ public class MyGlobalExceptionHandler extends GlobalExceptionHandler {
     @ExceptionHandler({MyException.class})
     public Object myExceptionHandler(HttpServletRequest req, MyException e){
 
-        logger.error("------------------------------");
-        logger.error("exception:" + e.getDevMessage());
+        logger.error("----------------", e);
         return new Result<>( 500, e.getMessage(), e.getDevMessage(), null);
     }
 

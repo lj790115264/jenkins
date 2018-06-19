@@ -9,6 +9,7 @@ import com.chinacaring.peixian.patient.client.dto.front.request.CommonUsedPatien
 import com.chinacaring.peixian.patient.client.dto.front.response.BindCommonUsedPatientResponse;
 import com.chinacaring.peixian.patient.client.dto.front.response.CommonUsedPatientResponse;
 import com.chinacaring.peixian.patient.client.dto.his2.CreateProfileRequestHis;
+import com.chinacaring.peixian.patient.client.exception.MyException;
 import com.chinacaring.peixian.patient.client.service.BaseInfoService;
 import com.chinacaring.peixian.patient.client.service.CommonUsedPatientService;
 import com.chinacaring.peixian.patient.client.wsdl.reponse.insert_patientinfo.InsertPatientInfo;
@@ -178,7 +179,7 @@ public class CommonUsedPatientServiceImpl implements CommonUsedPatientService {
     }
 
     @Override
-    public boolean modifyPhone(CommonUsedPatientRequest commonUsedPatientRequest, User user) throws CommonException {
+    public boolean modifyPhone(CommonUsedPatientRequest commonUsedPatientRequest, User user) throws CommonException, MyException {
 
         // 姓名是否相同
         boolean sameName = false;
@@ -207,8 +208,8 @@ public class CommonUsedPatientServiceImpl implements CommonUsedPatientService {
                 InsertPatientInfo profileResponseHis = baseInfoService.createProfile(createProfileRequestHis);
                 patientCode = profileResponseHis.getCARDNO();
             } catch (Exception ex) {
-
-                throw new CommonException("建立档案失败");
+                MyException my = new MyException("建立档案失败", ex);
+                throw my;
             }
             commonUsedPatient.setPatientCode(patientCode);
             commonUsedPatient.setMcardNo(patientCode);

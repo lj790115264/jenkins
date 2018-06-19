@@ -6,6 +6,7 @@ import com.chinacaring.common.vo.Result;
 import com.chinacaring.peixian.patient.client.config.MyGlobalExceptionHandler;
 import com.chinacaring.peixian.patient.client.dto.front.request.CommonUsedPatientRequest;
 import com.chinacaring.peixian.patient.client.dto.front.response.CommonUsedPatientResponse;
+import com.chinacaring.peixian.patient.client.exception.MyException;
 import com.chinacaring.peixian.patient.client.service.CommonUsedPatientService;
 import com.chinacaring.user.annotation.CurrentUser;
 import com.chinacaring.user.dao.entity.User;
@@ -56,7 +57,7 @@ public class CommonUsedPatientController {
 
     @ApiOperation("修改常用就诊人的手机号")
     @PutMapping("/patient")
-    public Object modifyPhoneCommonUsedPatient(@RequestBody CommonUsedPatientRequest commonUsedPatientRequest, @CurrentUser User user) throws CommonException {
+    public Object modifyPhoneCommonUsedPatient(@RequestBody CommonUsedPatientRequest commonUsedPatientRequest, @CurrentUser User user) throws CommonException, MyException {
 
         return new Result<>(commonUsedPatientService.modifyPhone(commonUsedPatientRequest, user));
 

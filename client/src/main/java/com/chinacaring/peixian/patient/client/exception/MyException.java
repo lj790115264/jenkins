@@ -2,7 +2,7 @@ package com.chinacaring.peixian.patient.client.exception;
 
 import com.chinacaring.common.exception.CommonException;
 
-public class MyException extends CommonException {
+public class MyException extends Exception {
 
     private String devMessage;
 
@@ -20,6 +20,11 @@ public class MyException extends CommonException {
 
     public MyException(String devMessage) {
         this(devMessage, devMessage);
+    }
+
+    public MyException(String devMessage, Throwable t) {
+        super(t);
+        this.devMessage = devMessage;
     }
 
     public MyException(String message, String devMessage) {
