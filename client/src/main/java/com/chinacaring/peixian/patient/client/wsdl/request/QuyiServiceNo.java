@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "quyiServiceNo", targetNamespace = "http://tempuri.org/", wsdlLocation = "http://172.17.10.236/quyiServiceTest/quyiServiceNo.asmx?wsdl")
+@WebServiceClient(name = "quyiServiceNo", targetNamespace = "http://tempuri.org/", wsdlLocation = "http://172.17.10.236/quyiService/quyiServiceNo.asmx?wsdl")
 public class QuyiServiceNo
     extends Service
 {
@@ -30,7 +30,7 @@ public class QuyiServiceNo
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://172.17.10.236/quyiServiceTest/quyiServiceNo.asmx?wsdl");
+            url = new URL("http://172.17.10.236/quyiService/quyiServiceNo.asmx?wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }
