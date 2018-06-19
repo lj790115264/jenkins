@@ -50,7 +50,7 @@ public class MyGlobalExceptionHandler extends GlobalExceptionHandler {
             this.sendEmail(req, e);
         }
 
-        logger.error(e.getMessage());
+        logger.error("捕获的错误", e);
 
         return result;
     }
