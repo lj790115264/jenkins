@@ -15,6 +15,7 @@ import com.chinacaring.peixian.patient.client.dto.front.response.payments.Inbala
 import com.chinacaring.peixian.patient.client.dto.his.request.confirmInbalance.ConfirmInbalanceRequestHis;
 import com.chinacaring.peixian.patient.client.dto.his.response.confirmInbalance.ConfirmInbalanceResponseHis;
 import com.chinacaring.peixian.patient.client.dto.pingpp.ChargeRequest;
+import com.chinacaring.peixian.patient.client.exception.MyException;
 import com.chinacaring.peixian.patient.client.exception.SoapException;
 import com.chinacaring.peixian.patient.client.service.InbalanceService;
 import com.chinacaring.peixian.patient.client.utils.RequestUtil;
@@ -157,7 +158,7 @@ public class InbalanceServiceImpl implements InbalanceService {
     }
 
     @Override
-    public Boolean doInbalanceConfirm(String orderNO) throws CommonException {
+    public Boolean doInbalanceConfirm(String orderNO) throws CommonException, SoapException {
 
         Inbalance inbalance = checkOrder(orderNO);
         if (null == inbalance) {
@@ -264,7 +265,7 @@ public class InbalanceServiceImpl implements InbalanceService {
     }
 
     @Override
-    public InbalanceResponse getInbalance(String name, String idCard) throws CommonException {
+    public InbalanceResponse getInbalance(String name, String idCard) throws CommonException, SoapException {
 
         String res = service.getQuyiServiceNoSoap().getInhosPatientInfo("11", idCard, name);
         Queryinhospatient soap;
@@ -291,7 +292,7 @@ public class InbalanceServiceImpl implements InbalanceService {
     }
 
 
-    public InbalanceResponse getInbalanceOld(String name, String idCard) throws CommonException {
+    public InbalanceResponse getInbalanceOld(String name, String idCard) throws CommonException, MyException {
 
         String res = service.getQuyiServiceNoSoap().queryInMainInfo(name, idCard, "ALL");
         QueryInMainInfoSoap soap;
@@ -378,7 +379,7 @@ public class InbalanceServiceImpl implements InbalanceService {
     }
 
     @Override
-    public Object getInbalanceList(String name, String idCard) throws CommonException {
+    public Object getInbalanceList(String name, String idCard) throws CommonException, MyException {
 
         InbalanceResponse inbalanceResponse = getInbalanceOld(name, idCard);
 

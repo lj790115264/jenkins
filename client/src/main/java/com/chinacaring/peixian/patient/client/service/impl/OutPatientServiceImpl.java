@@ -82,7 +82,7 @@ public class OutPatientServiceImpl implements OutPatientService {
     }
 
     @Override
-    public Object getOutpatientRecords(ClinicRecordRequest clinicRecordRequest) throws CommonException, ParseException {
+    public Object getOutpatientRecords(ClinicRecordRequest clinicRecordRequest) throws CommonException, ParseException, SoapException {
 
 
         Integer interval = interVal(clinicRecordRequest.getBeginTime(), clinicRecordRequest.getEndTime());
@@ -141,7 +141,7 @@ public class OutPatientServiceImpl implements OutPatientService {
 
     @Override
     public Object getUnpaidClinicRecords(UnpaidOutpatientRequest unpaidOutpatientRequest) throws CommonException,
-            ParseException {
+            ParseException, SoapException {
 
         String res = serviceNo.getQuyiServiceNoSoap().getRegInfoByCardNoOrName(unpaidOutpatientRequest.getPatientCode(),
                 unpaidOutpatientRequest.getName(), "1");
@@ -193,7 +193,7 @@ public class OutPatientServiceImpl implements OutPatientService {
     }
 
     @Override
-    public Object getPrescription(PrescriptionRequest prescriptionRequest) throws CommonException, ParseException {
+    public Object getPrescription(PrescriptionRequest prescriptionRequest) throws CommonException, ParseException, SoapException {
 
         String mxRes = serviceNo.getQuyiServiceNoSoap().getFeeListByClinicCode(prescriptionRequest.getRegNO(),
                 prescriptionRequest.getIsFee());
@@ -320,7 +320,7 @@ public class OutPatientServiceImpl implements OutPatientService {
     }
 
     @Override
-    public Boolean doOutpatientConfirm(String orderNo) throws CommonException {
+    public Boolean doOutpatientConfirm(String orderNo) throws CommonException, MyException {
 
         Outpatient outpatient = checkOrder(orderNo);
         if (null == outpatient) {

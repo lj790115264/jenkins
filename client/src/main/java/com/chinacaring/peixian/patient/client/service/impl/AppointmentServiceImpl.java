@@ -18,6 +18,7 @@ import com.chinacaring.peixian.patient.client.dto.front.response.payments.Regist
 import com.chinacaring.peixian.patient.client.dto.his2.AppointmentRequestHis;
 import com.chinacaring.peixian.patient.client.dto.his2.RegisterRequestHis;
 import com.chinacaring.peixian.patient.client.dto.pingpp.ChargeRequest;
+import com.chinacaring.peixian.patient.client.exception.MyException;
 import com.chinacaring.peixian.patient.client.exception.SoapException;
 import com.chinacaring.peixian.patient.client.service.AppointmentService;
 import com.chinacaring.peixian.patient.client.utils.ValidateUtils;
@@ -82,7 +83,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     private static DecimalFormat df = new DecimalFormat("#0.00");
 
     @Override
-    public ScheduleResponse getSchedule(ScheduleRequest scheduleRequest) throws CommonException, ParseException {
+    public ScheduleResponse getSchedule(ScheduleRequest scheduleRequest) throws CommonException, ParseException, MyException {
 
         String soap = service.getQuyiServiceNoSoap().getShemaInfoNew(
                 scheduleRequest.getBeginTime(),
@@ -130,7 +131,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public OrderResponse createAppointmentOrder(AppointmentInfoRequest appointmentInfoRequest, User user) throws
-            CommonException, ParseException {
+            CommonException, ParseException, SoapException {
 //        appointmentInfoRequest.setCost("1");
 
         Appointment appointment = new Appointment();
@@ -236,7 +237,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         return new OrderResponse(appointmentWithID.getId(), payResult);
     }
 
-    public InsertBookingSoap doAppointment(AppointmentRequestHis appointmentRequestHis) throws CommonException {
+    public InsertBookingSoap doAppointment(AppointmentRequestHis appointmentRequestHis) throws CommonException, SoapException {
 
         String soap = service.getQuyiServiceNoSoap().insertBooking(appointmentRequestHis.mixed());
 
@@ -270,7 +271,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 
 
     @Override
-    public  Boolean doRegister(String orderNo) throws CommonException {
+    public  Boolean doRegister(String orderNo) throws CommonException, SoapException {
 
         Appointment appointment = checkOrder(orderNo);
         if (null == appointment) {

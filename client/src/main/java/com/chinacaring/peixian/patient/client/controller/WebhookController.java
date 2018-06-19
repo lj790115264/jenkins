@@ -8,6 +8,7 @@ import com.chinacaring.peixian.patient.client.dao.entity.Orders;
 import com.chinacaring.peixian.patient.client.dao.repository.AppointmentRepository;
 import com.chinacaring.peixian.patient.client.dao.repository.OrdersRepository;
 import com.chinacaring.peixian.patient.client.dto.pingpp.PayResponse;
+import com.chinacaring.peixian.patient.client.exception.MyException;
 import com.chinacaring.peixian.patient.client.exception.SoapException;
 import com.chinacaring.peixian.patient.client.service.AppointmentService;
 import com.chinacaring.peixian.patient.client.service.InbalanceService;
@@ -41,7 +42,7 @@ public class WebhookController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @PostMapping("register")
-    public Object registerWebhook(@RequestBody String data, HttpServletRequest request, HttpServletResponse response) throws CommonException {
+    public Object registerWebhook(@RequestBody String data, HttpServletRequest request, HttpServletResponse response) throws CommonException, MyException {
         Event event = Webhooks.eventParse(data);
         String signature = request.getHeader("x-pingplusplus-signature");
         logger.error("signature：" + signature);
@@ -94,7 +95,7 @@ public class WebhookController {
      * @param event
      * @param response
      */
-    private void callbackHandler(Event event, HttpServletResponse response) throws CommonException {
+    private void callbackHandler(Event event, HttpServletResponse response) throws CommonException, MyException {
         String result = event.getData().getObject().toString();
         PayResponse charge = JacksonUtil.toObject(result, PayResponse.class);
         String orderNo = charge.getOrder_no();
@@ -158,6 +159,16 @@ public class WebhookController {
                     } else {
                         logger.error("异常重复操作该订单");
                     }
+                } catch (CommonException e) {
+                    e.printStackTrace();
+                    //挂号失败。退款
+                    refundService.refund(orderNo, Constant.ORDERS_CLINIC, "退款原因" + e.getDetailMessage());
+                    response.setStatus(500);
+                    //更新订单状态
+                    orderByOrderNo.setRefundReason("门诊缴费确认失败");
+                    orderByOrderNo.setIsRefund(1);
+                    ordersRepository.save(orderByOrderNo);
+                    logger.error(orderNo + "门诊缴费确认失败");
                 } catch (SoapException e) {
                     logger.error("------------------------------");
                     logger.error("argument:" + e.getArguments());
@@ -165,16 +176,6 @@ public class WebhookController {
                     //挂号失败。退款
                     refundService.refund(orderNo, Constant.ORDERS_CLINIC, "退款原因" + e.getDetailMessage());
                     response.setStatus(500);
-                    orderByOrderNo.setRefundReason("门诊缴费确认失败");
-                    orderByOrderNo.setIsRefund(1);
-                    ordersRepository.save(orderByOrderNo);
-                    logger.error(orderNo + "门诊缴费确认失败");
-                } catch (CommonException e) {
-                    e.printStackTrace();
-                    //挂号失败。退款
-                    refundService.refund(orderNo, Constant.ORDERS_CLINIC, "退款原因" + e.getDetailMessage());
-                    response.setStatus(500);
-                    //更新订单状态
                     orderByOrderNo.setRefundReason("门诊缴费确认失败");
                     orderByOrderNo.setIsRefund(1);
                     ordersRepository.save(orderByOrderNo);

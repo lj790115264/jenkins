@@ -7,6 +7,8 @@ import com.chinacaring.peixian.patient.client.dto.front.response.AppointmentReco
 import com.chinacaring.peixian.patient.client.dto.his.request.appointment.AppointmentRequestHis;
 import com.chinacaring.peixian.patient.client.dto.his.request.registerState.RegisterStateRequestHis;
 import com.chinacaring.peixian.patient.client.dto.his.response.appointment.AppointmentResponseHis;
+import com.chinacaring.peixian.patient.client.exception.MyException;
+import com.chinacaring.peixian.patient.client.exception.SoapException;
 import com.chinacaring.peixian.patient.client.wsdl.reponse.insert_booking.InsertBookingSoap;
 import com.chinacaring.user.dao.entity.User;
 
@@ -15,11 +17,11 @@ import java.util.concurrent.ExecutionException;
 
 public interface AppointmentService {
 
-    Object getSchedule(ScheduleRequest scheduleRequest) throws CommonException, ParseException;
+    Object getSchedule(ScheduleRequest scheduleRequest) throws CommonException, ParseException, MyException;
 
-    Object createAppointmentOrder(AppointmentInfoRequest appointmentInfoRequest, User user) throws CommonException, ParseException;
+    Object createAppointmentOrder(AppointmentInfoRequest appointmentInfoRequest, User user) throws CommonException, ParseException, SoapException;
 
-    Boolean doRegister(String orderNo) throws CommonException;
+    Boolean doRegister(String orderNo) throws CommonException, SoapException;
 
     //判断挂号是否成功 （向his回写成功？）
     Object getRegisterStatus(Integer id) throws CommonException;
