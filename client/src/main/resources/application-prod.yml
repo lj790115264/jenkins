@@ -25,5 +25,6 @@ swagger:
 consul:
   host: 172.17.10.89
 logging:
-  level: error
+  level:
+    root: error
   file: ${spring.application.name}.log
