@@ -45,7 +45,7 @@ public class BaseInfoServiceImpl implements BaseInfoService {
     }
 
     @Override
-    public InsertPatientInfo createProfile(CreateProfileRequestHis createProfileRequestHis) throws CommonException {
+    public InsertPatientInfo createProfile(CreateProfileRequestHis createProfileRequestHis) throws CommonException, MyException {
 
         String res = soap.getQuyiServiceNoSoap().insertPatientInfo(createProfileRequestHis.mixed());
         InsertPatientInfoSoap insertPatientInfoSoap = JaxbXmlUtil.convertToJavaBean(res, InsertPatientInfoSoap.class);

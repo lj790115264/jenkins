@@ -3,6 +3,8 @@ package com.chinacaring.peixian.patient.client.controller;
 import com.chinacaring.common.exception.CommonException;
 import com.chinacaring.common.vo.Result;
 import com.chinacaring.peixian.patient.client.dto.front.request.InbalanceInfoRequest;
+import com.chinacaring.peixian.patient.client.exception.MyException;
+import com.chinacaring.peixian.patient.client.exception.SoapException;
 import com.chinacaring.peixian.patient.client.service.InbalanceService;
 import com.chinacaring.user.annotation.CurrentUser;
 import com.chinacaring.user.dao.entity.User;
@@ -25,7 +27,7 @@ public class InbalanceController {
      */
     @GetMapping("in_hospital/balance")
     public Object getInbalance(@RequestParam("name") String name,
-                               @RequestParam("id_card") String idcard) throws CommonException {
+                               @RequestParam("id_card") String idcard) throws CommonException, SoapException {
         return new Result<>(inbalanceService.getInbalance(name, idcard));
     }
 
@@ -60,7 +62,7 @@ public class InbalanceController {
      */
     @GetMapping("in_hospital/bills")
     public Object getInhospitalBills(@RequestParam("name") String name,
-                                     @RequestParam("id_card") String idcard) throws CommonException {
+                                     @RequestParam("id_card") String idcard) throws CommonException, MyException {
         return new Result<>(inbalanceService.getInbalanceList(name, idcard));
 
     }

@@ -13,7 +13,7 @@ import java.util.List;
 public interface CommonUsedPatientService {
 
 
-    BindCommonUsedPatientResponse bindCommonUsedPatient(CommonUsedPatientRequest commonUsedPatientRequest, User user) throws CommonException, ParseException;
+    BindCommonUsedPatientResponse bindCommonUsedPatient(CommonUsedPatientRequest commonUsedPatientRequest, User user) throws CommonException, ParseException, MyException;
 
     boolean deleteCommonUsedPatient(String idCard, User user) throws CommonException;
 

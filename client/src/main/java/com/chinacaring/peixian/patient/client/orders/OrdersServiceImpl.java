@@ -69,7 +69,7 @@ public class OrdersServiceImpl implements OrdersService {
      * @return
      * @throws CommonException
      */
-    public List<GetOrderInfoByOperCode> getHisOrders(Date startDate, Date endDate) throws CommonException {
+    public List<GetOrderInfoByOperCode> getHisOrders(Date startDate, Date endDate) throws CommonException, SoapException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String res = null;
         try {
@@ -97,7 +97,7 @@ public class OrdersServiceImpl implements OrdersService {
     @Override
     public List<Orders> getOrders(Pageable pageable, Date startDate, Date endDate, String channel, String type,
                                   Boolean paid, Boolean refunded, Integer offline_refund_status, HttpServletResponse
-                                          response) throws CommonException, ParseException {
+                                          response) throws CommonException, ParseException, SoapException {
         Page<Orders> ordersPage = ordersRepository.findAll(where(startDate, endDate, channel, type, paid, refunded,
                 offline_refund_status), pageable);
 
@@ -183,7 +183,7 @@ public class OrdersServiceImpl implements OrdersService {
     @Override
     public OrderTotalResponse getOrdersTotal(Date startDate, Date endDate, String channel, String type, Boolean paid,
                                              Boolean refunded, Integer offline_refund_status, HttpServletResponse
-                                                     response) throws CommonException, ParseException {
+                                                     response) throws CommonException, ParseException, SoapException {
         List<Orders> orders = getOrders(null, startDate, endDate, channel, type, paid, refunded,
                 offline_refund_status, response);
         BigDecimal totalMon = new BigDecimal(0);
@@ -230,7 +230,7 @@ public class OrdersServiceImpl implements OrdersService {
     @Override
     public ExcelNameResponse generateTheExcel(Date startDate, Date endDate, String channel, String type, Boolean
             paid, Boolean refunded, Integer offline_refund_status, HttpServletResponse response) throws
-            NoSuchFieldException, IllegalAccessException, IOException, CommonException, ParseException {
+            NoSuchFieldException, IllegalAccessException, IOException, CommonException, ParseException, SoapException {
         List<Orders> orders = getOrders(null, startDate, endDate, channel, type, paid, refunded,
                 offline_refund_status, response);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

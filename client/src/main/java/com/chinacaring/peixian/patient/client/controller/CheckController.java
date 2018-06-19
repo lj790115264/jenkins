@@ -2,6 +2,7 @@ package com.chinacaring.peixian.patient.client.controller;
 
 import com.chinacaring.common.exception.CommonException;
 import com.chinacaring.common.vo.Result;
+import com.chinacaring.peixian.patient.client.exception.MyException;
 import com.chinacaring.peixian.patient.client.service.CheckService;
 import com.chinacaring.peixian.patient.client.utils.ValidateUtils;
 import io.swagger.annotations.Api;
@@ -22,7 +23,7 @@ public class CheckController {
     @GetMapping("clinic_check")
     public Object getClinicChecks(@RequestParam("card_no") String cardNo,
                                   @RequestParam("begin_time") String beginTime,
-                                  @RequestParam("end_time") String endTime) throws CommonException, ParseException {
+                                  @RequestParam("end_time") String endTime) throws CommonException, ParseException, MyException {
 
         beginTime = ValidateUtils.time(beginTime) + "000000";
         endTime = ValidateUtils.time(endTime) + "235959";

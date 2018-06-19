@@ -67,7 +67,7 @@ public class OrderController {
                             @RequestParam(required = false) Boolean is_paid,
                             @RequestParam(required = false) Boolean is_refund,
                             @RequestParam(required = false) Integer offline_refund_status,
-                            HttpServletResponse response) throws ParseException, CommonException {
+                            HttpServletResponse response) throws ParseException, CommonException, SoapException {
 
         Date startDate = null;
         Date endDate = null;
@@ -143,7 +143,7 @@ public class OrderController {
                                   @RequestParam(required = false) String type,
                                   @RequestParam(required = false) Boolean is_paid,
                                   @RequestParam(required = false) Integer offline_refund_status,
-                                  @RequestParam(required = false) Boolean is_refund, HttpServletResponse response) throws ParseException, CommonException {
+                                  @RequestParam(required = false) Boolean is_refund, HttpServletResponse response) throws ParseException, CommonException, SoapException {
 
         Date startDate = null;
         Date endDate = null;
@@ -175,7 +175,7 @@ public class OrderController {
                               @RequestParam(required = false) String type,
                               @RequestParam(required = false) Boolean is_paid,
                               @RequestParam(required = false) Integer offline_refund_status,
-                              @RequestParam(required = false) Boolean is_refund, HttpServletResponse response) throws ParseException, IllegalAccessException, NoSuchFieldException, IOException, CommonException {
+                              @RequestParam(required = false) Boolean is_refund, HttpServletResponse response) throws ParseException, IllegalAccessException, NoSuchFieldException, IOException, CommonException, SoapException {
 
         Date startDate = null;
         Date endDate = null;
@@ -215,7 +215,7 @@ public class OrderController {
      */
     @GetMapping("check/order")
     public Object checkOrder(@RequestParam() String start_time,
-                             @RequestParam(required = false) String end_time) throws ParseException, CommonException {
+                             @RequestParam(required = false) String end_time) throws ParseException, CommonException, SoapException {
 
         Date startDate,
                 endDate;
@@ -245,7 +245,7 @@ public class OrderController {
      */
     @GetMapping("check/count")
     public Object checkCount(@RequestParam() String start_time,
-                             @RequestParam(required = false) String end_time) throws ParseException, CommonException {
+                             @RequestParam(required = false) String end_time) throws ParseException, CommonException, SoapException {
 
         Date startDate,
                 endDate;
@@ -269,7 +269,7 @@ public class OrderController {
      */
     @GetMapping("check/long")
     public Object checkLong(@RequestParam() String start_time,
-                             @RequestParam(required = false) String end_time) throws ParseException, CommonException {
+                             @RequestParam(required = false) String end_time) throws ParseException, CommonException, SoapException {
 
         Date startDate,
                 endDate;
@@ -293,7 +293,7 @@ public class OrderController {
      */
     @GetMapping("check/short")
     public Object checkShort(@RequestParam() String start_time,
-                             @RequestParam(required = false) String end_time) throws ParseException, CommonException {
+                             @RequestParam(required = false) String end_time) throws ParseException, CommonException, SoapException {
 
         Date startDate,
                 endDate;

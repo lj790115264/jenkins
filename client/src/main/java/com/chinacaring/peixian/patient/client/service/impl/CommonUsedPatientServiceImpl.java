@@ -76,7 +76,7 @@ public class CommonUsedPatientServiceImpl implements CommonUsedPatientService {
     }
 
     @Override
-    public BindCommonUsedPatientResponse bindCommonUsedPatient(CommonUsedPatientRequest commonUsedPatientRequest, User user) throws CommonException, ParseException {
+    public BindCommonUsedPatientResponse bindCommonUsedPatient(CommonUsedPatientRequest commonUsedPatientRequest, User user) throws CommonException, ParseException, MyException {
 
         String phone = commonUsedPatientRequest.getPhone();
         //身份证大写

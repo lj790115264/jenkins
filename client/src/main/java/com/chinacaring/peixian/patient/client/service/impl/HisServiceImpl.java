@@ -4,6 +4,7 @@ import com.chinacaring.common.exception.CommonException;
 import com.chinacaring.peixian.patient.client.dto.check.HisOrder;
 import com.chinacaring.peixian.patient.client.enumeration.PayWay;
 import com.chinacaring.peixian.patient.client.enumeration.TradeType;
+import com.chinacaring.peixian.patient.client.exception.SoapException;
 import com.chinacaring.peixian.patient.client.orders.OrdersService;
 import com.chinacaring.peixian.patient.client.service.HisService;
 import com.chinacaring.peixian.patient.client.wsdl.orders.response.get_order_infoby_opercode.GetOrderInfoByOperCode;
@@ -28,7 +29,7 @@ public class HisServiceImpl implements HisService {
     private static final ThreadLocal<List<HisOrder>> his = new ThreadLocal<>();
 
     @Override
-    public List<HisOrder> getHisOrders(Date start, Date end) throws CommonException {
+    public List<HisOrder> getHisOrders(Date start, Date end) throws CommonException, SoapException {
 
         if (null != his.get()) {
             return his.get();

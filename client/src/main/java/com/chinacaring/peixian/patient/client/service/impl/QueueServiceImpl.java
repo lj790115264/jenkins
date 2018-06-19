@@ -28,7 +28,7 @@ public class QueueServiceImpl implements QueueService {
     }
 
     @Override
-    public Object getQueueDept() throws CommonException {
+    public Object getQueueDept() throws CommonException, SoapException {
         String res = service.getWebServiceCallInterfaceSoap().getQueueByDept();
         Response soap;
         try {
@@ -55,7 +55,7 @@ public class QueueServiceImpl implements QueueService {
     }
 
     @Override
-    public List<QueuePatientResponse> getQueuePatient(String patientCode) throws CommonException {
+    public List<QueuePatientResponse> getQueuePatient(String patientCode) throws CommonException, SoapException {
         String res = service.getWebServiceCallInterfaceSoap().getQueueForPatient(request(patientCode));
         com.chinacaring.peixian.patient.client.wsdl.reponse.get_queue_for_patient.Response soap;
         try {

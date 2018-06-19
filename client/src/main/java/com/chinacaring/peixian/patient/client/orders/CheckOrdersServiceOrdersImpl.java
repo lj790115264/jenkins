@@ -8,6 +8,7 @@ import com.chinacaring.peixian.patient.client.dto.check.CheckCount;
 import com.chinacaring.peixian.patient.client.dto.check.HisOrder;
 import com.chinacaring.peixian.patient.client.enumeration.PayWay;
 import com.chinacaring.peixian.patient.client.enumeration.TradeType;
+import com.chinacaring.peixian.patient.client.exception.SoapException;
 import com.chinacaring.peixian.patient.client.service.HisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,7 +56,7 @@ public class CheckOrdersServiceOrdersImpl implements CheckOrdersService {
     }
 
     @Override
-    public List<CheckCount> checkCount(Date begin, Date end) throws CommonException {
+    public List<CheckCount> checkCount(Date begin, Date end) throws CommonException, SoapException {
 
         List<HisOrder> hisList;
         hisList = hisService.getHisOrders(begin, end);
@@ -136,7 +137,7 @@ public class CheckOrdersServiceOrdersImpl implements CheckOrdersService {
     }
 
     @Override
-    public List<CheckCompare> longMoney(Date begin, Date end) throws CommonException {
+    public List<CheckCompare> longMoney(Date begin, Date end) throws CommonException, SoapException {
         // 左边代表我们这边 右边代表his
         List<HisOrder> hisList = hisService.getHisOrders(begin, end);
         List<Orders> orders = ordersRepository.findAllByPayTimeBetweenAndIsPaidAndIsRefund(begin, end, 1, 0);
@@ -194,7 +195,7 @@ public class CheckOrdersServiceOrdersImpl implements CheckOrdersService {
     }
 
     @Override
-    public List<CheckCompare> shortMoney(Date begin, Date end) throws CommonException {
+    public List<CheckCompare> shortMoney(Date begin, Date end) throws CommonException, SoapException {
         // 左边代表his（一层循环） 右边代表我们这边（二层）
         List<HisOrder> hisList = hisService.getHisOrders(begin, end);
         List<Orders> orders = ordersRepository.findAllByPayTimeBetweenAndIsPaidAndIsRefund(begin, end, 1, 0);

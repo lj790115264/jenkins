@@ -34,7 +34,7 @@ public class ExamineServiceImpl implements ExamineService {
     private QuyiServiceNo service;
 
     @Override
-    public List<ExamineList> getExamine(String regNo, String beginTime, String endTime) throws ParseException, CommonException {
+    public List<ExamineList> getExamine(String regNo, String beginTime, String endTime) throws ParseException, CommonException, MyException {
 
         String result = service.getQuyiServiceNoSoap().getLisResultInfo(regNo, beginTime, endTime);
         LisResultInfoSoap soap;

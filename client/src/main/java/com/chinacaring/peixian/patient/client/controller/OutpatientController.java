@@ -7,6 +7,7 @@ import com.chinacaring.peixian.patient.client.dto.front.request.ClinicRecordRequ
 import com.chinacaring.peixian.patient.client.dto.front.request.OutpatientInfoRequest;
 import com.chinacaring.peixian.patient.client.dto.front.request.PrescriptionRequest;
 import com.chinacaring.peixian.patient.client.dto.front.request.UnpaidOutpatientRequest;
+import com.chinacaring.peixian.patient.client.exception.SoapException;
 import com.chinacaring.peixian.patient.client.service.OutPatientService;
 import com.chinacaring.user.annotation.CurrentUser;
 import com.chinacaring.user.dao.entity.User;
@@ -27,7 +28,7 @@ public class OutpatientController {
     @GetMapping("/clinic/record")
     public Object getClinicRecords(@RequestParam("begin_time") String beginTime,
                                    @RequestParam("end_time") String endTime,
-                                   @RequestParam("patient_code") String patientCode) throws CommonException, ParseException {
+                                   @RequestParam("patient_code") String patientCode) throws CommonException, ParseException, SoapException {
 
         return new Result<>(outPatientService.getOutpatientRecords(new ClinicRecordRequest(patientCode, beginTime, endTime)));
     }
@@ -41,7 +42,7 @@ public class OutpatientController {
     @ApiOperation("未缴费处方的门诊记录")
     @GetMapping("/clinic/bills")
     public Object getOutpatientUnpaidRecords(@RequestParam("name") String name,
-                                             @RequestParam("patient_code") String patientCode) throws CommonException, ParseException {
+                                             @RequestParam("patient_code") String patientCode) throws CommonException, ParseException, SoapException {
 
         return new Result<>(outPatientService.getUnpaidClinicRecords(new UnpaidOutpatientRequest(patientCode, name)));
     }
@@ -49,7 +50,7 @@ public class OutpatientController {
     @ApiOperation("门诊处方信息")
     @GetMapping("/clinic/recipe")
     public Object getPrescription(@RequestParam("register_id") String registerId,
-                                  @RequestParam("is_fee") String isFee) throws CommonException, ParseException {
+                                  @RequestParam("is_fee") String isFee) throws CommonException, ParseException, SoapException {
         return new Result<>(outPatientService.getPrescription(new PrescriptionRequest(registerId, isFee)));
     }
 

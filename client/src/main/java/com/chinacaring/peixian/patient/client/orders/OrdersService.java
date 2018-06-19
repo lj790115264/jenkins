@@ -3,6 +3,7 @@ package com.chinacaring.peixian.patient.client.orders;
 import com.chinacaring.common.exception.CommonException;
 import com.chinacaring.peixian.patient.client.dao.entity.Orders;
 import com.chinacaring.peixian.patient.client.dto.pingpp.Refund;
+import com.chinacaring.peixian.patient.client.exception.SoapException;
 import com.chinacaring.peixian.patient.client.wsdl.orders.response.get_order_infoby_opercode.GetOrderInfoByOperCode;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.domain.Pageable;
@@ -21,10 +22,10 @@ import java.util.List;
  */
 public interface OrdersService {
 
-    List<GetOrderInfoByOperCode> getHisOrders(Date startDate, Date endDate) throws CommonException;
+    List<GetOrderInfoByOperCode> getHisOrders(Date startDate, Date endDate) throws CommonException, SoapException;
 
     List<Orders> getOrders(Pageable pageable, Date startDate, Date endDate, String channel, String type, Boolean
-            paid, Boolean refunded, Integer offline_refund_status, HttpServletResponse response) throws CommonException, ParseException;
+            paid, Boolean refunded, Integer offline_refund_status, HttpServletResponse response) throws CommonException, ParseException, SoapException;
 
     Refund refund(RefundRequest request) throws CommonException;
 
@@ -33,10 +34,10 @@ public interface OrdersService {
     List<Refund> getRefundByChargeId(String charge_id);
 
     OrderTotalResponse getOrdersTotal(Date startDate, Date endDate, String channel, String type, Boolean paid,
-                                      Boolean refunded, Integer offline_refund_status, HttpServletResponse response) throws CommonException, ParseException;
+                                      Boolean refunded, Integer offline_refund_status, HttpServletResponse response) throws CommonException, ParseException, SoapException;
 
     ExcelNameResponse generateTheExcel(Date startDate, Date endDate, String channel, String type, Boolean paid,
-                                       Boolean refunded, Integer offline_refund_status, HttpServletResponse response) throws NoSuchFieldException, IllegalAccessException, IOException, CommonException, ParseException;
+                                       Boolean refunded, Integer offline_refund_status, HttpServletResponse response) throws NoSuchFieldException, IllegalAccessException, IOException, CommonException, ParseException, SoapException;
 
     ResponseEntity<InputStreamResource> downloadTheExcel(String fileName) throws CommonException;
 

@@ -32,7 +32,7 @@ public class CommonUsedPatientController {
 
     @ApiOperation("绑定常用就诊人")
     @PostMapping("/patient")
-    public Object bindCommonUsedPatient(@RequestBody CommonUsedPatientRequest commonUsedPatientRequest, @CurrentUser User user) throws CommonException, ParseException {
+    public Object bindCommonUsedPatient(@RequestBody CommonUsedPatientRequest commonUsedPatientRequest, @CurrentUser User user) throws CommonException, ParseException, MyException {
 
         return new Result<>(commonUsedPatientService.bindCommonUsedPatient(commonUsedPatientRequest, user));
 

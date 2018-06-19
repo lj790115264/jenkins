@@ -5,6 +5,8 @@ import com.chinacaring.common.exception.CommonException;
 import com.chinacaring.common.vo.Result;
 import com.chinacaring.peixian.patient.client.dto.front.request.AppointmentInfoRequest;
 import com.chinacaring.peixian.patient.client.dto.front.request.ScheduleRequest;
+import com.chinacaring.peixian.patient.client.exception.MyException;
+import com.chinacaring.peixian.patient.client.exception.SoapException;
 import com.chinacaring.peixian.patient.client.service.AppointmentService;
 import com.chinacaring.peixian.patient.client.utils.ValidateUtils;
 import com.chinacaring.user.annotation.CurrentUser;
@@ -26,7 +28,7 @@ public class AppointmentController {
     @GetMapping("/schedule/dept/{dept_code}")
     public Object getSchedule(@RequestParam("begin_time") String beginTime,
                               @RequestParam("end_time") String endTime,
-                              @PathVariable("dept_code") String deptCode) throws CommonException, ParseException {
+                              @PathVariable("dept_code") String deptCode) throws CommonException, ParseException, MyException {
 
         beginTime = ValidateUtils.time(beginTime) + "000000";
         endTime = ValidateUtils.time(endTime) + "235959";
@@ -36,7 +38,7 @@ public class AppointmentController {
 
     @ApiOperation("创建挂号订单")
     @PostMapping("/register")
-    public Object createAppointmentOrder(@RequestBody AppointmentInfoRequest appointmentInfoRequest, @CurrentUser User user) throws CommonException, ParseException {
+    public Object createAppointmentOrder(@RequestBody AppointmentInfoRequest appointmentInfoRequest, @CurrentUser User user) throws CommonException, ParseException, SoapException {
         return new Result<>(appointmentService.createAppointmentOrder(appointmentInfoRequest, user));
     }
 
@@ -48,7 +50,7 @@ public class AppointmentController {
 
     @ApiOperation("挂号记录")
     @GetMapping("/register/{patient_code}")
-    public Object getAppointmentRecords(@PathVariable("patient_code") String patientCode ,@CurrentUser User user) throws CommonException, ExecutionException, InterruptedException {
+    public Object getAppointmentRecords(@PathVariable("patient_code") String patientCode ,@CurrentUser User user) throws CommonException, ExecutionException, InterruptedException, SoapException {
         return new Result<>(appointmentService.getAppointRecords(patientCode, user));
     }
 

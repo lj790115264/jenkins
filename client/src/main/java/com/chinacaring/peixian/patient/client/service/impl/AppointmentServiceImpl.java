@@ -394,7 +394,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 //    }
 
     @Override
-    public AppointmentRecordsResponse getAppointRecords(String patientCode, User user) throws CommonException, ExecutionException, InterruptedException {
+    public AppointmentRecordsResponse getAppointRecords(String patientCode, User user) throws CommonException, ExecutionException, InterruptedException, SoapException {
 
         Sort sort = new Sort(Sort.Direction.DESC, "id");
         List<Appointment> appointments = appointmentRepository

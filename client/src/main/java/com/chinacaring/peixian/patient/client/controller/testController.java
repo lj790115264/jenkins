@@ -1,6 +1,8 @@
 package com.chinacaring.peixian.patient.client.controller;
 
 import com.chinacaring.common.exception.CommonException;
+import com.chinacaring.peixian.patient.client.exception.MyException;
+import com.chinacaring.peixian.patient.client.exception.SoapException;
 import com.chinacaring.peixian.patient.client.service.AppointmentService;
 import com.chinacaring.peixian.patient.client.service.BaseInfoService;
 import com.chinacaring.peixian.patient.client.service.OutPatientService;
@@ -28,17 +30,17 @@ public class testController {
     }
 
     @GetMapping("/test/price")
-    public Object testPrice() throws CommonException {
+    public Object testPrice() throws CommonException, SoapException {
         return priceService.insertDb();
     }
 
     @GetMapping("/test2")
-    public Object Test(String id) throws CommonException, InterruptedException {
+    public Object Test(String id) throws CommonException, InterruptedException, SoapException {
         return appointmentService.doRegister(id);
     }
 
     @GetMapping("/test3")
-    public Object Test3(String id) throws CommonException {
+    public Object Test3(String id) throws CommonException, MyException {
         return outPatientService.doOutpatientConfirm(id);
     }
 }

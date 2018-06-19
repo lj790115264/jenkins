@@ -3,6 +3,7 @@ package com.chinacaring.peixian.patient.client.controller;
 
 import com.chinacaring.common.exception.CommonException;
 import com.chinacaring.common.vo.Result;
+import com.chinacaring.peixian.patient.client.exception.SoapException;
 import com.chinacaring.peixian.patient.client.service.QueueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,12 +20,12 @@ public class QueueController {
 
 
     @GetMapping("/dept")
-    public Object getQueueDept() throws CommonException {
+    public Object getQueueDept() throws CommonException, SoapException {
         return new Result<>(queueService.getQueueDept());
     }
 
     @GetMapping("/{patient_code}")
-    public Object getQueuePatient(@PathVariable("patient_code") String patientCode) throws CommonException {
+    public Object getQueuePatient(@PathVariable("patient_code") String patientCode) throws CommonException, SoapException {
         return new Result<>(queueService.getQueuePatient(patientCode));
     }
 }

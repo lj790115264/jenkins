@@ -29,28 +29,23 @@ public class AppointRecord {
     private QuyiServiceNo service;
     private static DecimalFormat df = new DecimalFormat("#0.00");
 
-    public Future<String> state(Appointment appointment) {
+    public Future<String> state(Appointment appointment) throws SoapException {
 
         String registerStatus;
+        String soap = new QuyiServiceNo().getQuyiServiceNoSoap().getRegState(appointment.getRegisterId());
+        GetRegStateSoap regSoap;
         try {
-            String soap = new QuyiServiceNo().getQuyiServiceNoSoap().getRegState(appointment.getRegisterId());
-            GetRegStateSoap regSoap;
-            try {
-                regSoap = JaxbXmlUtil.convertToJavaBean(soap, GetRegStateSoap.class);
-                registerStatus = regSoap.getData().getGetRegState().getState();
-            } catch (Exception e) {
-                throw new SoapException("获取挂号状态失败", soap, appointment.getRegisterId());
-            }
-
-            if (!Objects.equals(Constant.RETURN_CODE_SUCCESS, regSoap.getResult().getReturnCode())) {
-                throw new SoapException("获取挂号状态失败", regSoap.getResult().getReturnDesc(), appointment
-                        .getRegisterId());
-            }
-            return new AsyncResult(registerStatus);
-
-        } catch (CommonException e) {
-            logger.error("获取挂号状态失败" + appointment.getRegisterId());
-            return new AsyncResult<>(null);
+            regSoap = JaxbXmlUtil.convertToJavaBean(soap, GetRegStateSoap.class);
+            registerStatus = regSoap.getData().getGetRegState().getState();
+        } catch (Exception e) {
+            throw new SoapException("获取挂号状态失败", soap, appointment.getRegisterId());
         }
+
+        if (!Objects.equals(Constant.RETURN_CODE_SUCCESS, regSoap.getResult().getReturnCode())) {
+            throw new SoapException("获取挂号状态失败", regSoap.getResult().getReturnDesc(), appointment
+                    .getRegisterId());
+        }
+        return new AsyncResult(registerStatus);
+
     }
 }

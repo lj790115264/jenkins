@@ -5,6 +5,7 @@ import com.chinacaring.common.exception.CommonException;
 import com.chinacaring.common.vo.Result;
 import com.chinacaring.peixian.patient.client.dto.front.response.ExamineDetailResponseWithSortCode;
 import com.chinacaring.peixian.patient.client.dto.front.response.ExamineList;
+import com.chinacaring.peixian.patient.client.exception.MyException;
 import com.chinacaring.peixian.patient.client.service.ExamineService;
 import com.chinacaring.peixian.patient.client.utils.ValidateUtils;
 import io.swagger.annotations.Api;
@@ -35,7 +36,7 @@ public class ExamineController {
     @GetMapping(value = "/examine")
     public Object getExamine(@RequestParam("register_id") String regNo,
                              @RequestParam("begin_time") String beginTime,
-                             @RequestParam("end_time") String endTime) throws ParseException, CommonException {
+                             @RequestParam("end_time") String endTime) throws ParseException, CommonException, MyException {
 
         beginTime = ValidateUtils.time(beginTime) + "000000";
         endTime = ValidateUtils.time(endTime) + "235959";

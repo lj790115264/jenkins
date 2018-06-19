@@ -31,7 +31,7 @@ public class PriceServiceImpl implements PriceService {
     private QuyiServiceNo service;
 
     @Override
-    public String insertDb() throws CommonException {
+    public String insertDb() throws CommonException, SoapException {
 
         String res = service.getQuyiServiceNoSoap().queryPriceBoardInfo("ALL");
         QueryPriceBoardInfoSoap soap;

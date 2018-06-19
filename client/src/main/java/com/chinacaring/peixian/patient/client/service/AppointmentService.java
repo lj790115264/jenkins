@@ -26,6 +26,6 @@ public interface AppointmentService {
     //判断挂号是否成功 （向his回写成功？）
     Object getRegisterStatus(Integer id) throws CommonException;
 
-    AppointmentRecordsResponse getAppointRecords(String patientCode, User user) throws CommonException, ExecutionException, InterruptedException;
+    AppointmentRecordsResponse getAppointRecords(String patientCode, User user) throws CommonException, ExecutionException, InterruptedException, SoapException;
 
 }
