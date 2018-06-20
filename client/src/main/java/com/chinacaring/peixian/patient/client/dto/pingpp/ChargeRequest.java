@@ -17,8 +17,8 @@ public class ChargeRequest implements Serializable{
     private String channel;
     private String subject;
     private String open_id;
-//    private String app_id = "app_iXrbz9CmDu5ODqTO";
-    private String app_id = "app_e9u9q9KyXPiL4u58";
+    private String app_id = "app_iXrbz9CmDu5ODqTO"; // 正式
+//    private String app_id = "app_e9u9q9KyXPiL4u58"; // 测试
 
     public String getApp_id() {
         return app_id;
