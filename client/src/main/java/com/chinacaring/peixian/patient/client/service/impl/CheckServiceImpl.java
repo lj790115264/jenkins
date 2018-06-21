@@ -48,7 +48,7 @@ public class CheckServiceImpl implements CheckService {
             response.setDescript(department.getReportdescribe());
             response.setCheckId(department.getCheckserialnum());
             response.setDiagnose(department.getReportdiagnose());
-            response.setTime(ValidateUtils.soapTime(department.getStudytime(), "yyyy-MM-dd"));
+            response.setTime(ValidateUtils.soapTime(department.getStudytime(), "yyyy-MM-dd HH:mm:ss"));
             response.setDocName(department.getDocname());
             response.setDevice(department.getDevicename());
             response.setScription(department.getStudyscription());
