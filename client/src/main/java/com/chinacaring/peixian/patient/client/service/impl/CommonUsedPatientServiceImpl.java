@@ -121,8 +121,8 @@ public class CommonUsedPatientServiceImpl implements CommonUsedPatientService {
             if (StringUtils.isEmpty(patientCode)){
                 throw new CommonException("查到档案，但是patientCode为 空");
             }
-        } catch (CommonException e) {
-            message = e.getDetailMessage();
+        } catch (MyException e) {
+            message = e.getDevMessage();
             CreateProfileRequestHis createProfileRequestHis = new CreateProfileRequestHis();
             createProfileRequestHis.setPhone(phone);
             createProfileRequestHis.setName(name);

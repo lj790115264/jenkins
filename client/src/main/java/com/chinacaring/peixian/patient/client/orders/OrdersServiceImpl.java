@@ -85,10 +85,10 @@ public class OrdersServiceImpl implements OrdersService {
             throw new SoapException("暂无订单记录!!", res, "099020" + sdf.format(startDate) + sdf.format(endDate));
         }
         if (!Objects.equals(Constant.RETURN_CODE_SUCCESS, soap.getResult().getReturnCode())) {
-            throw new SoapException("暂无门诊记录!", soap.getResult().getReturnDesc(), "099020" + sdf.format(startDate) + sdf.format(endDate));
+            throw new SoapException("暂无订单记录!", soap.getResult().getReturnDesc(), "099020" + sdf.format(startDate) + sdf.format(endDate));
         }
         if (Objects.isNull(soap.getData().getGetOrderInfoByOperCode()) || soap.getData().getGetOrderInfoByOperCode().isEmpty()) {
-            throw new CommonException("暂无门诊记录");
+            throw new CommonException("暂无订单记录");
         }
         return soap.getData().getGetOrderInfoByOperCode();
     }
