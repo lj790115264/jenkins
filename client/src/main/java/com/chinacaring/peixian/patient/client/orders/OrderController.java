@@ -4,11 +4,13 @@ import com.chinacaring.common.exception.CommonException;
 import com.chinacaring.common.vo.Result;
 import com.chinacaring.common.vo.ResultStatusCode;
 import com.chinacaring.peixian.patient.client.dao.entity.Orders;
+import com.chinacaring.peixian.patient.client.dto.check.HisOrder;
 import com.chinacaring.peixian.patient.client.dto.front.response.CheckOrderResponse;
 import com.chinacaring.peixian.patient.client.dto.front.response.CheckResponse;
 import com.chinacaring.peixian.patient.client.dto.pingpp.Refund;
 import com.chinacaring.peixian.patient.client.dto.wechatpush.WechatPushResponse;
 import com.chinacaring.peixian.patient.client.exception.SoapException;
+import com.chinacaring.peixian.patient.client.service.HisService;
 import com.chinacaring.peixian.patient.client.service.WechatPushService;
 import com.chinacaring.util.TimeUtil;
 import io.swagger.annotations.ApiOperation;
@@ -205,6 +207,8 @@ public class OrderController {
         return new Result<>();
     }
 
+    @Autowired
+    private HisService hisService;
     /**
      * 统计+长款+短款
      * @param start_time
@@ -226,13 +230,17 @@ public class OrderController {
             endDate = new Date();
         }
         Result result = new Result();
+        List<HisOrder> hisList;
+        hisList = hisService.getHisOrders(startDate, endDate);
+//        hisList = hisService.getHisOrders(startDate, endDate);
+//        hisList = hisService.getHisOrders(startDate, endDate);
         CheckOrderResponse checkOrderResponse = new CheckOrderResponse();
         checkOrderResponse.setCount(checkOrdersService.checkCount(startDate, endDate));
         checkOrderResponse.setCheckLong(checkOrdersService.longMoney(startDate, endDate));
         checkOrderResponse.setCheckShort(checkOrdersService.shortMoney(startDate, endDate));
 
         result.setData(checkOrderResponse);
-        return result;
+        return hisList;
     }
 
     /**
