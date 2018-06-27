@@ -10,4 +10,5 @@ import java.util.List;
 public interface HisService {
 
     List<HisOrder> getHisOrders(Date start, Date end) throws CommonException, SoapException;
+
 }

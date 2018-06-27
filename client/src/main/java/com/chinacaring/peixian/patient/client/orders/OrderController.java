@@ -9,6 +9,7 @@ import com.chinacaring.peixian.patient.client.dto.front.response.CheckResponse;
 import com.chinacaring.peixian.patient.client.dto.pingpp.Refund;
 import com.chinacaring.peixian.patient.client.dto.wechatpush.WechatPushResponse;
 import com.chinacaring.peixian.patient.client.exception.SoapException;
+import com.chinacaring.peixian.patient.client.service.HisService;
 import com.chinacaring.peixian.patient.client.service.WechatPushService;
 import com.chinacaring.util.TimeUtil;
 import io.swagger.annotations.ApiOperation;
@@ -205,6 +206,8 @@ public class OrderController {
         return new Result<>();
     }
 
+    @Autowired
+    private HisService hisService;
     /**
      * 统计+长款+短款
      * @param start_time
@@ -230,7 +233,9 @@ public class OrderController {
         checkOrderResponse.setCount(checkOrdersService.checkCount(startDate, endDate));
         checkOrderResponse.setCheckLong(checkOrdersService.longMoney(startDate, endDate));
         checkOrderResponse.setCheckShort(checkOrdersService.shortMoney(startDate, endDate));
+//
 
+//
         result.setData(checkOrderResponse);
         return result;
     }

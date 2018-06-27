@@ -11,7 +11,10 @@ import com.chinacaring.peixian.patient.client.wsdl.orders.response.get_order_inf
 import com.chinacaring.util.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,10 +34,11 @@ public class HisServiceImpl implements HisService {
     @Override
     public List<HisOrder> getHisOrders(Date start, Date end) throws CommonException, SoapException {
 
-        if (null != his.get()) {
-            return his.get();
-        }
+        HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
 
+        if (null != request.getAttribute("hisOrder")) {
+            return (List<HisOrder>)request.getAttribute("hisOrder");
+        }
         List<GetOrderInfoByOperCode> hisOrders;
         try {
             hisOrders = ordersService.getHisOrders(start, end);
@@ -68,7 +72,8 @@ public class HisServiceImpl implements HisService {
             iHisOrders.add(iHisOrder);
         }
 
-        his.set(iHisOrders);
+//        his.set(iHisOrders);
+        request.setAttribute("hisOrder", iHisOrders);
 
         return iHisOrders;
     }
