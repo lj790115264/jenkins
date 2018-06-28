@@ -26,5 +26,5 @@ consul:
   host: 172.17.10.91
 logging:
   level:
-    root: error
+    root: info
   file: ${spring.application.name}.log
