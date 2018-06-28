@@ -1,5 +1,8 @@
 server:
   port: 11236
+  tomcat:
+    accesslog:
+      enabled: true
 caring:
   hospital: 1204
 ajax:
