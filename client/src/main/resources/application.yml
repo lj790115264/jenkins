@@ -4,6 +4,7 @@ server:
     accesslog:
       enabled: true
       directory: accesslog
+      rotate: true
 caring:
   hospital: 1204
 ajax:

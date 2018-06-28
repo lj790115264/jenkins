@@ -99,6 +99,7 @@ public class CheckOrdersServiceOrdersImpl implements CheckOrdersService {
         checkCountList.add(register);
         checkCountList.add(recipe);
         checkCountList.add(inbalance);
+
         return checkCountList;
     }
 
@@ -191,6 +192,14 @@ public class CheckOrdersServiceOrdersImpl implements CheckOrdersService {
                 checkCompareList.add(c);
             }
         }
+
+        checkCompareList.sort((a, b) -> {
+            if (a.getTradeTime().getTime() > b.getTradeTime().getTime()) {
+                return 1;
+            }
+            return -1;
+        });
+
         return checkCompareList;
     }
 
@@ -243,6 +252,12 @@ public class CheckOrdersServiceOrdersImpl implements CheckOrdersService {
                 checkCompareList.add(c);
             }
         }
+        checkCompareList.sort((a, b) -> {
+            if (a.getHisTradeTime().getTime() > b.getHisTradeTime().getTime()) {
+                return 1;
+            }
+            return -1;
+        });
         return checkCompareList;
     }
 }
