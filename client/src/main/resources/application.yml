@@ -3,6 +3,7 @@ server:
   tomcat:
     accesslog:
       enabled: true
+      directory: accesslog
 caring:
   hospital: 1204
 ajax:
