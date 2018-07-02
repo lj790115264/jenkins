@@ -56,10 +56,14 @@ public class CheckOrdersServiceOrdersImpl implements CheckOrdersService {
     }
 
     @Override
-    public List<CheckCount> checkCount(Date begin, Date end) throws CommonException, SoapException {
+    public List<CheckCount> checkCount(Date begin, Date end) throws CommonException {
 
         List<HisOrder> hisList;
-        hisList = hisService.getHisOrders(begin, end);
+        try {
+            hisList = hisService.getHisOrders(begin, end);
+        } catch (SoapException e) {
+            hisList = new ArrayList<>();
+        }
         List<Orders> orders = ordersRepository.findAllByPayTimeBetweenAndIsPaidAndIsRefund(begin, end, 1, 0);
         CheckCount total = new CheckCount();
         total.setName("总交易");
@@ -138,9 +142,14 @@ public class CheckOrdersServiceOrdersImpl implements CheckOrdersService {
     }
 
     @Override
-    public List<CheckCompare> longMoney(Date begin, Date end) throws CommonException, SoapException {
+    public List<CheckCompare> longMoney(Date begin, Date end) throws CommonException {
         // 左边代表我们这边 右边代表his
-        List<HisOrder> hisList = hisService.getHisOrders(begin, end);
+        List<HisOrder> hisList = null;
+        try {
+            hisList = hisService.getHisOrders(begin, end);
+        } catch (SoapException e) {
+            hisList = new ArrayList<>();
+        }
         List<Orders> orders = ordersRepository.findAllByPayTimeBetweenAndIsPaidAndIsRefund(begin, end, 1, 0);
         int i = 0;
         List<CheckCompare> checkCompareList = new ArrayList<>();
@@ -204,9 +213,14 @@ public class CheckOrdersServiceOrdersImpl implements CheckOrdersService {
     }
 
     @Override
-    public List<CheckCompare> shortMoney(Date begin, Date end) throws CommonException, SoapException {
+    public List<CheckCompare> shortMoney(Date begin, Date end) throws CommonException {
         // 左边代表his（一层循环） 右边代表我们这边（二层）
-        List<HisOrder> hisList = hisService.getHisOrders(begin, end);
+        List<HisOrder> hisList = null;
+        try {
+            hisList = hisService.getHisOrders(begin, end);
+        } catch (SoapException e) {
+            hisList = new ArrayList<>();
+        }
         List<Orders> orders = ordersRepository.findAllByPayTimeBetweenAndIsPaidAndIsRefund(begin, end, 1, 0);
         int i = 0;
         List<CheckCompare> checkCompareList = new ArrayList<>();
