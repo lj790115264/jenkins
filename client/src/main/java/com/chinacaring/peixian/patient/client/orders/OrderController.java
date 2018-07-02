@@ -222,9 +222,9 @@ public class OrderController {
 
         Date startDate,
                 endDate;
-        startDate = TimeUtil.parseDate(start_time, TimeUtil.YYYY_MM_DD);
+        startDate = TimeUtil.parseDate(start_time, TimeUtil.FORMAT_LONG);
         if (null != end_time) {
-            endDate = TimeUtil.parseDate(end_time, TimeUtil.YYYY_MM_DD);
+            endDate = TimeUtil.parseDate(end_time, TimeUtil.FORMAT_LONG);
         } else {
             endDate = new Date();
         }
