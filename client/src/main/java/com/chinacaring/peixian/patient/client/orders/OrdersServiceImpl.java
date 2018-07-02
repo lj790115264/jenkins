@@ -97,7 +97,7 @@ public class OrdersServiceImpl implements OrdersService {
     @Override
     public List<Orders> getOrders(Pageable pageable, Date startDate, Date endDate, String channel, String type,
                                   Boolean paid, Boolean refunded, Integer offline_refund_status, HttpServletResponse
-                                          response) throws CommonException, ParseException, SoapException {
+                                          response) throws CommonException, ParseException {
         Page<Orders> ordersPage = ordersRepository.findAll(where(startDate, endDate, channel, type, paid, refunded,
                 offline_refund_status), pageable);
 
@@ -106,7 +106,12 @@ public class OrdersServiceImpl implements OrdersService {
 
         List<Orders> ordersList = ordersPage.getContent();
 
-        List<GetOrderInfoByOperCode> hisOrders = getHisOrders(startDate, endDate);
+        List<GetOrderInfoByOperCode> hisOrders;
+        try {
+            hisOrders = getHisOrders(startDate, endDate);
+        } catch (SoapException e) {
+            hisOrders = new ArrayList<>();
+        }
 
         String myInvoiceNo,
                 hisInvoiceNo,
@@ -183,14 +188,9 @@ public class OrdersServiceImpl implements OrdersService {
     @Override
     public OrderTotalResponse getOrdersTotal(Date startDate, Date endDate, String channel, String type, Boolean paid,
                                              Boolean refunded, Integer offline_refund_status, HttpServletResponse
-                                                     response) throws CommonException, ParseException {
-        List<Orders> orders = new ArrayList<>();
-        try {
-            orders = getOrders(null, startDate, endDate, channel, type, paid, refunded,
+                                                     response) throws CommonException, ParseException, SoapException {
+        List<Orders> orders = getOrders(null, startDate, endDate, channel, type, paid, refunded,
                     offline_refund_status, response);
-        } catch (SoapException e) {
-            e.printStackTrace();
-        }
         BigDecimal totalMon = new BigDecimal(0);
         BigDecimal paidMon = new BigDecimal(0);
         BigDecimal refundedMon = new BigDecimal(0);
