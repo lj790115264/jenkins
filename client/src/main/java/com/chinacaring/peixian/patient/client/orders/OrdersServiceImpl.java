@@ -183,9 +183,14 @@ public class OrdersServiceImpl implements OrdersService {
     @Override
     public OrderTotalResponse getOrdersTotal(Date startDate, Date endDate, String channel, String type, Boolean paid,
                                              Boolean refunded, Integer offline_refund_status, HttpServletResponse
-                                                     response) throws CommonException, ParseException, SoapException {
-        List<Orders> orders = getOrders(null, startDate, endDate, channel, type, paid, refunded,
-                offline_refund_status, response);
+                                                     response) throws CommonException, ParseException {
+        List<Orders> orders = new ArrayList<>();
+        try {
+            orders = getOrders(null, startDate, endDate, channel, type, paid, refunded,
+                    offline_refund_status, response);
+        } catch (SoapException e) {
+            e.printStackTrace();
+        }
         BigDecimal totalMon = new BigDecimal(0);
         BigDecimal paidMon = new BigDecimal(0);
         BigDecimal refundedMon = new BigDecimal(0);
