@@ -125,7 +125,7 @@ public class ExamineServiceImpl implements ExamineService {
                 }
                 return 1;
             } catch (ParseException e) {
-                e.printStackTrace();
+                return -1;
             }
         });
 
