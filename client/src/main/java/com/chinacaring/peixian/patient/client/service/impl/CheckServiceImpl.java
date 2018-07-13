@@ -15,6 +15,8 @@ import com.chinacaring.util.JaxbXmlUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +27,9 @@ public class CheckServiceImpl implements CheckService {
 
     @Autowired
     private QuyiServiceNo service;
+
+    static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
     @Override
     public Object getCheck(String cardNo, String beginDate, String endDate) throws MyException {
 
@@ -69,6 +74,16 @@ public class CheckServiceImpl implements CheckService {
             checkList.setTime(list.get(0).getTime());
             checkLists.add(checkList);
         }
+        checkLists.sort((a, b) -> {
+            try {
+                if (sdf.parse(a.getTime()).getTime() >= sdf.parse(b.getTime()).getTime()) {
+                    return -1;
+                }
+                return 1;
+            } catch (ParseException e) {
+                return -1;
+            }
+        });
         return checkLists;
     }
 }
