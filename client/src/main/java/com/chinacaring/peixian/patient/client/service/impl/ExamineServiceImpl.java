@@ -83,8 +83,6 @@ public class ExamineServiceImpl implements ExamineService {
             examineResponses.add(examineResponse);
         }
 
-
-
         ListUtils<ExamineDetailResponseWithSortCode> listUtils = new ListUtils<>(examineResponses);
 
         Map<String, List<ExamineDetailResponseWithSortCode>> map = listUtils.groupBy(ExamineDetailResponseWithSortCode.class,
@@ -93,7 +91,11 @@ public class ExamineServiceImpl implements ExamineService {
         List<ExamineList> examineListList = new ArrayList<>();
         for (List<ExamineDetailResponseWithSortCode> list: map.values()) {
             ExamineList examineList = new ExamineList();
+
             list.sort((a, b) -> {
+                if (null == a || null == b || null == a.getStatusCode() || null == b.getStatusCode()) {
+                    return -1;
+                }
                 if (a.getStatusCode() > b.getStatusCode()) {
                     return -1;
                 }
