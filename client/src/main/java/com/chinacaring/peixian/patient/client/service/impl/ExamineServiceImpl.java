@@ -96,6 +96,9 @@ public class ExamineServiceImpl implements ExamineService {
                 if (null == a || null == b || null == a.getStatusCode() || null == b.getStatusCode()) {
                     return -1;
                 }
+                if (a.getStatusCode() == b.getStatusCode()) {
+                    return 0;
+                }
                 if (a.getStatusCode() > b.getStatusCode()) {
                     return -1;
                 }
