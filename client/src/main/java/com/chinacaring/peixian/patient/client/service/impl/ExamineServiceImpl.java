@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +33,8 @@ public class ExamineServiceImpl implements ExamineService {
 
     @Autowired
     private QuyiServiceNo service;
+
+    static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     @Override
     public List<ExamineList> getExamine(String regNo, String beginTime, String endTime) throws ParseException, CommonException, MyException {
@@ -111,6 +114,20 @@ public class ExamineServiceImpl implements ExamineService {
             examineList.setReport_time(list.get(0).getReportTime());
             examineListList.add(examineList);
         }
+
+        examineListList.sort((a, b) -> {
+            try {
+                if (sdf.parse(a.getReport_time()).getTime() == sdf.parse(b.getReport_time()).getTime()) {
+                    return 0;
+                }
+                if (sdf.parse(a.getReport_time()).getTime() > sdf.parse(b.getReport_time()).getTime()) {
+                    return -1;
+                }
+                return 1;
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        });
 
         return examineListList;
     }
