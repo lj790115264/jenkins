@@ -183,7 +183,7 @@ public class InbalanceServiceImpl implements InbalanceService {
         String res = service.getQuyiServiceNoSoap()
                 .inhosPatientInbalanceRecharge(inbalance.getInpatientCode(),
                         inbalance.getPatientName(),
-                        "QY",
+                        "099200",
                         "WX",
                         df.format(inbalance.getCost().divide(new BigDecimal(100))),
                         sdf.format(new Date()),
